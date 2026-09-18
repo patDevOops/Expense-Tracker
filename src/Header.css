@@ -1,0 +1,23 @@
+header{
+  display:flex;
+  justify-content: start;
+  align-items:center;
+  border:1px solid white;
+  background:hwb(218 10% 83%);
+  margin-top:1px;
+  padding:5px;
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+}
+.hamburger-icon-con{
+  margin:0.5rem 1rem;
+}
+.title{
+  margin:0.5rem 1rem;
+}
+.hamburger-icon{
+  height:1.5rem;
+  width:1.5rem
+}

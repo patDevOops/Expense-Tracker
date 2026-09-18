@@ -1,0 +1,13 @@
+.category{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.arrow-btn{
+  height:26px;
+  width:35px;
+  margin:10px;
+}
+.category-name{
+  font-size:25px
+}
