@@ -1,6 +1,7 @@
 import {Category} from './Category';
 import {Items} from './Items'
-import {Date} from './Date'
+import {Date} from './Date';
+import {FormCard} from './FormCard'
 import './Contents';
 export function Contents(){
   return(
@@ -8,6 +9,7 @@ export function Contents(){
       <Category/>
       <Date/>
       <Items/>
+      <FormCard/>
     </div>
   )
 }
