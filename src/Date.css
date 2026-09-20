@@ -1,0 +1,8 @@
+.date{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.year{
+  font-size:0.6rem;
+}

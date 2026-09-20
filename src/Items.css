@@ -1,8 +1,15 @@
 .items{
   display:flex;
   flex-direction: column;
+  
 }
 .item-gen{
   border:0.5px solid white;
   margin:5px 15px;
+  padding:1px;
+  display:flex;
+  justify-content: space-between;
+}
+.item-name div:last-child{
+  font-size:0.5rem;
 }

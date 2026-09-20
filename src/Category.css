@@ -8,6 +8,6 @@
   width:35px;
   margin:10px;
 }
-.category-name{
+.category-name div:first-child{
   font-size:25px
 }
