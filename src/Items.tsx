@@ -8,7 +8,8 @@ export function Items() {
       <div className="item-gen">
         <div className="item-name">
           <div>Milk</div>
-          <div>2 x ₱15</div>
+          <span>2 x ₱15</span>
+          <span>11:22AM</span>
         </div>
         <div>₱30</div>
         <IoIosArrowBack />
@@ -17,7 +18,8 @@ export function Items() {
       <div className="item-gen">
         <div className="item-name">
           <div>Candy</div>
-          <div>1 x ₱5</div>
+          <span>5 x ₱1</span>
+          <span>11:30AM</span>
         </div>
         <div>₱5</div>
         <IoIosArrowBack />
@@ -26,7 +28,8 @@ export function Items() {
       <div className="item-gen">
         <div className="item-name">
           <div>ulam</div>
-          <div></div>
+          <span></span>
+          <span>11:30AM</span>
         </div>
         <div>₱40</div>
         <IoIosArrowBack />

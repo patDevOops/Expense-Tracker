@@ -1,10 +1,13 @@
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 :root{
   --main-color:hwb(217 7% 88%);
 }
 
 body{
-  margin:0;
-  padding:0;
   background:var(--main-color);
   color:white;
   font-family:arial;

@@ -9,7 +9,12 @@
   padding:1px;
   display:flex;
   justify-content: space-between;
+  align-items: center;
 }
-.item-name div:last-child{
+.item-name span{
   font-size:0.5rem;
+  margin-left:0.2rem;
+}
+.item-name div{
+  margin:0.1rem 0.2rem;
 }
