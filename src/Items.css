@@ -18,3 +18,9 @@
 .item-name div{
   margin:0.1rem 0.2rem;
 }
+.item-date{
+  margin:8px 15px 0px 15px;
+  font-size:0.8rem;
+  display:flex;
+  gap:0.5rem
+}

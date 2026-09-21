@@ -1,10 +1,13 @@
 import "./Items.css";
 import { IoIosArrowBack } from "react-icons/io";
-
+import { IoIosArrowDown } from "react-icons/io";
 export function Items() {
   return (
     <div className="items">
-      
+      <div className="item-date">
+        <div>Sept 20</div>
+        <IoIosArrowDown size="15"/>
+      </div>
       <div className="item-gen">
         <div className="item-name">
           <div>Milk</div>
@@ -25,6 +28,10 @@ export function Items() {
         <IoIosArrowBack />
       </div>
       
+      <div className="item-date">
+        <div>Sept 21</div>
+        <IoIosArrowDown size="15"/>
+      </div>
       <div className="item-gen">
         <div className="item-name">
           <div>ulam</div>
