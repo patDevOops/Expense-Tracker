@@ -27,14 +27,14 @@ export function FormCard() {
           <button>-</button>
           </div>         
         </div>
-        <button>
-          <IoIosArrowDown/>
-        </button>
-
+        
         <div className="form">
           <label className="label">Date</label>
           <input />
         </div>
+        <button>
+          <IoIosArrowDown/>
+        </button>
       </div>
       <div>
         <button>Add</button>

@@ -2,7 +2,15 @@
   display:flex;
   flex-direction:column;
   align-items:center;
+  flex-grow: 1;
 }
 .year{
+  font-size:0.6rem;
+}
+.date-container{
+  display:flex;
+  justify-content:space-between;
+}
+.edge-title{
   font-size:0.6rem;
 }
