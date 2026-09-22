@@ -8,8 +8,9 @@ function App() {
   eruda.init()
   return (
     <>
-      <SideBar/>
+      
       <Header />
+      <SideBar/>
       <Contents/>
     </>
   )

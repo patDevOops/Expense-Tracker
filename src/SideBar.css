@@ -1,6 +1,11 @@
 .sidebar{
   position:fixed;
-  height:100vh;
+  padding:10px;
   background-color:gray;
-  width:40px;
+  
+  top:0;
+  z-index: 100;
+}
+.sidebar-title{
+  font-size:0.7rem;
 }
