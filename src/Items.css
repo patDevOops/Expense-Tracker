@@ -24,3 +24,6 @@
   display:flex;
   gap:0.5rem
 }
+.total-expense,.current-record{
+  padding:2px
+}
