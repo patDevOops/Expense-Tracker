@@ -6,9 +6,11 @@ export function SideBar(){
       <div>New Record</div>
       <div>My Record</div>
       
-      <div className="sidebar-title">Items</div>
+      <div className="sidebar-title">Saved Items</div>
       <div>Add Items</div>
       <div>View Items</div>
+
+      
     </div>
   )
 }

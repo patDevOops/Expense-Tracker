@@ -1,0 +1,8 @@
+.floating-btn{
+  display:flex;
+  justify-content: end;
+  position:fixed;
+  bottom:0;
+  right:0;
+  
+}
