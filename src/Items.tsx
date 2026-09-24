@@ -17,7 +17,9 @@ export function Items() {
         
         <div className="item-total-price">₱30.00</div>
         
-        <IoIosArrowBack className="item-arrow"/>
+        <IoIosArrowBack 
+          className="item-arrow"
+          size="20"/>
       </div>
       
       <div className="item-gen">
@@ -27,7 +29,9 @@ export function Items() {
           <span>11:30AM</span>
         </div>
         <div className="item-total-price">₱5.00</div>
-        <IoIosArrowBack className="item-arrow"/>
+        <IoIosArrowBack 
+          className="item-arrow"
+          size="20"/>
       </div>
       
       <div className="item-date">
@@ -41,7 +45,9 @@ export function Items() {
           <span>11:30AM</span>
         </div>
         <div className="item-total-price">₱40.00</div>
-        <IoIosArrowBack className="item-arrow"/>
+        <IoIosArrowBack 
+          className="item-arrow"
+          size="20"/>
       </div>
     </div>
   );

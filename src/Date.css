@@ -16,22 +16,34 @@
 }
 .edge-title{
   font-size:0.6rem;
+  margin-bottom:2px;
   color:#adb2ba;
 }
-.item-all-sum{
+.item-all-sum,.record-name{
   color:#ff5c5c;
-  font-size:1.3rem;
+  font-size:1.4rem;
+  font-family:sans-serif;
+  font-weight:700;
 }
-.record-name{
-  font-size:1.3rem;
-  color:#ff5c5c
-}
-.current-record-cont,.total-expense{
+.current-record-cont,.total-expense-cont{
   display:flex;
-  border:1px solid;
+  border: 1px solid #2a2f3a;
+  border-radius:5px;
+  background:hwb(214 6% 88%);
 }
 .arrow-expand-cont{
   display:flex;
   align-items:center;
-  border:1px solid;
+  border-right: 1px solid #2a2f3a;
+  
+}
+.arrow-expand-cont-left{
+  border: 1px solid #2a2f3a;
+  border-right:none;
+  border-top:none;
+  border-bottom:none;
+}
+.record-info-cont{
+  padding:8px 6px;
+  
 }
