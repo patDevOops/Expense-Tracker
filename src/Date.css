@@ -4,6 +4,9 @@
   align-items:center;
   flex-grow: 1;
 }
+.date-container{
+  margin-top:5px;
+}
 .year{
   font-size:0.6rem;
 }
@@ -13,4 +16,22 @@
 }
 .edge-title{
   font-size:0.6rem;
+  color:#adb2ba;
+}
+.item-all-sum{
+  color:#ff5c5c;
+  font-size:1.3rem;
+}
+.record-name{
+  font-size:1.3rem;
+  color:#ff5c5c
+}
+.current-record-cont,.total-expense{
+  display:flex;
+  border:1px solid;
+}
+.arrow-expand-cont{
+  display:flex;
+  align-items:center;
+  border:1px solid;
 }

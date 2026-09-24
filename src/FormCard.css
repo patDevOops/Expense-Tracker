@@ -8,7 +8,8 @@
   right:0;
   left:0;
   bottom:0;
-
+  display:none;
+  border-bottom:1px solid #2a2f3a;
   background:hwb(218 10% 83%);
 }
 .form{

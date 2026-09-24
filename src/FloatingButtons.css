@@ -4,11 +4,11 @@
   position:fixed;
   bottom:0;
   right:0;
-  
 }
 .floating-btn button{
-  width:40px;
-  height:45px;
+  margin:0.4rem;
+  width:50px;
+  height:55px;
   border-radius:50%;
   border:none;
   font-size:2rem;

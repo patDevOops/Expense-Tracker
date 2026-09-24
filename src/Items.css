@@ -2,19 +2,36 @@
   display:flex;
   flex-direction: column;
   border:1px solid white;
-  height:100vh;
+  height:75vh;
+  max-height:510px;
+  overflow:scroll;
+  margin-left:20px;
+  margin-right:20px;
+  margin-top:7px;
 }
 .item-gen{
   border:0.5px solid white;
   margin:5px 15px;
-  padding:1px;
+  padding:5px 3px;
   display:flex;
   justify-content: space-between;
   align-items: center;
+  border-radius:6px;
+  border: 1px solid #2a2f3a;
+  background:hwb(218 10% 83%);
+}
+.item-name{
+  flex-grow:1;
 }
 .item-name span{
-  font-size:0.5rem;
+  font-size:0.6rem;
   margin-left:0.2rem;
+  color:#8b93a3;
+  padding:3px 5px;
+  border-radius:3px;
+}
+.item-name .item-price-calc{
+  background:#23262e;
 }
 .item-name div{
   margin:0.1rem 0.2rem;
@@ -23,8 +40,16 @@
   margin:8px 15px 0px 15px;
   font-size:0.8rem;
   display:flex;
-  gap:0.5rem
+  gap:0.5rem;
+  color:#adb2ba;
 }
-.total-expense,.current-record{
-  padding:2px
+.item-date div{
+  font-size:0.7rem;
+}
+.item-total-price{
+  font-size:1.2rem;
+  margin-right:5px;
+}
+.item-arrow{
+  margin-right:5px
 }

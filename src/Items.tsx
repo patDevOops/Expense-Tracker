@@ -11,21 +11,23 @@ export function Items() {
       <div className="item-gen">
         <div className="item-name">
           <div>Milk</div>
-          <span>2 x ₱15</span>
+          <span className="item-price-calc">2 x ₱15.00</span>
           <span>11:22AM</span>
         </div>
-        <div>₱30</div>
-        <IoIosArrowBack />
+        
+        <div className="item-total-price">₱30.00</div>
+        
+        <IoIosArrowBack className="item-arrow"/>
       </div>
       
       <div className="item-gen">
         <div className="item-name">
           <div>Candy</div>
-          <span>5 x ₱1</span>
+          <span className="item-price-calc">5 x ₱1.00</span>
           <span>11:30AM</span>
         </div>
-        <div>₱5</div>
-        <IoIosArrowBack />
+        <div className="item-total-price">₱5.00</div>
+        <IoIosArrowBack className="item-arrow"/>
       </div>
       
       <div className="item-date">
@@ -35,11 +37,11 @@ export function Items() {
       <div className="item-gen">
         <div className="item-name">
           <div>ulam</div>
-          <span></span>
+          <span className="item-price-calc">1 x ₱40.00</span>
           <span>11:30AM</span>
         </div>
-        <div>₱40</div>
-        <IoIosArrowBack />
+        <div className="item-total-price">₱40.00</div>
+        <IoIosArrowBack className="item-arrow"/>
       </div>
     </div>
   );
