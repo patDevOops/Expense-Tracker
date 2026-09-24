@@ -5,7 +5,8 @@
   flex-grow: 1;
 }
 .date-container{
-  margin-top:5px;
+  margin-top:6px;
+  position:relative;
 }
 .year{
   font-size:0.6rem;
@@ -30,6 +31,14 @@
   border: 1px solid #2a2f3a;
   border-radius:5px;
   background:hwb(214 6% 88%);
+  position:fixed;
+  box-shadow:1px 1px 8px rgba(0,0,0,0.35)
+}
+.total-expense-cont{
+  right:0;
+}
+.current-record-cont{
+  left:0;
 }
 .arrow-expand-cont{
   display:flex;
@@ -44,6 +53,6 @@
   border-bottom:none;
 }
 .record-info-cont{
-  padding:8px 6px;
+  padding:9px 6px;
   
 }

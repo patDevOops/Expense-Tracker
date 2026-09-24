@@ -6,7 +6,8 @@
   right:0;
 }
 .floating-btn button{
-  margin:0.4rem;
+  margin-bottom:0.4rem;
+  margin-right:5px;
   width:50px;
   height:55px;
   border-radius:50%;
@@ -15,4 +16,8 @@
   display:flex;
   align-items: center;
   justify-content:center;
+  background:#4f8cff;
+  color:white;
+  font-weight:600;
+  box-shadow:1px -1px 8px rgba(0,0,0,0.35)
 }
