@@ -4,11 +4,22 @@ import './Category.css'
 export function Category(){
   return(
     <div className="category">
-      <FaArrowLeft className="arrow-btn"/>
+      <button className="arrow-btn-cont">
+        <FaArrowLeft 
+        className="arrow-btn"
+        size="20"
+        color="white"/>
+      </button>
+      
        <div className="category-name">
          <div>Food</div>
        </div>
-      <FaArrowRight className="arrow-btn"/>
+      <button className="arrow-btn-cont">
+        <FaArrowRight 
+        className="arrow-btn"
+        size="20"
+        color="white"/>
+      </button>
     </div>
   )
 }
