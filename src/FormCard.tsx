@@ -34,20 +34,26 @@ export function FormCard() {
       </div>
 
       <div className="more-form">
-        <div className="form">
-          <label className="label">Quantity</label>
-          <div>
-            <button>+</button>
-          <input type="number" placeholder="each(optional)" />
-          <button>-</button>
-          </div>         
-        </div>
-        
-        <div className="form">
+        <div className="form form-date">
           <label className="label">Date</label>
-          <input />
+          <input 
+            className="form-input more-form-input"
+            type="date"/>
         </div>
         
+        <div className="form form-quantity">
+          <label className="label">Quantity</label>
+          <div className="form-quantity-input-cont">
+            <button className="form-quan-btn">-</button>
+            
+          <input 
+            type="number"
+            placeholder="each(optional)"
+            className="form-input more-form-input"/>
+            <button className="form-quan-btn">+</button>
+          
+          </div>         
+        </div>        
       </div>
       
       <div className="form-btns">

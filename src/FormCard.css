@@ -10,7 +10,7 @@
   bottom:0;
   border: 1px solid #2a2f3a;
   border-bottom:1px solid #2a2f3a;
-  
+  overflow:scroll;
   border-radius:10px;
   border-bottom:none;
   background:hwb(214 6% 88%);
@@ -27,7 +27,8 @@
   color:#adb2ba;
 }
 .more-form{
-  display:none;
+  width:90%;
+  
 }
 .form-input-name{
   width:100%;
@@ -74,9 +75,16 @@
   display:flex;
   flex-direction:column;
   width:90%;
+  gap:5px
 }
 .form-btns button:first-child{
-  display:none;
+  background:hwb(217 7% 88%);
+  border: 1px solid #2a2f3a;
+  color:white;
+  font-size:1rem;
+  font-weight:600;
+  border-radius:5px;
+  padding:4px;
 }
 .form-btns button:last-child{
   background:#4f8cff;
@@ -86,4 +94,25 @@
   font-weight:600;
   border-radius:5px;
   padding:10px;
+}
+.form-date,.form-quantity{
+  width:100%;
+}
+.more-form-input{
+  width:100%;
+  text-align:center;
+}
+.form-quantity-input-cont{
+  display:flex;
+  align-items:center;
+  gap:3px;
+}
+.form-quan-btn{
+  background:#4f8cff;
+  border:none;
+  color:white;
+  border-radius:30%;
+  padding:13px;
+  font-size:1rem;
+  font-weight:600;
 }
