@@ -1,24 +1,39 @@
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
+
 export function FormCard() {
   return (
     <div className="form-cont">
       <div className="form-name form">
         <label className="label">Name</label>
-        <input placeholder="Item Name" />
+        <div className="form-input-name-cont">
+          <input 
+          placeholder="Item Name"
+          className="form-input form-input-name"/>
+          <IoIosArrowDown 
+            size="23"
+            className="item-pick-arrow"/>
+        </div>
+        
       </div>
 
-      <div className="form-price form">
-        <label className="label">Price₱</label>
-        <input placeholder="price" />
+      <div className="form-price">
+        <div className="form form-row">
+          <label className="label">Price₱</label>
+        <input 
+          placeholder="price"
+          className="form-input form-input-price"/>
+        </div>
+        
+        <div className="form form-row">
+          <label className="label">Category</label>
+          <select className="form-input">
+            <option>Milk</option>
+          </select>
+        </div>
       </div>
 
       <div className="more-form">
-        <div className="form">
-          <label className="label">Category</label>
-          <select></select>
-        </div>
-
         <div className="form">
           <label className="label">Quantity</label>
           <div>
@@ -32,11 +47,13 @@ export function FormCard() {
           <label className="label">Date</label>
           <input />
         </div>
-        <button>
-          <IoIosArrowDown/>
-        </button>
+        
       </div>
-      <div>
+      
+      <div className="form-btns">
+        <button>
+          <IoIosArrowDown size="22"/>
+        </button>
         <button>Add</button>
       </div>
     </div>

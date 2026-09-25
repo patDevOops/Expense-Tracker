@@ -1,23 +1,89 @@
 .form-cont{
   border:1px solid white;
   margin-top:5px;
-  padding:3px;
+  padding:14px 10px;
   height:100vh;
   max-height: 350px;
   position:fixed;
   right:0;
   left:0;
   bottom:0;
-  display:none;
+  border: 1px solid #2a2f3a;
   border-bottom:1px solid #2a2f3a;
-  background:hwb(218 10% 83%);
+  
+  border-radius:10px;
+  border-bottom:none;
+  background:hwb(214 6% 88%);
 }
 .form{
   display:flex;
   flex-direction: column;
-  margin-bottom:0.3rem;
+  margin-bottom:0.5rem;
 }
 .label{
-  font-size:10px;
-  margin:0.1rem
+  font-size:12px;
+  margin:0.1rem;
+  font-weight:500;
+  color:#adb2ba;
+}
+.more-form{
+  display:none;
+}
+.form-input-name{
+  width:100%;
+  position:relative;
+}
+.form-name{
+  width:90%;
+}
+.form-input-name-cont{
+  position:relative;
+  width:100%;
+  display:flex;
+  align-items:center;
+}
+.item-pick-arrow{
+  position:absolute;
+  right:5px;
+  z-index:100;
+  color:white‌;
+}
+.form-input{
+  padding:13px 10px;
+  font-size:0.9rem;
+  border:none;
+  border-radius:5px;
+  color:white;
+  background:hwb(218 10% 83%);
+  border: 1px solid #2a2f3a;
+}
+
+.form-price{
+  width:90%;
+  display:flex;
+  
+}
+.form-price .form-row:first-child{
+  width:60%;
+  margin-right:6px;
+}
+.form-price .form-row:last-child{
+  width:40%;
+}
+.form-btns{
+  display:flex;
+  flex-direction:column;
+  width:90%;
+}
+.form-btns button:first-child{
+  display:none;
+}
+.form-btns button:last-child{
+  background:#4f8cff;
+  border:none;
+  color:white;
+  font-size:1rem;
+  font-weight:600;
+  border-radius:5px;
+  padding:10px;
 }
