@@ -4,6 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 export function Items() {
   return (
     <div className="items">
+      <div>3 items</div>
       <div className="item-date">
         <div>Sept 20</div>
         <IoIosArrowDown size="15"/>
