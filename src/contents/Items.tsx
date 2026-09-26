@@ -1,7 +1,9 @@
+import {records} from '../data/records.js';
 import "./Items.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 export function Items() {
+  
   return (
     <div className="items">
       <div>3 items</div>
