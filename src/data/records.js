@@ -6,9 +6,26 @@ export const records = [{
   items:[{
     name:'Milk',
     id:'111',
-    createdAt:'2026-09-20',
-    createdTime:'10:07 AM',
+    createdAt:'2026-09-22',
+    createdTime:'11:22 AM',
     quantity:2,
     price:15,
+    category:'food',
+  },{
+    name:'Candy',
+    id:'112',
+    createdAt:'2026-09-21',
+    createdTime:'11:30 AM',
+    quantity:5,
+    price:1,
+    category:'food',
+  },{
+    name:'ulam',
+    id:'113',
+    createdAt:'2026-09-22',
+    createdTime:'11:30 AM',
+    quantity:1,
+    price:40,
+    category:'food',
   }]
 }]

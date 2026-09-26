@@ -14,7 +14,7 @@
   border-radius:10px;
   border-bottom:none;
   background:hwb(214 6% 88%);
-  
+  display:none;
 }
 .form{
   display:flex;
