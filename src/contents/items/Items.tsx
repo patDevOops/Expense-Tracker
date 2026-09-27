@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { records } from "../../data/records.js";
 import "./Items.css";
 import { ItemsGen } from "./ItemsGen";
+import { IoMdArrowDropup } from "react-icons/io";
 
 const today = dayjs();
 export function Items() {
@@ -47,10 +48,16 @@ export function Items() {
 
   return (
     <div className="items">
+      
       <div>
-        <span>September 2026</span>
+        <span className="month-year-cont">
+          <div>September 2026</div>
+          <IoMdArrowDropup className="dropdown-arrow"/>
+        </span>
+        
         <span>3 items</span>
       </div>
+      
       <div className="items-scrollable">
         {itemRecords.map((item) => {
           const isHide = isCollapse.includes(item.createdAt);
