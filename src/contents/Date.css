@@ -1,59 +1,24 @@
-.date{
+.date-year-month-cont{
   display:flex;
-  flex-direction:column;
-  align-items:center;
-  flex-grow: 1;
-  font-weight: 500;
+  justify-content: space-between;
+  align-items: center;
+  margin:8px auto
 }
-.date-container{
-  margin-top:6px;
-  position:relative;
+.arrow-btn{
+  height:26px;
+  width:35px;
 }
-
-.date-container{
-  display:flex;
-  justify-content:space-between;
-}
-.edge-title{
-  font-size:0.6rem;
-  margin-bottom:2px;
-  color:#adb2ba;
-}
-.item-all-sum,.record-name{
-  color:#ff5c5c;
-  font-size:1.4rem;
-  font-family:sans-serif;
-  font-weight:700;
-}
-.current-record-cont,.total-expense-cont{
-  display:none;
-  border: 1px solid #2a2f3a;
-  border-radius:5px;
-  background:hwb(214 6% 88%);
-  position:fixed;
-  box-shadow:1px 1px 8px rgba(0,0,0,0.35);
-  z-index:100;
-  
-}
-.total-expense-cont{
-  right:0;
-}
-.current-record-cont{
-  left:0;
-}
-.arrow-expand-cont{
+.arrow-btn-cont{
+  background:#4f8cff;
+  border-radius:50%;
+  padding:6px 2px;
+  border:none;
   display:flex;
   align-items:center;
-  border-right: 1px solid #2a2f3a;
-  
+  justify-content:center;
+  margin:auto 8px;
 }
-.arrow-expand-cont-left{
-  border: 1px solid #2a2f3a;
-  border-right:none;
-  border-top:none;
-  border-bottom:none;
-}
-.record-info-cont{
-  padding:9px 6px;
-  
+.date-year-name div:first-child{
+  font-size:32px;
+  font-weight: 600;
 }

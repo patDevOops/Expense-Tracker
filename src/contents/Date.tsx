@@ -1,30 +1,25 @@
-import "./Date.css";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
-export function Date() {
-  return (
-    <div className="date-container">
-      <div className="current-record-cont">
-        <div className="record-info-cont">
-          <div className="edge-title">Current Record</div>
-          <div className="record-name">untitled</div>
-        </div>
-        <div className="arrow-expand-cont arrow-expand-cont-left">
-          <IoIosArrowForward size="21" color="orange" />
-        </div>
-      </div>
-
+import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+import './Date.css'
+export function Date(){
+  return(
+    <div className="date-year-month-cont">
+      <button className="arrow-btn-cont">
+        <FaArrowLeft 
+        className="arrow-btn"
+        size="20"
+        color="white"/>
+      </button>
       
-
-      <div className="total-expense-cont">
-        <div className="arrow-expand-cont">
-          <IoIosArrowBack color="orange" size="21" />
-        </div>
-        <div className="record-info-cont">
-          <div className="edge-title">Total Expense</div>
-          <div className="item-all-sum">₱75.00</div>
-        </div>
-      </div>
+       <div className="date-year-name">
+         <div>September 2026</div>
+       </div>
+      <button className="arrow-btn-cont">
+        <FaArrowRight 
+        className="arrow-btn"
+        size="20"
+        color="white"/>
+      </button>
     </div>
-  );
+  )
 }

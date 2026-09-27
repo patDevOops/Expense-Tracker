@@ -1,7 +1,7 @@
 import {useState} from 'react';
-import {Category} from './Category';
-import {Items} from './items/Items'
 import {Date} from './Date';
+import {Items} from './items/Items'
+import {Info} from './Info';
 import {FormCard} from './FormCard';
 import {FloatingButtons} from './FloatingButtons';
 import './Contents';
@@ -13,8 +13,8 @@ export function Contents(){
   }
   return(
     <div className="main">
-      <Category/>
       <Date/>
+      <Info/>
       <Items/>
       <FormCard isShowForm={isShowForm}/>
       <FloatingButtons toggleForm={toggleForm}/>
