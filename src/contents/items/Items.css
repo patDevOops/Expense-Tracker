@@ -106,13 +106,13 @@
   width:20px;
   
 }
-.month-year-cont{
+.category-cont{
   display:flex;
   align-items:center;
   gap:3px;
   position:relative;
 }
-.pick-date-collapse{
+.pick-category-collapse{
   position:absolute;
   background:gray;
   right:0;

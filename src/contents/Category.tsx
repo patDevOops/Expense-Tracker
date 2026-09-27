@@ -12,7 +12,7 @@ export function Category(){
       </button>
       
        <div className="category-name">
-         <div>Food</div>
+         <div>September 2026</div>
        </div>
       <button className="arrow-btn-cont">
         <FaArrowRight 

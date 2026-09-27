@@ -59,15 +59,15 @@ export function Items() {
     <div className="items">
       
       <div>
-        <span className="month-year-cont">
-          <div>September 2026</div>
+        <span className="category-cont">
+          <div>Food</div>
           <IoMdArrowDropup 
             className="dropdown-arrow"
             onClick={toggleDropdown}/>
           
-          {isDropdown && <div className="pick-date-collapse">
-            <div>August 2026</div>
-            <div>July 2026</div>
+          {isDropdown && <div className="pick-category-collapse">
+            <div>Things</div>
+            <div>All</div>
           </div>}
           
         </span>
