@@ -14,10 +14,7 @@ export function Date() {
         </div>
       </div>
 
-      <div className="date">
-        <div className="month">September</div>
-        <div className="year">2026</div>
-      </div>
+      
 
       <div className="total-expense-cont">
         <div className="arrow-expand-cont">

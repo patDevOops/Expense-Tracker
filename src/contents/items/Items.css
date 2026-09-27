@@ -3,29 +3,34 @@
   flex-direction: column;
   border:1px solid #2a2f3a;
   height:100vh;
-  max-height:502px;
+  max-height:505px;
   margin-left:20px;
   margin-right:20px;
-  margin-top:19px;
+  margin-top:36px;
   background:hwb(214 6% 88%);
   border-radius:6px;
   position:relative;
-  padding-top:6px
+  padding-top:15px
 }
 .items-scrollable{
   overflow: scroll;
+  scrollbar-width:none;
 }
 .items > div:first-child{
   font-size:0.8rem;
   font-weight:600;
   position:absolute;
-  right:4px;
-  top:4px;
+  right:0;
+  top:0;
+  left:0;
+  display:flex;
+  padding:5px;
+  justify-content: space-between;
+  background:hwb(214 6% 88%);
 }
 .item-gen{
   border:0.5px solid white;
   margin:5px 15px;
-  
   display:flex;
   justify-content: space-between;
   align-items: stretch;

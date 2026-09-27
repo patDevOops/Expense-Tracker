@@ -9,9 +9,7 @@
   margin-top:6px;
   position:relative;
 }
-.year{
-  font-size:0.6rem;
-}
+
 .date-container{
   display:flex;
   justify-content:space-between;

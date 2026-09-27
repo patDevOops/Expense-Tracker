@@ -47,7 +47,10 @@ export function Items() {
 
   return (
     <div className="items">
-      <div>3 items</div>
+      <div>
+        <span>September 2026</span>
+        <span>3 items</span>
+      </div>
       <div className="items-scrollable">
         {itemRecords.map((item) => {
           const isHide = isCollapse.includes(item.createdAt);
