@@ -1,5 +1,5 @@
 import {Category} from './Category';
-import {Items} from './Items'
+import {Items} from './items/Items'
 import {Date} from './Date';
 import {FormCard} from './FormCard';
 import {FloatingButtons} from './FloatingButtons';
