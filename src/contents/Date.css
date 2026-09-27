@@ -26,13 +26,14 @@
   font-weight:700;
 }
 .current-record-cont,.total-expense-cont{
-  display:flex;
+  display:none;
   border: 1px solid #2a2f3a;
   border-radius:5px;
   background:hwb(214 6% 88%);
   position:fixed;
   box-shadow:1px 1px 8px rgba(0,0,0,0.35);
   z-index:100;
+  
 }
 .total-expense-cont{
   right:0;

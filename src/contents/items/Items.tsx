@@ -11,6 +11,15 @@ export function Items() {
   const [selectedCategory, setSelectedCategory] = useState("food");
   const [selectedDate, setSelectedDate] = useState("2026-09");
   const [isCollapse, setIsCollapse] = useState([]);
+  const [isDropdown, setIsDropdown] = useState(false)
+  
+  const toggleDropdown = ()=>{
+    if (isDropdown){
+      setIsDropdown(false)
+    }else{
+      setIsDropdown(true)
+    }
+  }
   //get items in records array
   let itemRecords;
   records.forEach((record) => {
@@ -52,9 +61,16 @@ export function Items() {
       <div>
         <span className="month-year-cont">
           <div>September 2026</div>
-          <IoMdArrowDropup className="dropdown-arrow"/>
+          <IoMdArrowDropup 
+            className="dropdown-arrow"
+            onClick={toggleDropdown}/>
+          
+          {isDropdown && <div className="pick-date-collapse">
+            <div>August 2026</div>
+            <div>July 2026</div>
+          </div>}
+          
         </span>
-        
         <span>3 items</span>
       </div>
       

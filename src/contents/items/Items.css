@@ -10,7 +10,7 @@
   background:hwb(214 6% 88%);
   border-radius:6px;
   position:relative;
-  padding-top:18px
+  padding-top:23px
 }
 .items-scrollable{
   overflow: scroll;
@@ -103,11 +103,24 @@
 }
 .dropdown-arrow{
   height:18px;
-  width:18px;
+  width:20px;
   
 }
 .month-year-cont{
   display:flex;
   align-items:center;
-  gap:2px;
+  gap:3px;
+  position:relative;
+}
+.pick-date-collapse{
+  position:absolute;
+  background:gray;
+  right:0;
+  top:15px;
+  display:flex;
+  flex-direction: column;
+  
+}
+.pick-date-collapse div{
+  padding:5px 10px;
 }

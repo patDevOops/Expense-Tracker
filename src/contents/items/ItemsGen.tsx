@@ -1,9 +1,15 @@
 import dayjs from "dayjs";
+import {useState} from 'react';
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoTrashBin } from "react-icons/io5";
 import { LuPencil } from "react-icons/lu";
 export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
+  const [isExpanding, setIsExpanding] = useState(false)
+  const toggleExpand = ()=>{
+    if (isExpanding) {setIsExpanding(false)} else
+    setIsExpanding(true)
+  }
   return (
     <div>
       {showDate && (
@@ -31,18 +37,20 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
           </div>
           
           <div className="item-arrow-cont">
-            <IoIosArrowBack className="item-arrow"
-              size="20"/>
+            <IoIosArrowBack 
+              className="item-arrow"
+              size="20"
+              onClick={toggleExpand}/>
           </div>
           
-          <div className="expanded-btn-cont">
+          {isExpanding && <div className="expanded-btn-cont">
             <button className="expanded-btn">
               <LuPencil className="arrow-btn-expanded"/>
             </button>
             <button className="expanded-btn">
               <IoTrashBin className="arrow-btn-expanded" />
             </button>
-          </div>
+          </div>}
           
         </div>
       )}
