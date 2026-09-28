@@ -99,7 +99,10 @@
   padding:10px;
 }
 .form-date{
-  width:100%;
+  width:60%;
+}
+.form-time{
+  width:40%;
 }
 .more-form-input{
   width:100%;
@@ -124,7 +127,7 @@
   width:100%;
   gap:5px;
 }
-.form-time{
+.form-price-each{
   width:60%
 }
 .form-quantity{
