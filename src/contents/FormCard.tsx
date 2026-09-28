@@ -3,12 +3,17 @@ import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
 
 export function FormCard({isShowForm}) {
-  
+  const [isShowMoreForm,setIsShowMoreForm] = useState(false)
+  const expandMoreForm = ()=>{
+    if (isShowMoreForm){
+      setIsShowMoreForm(false)
+    } else setIsShowMoreForm(true)
+  }
   return (
     <>
       {isShowForm && <div className="form-cont">
         <div className="form-name form">
-          <label className="label">Name</label>
+          <label className="label">Item Name</label>
           <div className="form-input-name-cont">
             <input
               placeholder="Item Name"
@@ -20,7 +25,7 @@ export function FormCard({isShowForm}) {
 
         <div className="form-price">
           <div className="form form-row">
-            <label className="label">Price₱</label>
+            <label className="label">Total Price</label>
             <input
               placeholder="price"
               className="form-input form-input-price"
@@ -35,7 +40,7 @@ export function FormCard({isShowForm}) {
           </div>
         </div>
 
-        <div className="more-form">
+        { isShowMoreForm && <div className="more-form">
           <div className="form form-date">
             <label className="label">Date</label>
             <input className="form-input more-form-input" type="date" />
@@ -61,11 +66,13 @@ export function FormCard({isShowForm}) {
               </div>
             </div>
           </div>
-        </div>
+        </div>}
 
         <div className="form-btns">
-          <button>
-            <IoIosArrowDown size="22" />
+          <button onClick={expandMoreForm}>
+            <IoIosArrowDown 
+              size="22"
+              />
           </button>
           <button>Add</button>
         </div>
