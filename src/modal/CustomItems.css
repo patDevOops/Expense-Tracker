@@ -12,6 +12,7 @@
   border:var(--border);
   padding:4px;
   border-radius:5px;
+  overflow: scroll;
 }
 .custom-item-gen > div span:first-child{
   font-weight:500;

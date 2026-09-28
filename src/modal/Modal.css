@@ -6,7 +6,7 @@
   top:200px;
   left:30px;
   right:30px;
-  padding:15px;
+  padding:15px 15px 3rem 15px;
   border-radius:5px;
 }
 .close-btn-modal{

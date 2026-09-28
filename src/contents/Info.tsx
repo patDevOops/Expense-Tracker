@@ -1,28 +1,42 @@
+import {useState} from 'react';
 import "./Info.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 export function Info() {
+  const [listToggle,setListToggle] = useState([])
+  const toggle = (val)=>{
+    if (listToggle.includes(val)){
+      setListToggle(listToggle.filter((a)=> val !== a))
+    } else{
+      setListToggle([...listToggle,val])
+    }
+  }
   return (
     <div className="info-container">
       <div className="current-record-cont">
-        <div className="record-info-cont">
+        {listToggle.includes("current-record") && <div className="record-info-cont">
           <div className="edge-title">Current Record</div>
           <div className="record-name">untitled</div>
-        </div>
-        <div className="arrow-expand-cont arrow-expand-cont-left">
+        </div>}
+        <div 
+          className="arrow-expand-cont arrow-expand-cont-left"
+          onClick={()=>{toggle('current-record')}}>
           <IoIosArrowForward size="21" color="orange" />
         </div>
       </div>
 
       <div className="total-expense-cont">
-        <div className="arrow-expand-cont">
+        <div 
+          className="arrow-expand-cont"
+          onClick={()=>{toggle('total-expense')}}>
           <IoIosArrowBack color="orange" size="21" />
         </div>
-        <div className="record-info-cont">
+        {listToggle.includes("total-expense") &&<div className="record-info-cont">
           <div className="edge-title">Total Expense</div>
           <div className="item-all-sum">₱75.00</div>
-        </div>
+        </div>}
       </div>
+      
     </div>
   );
 }
