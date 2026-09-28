@@ -4,11 +4,12 @@
   border-radius:5px;
   padding:5px;
   color:white;
+  flex-grow: 1;
 }
 .record-input-cont{
   display:flex;
   gap:4px;
-  margin:5px 0 10px 0
+  margin:5px 0 10px 0;
 }
 .record-input-cont button{
   color:white;
@@ -17,7 +18,7 @@
   border-radius:4px;
   padding:0 5px
 }
-.record-gen div{
+.record-gen > div{
   border:var(--border);
   border-radius:4px;
   margin-bottom:5px;
@@ -49,5 +50,19 @@
 .record-btn-container{
   display:flex;
   justify-content: space-between;
-  margin-top:8px;
+  margin-top:15px;
+}
+.record-gen-description{
+  color:var(--text-blur);
+  font-size:0.6rem;
+  display:flex;
+  gap:6px;
+  margin-top:5px;
+}
+.record-gen-description span:last-child{
+  color:lime;
+}
+.record-gen-name{
+  font-weight:500;
+  font-size:0.9rem;
 }
