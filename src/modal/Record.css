@@ -1,0 +1,53 @@
+.modal-input-rec{
+  background:hwb(218 10% 83%);
+  border:var(--border);
+  border-radius:5px;
+  padding:5px;
+  color:white;
+}
+.record-input-cont{
+  display:flex;
+  gap:4px;
+  margin:5px 0 10px 0
+}
+.record-input-cont button{
+  color:white;
+  background:var(--btn-color);
+  border:none;
+  border-radius:4px;
+  padding:0 5px
+}
+.record-gen div{
+  border:var(--border);
+  border-radius:4px;
+  margin-bottom:5px;
+  padding:5px;
+}
+.record-btn-container .delete{
+  background:red;
+  border:none;
+  color:white;
+  border-radius:4px;
+  padding:6px 10px;
+}
+.record-btn-container .view{
+  background:var(--btn-color);
+  border:none;
+  color:white;
+  height:100%;
+  border-radius:4px;
+  padding:6px 10px;
+}
+.record-btn-container .close{
+  border:none;
+  color:white;
+  background:hwb(218 15% 71% / 0.8352941176470589);
+  border-radius:4px;
+  padding:6px 10px;
+  margin-right:4px;
+}
+.record-btn-container{
+  display:flex;
+  justify-content: space-between;
+  margin-top:8px;
+}

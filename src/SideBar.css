@@ -1,13 +1,15 @@
 .sidebar{
   position:fixed;
-  padding:10px;
   background-color:gray;
-  display: none;
   top:0;
   z-index: 100;
 }
-.sidebar-title{
-  font-size:0.7rem;
-  margin-top:0.8rem;
-  margin-bottom:0.2rem;
+.sidebar div{
+  padding:10px 3rem 10px 10px;
+  display:flex;
+  align-items: center;
+  gap:20px;
+}
+.sidebar div span:last-child{
+  font-size:0.8rem;
 }

@@ -11,6 +11,7 @@ export function Contents(){
   const toggleForm = ()=>{
     if (isShowForm){setIsShowForm(false)}else setIsShowForm(true)
   }
+  
   return(
     <div className="main">
       <Date/>

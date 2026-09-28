@@ -5,6 +5,8 @@
 }
 :root{
   --main-color:hwb(217 7% 88%);
+  --btn-color:#4f8cff;
+  --border:1px solid #2a2f3a;
 }
 
 body{
