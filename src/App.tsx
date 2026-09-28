@@ -6,7 +6,13 @@ import { Modal } from "./modal/Modal";
 import "./Main.css";
 
 function App() {
+  const [typeModal, setTypeModal] = useState(null);
+  //Modal
   const [isShowModal, setIsShowModal] = useState(false);
+
+  const renderTypeModal = (type) => {
+    setTypeModal(type);
+  };
   const toggleModal = (bool) => {
     if (bool !== undefined) {
       setIsShowModal(bool);
@@ -16,6 +22,7 @@ function App() {
       setIsShowModal(false);
     } else setIsShowModal(true);
   };
+
   //for sidebar hamburger menu toggle
   const [isShowSidebar, setIsShowSidebar] = useState(false);
 
@@ -33,7 +40,7 @@ function App() {
   return (
     <>
       <Header toggleSidebar={toggleSidebar} />
-      
+
       {isShowModal && (
         <div
           className="barrier"
@@ -50,14 +57,15 @@ function App() {
           }}
         ></div>
       )}
-      
+
       <SideBar
         isShowSidebar={isShowSidebar}
         toggleModal={toggleModal}
         toggleSidebar={toggleSidebar}
+        renderTypeModal={renderTypeModal}
       />
 
-      {isShowModal && <Modal toggleModal={toggleModal} />}
+      {isShowModal && <Modal toggleModal={toggleModal} typeModal={typeModal} />}
 
       <Contents />
     </>

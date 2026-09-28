@@ -1,7 +1,8 @@
 import {Record} from './Record';
+import {Category} from './Category'
 import './Modal.css';
 import { IoMdClose } from "react-icons/io";
-export function Modal({toggleModal,toggleSidebar}) {
+export function Modal({toggleModal,toggleSidebar,typeModal}) {
   return(
     <div className="modal-container">
       <button 
@@ -9,7 +10,9 @@ export function Modal({toggleModal,toggleSidebar}) {
         onClick={()=>{
           toggleModal(false);
         }}><IoMdClose size="20"/></button>
-      <Record/>
+      
+      {typeModal === "record" && <Record/>}
+      {typeModal === "category" && <Category/>}
     </div>
   )
 }

@@ -4,7 +4,7 @@ import { CiViewList } from "react-icons/ci";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosPaper } from "react-icons/io";
 import { IoMdAdd } from "react-icons/io";
-export function SideBar({ isShowSidebar,toggleModal,toggleSidebar }) {
+export function SideBar({ isShowSidebar,toggleModal,toggleSidebar,renderTypeModal }) {
   return (
     <>
       {isShowSidebar && (
@@ -12,6 +12,7 @@ export function SideBar({ isShowSidebar,toggleModal,toggleSidebar }) {
           <div onClick={()=>{
           toggleModal(true);
           toggleSidebar(false)
+          renderTypeModal('record')
           }}>
             <span><IoIosPaper /></span>
             <span>Record</span>
@@ -22,7 +23,13 @@ export function SideBar({ isShowSidebar,toggleModal,toggleSidebar }) {
             <span>Custom Items</span>
             
           </div>
-          <div>
+          
+          <div onClick={()=>{
+          toggleModal(true);
+          toggleSidebar(false)
+          
+          renderTypeModal('category')
+          }}>
             <span><BiCategory color="white"/></span>
             <span>Add Category</span>
           </div>
