@@ -18,10 +18,14 @@ export function SideBar({ isShowSidebar,toggleModal,toggleSidebar,renderTypeModa
             <span>Record</span>
           </div>
           
-          <div>
+          <div onClick={()=>{
+          toggleModal(true);
+          toggleSidebar(false)
+          
+          renderTypeModal('custom-items')
+          }}>
             <span><CiViewList /></span>
             <span>Custom Items</span>
-            
           </div>
           
           <div onClick={()=>{

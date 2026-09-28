@@ -1,0 +1,27 @@
+.custom-item-gen > div{
+  display:flex;
+  justify-content: space-between;
+  padding:5px;
+  border-bottom:var(--border);
+}
+.custom-item-gen > div:last-child{
+  border-bottom:none;
+}
+
+.custom-item-gen{
+  border:var(--border);
+  padding:4px;
+  border-radius:5px;
+}
+.custom-item-gen > div span:first-child{
+  font-weight:500;
+}
+.custom-item-input-cont select{
+  width:25%
+}
+.custom-item-input-cont button{
+  width:20%
+}
+.custom-item-input-cont input{
+  width:55%
+}

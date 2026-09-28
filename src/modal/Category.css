@@ -1,3 +1,43 @@
 .record-name-highlighted{
   color:lime;
 }
+.category-gen > div{
+  display:flex;
+  justify-content: space-between;
+  border-bottom:var(--border);
+  padding:5px;
+  font-size:0.9rem;
+  font-weight:500;
+}
+.category-gen div:last-child{
+  border-bottom:none;
+}
+.category-gen{
+  border:var(--border);
+  padding:5px;
+  border-radius:4px;
+}
+.category-menu-container{
+  position:relative;
+}
+.select-menu{
+  position:absolute;
+  top:14px;
+  right:0;
+  font-size:0.7rem;
+  z-index:1;
+  border:var(--border);
+  border-radius:5px;
+  overflow:hidden;
+  
+}
+.select-menu p{
+  background:hwb(214 6% 88%);
+  padding:8px 10px;
+  display:flex;
+  gap:5px;
+}
+.select-menu p:first-child{
+  border-bottom:var(--border);
+  border-bottom-style:dotted;
+}

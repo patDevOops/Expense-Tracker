@@ -1,5 +1,6 @@
 import {Record} from './Record';
-import {Category} from './Category'
+import {Category} from './Category';
+import {CustomItems} from './CustomItems';
 import './Modal.css';
 import { IoMdClose } from "react-icons/io";
 export function Modal({toggleModal,toggleSidebar,typeModal}) {
@@ -13,6 +14,7 @@ export function Modal({toggleModal,toggleSidebar,typeModal}) {
       
       {typeModal === "record" && <Record/>}
       {typeModal === "category" && <Category/>}
+      {typeModal === "custom-items" && <CustomItems/>}
     </div>
   )
 }
