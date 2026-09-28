@@ -4,26 +4,22 @@ import { CiViewList } from "react-icons/ci";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosPaper } from "react-icons/io";
 import { IoMdAdd } from "react-icons/io";
-export function SideBar({ isShowSidebar }) {
+export function SideBar({ isShowSidebar,toggleModal,toggleSidebar }) {
   return (
     <>
       {isShowSidebar && (
         <div className="sidebar">
-          <div>
-            <span><IoMdAdd /></span>
-            <span>New Record</span>
-          </div>
-          <div>
+          <div onClick={()=>{
+          toggleModal(true);
+          toggleSidebar(false)
+          }}>
             <span><IoIosPaper /></span>
-            <span>My Record</span>
+            <span>Record</span>
           </div>
-          <div>
-            <span><IoIosAddCircleOutline /></span>
-            <span>Add Items</span>
-          </div>
+          
           <div>
             <span><CiViewList /></span>
-            <span>View Items</span>
+            <span>Custom Items</span>
             
           </div>
           <div>

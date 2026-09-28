@@ -1,25 +1,67 @@
-import {useState} from 'react';
-import {Header} from './Header'
-import {Contents} from './contents/Contents';
-import {SideBar} from './SideBar.tsx';
-import {Modal} from './modal/Modal';
-import './Main.css'
-
+import { useState } from "react";
+import { Header } from "./Header";
+import { Contents } from "./contents/Contents";
+import { SideBar } from "./SideBar.tsx";
+import { Modal } from "./modal/Modal";
+import "./Main.css";
 
 function App() {
-  const [isShowSidebar,setIsShowSidebar] = useState(false)
-  const toggleSidebar = ()=>{
-    if (isShowSidebar){setIsSidebar(false)}else setIsShowSidebar(true)
-  }
-  eruda.init()
+  const [isShowModal, setIsShowModal] = useState(false);
+  const toggleModal = (bool) => {
+    if (bool !== undefined) {
+      setIsShowModal(bool);
+      return;
+    }
+    if (isShowModal) {
+      setIsShowModal(false);
+    } else setIsShowModal(true);
+  };
+  //for sidebar hamburger menu toggle
+  const [isShowSidebar, setIsShowSidebar] = useState(false);
+
+  const toggleSidebar = (bool) => {
+    if (bool !== undefined) {
+      setIsShowSidebar(bool);
+      return;
+    }
+    if (isShowSidebar) {
+      setIsSidebar(false);
+    } else setIsShowSidebar(true);
+  };
+
+  eruda.init();
   return (
     <>
-      <Header toggleSidebar={toggleSidebar}/>
-      <SideBar isShowSidebar={isShowSidebar}/>
-      <Modal/>
-      <Contents/>
+      <Header toggleSidebar={toggleSidebar} />
+      
+      {isShowModal && (
+        <div
+          className="barrier"
+          onClick={() => {
+            setIsShowSidebar(false);
+          }}
+        ></div>
+      )}
+      {isShowSidebar && (
+        <div
+          className="barrier"
+          onClick={() => {
+            setIsShowSidebar(false);
+          }}
+        ></div>
+      )}
+      
+      <SideBar
+        isShowSidebar={isShowSidebar}
+        toggleModal={toggleModal}
+        toggleSidebar={toggleSidebar}
+      />
+
+      {isShowModal && <Modal toggleModal={toggleModal} />}
+
+      <Contents />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,7 +1,7 @@
 import "./Record.css";
 export function Record() {
   return (
-    <div>
+    <>
       <div className="modal-title">Create Record</div>
 
       <div className="record-input-cont">
@@ -34,6 +34,6 @@ export function Record() {
           <button className="view">view</button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
