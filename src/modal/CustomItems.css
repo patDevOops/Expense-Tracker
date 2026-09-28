@@ -25,3 +25,12 @@
 .custom-item-input-cont input{
   width:55%
 }
+.custom-item-category{
+  font-size:0.65rem;
+  font-weight:500;
+  border-radius:3px;
+  background:hwb(34 0% 13%);
+  text-align: center;
+  padding:1px 2px;
+  margin-top:3px;
+}

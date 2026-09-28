@@ -1,14 +1,14 @@
-import {useState} from 'react';
-import './CustomItems.css';
+import { useState } from "react";
+import "./CustomItems.css";
 import { GoKebabHorizontal } from "react-icons/go";
 import { GoPencil } from "react-icons/go";
 import { CiTrash } from "react-icons/ci";
 export function CustomItems() {
-  const [isViewMenu,setIsViewMenu] = useState(false)
+  const [isViewMenu, setIsViewMenu] = useState(false);
   const toggleMenu = () => {
     setIsViewMenu(isViewMenu ? false : true);
   };
-  return(
+  return (
     <>
       <div className="modal-title">Create Custom Items</div>
       <div className="record-input-cont custom-item-input-cont">
@@ -19,9 +19,11 @@ export function CustomItems() {
         <button>Add</button>
       </div>
       <div className="custom-item-gen">
-        
         <div>
-          <span>Milk</span>
+          <span>
+            <p>Milk</p>
+            <p className="custom-item-category">Food</p>
+          </span>
           <span className="category-menu-container">
             <GoKebabHorizontal size="19" onClick={toggleMenu} />
 
@@ -39,9 +41,12 @@ export function CustomItems() {
             )}
           </span>
         </div>
-        
+
         <div>
-          <span>Candy</span>
+          <span>
+            <p>shoes</p>
+            <p className="custom-item-category">Things</p>
+          </span>
           <span className="category-menu-container">
             <GoKebabHorizontal size="19" onClick={toggleMenu} />
 
@@ -59,8 +64,7 @@ export function CustomItems() {
             )}
           </span>
         </div>
-        
       </div>
     </>
-  )
+  );
 }
