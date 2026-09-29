@@ -1,8 +1,9 @@
 .sidebar{
   position:fixed;
-  background-color:gray;
+  background-color:rgb(15,22,31);
   top:0;
   z-index: 300;
+  box-shadow: 1px 1px 10px rgba(0,0,0,0.25)
 }
 .sidebar div{
   padding:10px 3rem 10px 10px;

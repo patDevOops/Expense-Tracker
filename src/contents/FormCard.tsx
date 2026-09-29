@@ -7,6 +7,10 @@ export function FormCard({ isShowForm }) {
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
   };
+  const [isPickItem, setIspickItem] = useState(false);
+  const pickItem = () => {
+    setIspickItem(isPickItem ? false : true);
+  };
 
   return (
     <>
@@ -21,7 +25,7 @@ export function FormCard({ isShowForm }) {
               />
               
               <div className="pick-item-container">
-                <div className="pick-item-generated">
+                {isPickItem && <div className="pick-item-generated">
                   <div>
                     <span>candy</span>
                     <div className="pick-item-gen-description">
@@ -35,8 +39,12 @@ export function FormCard({ isShowForm }) {
                       <span>food</span>
                     </div>
                   </div>
-                </div>
-                <IoIosArrowDown size="23" className="item-pick-arrow" />
+                </div>}
+                
+                <IoIosArrowDown 
+                  size="23"
+                  className="item-pick-arrow"
+                  onClick={pickItem}/>
               </div>
               
             </div>
