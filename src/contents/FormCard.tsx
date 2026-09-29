@@ -5,10 +5,9 @@ import { IoIosArrowDown } from "react-icons/io";
 export function FormCard({ isShowForm }) {
   const [isShowMoreForm, setIsShowMoreForm] = useState(false);
   const expandMoreForm = () => {
-    if (isShowMoreForm) {
-      setIsShowMoreForm(false);
-    } else setIsShowMoreForm(true);
+    setIsShowMoreForm(isShowMoreForm ? false : true);
   };
+
   return (
     <>
       {isShowForm && (
@@ -20,7 +19,26 @@ export function FormCard({ isShowForm }) {
                 placeholder="Item Name"
                 className="form-input form-input-name"
               />
-              <IoIosArrowDown size="23" className="item-pick-arrow" />
+              
+              <div className="pick-item-container">
+                <div className="pick-item-generated">
+                  <div>
+                    <span>candy</span>
+                    <div className="pick-item-gen-description">
+                      <span>food</span>
+                      <span>₱1.00</span>
+                    </div>
+                  </div>
+                  <div>
+                    <span>milk</span>
+                    <div className="pick-item-gen-description">
+                      <span>food</span>
+                    </div>
+                  </div>
+                </div>
+                <IoIosArrowDown size="23" className="item-pick-arrow" />
+              </div>
+              
             </div>
           </div>
 

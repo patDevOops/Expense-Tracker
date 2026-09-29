@@ -1,7 +1,7 @@
 .form-cont{
   border:1px solid white;
   margin-top:5px;
-  padding:14px 10px;
+  padding:14px 0 14px 14px;
   height:100vh;
   max-height: 350px;
   position:fixed;
@@ -46,10 +46,49 @@
   align-items:center;
 }
 .item-pick-arrow{
+  color:white‌;
+}
+.pick-item-container{
   position:absolute;
   right:5px;
-  z-index:100;
-  color:white‌;
+  display:flex;
+  top:0.6rem;
+}
+.pick-item-generated > div > div span{
+  font-size:0.5rem;
+}
+.pick-item-generated > div > span{
+  font-size:0.8rem;
+  font-weight:500;
+}
+.pick-item-generated > div{
+  background:var(--main-color);
+  padding:5px 10px;
+  border-bottom:1px dotted #2a2f3a;
+}
+.pick-item-generated > div:last-child{
+  border:none;
+}
+.pick-item-generated{
+  background:var(--main-color);
+  border:var(--border);
+  border-radius:5px;
+  overflow:hidden;
+}
+.pick-item-gen-description{
+  display:flex;
+  gap:3px;
+  margin-top:3px;
+  color:var(--text-blur)
+}
+.pick-item-gen-description span:first-child{
+  background:rgb(222,126,0);
+  color:white;
+  border-radius:3px;
+  padding:2px 5px;
+}
+.pick-item-gen-description span:last-child{
+  padding:2px 5px;
 }
 .form-input{
   padding:13px 10px;

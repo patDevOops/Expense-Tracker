@@ -10,7 +10,7 @@
   background:hwb(214 6% 88%);
   border-radius:6px;
   position:relative;
-  padding-top:23px
+  padding-top:26px
 }
 .items-scrollable{
   overflow: scroll;
@@ -20,9 +20,9 @@
   font-size:0.8rem;
   font-weight:600;
   position:absolute;
-  right:0;
+  right:8px;
   top:0;
-  left:0;
+  left:8px;
   display:flex;
   padding:5px;
   justify-content: space-between;
@@ -41,6 +41,7 @@
 .item-name{
   flex-grow:1;
   margin:8px 0 8px 3px;
+  text-wrap:nowrap;
 }
 .item-name span{
   font-size:0.6rem;
