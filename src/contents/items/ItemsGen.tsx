@@ -28,11 +28,11 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
           <div className="item-name">
             <div>{item.name}</div>
             <span className="item-price-calc">
-              {item.quantity} x ₱{item.price}
+              {item.quantity} x ₱{item.price.toFixed(2)}
             </span>
             <span>{item.createdTime}</span>
           </div>
-          <div className="item-total-price">₱{item.quantity * item.price}
+          <div className="item-total-price">₱{(item.quantity * item.price).toFixed(2)}
           </div>
           
           <div className="item-arrow-cont">
