@@ -115,13 +115,20 @@
 }
 .pick-category-collapse{
   position:absolute;
-  background:gray;
   right:0;
   top:15px;
   display:flex;
   flex-direction: column;
-  
+  border:var(--border);
+  z-index:100;
+  border-radius:5px;
+  overflow:hidden;
 }
 .pick-category-collapse div{
-  padding:5px 10px;
+  padding:5px 13px;
+  background-color:rgb(15,22,31);
+}
+.pick-category-collapse div:last-child{
+  border-top:1px dotted #2a2f3a;
+  margin-top:3px;
 }
