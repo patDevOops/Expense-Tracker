@@ -14,11 +14,7 @@ export function Items() {
   const [isDropdown, setIsDropdown] = useState(false)
   
   const toggleDropdown = ()=>{
-    if (isDropdown){
-      setIsDropdown(false)
-    }else{
-      setIsDropdown(true)
-    }
+    setIsDropdown(isDropdown ? false : true)
   }
   //get items in records array
   let itemRecords;

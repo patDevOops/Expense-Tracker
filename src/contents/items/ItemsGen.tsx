@@ -7,8 +7,7 @@ import { LuPencil } from "react-icons/lu";
 export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
   const [isExpanding, setIsExpanding] = useState(false)
   const toggleExpand = ()=>{
-    if (isExpanding) {setIsExpanding(false)} else
-    setIsExpanding(true)
+    setIsExpanding(isExpanding ? false : true)
   }
   return (
     <div>
