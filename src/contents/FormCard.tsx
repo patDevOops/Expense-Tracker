@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
 
-export function FormCard({ isShowForm }) {
+export function FormCard({ isShowForm ,records}) {
   const [isShowMoreForm, setIsShowMoreForm] = useState(false);
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);

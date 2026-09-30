@@ -1,14 +1,10 @@
 import { useState, useRef } from "react";
-import dayjs from "dayjs";
+
 import "./Items.css";
 import { ItemsGen } from "./ItemsGen";
 import { IoMdArrowDropup } from "react-icons/io";
 
-const today = dayjs();
-export function Items({records}) {
-  const [currentRecordId, setCurrentRecordId] = useState("123");
-  const [selectedCategory, setSelectedCategory] = useState("food");
-  const [selectedDate, setSelectedDate] = useState("2026-09");
+export function Items({records,itemRecords}) {
   const [isCollapse, setIsCollapse] = useState([]);
   const [isDropdown, setIsDropdown] = useState(false);
 
@@ -16,28 +12,6 @@ export function Items({records}) {
     setIsDropdown(isDropdown ? false : true);
   };
   
-  let itemRecords;
-  records.forEach((record) => {
-    if (record.id === currentRecordId) {
-      itemRecords = record.items;
-    }
-  });
-  //filter items to match selectedCategory and selectedDate
-  itemRecords = itemRecords.filter(
-    (item) =>
-      item.category === selectedCategory &&
-      selectedDate === dayjs(item.createdAt).format("YYYY-MM"),
-  );
-
-  // sort by newest first
-  itemRecords.sort((a, b) => {
-    const date1 = `${a.createdAt} ${a.createdTime}`;
-    const date2 = `${b.createdAt} ${b.createdTime}`;
-    return today.diff(date1) - today.diff(date2);
-  });
-
-  let previousDate;
-
   const toggleCollapse = (date) => {
     if (isCollapse.includes(date)) {
       setIsCollapse(
@@ -49,6 +23,8 @@ export function Items({records}) {
       setIsCollapse([...isCollapse, date]);
     }
   };
+
+  let previousDate;
 
   return (
     <div className="items">
