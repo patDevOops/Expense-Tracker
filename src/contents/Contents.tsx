@@ -78,13 +78,11 @@ export function Contents() {
 
   // sort by newest first
   itemRecords.sort((a, b) => {
-    console.log(records)
+    console.log(records);
     return today.diff(a.createdAt) - today.diff(b.createdAt);
   });
 
-  const addItems = (items) => {
-    
-  };
+  const addItems = (items) => {};
 
   const [isShowForm, setIsShowForm] = useState(false);
   const toggleForm = () => {

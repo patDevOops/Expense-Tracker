@@ -1,17 +1,17 @@
 import { useState, useRef } from "react";
-import dayjs from 'dayjs';
+import { formatMY } from "../../utils/date.js";
 import "./Items.css";
 import { ItemsGen } from "./ItemsGen";
 import { IoMdArrowDropup } from "react-icons/io";
 
-export function Items({records,itemRecords}) {
+export function Items({ records, itemRecords }) {
   const [isCollapse, setIsCollapse] = useState([]);
   const [isDropdown, setIsDropdown] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdown(isDropdown ? false : true);
   };
-  
+
   const toggleCollapse = (date) => {
     if (isCollapse.includes(date)) {
       setIsCollapse(
@@ -48,12 +48,12 @@ export function Items({records,itemRecords}) {
 
       <div className="items-scrollable">
         {itemRecords.map((item) => {
-          const isHide = isCollapse.includes(dayjs(item.createdAt).format('YYYY-MM-D'));
+          const isHide = isCollapse.includes(formatMY(item.createdAt));
           let showDate = true;
-          if (previousDate === dayjs(item.createdAt).format('YYYY-MM-D')) {
+          if (previousDate === formatMY(item.createdAt)) {
             showDate = false;
           }
-          previousDate = dayjs(item.createdAt).format('YYYY-MM-D');
+          previousDate = formatMY(item.createdAt);
           return (
             <ItemsGen
               item={item}

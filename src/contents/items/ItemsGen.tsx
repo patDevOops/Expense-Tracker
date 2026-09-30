@@ -1,14 +1,15 @@
 import dayjs from "dayjs";
-import {useState} from 'react';
+import { useState } from "react";
+import { formatMY } from "../../utils/date.js";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoTrashBin } from "react-icons/io5";
 import { LuPencil } from "react-icons/lu";
 export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
-  const [isExpanding, setIsExpanding] = useState(false)
-  const toggleExpand = ()=>{
-    setIsExpanding(isExpanding ? false : true)
-  }
+  const [isExpanding, setIsExpanding] = useState(false);
+  const toggleExpand = () => {
+    setIsExpanding(isExpanding ? false : true);
+  };
   return (
     <div>
       {showDate && (
@@ -17,7 +18,7 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
           <IoIosArrowDown
             size="15"
             onClick={() => {
-              toggleCollapse(dayjs(item.createdAt).format('YYYY-MM-D'));
+              toggleCollapse(formatMY(item.createdAt));
             }}
           />
         </div>
@@ -30,27 +31,30 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
             <span className="item-price-calc">
               {item.quantity} x ₱{item.price.toFixed(2)}
             </span>
-            <span>{dayjs(item.createdAt).format('h:mm A')}</span>
+            <span>{dayjs(item.createdAt).format("h:mm A")}</span>
           </div>
-          <div className="item-total-price">₱{(item.quantity * item.price).toFixed(2)}
+          <div className="item-total-price">
+            ₱{(item.quantity * item.price).toFixed(2)}
           </div>
-          
+
           <div className="item-arrow-cont">
-            <IoIosArrowBack 
+            <IoIosArrowBack
               className="item-arrow"
               size="20"
-              onClick={toggleExpand}/>
+              onClick={toggleExpand}
+            />
           </div>
-          
-          {isExpanding && <div className="expanded-btn-cont">
-            <button className="expanded-btn">
-              <LuPencil className="arrow-btn-expanded"/>
-            </button>
-            <button className="expanded-btn">
-              <IoTrashBin className="arrow-btn-expanded" />
-            </button>
-          </div>}
-          
+
+          {isExpanding && (
+            <div className="expanded-btn-cont">
+              <button className="expanded-btn">
+                <LuPencil className="arrow-btn-expanded" />
+              </button>
+              <button className="expanded-btn">
+                <IoTrashBin className="arrow-btn-expanded" />
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
