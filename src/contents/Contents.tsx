@@ -81,8 +81,34 @@ export function Contents() {
     console.log(records);
     return today.diff(a.createdAt) - today.diff(b.createdAt);
   });
-
-  const addItems = (items) => {};
+  //add items event handler
+  const addItems = (newItems) => {
+    setRecords(
+      records.map((record) => {
+        if (record.id === currentRecordId) {
+          return {
+            ...record,
+            items: [...record.items, newItems],
+          };
+        }
+        return record;
+      }),
+    );
+  };
+  //remove items event handler
+  const removeItems = (id) => {
+    setRecords(
+      records.map((record) => {
+        if (record.id === currentRecordId) {
+          return {
+            ...record,
+            items: record.items.filter((a) => a.id !== id),
+          };
+        }
+        return record;
+      }),
+    );
+  };
 
   const [isShowForm, setIsShowForm] = useState(false);
   const toggleForm = () => {
@@ -94,7 +120,10 @@ export function Contents() {
       <Date />
       <Info />
       <Items itemRecords={itemRecords} />
-      <FormCard isShowForm={isShowForm} records={records} addItems={addItems} />
+      <FormCard 
+        isShowForm={isShowForm}
+        records={records}
+        addItems={addItems} />
       <FloatingButtons toggleForm={toggleForm} />
     </div>
   );
