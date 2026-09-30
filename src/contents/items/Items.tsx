@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-
+import dayjs from 'dayjs';
 import "./Items.css";
 import { ItemsGen } from "./ItemsGen";
 import { IoMdArrowDropup } from "react-icons/io";
@@ -48,12 +48,12 @@ export function Items({records,itemRecords}) {
 
       <div className="items-scrollable">
         {itemRecords.map((item) => {
-          const isHide = isCollapse.includes(item.createdAt);
+          const isHide = isCollapse.includes(dayjs(item.createdAt).format('YYYY-MM-D'));
           let showDate = true;
-          if (previousDate === item.createdAt) {
+          if (previousDate === dayjs(item.createdAt).format('YYYY-MM-D')) {
             showDate = false;
           }
-          previousDate = item.createdAt;
+          previousDate = dayjs(item.createdAt).format('YYYY-MM-D');
           return (
             <ItemsGen
               item={item}

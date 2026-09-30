@@ -17,7 +17,7 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
           <IoIosArrowDown
             size="15"
             onClick={() => {
-              toggleCollapse(item.createdAt);
+              toggleCollapse(dayjs(item.createdAt).format('YYYY-MM-D'));
             }}
           />
         </div>
@@ -30,7 +30,7 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
             <span className="item-price-calc">
               {item.quantity} x ₱{item.price.toFixed(2)}
             </span>
-            <span>{item.createdTime}</span>
+            <span>{dayjs(item.createdAt).format('h:mm A')}</span>
           </div>
           <div className="item-total-price">₱{(item.quantity * item.price).toFixed(2)}
           </div>

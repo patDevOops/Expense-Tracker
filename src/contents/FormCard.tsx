@@ -11,6 +11,21 @@ export function FormCard({ isShowForm ,records}) {
   const pickItem = () => {
     setIspickItem(isPickItem ? false : true);
   };
+  //name input
+  const [nameInput,setNameInput] = useState('')
+  const typeNameInput = (event)=>{
+    setNameInput(event.target.value)
+  }
+  //price input
+  const [inputPrice,setInputPrice] = useState('')
+  const typeInputPrice = (event)=>{
+    setInputPrice(event.target.value)
+  }
+  //quantity input
+  const [inputQuantity,setInputQuantity] = useState(1)
+  const typeInputQuantity = (event)=>{
+    setInputQuantity(event.target.value)
+  }
 
   return (
     <>
@@ -22,6 +37,8 @@ export function FormCard({ isShowForm ,records}) {
               <input
                 placeholder="Item Name"
                 className="form-input form-input-name"
+                value={nameInput}
+                onChange={typeNameInput}
               />
               
               <div className="pick-item-container">
@@ -56,6 +73,9 @@ export function FormCard({ isShowForm ,records}) {
               <input
                 placeholder="price"
                 className="form-input form-input-price"
+                value={inputPrice}
+                onChange={typeInputPrice}
+                type="number"
               />
             </div>
 
