@@ -1,22 +1,21 @@
 import { useState, useRef } from "react";
 import dayjs from "dayjs";
-import { records } from "../../data/records.js";
 import "./Items.css";
 import { ItemsGen } from "./ItemsGen";
 import { IoMdArrowDropup } from "react-icons/io";
 
 const today = dayjs();
-export function Items() {
+export function Items({records}) {
   const [currentRecordId, setCurrentRecordId] = useState("123");
   const [selectedCategory, setSelectedCategory] = useState("food");
   const [selectedDate, setSelectedDate] = useState("2026-09");
   const [isCollapse, setIsCollapse] = useState([]);
-  const [isDropdown, setIsDropdown] = useState(false)
+  const [isDropdown, setIsDropdown] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdown(isDropdown ? false : true);
+  };
   
-  const toggleDropdown = ()=>{
-    setIsDropdown(isDropdown ? false : true)
-  }
-  //get items in records array
   let itemRecords;
   records.forEach((record) => {
     if (record.id === currentRecordId) {
@@ -53,23 +52,24 @@ export function Items() {
 
   return (
     <div className="items">
-      
       <div>
         <span className="category-cont">
           <div>Food</div>
-          <IoMdArrowDropup 
+          <IoMdArrowDropup
             className="dropdown-arrow"
-            onClick={toggleDropdown}/>
-          
-          {isDropdown && <div className="pick-category-collapse">
-            <div>Things</div>
-            <div>All</div>
-          </div>}
-          
+            onClick={toggleDropdown}
+          />
+
+          {isDropdown && (
+            <div className="pick-category-collapse">
+              <div>Things</div>
+              <div>All</div>
+            </div>
+          )}
         </span>
         <span>3 items</span>
       </div>
-      
+
       <div className="items-scrollable">
         {itemRecords.map((item) => {
           const isHide = isCollapse.includes(item.createdAt);

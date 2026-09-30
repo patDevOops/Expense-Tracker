@@ -27,37 +27,5 @@ export const records = [{
     quantity:1,
     price:40,
     category:'food',
-  },{
-         name:'ulam',
-    id:'5',
-    createdAt:'2026-09-22',
-    createdTime:'11:30 AM',
-    quantity:1,
-    price:40,
-    category:'food',
-  },{
-  name:'ulam',
-    id:'h',
-    createdAt:'2026-09-22',
-    createdTime:'11:30 AM',
-    quantity:1,
-    price:40,
-    category:'food',
-  },{
-  name:'ulam',
-    id:'8',
-    createdAt:'2026-09-22',
-    createdTime:'11:30 AM',
-    quantity:1,
-    price:40,
-    category:'food',
-  },{
-  name:'ulam',
-    id:'113',
-    createdAt:'2026-09-18',
-    createdTime:'11:30 AM',
-    quantity:1,
-    price:40,
-    category:'food',
   }]
 }]
