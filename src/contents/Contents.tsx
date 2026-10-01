@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import dayjs from "dayjs";
 import { Date } from "./Date";
 import { Items } from "./items/Items";
@@ -26,7 +26,7 @@ const today = dayjs();
 export function Contents() {
   const [currentRecordId, setCurrentRecordId] = useState("123");
   const [selectedCategory, setSelectedCategory] = useState("food");
-  const [selectedDate, setSelectedDate] = useState("2026-09");
+  const [selectedDate, setSelectedDate] = useState("2026-10");
   const [records, setRecords] = useState<Record[]>([
     {
       name: "untitled",
@@ -61,7 +61,7 @@ export function Contents() {
       ],
     },
   ]);
-
+  
   //find array of items in records
   let itemRecords: Items[] = [];
   records.forEach((record) => {
@@ -78,7 +78,6 @@ export function Contents() {
 
   // sort by newest first
   itemRecords.sort((a, b) => {
-    console.log(records);
     return today.diff(a.createdAt) - today.diff(b.createdAt);
   });
   //add items event handler
@@ -109,11 +108,13 @@ export function Contents() {
       }),
     );
   };
+  
 
   const [isShowForm, setIsShowForm] = useState(false);
   const toggleForm = () => {
     setIsShowForm(isShowForm ? false : true);
   };
+  console.log(records)
 
   return (
     <div className="main">

@@ -1,8 +1,9 @@
 import { useState } from "react";
+import dayjs from 'dayjs'
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
 
-export function FormCard({ isShowForm ,records}) {
+export function FormCard({ isShowForm, records ,addItems}) {
   const [isShowMoreForm, setIsShowMoreForm] = useState(false);
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
@@ -11,32 +12,35 @@ export function FormCard({ isShowForm ,records}) {
   const pickItem = () => {
     setIspickItem(isPickItem ? false : true);
   };
-  const [form,setForm] = useState({
-    name:"",
-    totalPrice:"",
-    category:"",
-    date:"",
-    time:"",
-    pricePerQty:"",
-    quantity:""
-  })
 
-  const inputForm = (event)=>{
-    const {name, value} = event.target;
+  const [form, setForm] = useState({
+    name: "",
+    category: "food",
+    date: dayjs().format('YYYY-MM-D'),
+    time: dayjs().format('h:mm A'),
+    price: "",
+    quantity: 1,
+    totalPrice: "",
+    id:"",
+  });
 
-    setForm((prev)=>({
+  const inputForm = (event) => {
+    const { name, value } = event.target;
+    setForm((prev) => ({
       ...prev,
-      [name]:value
-    }))
-  }
-  const inputNumForm = (event)=>{
-    const {name, value} = event.target;
-
-    setForm((prev)=>({
+      [name]: value,
+    }));
+  };
+  
+  const inputNumForm = (event) => {
+    const name = event.target.name;
+    const value = !event.target.value ? "" : Number(event.target.value)
+    
+    setForm((prev) => ({
       ...prev,
-      [name]:value === "" ? "" : Number(value)
-    }))
-  }
+      [name]:value ? value :"",
+    }));
+  };
 
   return (
     <>
@@ -52,30 +56,32 @@ export function FormCard({ isShowForm ,records}) {
                 value={form.name}
                 onChange={inputForm}
               />
-              
+
               <div className="pick-item-container">
-                {isPickItem && <div className="pick-item-generated">
-                  <div>
-                    <span>candy</span>
-                    <div className="pick-item-gen-description">
-                      <span>food</span>
-                      <span>₱1.00</span>
+                {isPickItem && (
+                  <div className="pick-item-generated">
+                    <div>
+                      <span>candy</span>
+                      <div className="pick-item-gen-description">
+                        <span>food</span>
+                        <span>₱1.00</span>
+                      </div>
+                    </div>
+                    <div>
+                      <span>milk</span>
+                      <div className="pick-item-gen-description">
+                        <span>food</span>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <span>milk</span>
-                    <div className="pick-item-gen-description">
-                      <span>food</span>
-                    </div>
-                  </div>
-                </div>}
-                
-                <IoIosArrowDown 
+                )}
+
+                <IoIosArrowDown
                   size="23"
                   className="item-pick-arrow"
-                  onClick={pickItem}/>
+                  onClick={pickItem}
+                />
               </div>
-              
             </div>
           </div>
 
@@ -86,7 +92,7 @@ export function FormCard({ isShowForm ,records}) {
                 name="totalPrice"
                 placeholder="price"
                 className="form-input form-input-price"
-                value={form.totalPrice}
+                value={form.price ? form.quantity * form.price : form.totalPrice}
                 onChange={inputNumForm}
                 type="number"
               />
@@ -95,9 +101,11 @@ export function FormCard({ isShowForm ,records}) {
             <div className="form form-row">
               <label className="label">Category</label>
               <select 
-                
+                name="category"
+                value={form.category}
+                onChange={inputForm}
                 className="form-input">
-                <option>Milk</option>
+                <option value="food">Food</option>
               </select>
             </div>
           </div>
@@ -107,31 +115,34 @@ export function FormCard({ isShowForm ,records}) {
               <div className="row-container">
                 <div className="form form-date">
                   <label className="label">Date</label>
-                  <input 
+                  <input
                     name="date"
                     value={form.date}
                     className="form-input more-form-input"
                     type="date"
-                    onChange={inputForm}/>
+                    onChange={inputForm}
+                  />
                 </div>
                 <div className="form-time form">
                   <label className="label">Time</label>
-                  <input 
+                  <input
                     name="time"
                     value={form.time}
                     type="time"
                     className="form-input more-form-input"
-                    onChange={inputForm}/>
+                    onChange={inputForm}
+                  />
                 </div>
               </div>
               <div className="row-container">
                 <div className="form form-price-each">
                   <label className="label">Price(each)</label>
-                  <input 
-                    name="pricePerQty"
-                    value={form.pricePerQty}
+                  <input
+                    name="price"
+                    value={form.price}
                     className="form-input"
-                    onChange={inputNumForm}/>
+                    onChange={inputNumForm}
+                  />
                 </div>
 
                 <div className="form form-quantity">
@@ -158,7 +169,15 @@ export function FormCard({ isShowForm ,records}) {
             <button onClick={expandMoreForm}>
               <IoIosArrowDown size="22" />
             </button>
-            <button>Add</button>
+            <button onClick={()=>{
+          addItems({
+            ...form,
+            quantity:form.quantity <= 0 ? 1 : form.quantity,
+            createdAt:`${form.date} ${form.time}`,
+            id:crypto.randomUUID(),
+            totalPrice:form.price ? form.price * form.quantity : form.totalPrice
+          })
+            }}>Add</button>
           </div>
         </div>
       )}

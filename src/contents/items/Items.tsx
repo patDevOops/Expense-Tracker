@@ -4,7 +4,7 @@ import "./Items.css";
 import { ItemsGen } from "./ItemsGen";
 import { IoMdArrowDropup } from "react-icons/io";
 
-export function Items({ records, itemRecords }) {
+export function Items({itemRecords }) {
   const [isCollapse, setIsCollapse] = useState([]);
   const [isDropdown, setIsDropdown] = useState(false);
 

@@ -10,6 +10,7 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
   const toggleExpand = () => {
     setIsExpanding(isExpanding ? false : true);
   };
+  const isShowQtyCalc = item.quantity > 1 ?true : false;
   return (
     <div>
       {showDate && (
@@ -28,13 +29,14 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
         <div className="item-gen">
           <div className="item-name">
             <div>{item.name}</div>
-            <span className="item-price-calc">
-              {item.quantity} x ₱{item.price.toFixed(2)}
-            </span>
+            {isShowQtyCalc && <span className="item-price-calc">
+              {item.quantity} x ₱{(item.totalPrice / item.quantity).toFixed(2)}
+            </span>}
+            
             <span>{dayjs(item.createdAt).format("h:mm A")}</span>
           </div>
           <div className="item-total-price">
-            ₱{(item.quantity * item.price).toFixed(2)}
+            ₱{(item.price ? item.quantity * item.price : item.totalPrice).toFixed(2)}
           </div>
 
           <div className="item-arrow-cont">
