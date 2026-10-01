@@ -1,9 +1,9 @@
 import { useState } from "react";
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
 
-export function FormCard({ isShowForm, records ,addItems}) {
+export function FormCard({ isShowForm, records, addItems }) {
   const [isShowMoreForm, setIsShowMoreForm] = useState(false);
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
@@ -16,12 +16,12 @@ export function FormCard({ isShowForm, records ,addItems}) {
   const [form, setForm] = useState({
     name: "",
     category: "food",
-    date: dayjs().format('YYYY-MM-D'),
-    time: dayjs().format('h:mm A'),
+    date: dayjs().format("YYYY-MM-D"),
+    time: dayjs().format("h:mm A"),
     price: "",
     quantity: 1,
-    totalPrice: "",
-    id:"",
+    id: "",
+    totalPrice:""
   });
 
   const inputForm = (event) => {
@@ -31,23 +31,36 @@ export function FormCard({ isShowForm, records ,addItems}) {
       [name]: value,
     }));
   };
-  
+
   const inputNumForm = (event) => {
     const name = event.target.name;
-    const value = !event.target.value ? "" : Number(event.target.value)
+    const value = !event.target.value ? "" : Number(event.target.value);
     setForm((prev) => ({
       ...prev,
-      [name]:value ? value :"",
+      [name]: value ? value : "",
+      
     }));
   };
 
-  const clickBtnQty = (event)=>{
-    const {name} = event.target;
-    setForm((prev)=>({
+  const clickBtnQty = (event) => {
+    const { name } = event.target;
+    setForm((prev) => ({
       ...prev,
-      quantity:name === 'increase' ? prev.quantity + 1 : prev.quantity - 1
-    }))
-  }
+      quantity: name === "increase" ? prev.quantity + 1 : prev.quantity - 1,
+    }));
+  };
+  
+  const addItemsForm = () => {
+    if (!form.name || !form.totalPrice) return;
+    addItems({
+      ...form,
+      quantity: form.quantity <= 0 ? 1 : form.quantity,
+      createdAt: `${form.date} ${form.time}`,
+      id: crypto.randomUUID(),
+      totalPrice: form.price ? form.price * form.quantity : form.totalPrice,
+      price: form.price ? form.price : 0,
+    });
+  };
 
   return (
     <>
@@ -99,7 +112,7 @@ export function FormCard({ isShowForm, records ,addItems}) {
                 name="totalPrice"
                 placeholder="price"
                 className="form-input form-input-price"
-                value={form.price ? form.quantity * form.price : form.totalPrice}
+                value={form.price ? form.price*form.quantity :form.totalPrice}
                 onChange={inputNumForm}
                 type="number"
               />
@@ -107,11 +120,12 @@ export function FormCard({ isShowForm, records ,addItems}) {
 
             <div className="form form-row">
               <label className="label">Category</label>
-              <select 
+              <select
                 name="category"
                 value={form.category}
                 onChange={inputForm}
-                className="form-input">
+                className="form-input"
+              >
                 <option value="food">Food</option>
               </select>
             </div>
@@ -149,17 +163,20 @@ export function FormCard({ isShowForm, records ,addItems}) {
                     value={form.price}
                     className="form-input"
                     onChange={inputNumForm}
+                    placeholder="optional"
                   />
                 </div>
 
                 <div className="form form-quantity">
                   <label className="label">Quantity</label>
-                  <div 
-                    className="form-quantity-input-cont">
-                    <button 
+                  <div className="form-quantity-input-cont">
+                    <button
                       name="decrease"
                       onClick={clickBtnQty}
-                      className="form-quan-btn">-</button>
+                      className="form-quan-btn"
+                    >
+                      -
+                    </button>
 
                     <input
                       name="quantity"
@@ -169,10 +186,13 @@ export function FormCard({ isShowForm, records ,addItems}) {
                       className="form-input more-form-input"
                       onChange={inputNumForm}
                     />
-                    <button 
+                    <button
                       name="increase"
                       onClick={clickBtnQty}
-                      className="form-quan-btn">+</button>
+                      className="form-quan-btn"
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
               </div>
@@ -183,15 +203,7 @@ export function FormCard({ isShowForm, records ,addItems}) {
             <button onClick={expandMoreForm}>
               <IoIosArrowDown size="22" />
             </button>
-            <button onClick={()=>{
-          addItems({
-            ...form,
-            quantity:form.quantity <= 0 ? 1 : form.quantity,
-            createdAt:`${form.date} ${form.time}`,
-            id:crypto.randomUUID(),
-            totalPrice:form.price ? form.price * form.quantity : form.totalPrice
-          })
-            }}>Add</button>
+            <button onClick={addItemsForm}>Add</button>
           </div>
         </div>
       )}
