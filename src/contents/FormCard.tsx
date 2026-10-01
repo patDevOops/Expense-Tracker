@@ -11,20 +11,31 @@ export function FormCard({ isShowForm ,records}) {
   const pickItem = () => {
     setIspickItem(isPickItem ? false : true);
   };
-  //name input
-  const [nameInput,setNameInput] = useState('')
-  const typeNameInput = (event)=>{
-    setNameInput(event.target.value)
+  const [form,setForm] = useState({
+    name:"",
+    totalPrice:"",
+    category:"",
+    date:"",
+    time:"",
+    pricePerQty:"",
+    quantity:""
+  })
+
+  const inputForm = (event)=>{
+    const {name, value} = event.target;
+
+    setForm((prev)=>({
+      ...prev,
+      [name]:value
+    }))
   }
-  //price input
-  const [inputPrice,setInputPrice] = useState('')
-  const typeInputPrice = (event)=>{
-    setInputPrice(event.target.value)
-  }
-  //quantity input
-  const [inputQuantity,setInputQuantity] = useState(1)
-  const typeInputQuantity = (event)=>{
-    setInputQuantity(event.target.value)
+  const inputNumForm = (event)=>{
+    const {name, value} = event.target;
+
+    setForm((prev)=>({
+      ...prev,
+      [name]:value === "" ? "" : Number(value)
+    }))
   }
 
   return (
@@ -35,10 +46,11 @@ export function FormCard({ isShowForm ,records}) {
             <label className="label">Item Name</label>
             <div className="form-input-name-cont">
               <input
+                name="name"
                 placeholder="Item Name"
                 className="form-input form-input-name"
-                value={nameInput}
-                onChange={typeNameInput}
+                value={form.name}
+                onChange={inputForm}
               />
               
               <div className="pick-item-container">
@@ -71,17 +83,20 @@ export function FormCard({ isShowForm ,records}) {
             <div className="form form-row">
               <label className="label">Total Price</label>
               <input
+                name="totalPrice"
                 placeholder="price"
                 className="form-input form-input-price"
-                value={inputPrice}
-                onChange={typeInputPrice}
+                value={form.totalPrice}
+                onChange={inputNumForm}
                 type="number"
               />
             </div>
 
             <div className="form form-row">
               <label className="label">Category</label>
-              <select className="form-input">
+              <select 
+                
+                className="form-input">
                 <option>Milk</option>
               </select>
             </div>
@@ -92,17 +107,31 @@ export function FormCard({ isShowForm ,records}) {
               <div className="row-container">
                 <div className="form form-date">
                   <label className="label">Date</label>
-                  <input className="form-input more-form-input" type="date" />
+                  <input 
+                    name="date"
+                    value={form.date}
+                    className="form-input more-form-input"
+                    type="date"
+                    onChange={inputForm}/>
                 </div>
                 <div className="form-time form">
                   <label className="label">Time</label>
-                  <input type="time" className="form-input more-form-input" />
+                  <input 
+                    name="time"
+                    value={form.time}
+                    type="time"
+                    className="form-input more-form-input"
+                    onChange={inputForm}/>
                 </div>
               </div>
               <div className="row-container">
                 <div className="form form-price-each">
                   <label className="label">Price(each)</label>
-                  <input className="form-input" />
+                  <input 
+                    name="pricePerQty"
+                    value={form.pricePerQty}
+                    className="form-input"
+                    onChange={inputNumForm}/>
                 </div>
 
                 <div className="form form-quantity">
@@ -111,9 +140,12 @@ export function FormCard({ isShowForm ,records}) {
                     <button className="form-quan-btn">-</button>
 
                     <input
+                      name="quantity"
+                      value={form.quantity}
                       type="number"
                       placeholder="1"
                       className="form-input more-form-input"
+                      onChange={inputNumForm}
                     />
                     <button className="form-quan-btn">+</button>
                   </div>
