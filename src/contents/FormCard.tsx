@@ -35,12 +35,19 @@ export function FormCard({ isShowForm, records ,addItems}) {
   const inputNumForm = (event) => {
     const name = event.target.name;
     const value = !event.target.value ? "" : Number(event.target.value)
-    
     setForm((prev) => ({
       ...prev,
       [name]:value ? value :"",
     }));
   };
+
+  const clickBtnQty = (event)=>{
+    const {name} = event.target;
+    setForm((prev)=>({
+      ...prev,
+      quantity:name === 'increase' ? prev.quantity + 1 : prev.quantity - 1
+    }))
+  }
 
   return (
     <>
@@ -147,8 +154,12 @@ export function FormCard({ isShowForm, records ,addItems}) {
 
                 <div className="form form-quantity">
                   <label className="label">Quantity</label>
-                  <div className="form-quantity-input-cont">
-                    <button className="form-quan-btn">-</button>
+                  <div 
+                    className="form-quantity-input-cont">
+                    <button 
+                      name="decrease"
+                      onClick={clickBtnQty}
+                      className="form-quan-btn">-</button>
 
                     <input
                       name="quantity"
@@ -158,7 +169,10 @@ export function FormCard({ isShowForm, records ,addItems}) {
                       className="form-input more-form-input"
                       onChange={inputNumForm}
                     />
-                    <button className="form-quan-btn">+</button>
+                    <button 
+                      name="increase"
+                      onClick={clickBtnQty}
+                      className="form-quan-btn">+</button>
                   </div>
                 </div>
               </div>
