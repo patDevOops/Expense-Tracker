@@ -9,6 +9,7 @@ export function Items({
   changeCategory,
   category,
   selectedCategory,
+  setIsCategoryGlobal,
   isCategoryGlobal
 }) {
   const [isCollapse, setIsCollapse] = useState([]);
@@ -40,7 +41,7 @@ export function Items({
     <div className="items">
       <div>
         <span className="category-cont">
-          <div>{renderCategoryName}</div>
+          <div>{isCategoryGlobal ? 'All' :renderCategoryName}</div>
           <IoMdArrowDropup
             className="dropdown-arrow"
             onClick={toggleDropdown}
@@ -54,13 +55,14 @@ export function Items({
                     key={categoryVal.id}
                     onClick={() => {
                       changeCategory(categoryVal.id);
+                      setIsCategoryGlobal(false)
                     }}
                   >
                     {categoryVal.categoryName}
                   </div>
                 );
               })}
-              <div>All</div>
+              <div onClick={()=>{setIsCategoryGlobal(true)}}>All</div>
             </div>
           )}
         </span>

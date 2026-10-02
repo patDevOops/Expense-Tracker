@@ -39,7 +39,7 @@ export function Contents() {
     },
   ]);
   const [currentRecordId, setCurrentRecordId] = useState("123");
-  const [isCategoryGlobal, setIsCategoryGlobal] = useState(false);
+  const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");
   const [records, setRecords] = useState<Record[]>([
     {
@@ -184,6 +184,7 @@ export function Contents() {
       />
       <Info />
       <Items
+        setIsCategoryGlobal={setIsCategoryGlobal}
         isCategoryGlobal={isCategoryGlobal}
         itemRecords={itemRecords}
         changeCategory={changeCategory}
