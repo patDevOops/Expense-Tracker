@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "./Header";
 import { Contents } from "./contents/Contents";
 import { SideBar } from "./SideBar.tsx";
@@ -35,9 +35,9 @@ function App() {
       setIsSidebar(false);
     } else setIsShowSidebar(true);
   };
-  useEffect(()=>{
+  useEffect(() => {
     eruda.init();
-  },[])
+  }, []);
 
   return (
     <>

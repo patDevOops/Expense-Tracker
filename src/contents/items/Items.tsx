@@ -4,7 +4,12 @@ import "./Items.css";
 import { ItemsGen } from "./ItemsGen";
 import { IoMdArrowDropup } from "react-icons/io";
 
-export function Items({itemRecords }) {
+export function Items({
+  itemRecords,
+  changeCategory,
+  category,
+  selectedCategory,
+}) {
   const [isCollapse, setIsCollapse] = useState([]);
   const [isDropdown, setIsDropdown] = useState(false);
 
@@ -24,13 +29,17 @@ export function Items({itemRecords }) {
     }
   };
 
+  const renderCategoryName = category.find(
+    (a) => selectedCategory === a.id,
+  ).categoryName;
+
   let previousDate;
 
   return (
     <div className="items">
       <div>
         <span className="category-cont">
-          <div>Food</div>
+          <div>{renderCategoryName}</div>
           <IoMdArrowDropup
             className="dropdown-arrow"
             onClick={toggleDropdown}
@@ -38,11 +47,22 @@ export function Items({itemRecords }) {
 
           {isDropdown && (
             <div className="pick-category-collapse">
-              <div>Things</div>
-              <div>All</div>
+              {category.map((categoryVal) => {
+                return (
+                  <div
+                    key={categoryVal.id}
+                    onClick={() => {
+                      changeCategory(categoryVal.id);
+                    }}
+                  >
+                    {categoryVal.categoryName}
+                  </div>
+                );
+              })}
             </div>
           )}
         </span>
+
         <span>3 items</span>
       </div>
 

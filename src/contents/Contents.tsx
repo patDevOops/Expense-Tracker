@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { Date } from "./Date";
 import { Items } from "./items/Items";
@@ -24,9 +24,23 @@ type Items = {
 
 const today = dayjs();
 export function Contents() {
+  const [category, setCategory] = useState([
+    {
+      categoryName: "Food",
+      id: "098",
+    },
+    {
+      categoryName:'Things',
+      id:'765'
+    },
+    {
+      categoryName:'All',
+      id:'11111'
+    }
+  ]);
   const [currentRecordId, setCurrentRecordId] = useState("123");
-  const [selectedCategory, setSelectedCategory] = useState("food");
-  const [selectedDate, setSelectedDate] = useState("2026-10");
+  const [selectedCategory, setSelectedCategory] = useState("098");
+  const [selectedDate, setSelectedDate] = useState("2026-09");
   const [records, setRecords] = useState<Record[]>([
     {
       name: "untitled",
@@ -40,7 +54,8 @@ export function Contents() {
           createdAt: "2026-09-22 11:22 AM",
           quantity: 2,
           price: 15,
-          category: "food",
+          category: "098",
+          totalPrice:30,
         },
         {
           name: "Candy",
@@ -48,7 +63,8 @@ export function Contents() {
           createdAt: "2026-09-21 11:30 AM",
           quantity: 5,
           price: 1,
-          category: "food",
+          category: "098",
+          totalPrice:5,
         },
         {
           name: "ulam",
@@ -56,12 +72,12 @@ export function Contents() {
           createdAt: "2026-09-22 1:30 PM",
           quantity: 1,
           price: 40,
-          category: "food",
+          category: "098",
+          totalPrice:40,
         },
       ],
     },
   ]);
-  
   //find array of items in records
   let itemRecords: Items[] = [];
   records.forEach((record) => {
@@ -108,23 +124,26 @@ export function Contents() {
       }),
     );
   };
-  
+
+  const changeCategory = (categoryId)=>{
+    setSelectedCategory(categoryId)
+  }
 
   const [isShowForm, setIsShowForm] = useState(false);
   const toggleForm = () => {
     setIsShowForm(isShowForm ? false : true);
   };
-  console.log(records)
 
   return (
     <div className="main">
       <Date />
       <Info />
-      <Items itemRecords={itemRecords} />
-      <FormCard 
-        isShowForm={isShowForm}
-        records={records}
-        addItems={addItems} />
+      <Items 
+        itemRecords={itemRecords}
+        changeCategory={changeCategory}
+        category={category}
+        selectedCategory={selectedCategory}/>
+      <FormCard isShowForm={isShowForm} records={records} addItems={addItems} />
       <FloatingButtons toggleForm={toggleForm} />
     </div>
   );

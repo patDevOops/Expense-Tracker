@@ -123,6 +123,7 @@
   z-index:100;
   border-radius:5px;
   overflow:hidden;
+  background-color:rgb(15,22,31);
 }
 .pick-category-collapse div{
   padding:5px 13px;
