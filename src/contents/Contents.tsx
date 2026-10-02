@@ -26,6 +26,10 @@ const today = dayjs();
 export function Contents() {
   const [category, setCategory] = useState([
     {
+      categoryName: "Others",
+      id: "652",
+    },
+    {
       categoryName: "Food",
       id: "098",
     },
@@ -35,10 +39,11 @@ export function Contents() {
     },
     {
       categoryName: "All",
-      id: "11111",
+      id: "global",
     },
   ]);
   const [currentRecordId, setCurrentRecordId] = useState("123");
+  const [isCategoryGlobal, setIsCategoryGlobal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("098");
   const [records, setRecords] = useState<Record[]>([
     {
@@ -86,6 +91,7 @@ export function Contents() {
       ],
     },
   ]);
+
   //find array of items in records
   let itemRecords: Items[] = [];
   records.forEach((record) => {
@@ -94,40 +100,43 @@ export function Contents() {
     }
   });
 
-  const [listDates,setListDates] = useState(()=>{
-  //get Date List in itemRecords
+  const [listDates, setListDates] = useState(() => {
+    //get Date List in itemRecords
     itemRecords.sort((a, b) => {
-    return today.diff(a.createdAt) - today.diff(b.createdAt);
-  });
-    
-    let previousDate
-    let listDate = itemRecords.map((item)=>{
-      const convertDate = dayjs(item.createdAt).format('YYYY-MM')
-      
-      if (previousDate !== convertDate){
-        previousDate = convertDate
-        return convertDate
+      return today.diff(a.createdAt) - today.diff(b.createdAt);
+    });
+
+    let previousDate;
+    let listDate = itemRecords.map((item) => {
+      const convertDate = dayjs(item.createdAt).format("YYYY-MM");
+
+      if (previousDate !== convertDate) {
+        previousDate = convertDate;
+        return convertDate;
       }
-    })
-    listDate = listDate.filter(a => a)
-    console.log(listDate)
-    return listDate
-  })
+    });
+    listDate = listDate.filter((a) => a);
+    console.log(listDate);
+    return listDate;
+  });
 
   const [selectedDate, setSelectedDate] = useState(listDates[0]);
-  
-  const changeDate = (index)=>{
-    
-    setSelectedDate(listDates[index])
-    console.log('change')
-  }
+
+  const changeDate = (index) => {
+    setSelectedDate(listDates[index]);
+    console.log("change");
+  };
 
   //filter items to match selectedCategory and selectedDate
-  itemRecords = itemRecords.filter(
-    (item) =>
-      item.category === selectedCategory &&
-      selectedDate === dayjs(item.createdAt).format("YYYY-MM"),
-  );
+  if (!isCategoryGlobal) {
+    itemRecords = itemRecords.filter(
+      (item) =>
+        item.category === selectedCategory &&
+        selectedDate === dayjs(item.createdAt).format("YYYY-MM"),
+    );
+  } else {
+    
+  }
 
   // sort by newest first
   itemRecords.sort((a, b) => {
@@ -173,11 +182,11 @@ export function Contents() {
 
   return (
     <div className="main">
-      <Date 
+      <Date
         selectedDate={selectedDate}
         changeDate={changeDate}
         listDates={listDates}
-        />
+      />
       <Info />
       <Items
         itemRecords={itemRecords}
