@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
 
-export function FormCard({ isShowForm, records, addItems }) {
+export function FormCard({ isShowForm, records, addItems, category }) {
   const [isShowMoreForm, setIsShowMoreForm] = useState(false);
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
@@ -21,7 +21,7 @@ export function FormCard({ isShowForm, records, addItems }) {
     price: "",
     quantity: 1,
     id: "",
-    totalPrice:""
+    totalPrice: "",
   });
 
   const inputForm = (event) => {
@@ -38,7 +38,6 @@ export function FormCard({ isShowForm, records, addItems }) {
     setForm((prev) => ({
       ...prev,
       [name]: value ? value : "",
-      
     }));
   };
 
@@ -49,7 +48,7 @@ export function FormCard({ isShowForm, records, addItems }) {
       quantity: name === "increase" ? prev.quantity + 1 : prev.quantity - 1,
     }));
   };
-  
+
   const addItemsForm = () => {
     if (!form.name || !form.totalPrice) return;
     addItems({
@@ -112,7 +111,9 @@ export function FormCard({ isShowForm, records, addItems }) {
                 name="totalPrice"
                 placeholder="price"
                 className="form-input form-input-price"
-                value={form.price ? form.price*form.quantity :form.totalPrice}
+                value={
+                  form.price ? form.price * form.quantity : form.totalPrice
+                }
                 onChange={inputNumForm}
                 type="number"
               />
@@ -126,7 +127,13 @@ export function FormCard({ isShowForm, records, addItems }) {
                 onChange={inputForm}
                 className="form-input"
               >
-                <option value="food">Food</option>
+                {category.map((a) => {
+                  return (
+                    <option key={a.id} value={a.id}>
+                      {a.categoryName}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>

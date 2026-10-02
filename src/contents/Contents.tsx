@@ -37,10 +37,6 @@ export function Contents() {
       categoryName: "Things",
       id: "765",
     },
-    {
-      categoryName: "All",
-      id: "global",
-    },
   ]);
   const [currentRecordId, setCurrentRecordId] = useState("123");
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(false);
@@ -193,7 +189,9 @@ export function Contents() {
         category={category}
         selectedCategory={selectedCategory}
       />
-      <FormCard isShowForm={isShowForm} records={records} addItems={addItems} />
+      <FormCard 
+        category={category}
+        isShowForm={isShowForm} records={records} addItems={addItems} />
       <FloatingButtons toggleForm={toggleForm} />
     </div>
   );
