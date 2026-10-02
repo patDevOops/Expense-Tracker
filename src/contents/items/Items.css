@@ -112,10 +112,11 @@
   align-items:center;
   gap:3px;
   position:relative;
+  margin-left:0.6rem;
 }
 .pick-category-collapse{
   position:absolute;
-  right:0;
+  right:-8px;
   top:15px;
   display:flex;
   flex-direction: column;
@@ -126,7 +127,7 @@
   background-color:rgb(15,22,31);
 }
 .pick-category-collapse div{
-  padding:5px 13px;
+  padding:5px 20px;
   background-color:rgb(15,22,31);
 }
 .pick-category-collapse div:last-child{

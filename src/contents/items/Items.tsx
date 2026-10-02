@@ -12,6 +12,7 @@ export function Items({
   setIsCategoryGlobal,
   isCategoryGlobal
 }) {
+  
   const [isCollapse, setIsCollapse] = useState([]);
   const [isDropdown, setIsDropdown] = useState(false);
 
@@ -35,13 +36,22 @@ export function Items({
     (a) => selectedCategory === a.id,
   ).categoryName;
 
+  
+    let quantity = 0
+    itemRecords.forEach((item)=>{
+      if (item.category === selectedCategory) quantity += 1
+    })
+
   let previousDate;
 
   return (
     <div className="items">
       <div>
         <span className="category-cont">
-          <div>{isCategoryGlobal ? 'All' :renderCategoryName}</div>
+          <div 
+            onClick={toggleDropdown}
+            >{isCategoryGlobal ? 'All' :renderCategoryName}</div>
+          
           <IoMdArrowDropup
             className="dropdown-arrow"
             onClick={toggleDropdown}
@@ -56,18 +66,22 @@ export function Items({
                     onClick={() => {
                       changeCategory(categoryVal.id);
                       setIsCategoryGlobal(false)
+                      toggleDropdown()
                     }}
                   >
                     {categoryVal.categoryName}
                   </div>
                 );
               })}
-              <div onClick={()=>{setIsCategoryGlobal(true)}}>All</div>
+              <div onClick={()=>{
+              setIsCategoryGlobal(true)
+              toggleDropdown()
+                                }}>All</div>
             </div>
           )}
         </span>
 
-        <span>3 items</span>
+        <span>{isCategoryGlobal ? itemRecords.length: quantity} items</span>
       </div>
 
       <div className="items-scrollable">
