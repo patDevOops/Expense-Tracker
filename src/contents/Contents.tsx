@@ -76,13 +76,13 @@ export function Contents() {
           createdAt: "2026-09-23 11:30 AM",
           quantity: 5,
           price: 1,
-          category: "098",
+          category: "765",
           totalPrice: 5,
         },
         {
           name: "ulam",
           id: "113",
-          createdAt: "2026-10-22 1:30 PM",
+          createdAt: "2026-09-22 1:30 PM",
           quantity: 1,
           price: 40,
           category: "098",
@@ -128,15 +128,14 @@ export function Contents() {
   };
 
   //filter items to match selectedCategory and selectedDate
-  if (!isCategoryGlobal) {
     itemRecords = itemRecords.filter(
-      (item) =>
-        item.category === selectedCategory &&
-        selectedDate === dayjs(item.createdAt).format("YYYY-MM"),
-    );
-  } else {
-    
-  }
+      (item) => {
+        if (isCategoryGlobal){
+          return selectedDate === dayjs(item.createdAt).format("YYYY-MM")
+        }
+        return item.category === selectedCategory &&
+        selectedDate === dayjs(item.createdAt).format("YYYY-MM")
+          });
 
   // sort by newest first
   itemRecords.sort((a, b) => {
