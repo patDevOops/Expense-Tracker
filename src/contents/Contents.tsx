@@ -30,17 +30,16 @@ export function Contents() {
       id: "098",
     },
     {
-      categoryName:'Things',
-      id:'765'
+      categoryName: "Things",
+      id: "765",
     },
     {
-      categoryName:'All',
-      id:'11111'
-    }
+      categoryName: "All",
+      id: "11111",
+    },
   ]);
   const [currentRecordId, setCurrentRecordId] = useState("123");
   const [selectedCategory, setSelectedCategory] = useState("098");
-  const [selectedDate, setSelectedDate] = useState("2026-09");
   const [records, setRecords] = useState<Record[]>([
     {
       name: "untitled",
@@ -49,31 +48,40 @@ export function Contents() {
       status: "local",
       items: [
         {
+          name: "Chooe",
+          id: "88",
+          createdAt: "2026-07-22 11:22 AM",
+          quantity: 2,
+          price: 15,
+          category: "098",
+          totalPrice: 30,
+        },
+        {
           name: "Milk",
           id: "111",
           createdAt: "2026-09-22 11:22 AM",
           quantity: 2,
           price: 15,
           category: "098",
-          totalPrice:30,
+          totalPrice: 30,
         },
         {
           name: "Candy",
           id: "112",
-          createdAt: "2026-09-21 11:30 AM",
+          createdAt: "2026-09-23 11:30 AM",
           quantity: 5,
           price: 1,
           category: "098",
-          totalPrice:5,
+          totalPrice: 5,
         },
         {
           name: "ulam",
           id: "113",
-          createdAt: "2026-09-22 1:30 PM",
+          createdAt: "2026-10-22 1:30 PM",
           quantity: 1,
           price: 40,
           category: "098",
-          totalPrice:40,
+          totalPrice: 40,
         },
       ],
     },
@@ -85,6 +93,35 @@ export function Contents() {
       itemRecords = record.items;
     }
   });
+
+  const [listDates,setListDates] = useState(()=>{
+  //get Date List in itemRecords
+    itemRecords.sort((a, b) => {
+    return today.diff(a.createdAt) - today.diff(b.createdAt);
+  });
+    
+    let previousDate
+    let listDate = itemRecords.map((item)=>{
+      const convertDate = dayjs(item.createdAt).format('YYYY-MM')
+      
+      if (previousDate !== convertDate){
+        previousDate = convertDate
+        return convertDate
+      }
+    })
+    listDate = listDate.filter(a => a)
+    console.log(listDate)
+    return listDate
+  })
+
+  const [selectedDate, setSelectedDate] = useState(listDates[0]);
+  
+  const changeDate = (index)=>{
+    
+    setSelectedDate(listDates[index])
+    console.log('change')
+  }
+
   //filter items to match selectedCategory and selectedDate
   itemRecords = itemRecords.filter(
     (item) =>
@@ -125,9 +162,9 @@ export function Contents() {
     );
   };
 
-  const changeCategory = (categoryId)=>{
-    setSelectedCategory(categoryId)
-  }
+  const changeCategory = (categoryId) => {
+    setSelectedCategory(categoryId);
+  };
 
   const [isShowForm, setIsShowForm] = useState(false);
   const toggleForm = () => {
@@ -136,13 +173,18 @@ export function Contents() {
 
   return (
     <div className="main">
-      <Date />
+      <Date 
+        selectedDate={selectedDate}
+        changeDate={changeDate}
+        listDates={listDates}
+        />
       <Info />
-      <Items 
+      <Items
         itemRecords={itemRecords}
         changeCategory={changeCategory}
         category={category}
-        selectedCategory={selectedCategory}/>
+        selectedCategory={selectedCategory}
+      />
       <FormCard isShowForm={isShowForm} records={records} addItems={addItems} />
       <FloatingButtons toggleForm={toggleForm} />
     </div>
