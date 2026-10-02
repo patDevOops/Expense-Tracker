@@ -133,3 +133,9 @@
   border-top:1px dotted #2a2f3a;
   margin-top:3px;
 }
+#category-global-name{
+  background:#F97316;
+  border-radius:4px;
+  color:white;
+  padding:3px 5px;
+}

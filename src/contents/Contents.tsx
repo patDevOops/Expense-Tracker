@@ -184,6 +184,7 @@ export function Contents() {
       />
       <Info />
       <Items
+        isCategoryGlobal={isCategoryGlobal}
         itemRecords={itemRecords}
         changeCategory={changeCategory}
         category={category}

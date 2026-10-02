@@ -5,12 +5,14 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoTrashBin } from "react-icons/io5";
 import { LuPencil } from "react-icons/lu";
-export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
+export function ItemsGen({ item, showDate, toggleCollapse, isHide,isCategoryGlobal,category }) {
   const [isExpanding, setIsExpanding] = useState(false);
   const toggleExpand = () => {
     setIsExpanding(isExpanding ? false : true);
   };
   const isShowQtyCalc = item.quantity > 1 ?true : false;
+
+  const categoryName = category.find((a)=> a.id === item.category)?.categoryName
   return (
     <div>
       {showDate && (
@@ -29,11 +31,13 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide }) {
         <div className="item-gen">
           <div className="item-name">
             <div>{item.name}</div>
+            {isCategoryGlobal && <span id="category-global-name">{categoryName}</span>}
             {isShowQtyCalc && <span className="item-price-calc">
               {item.quantity} x ₱{(item.totalPrice / item.quantity).toFixed(2)}
             </span>}
             
             <span>{dayjs(item.createdAt).format("h:mm A")}</span>
+            
           </div>
           <div className="item-total-price">
             ₱{(item.price ? item.quantity * item.price : item.totalPrice).toFixed(2)}

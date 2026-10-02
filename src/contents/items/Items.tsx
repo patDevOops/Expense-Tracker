@@ -9,6 +9,7 @@ export function Items({
   changeCategory,
   category,
   selectedCategory,
+  isCategoryGlobal
 }) {
   const [isCollapse, setIsCollapse] = useState([]);
   const [isDropdown, setIsDropdown] = useState(false);
@@ -59,6 +60,7 @@ export function Items({
                   </div>
                 );
               })}
+              <div>All</div>
             </div>
           )}
         </span>
@@ -76,6 +78,8 @@ export function Items({
           previousDate = formatMY(item.createdAt);
           return (
             <ItemsGen
+              category={category}
+              isCategoryGlobal={isCategoryGlobal}
               item={item}
               key={item.id}
               showDate={showDate}
