@@ -67,7 +67,7 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide,isCategoryGlob
             </div>
           )}
         </div>
-        {showTotal && <div className="total-price-per-day">Total: {totalPricePerDay}</div>}
+        {showTotal && <div className="total-price-per-day">Total:  {totalPricePerDay}</div>}
       </>
       )}
       

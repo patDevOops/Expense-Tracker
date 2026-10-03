@@ -70,8 +70,11 @@
 }
 .total-price-per-day{
   margin:0px 15px 0.5rem 15px;
-  font-size:0.86rem;
+  font-size:0.84rem;
   color:white;
+  font-weight:500;
+  border-bottom:var(--border);
+  padding-bottom:0.3rem;
 }
 .item-date div{
   font-size:0.7rem;
