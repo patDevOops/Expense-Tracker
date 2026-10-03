@@ -10,7 +10,7 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide,isCategoryGlob
   const toggleExpand = () => {
     setIsExpanding(isExpanding ? false : true);
   };
-  const isShowQtyCalc = item.quantity > 1 ?true : false;
+  const isShowQtyCalc = item.price ?true : false;
 
   const categoryName = category.find((a)=> a.id === item.category)?.categoryName
   return (

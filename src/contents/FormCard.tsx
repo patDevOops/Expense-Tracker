@@ -15,7 +15,7 @@ export function FormCard({ isShowForm, records, addItems, category }) {
 
   const [form, setForm] = useState({
     name: "",
-    category: "food",
+    category: category[category.length - 1]?.id || "",
     date:"",
     time:"",
     price: "",
