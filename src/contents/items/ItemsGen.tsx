@@ -5,12 +5,12 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoTrashBin } from "react-icons/io5";
 import { LuPencil } from "react-icons/lu";
-export function ItemsGen({ item, showDate, toggleCollapse, isHide,isCategoryGlobal,category, removeItems}) {
+export function ItemsGen({ item, showDate, toggleCollapse, isHide,isCategoryGlobal,category, removeItems,showTotal,totalPricePerDay}) {
   const [isExpanding, setIsExpanding] = useState(false);
   const toggleExpand = () => {
     setIsExpanding(isExpanding ? false : true);
   };
-  const isShowQtyCalc = item.price ?true : false;
+  const isShowQtyCalc = item.price && item.quantity !== 1 ?true : false;
 
   const categoryName = category.find((a)=> a.id === item.category)?.categoryName
   return (
@@ -28,6 +28,7 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide,isCategoryGlob
       )}
 
       {!isHide && (
+      <>
         <div className="item-gen">
           <div className="item-name">
             <div>{item.name}</div>
@@ -66,7 +67,10 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide,isCategoryGlob
             </div>
           )}
         </div>
+        {showTotal && <div className="total-price-per-day">Total: {totalPricePerDay}</div>}
+      </>
       )}
+      
     </div>
   );
 }

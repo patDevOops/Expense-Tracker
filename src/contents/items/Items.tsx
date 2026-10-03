@@ -43,7 +43,22 @@ export function Items({
       if (item.category === selectedCategory) quantity += 1
     })
 
+  let totalSameDate = {}
+  itemRecords.forEach((item)=>{
+    let convertedDate = formatMY(item.createdAt)
+    if (totalSameDate[convertedDate]){
+      totalSameDate[convertedDate].count += 1;
+      totalSameDate[convertedDate].price += item.totalPrice;
+      return
+    }
+    totalSameDate[convertedDate] = {
+      count:1,
+      price:item.totalPrice
+    };
+  })
   let previousDate;
+  let countDate = 0;
+  
 
   return (
     <>
@@ -88,14 +103,25 @@ export function Items({
 
       <div className="items-scrollable">
         {itemRecords.map((item) => {
+          const itemDate = formatMY(item.createdAt)
           const isHide = isCollapse.includes(formatMY(item.createdAt));
           let showDate = true;
-          if (previousDate === formatMY(item.createdAt)) {
+          let showTotal = false;
+          
+          countDate += 1;
+          if (totalSameDate[itemDate].count === countDate) {
+            showTotal = true;
+            countDate = 0
+          }
+          
+          if (previousDate === itemDate) {
             showDate = false;
           }
           previousDate = formatMY(item.createdAt);
           return (
             <ItemsGen
+              totalPricePerDay={totalSameDate[itemDate].price}
+              showTotal={showTotal}
               removeItems={removeItems}
               category={category}
               isCategoryGlobal={isCategoryGlobal}

@@ -121,6 +121,7 @@ export function Contents() {
     console.log("change");
   };
 
+  //get total price per month
   let totalPrice = 0;
   itemRecords.forEach((item)=>{
     if (selectedDate === dayjs(item.createdAt).format("YYYY-MM")) totalPrice += item.totalPrice;

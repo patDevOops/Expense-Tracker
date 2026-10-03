@@ -68,6 +68,11 @@
   gap:0.5rem;
   color:#adb2ba;
 }
+.total-price-per-day{
+  margin:0px 15px 0.5rem 15px;
+  font-size:0.86rem;
+  color:white;
+}
 .item-date div{
   font-size:0.7rem;
 }
