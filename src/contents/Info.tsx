@@ -2,7 +2,7 @@ import {useState} from 'react';
 import "./Info.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-export function Info() {
+export function Info({totalPrice}) {
   const [listToggle,setListToggle] = useState([])
   const toggle = (val)=>{
     if (listToggle.includes(val)){
@@ -32,8 +32,8 @@ export function Info() {
           <IoIosArrowBack color="orange" size="21" />
         </div>
         {listToggle.includes("total-expense") &&<div className="record-info-cont">
-          <div className="edge-title">Total Expense</div>
-          <div className="item-all-sum">₱75.00</div>
+          <div className="edge-title">This Month Expenses</div>
+          <div className="item-all-sum">₱{totalPrice.toFixed(2)}</div>
         </div>}
       </div>
       

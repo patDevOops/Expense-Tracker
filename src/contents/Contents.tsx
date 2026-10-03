@@ -22,7 +22,6 @@ type Items = {
   category: string;
 };
 
-const today = dayjs();
 export function Contents() {
   const [category, setCategory] = useState([
     {
@@ -99,7 +98,7 @@ export function Contents() {
   //get Date List in itemRecords
   let listDates = [];
   itemRecords.sort((a, b) => {
-    return today.diff(a.createdAt) - today.diff(b.createdAt);
+    return dayjs().diff(a.createdAt) - dayjs().diff(b.createdAt);
   });
 
   let previousDate;
@@ -122,6 +121,11 @@ export function Contents() {
     console.log("change");
   };
 
+  let totalPrice = 0;
+  itemRecords.forEach((item)=>{
+    if (selectedDate === dayjs(item.createdAt).format("YYYY-MM")) totalPrice += item.totalPrice;
+  })
+
   //filter items to match selectedCategory and selectedDate
   itemRecords = itemRecords.filter((item) => {
     if (isCategoryGlobal) {
@@ -135,7 +139,7 @@ export function Contents() {
 
   // sort by newest first
   itemRecords.sort((a, b) => {
-    return today.diff(a.createdAt) - today.diff(b.createdAt);
+    return dayjs().diff(a.createdAt) - dayjs().diff(b.createdAt);
   });
   //add items event handler
   const addItems = (newItems) => {
@@ -183,7 +187,9 @@ export function Contents() {
         changeDate={changeDate}
         listDates={listDates}
       />
-      <Info />
+      <Info 
+        totalPrice={totalPrice}
+        />
       <Items
         removeItems={removeItems}
         setIsCategoryGlobal={setIsCategoryGlobal}
