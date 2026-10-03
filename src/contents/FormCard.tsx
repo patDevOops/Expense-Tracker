@@ -16,8 +16,8 @@ export function FormCard({ isShowForm, records, addItems, category }) {
   const [form, setForm] = useState({
     name: "",
     category: "food",
-    date: dayjs().format("YYYY-MM-D"),
-    time: dayjs().format("h:mm A"),
+    date:"",
+    time:"",
     price: "",
     quantity: 1,
     id: "",
@@ -54,11 +54,12 @@ export function FormCard({ isShowForm, records, addItems, category }) {
     addItems({
       ...form,
       quantity: form.quantity <= 0 ? 1 : form.quantity,
-      createdAt: `${form.date} ${form.time}`,
+      createdAt: `${form.date ? form.date: dayjs().format('YYYY-MM-D')} ${form.time ? form.time : dayjs().format('h:mm A')}`,
       id: crypto.randomUUID(),
       totalPrice: form.price ? form.price * form.quantity : form.totalPrice,
       price: form.price ? form.price : 0,
     });
+    console.log('form', form)
   };
 
   return (

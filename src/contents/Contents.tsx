@@ -96,42 +96,42 @@ export function Contents() {
     }
   });
 
-  const [listDates, setListDates] = useState(() => {
-    //get Date List in itemRecords
-    itemRecords.sort((a, b) => {
-      return today.diff(a.createdAt) - today.diff(b.createdAt);
-    });
-
-    let previousDate;
-    let listDate = itemRecords.map((item) => {
-      const convertDate = dayjs(item.createdAt).format("YYYY-MM");
-
-      if (previousDate !== convertDate) {
-        previousDate = convertDate;
-        return convertDate;
-      }
-    });
-    listDate = listDate.filter((a) => a);
-    console.log(listDate);
-    return listDate;
+  //get Date List in itemRecords
+  let listDates = [];
+  itemRecords.sort((a, b) => {
+    return today.diff(a.createdAt) - today.diff(b.createdAt);
   });
 
-  const [selectedDate, setSelectedDate] = useState(listDates[0]);
+  let previousDate;
+  let listDate = itemRecords.map((item) => {
+    const convertDate = dayjs(item.createdAt).format("YYYY-MM");
 
+    if (previousDate !== convertDate) {
+      previousDate = convertDate;
+      return convertDate;
+    }
+  });
+  listDate = listDate.filter((a) => a);
+  console.log(listDate);
+  listDates = listDate;
+
+  
+  const [selectedDate, setSelectedDate] = useState(listDates[0]);
   const changeDate = (index) => {
     setSelectedDate(listDates[index]);
     console.log("change");
   };
 
   //filter items to match selectedCategory and selectedDate
-    itemRecords = itemRecords.filter(
-      (item) => {
-        if (isCategoryGlobal){
-          return selectedDate === dayjs(item.createdAt).format("YYYY-MM")
-        }
-        return item.category === selectedCategory &&
-        selectedDate === dayjs(item.createdAt).format("YYYY-MM")
-          });
+  itemRecords = itemRecords.filter((item) => {
+    if (isCategoryGlobal) {
+      return selectedDate === dayjs(item.createdAt).format("YYYY-MM");
+    }
+    return (
+      item.category === selectedCategory &&
+      selectedDate === dayjs(item.createdAt).format("YYYY-MM")
+    );
+  });
 
   // sort by newest first
   itemRecords.sort((a, b) => {
@@ -150,6 +150,7 @@ export function Contents() {
         return record;
       }),
     );
+    console.log('addItems',newItems)
   };
   //remove items event handler
   const removeItems = (id) => {
@@ -191,9 +192,12 @@ export function Contents() {
         category={category}
         selectedCategory={selectedCategory}
       />
-      <FormCard 
+      <FormCard
         category={category}
-        isShowForm={isShowForm} records={records} addItems={addItems} />
+        isShowForm={isShowForm}
+        records={records}
+        addItems={addItems}
+      />
       <FloatingButtons toggleForm={toggleForm} />
     </div>
   );
