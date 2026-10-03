@@ -110,6 +110,7 @@ export function FormCard({ isShowForm, records, addItems, category,setIsShowForm
                   onClick={pickItem}
                 />
               </div>
+              
             </div>
           </div>
 
