@@ -5,7 +5,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoTrashBin } from "react-icons/io5";
 import { LuPencil } from "react-icons/lu";
-export function ItemsGen({ item, showDate, toggleCollapse, isHide,isCategoryGlobal,category }) {
+export function ItemsGen({ item, showDate, toggleCollapse, isHide,isCategoryGlobal,category, removeItems}) {
   const [isExpanding, setIsExpanding] = useState(false);
   const toggleExpand = () => {
     setIsExpanding(isExpanding ? false : true);
@@ -53,10 +53,14 @@ export function ItemsGen({ item, showDate, toggleCollapse, isHide,isCategoryGlob
 
           {isExpanding && (
             <div className="expanded-btn-cont">
-              <button className="expanded-btn">
+              <button 
+                
+                className="expanded-btn">
                 <LuPencil className="arrow-btn-expanded" />
               </button>
-              <button className="expanded-btn">
+              <button 
+                onClick={()=>{removeItems(item.id)}}
+                className="expanded-btn">
                 <IoTrashBin className="arrow-btn-expanded" />
               </button>
             </div>

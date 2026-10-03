@@ -185,6 +185,7 @@ export function Contents() {
       />
       <Info />
       <Items
+        removeItems={removeItems}
         setIsCategoryGlobal={setIsCategoryGlobal}
         isCategoryGlobal={isCategoryGlobal}
         itemRecords={itemRecords}
