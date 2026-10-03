@@ -194,6 +194,7 @@ export function Contents() {
         selectedCategory={selectedCategory}
       />
       <FormCard
+        setIsShowForm={setIsShowForm}
         category={category}
         isShowForm={isShowForm}
         records={records}

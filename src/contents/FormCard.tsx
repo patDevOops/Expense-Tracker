@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
 
-export function FormCard({ isShowForm, records, addItems, category }) {
+export function FormCard({ isShowForm, records, addItems, category,setIsShowForm }) {
   const [isShowMoreForm, setIsShowMoreForm] = useState(false);
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
@@ -64,6 +64,14 @@ export function FormCard({ isShowForm, records, addItems, category }) {
 
   return (
     <>
+      {isShowForm && (
+        <div
+          className="barrier-form"
+          onClick={() => {
+            setIsShowForm(false);
+          }}
+        ></div>
+      )}
       {isShowForm && (
         <div className="form-cont">
           <div className="form-name form">

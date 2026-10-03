@@ -46,7 +46,8 @@ export function Items({
   let previousDate;
 
   return (
-    <div className="items">
+    <>
+      <div className="items">
       <div>
         <span className="category-cont">
           <div 
@@ -108,5 +109,14 @@ export function Items({
         })}
       </div>
     </div>
+      {isDropdown && (
+        <div
+          className="barrier-items"
+          onClick={() => {
+            setIsDropdown(false);
+          }}
+        ></div>
+      )}
+    </>
   );
 }
