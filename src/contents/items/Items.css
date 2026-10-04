@@ -37,6 +37,7 @@
   border-radius:6px;
   border: 1px solid #2a2f3a;
   background:hwb(218 10% 83%);
+  position:relative;
 }
 .item-name{
   flex:1;
@@ -157,4 +158,25 @@
   border-radius:4px;
   color:white;
   padding:3px 5px;
+}
+.confirm-del-modal{
+  position: absolute;
+  bottom: -4.3rem;
+  right: 0;
+  display:flex;
+  flex-direction: column;
+  
+}
+.confirm-del-modal > button{
+  padding:0.6rem 0.68rem;
+  border:none;
+  z-index:165;
+  color:white;
+  font-weight: 500;
+}
+.confirm-del-modal > button:first-child{
+  background:hwb(39 1% 13%);
+}
+.confirm-del-modal > button:last-child{
+  background:hwb(39 1% 13%);
 }
