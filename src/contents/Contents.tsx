@@ -87,6 +87,10 @@ export function Contents() {
     },
   ]);
 
+  const recordName = records.find((a)=> currentRecordId === a.id).name
+
+  
+
   //find array of items in records
   let itemRecords: Items[] = [];
   records.forEach((record) => {
@@ -189,6 +193,7 @@ export function Contents() {
         listDates={listDates}
       />
       <Info 
+        recordName={recordName}
         totalPrice={totalPrice}
         />
       <Items

@@ -2,7 +2,7 @@ import {useState} from 'react';
 import "./Info.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-export function Info({totalPrice}) {
+export function Info({totalPrice,recordName}) {
   const [listToggle,setListToggle] = useState([])
   const toggle = (val)=>{
     if (listToggle.includes(val)){
@@ -16,7 +16,7 @@ export function Info({totalPrice}) {
       <div className="current-record-cont">
         {listToggle.includes("current-record") && <div className="record-info-cont">
           <div className="edge-title">Current Record</div>
-          <div className="record-name">untitled</div>
+          <div className="record-name">{recordName}</div>
         </div>}
         <div 
           className="arrow-expand-cont arrow-expand-cont-left"
