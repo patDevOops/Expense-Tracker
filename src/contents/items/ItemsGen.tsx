@@ -95,7 +95,7 @@ export function ItemsGen({
               {isConfirmModal && (
                 <div className="confirm-del-modal">
                   <button onClick={removeBarrier}>No</button>
-                  <button>Yes</button>
+                  <button onClick={()=>{removeItems(item.id)}}>Yes</button>
                 </div>
               )}
             </div>

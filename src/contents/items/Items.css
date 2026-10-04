@@ -12,9 +12,19 @@
   position:relative;
   padding-top:26px
 }
+/*
 .items-scrollable{
   overflow: scroll;
   scrollbar-width:none;
+  height:100%;
+}
+*/
+.items-scrollable {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-width: none;
+  padding-bottom:2rem;
 }
 .items > div:first-child{
   font-size:0.8rem;
@@ -161,16 +171,15 @@
 }
 .confirm-del-modal{
   position: absolute;
-  bottom: -4.3rem;
+  bottom: -4.2rem;
   right: 0;
   display:flex;
   flex-direction: column;
-  
+    z-index:165;
 }
 .confirm-del-modal > button{
   padding:0.6rem 0.68rem;
   border:none;
-  z-index:165;
   color:white;
   font-weight: 500;
 }
