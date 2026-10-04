@@ -26,9 +26,9 @@ export function ItemsGen({
   const categoryName = category.find(
     (a) => a.id === item.category,
   )?.categoryName;
-  const removeBarrier = ()=>{
-    setIsConfirmModal(false)
-  }
+  const removeBarrier = () => {
+    setIsConfirmModal(false);
+  };
   return (
     <>
       <div>
@@ -49,18 +49,21 @@ export function ItemsGen({
             <div className="item-gen">
               <div className="item-name">
                 <div>{item.name}</div>
-                {isCategoryGlobal && (
-                  <span id="category-global-name">{categoryName}</span>
-                )}
-                {isShowQtyCalc && (
-                  <span className="item-price-calc">
-                    {item.quantity} x ₱
-                    {(item.totalPrice / item.quantity).toFixed(2)}
-                  </span>
-                )}
+                <div className="item-gen-details">
+                  {isCategoryGlobal && (
+                    <span id="category-global-name">{categoryName}</span>
+                  )}
+                  {isShowQtyCalc && (
+                    <span className="item-price-calc">
+                      {item.quantity} x ₱
+                      {(item.totalPrice / item.quantity).toFixed(2)}
+                    </span>
+                  )}
 
-                <span>{dayjs(item.createdAt).format("h:mm A")}</span>
+                  <span>{dayjs(item.createdAt).format("h:mm A")}</span>
+                </div>
               </div>
+
               <div className="item-total-price">
                 ₱
                 {(item.price
@@ -95,7 +98,13 @@ export function ItemsGen({
               {isConfirmModal && (
                 <div className="confirm-del-modal">
                   <button onClick={removeBarrier}>No</button>
-                  <button onClick={()=>{removeItems(item.id)}}>Yes</button>
+                  <button
+                    onClick={() => {
+                      removeItems(item.id);
+                    }}
+                  >
+                    Yes
+                  </button>
                 </div>
               )}
             </div>
@@ -107,10 +116,15 @@ export function ItemsGen({
           </>
         )}
       </div>
-      
-      {isConfirmModal && <div 
-        onClick={()=>{setIsConfirmModal(false)}}
-        className="barrier-expand-btn"></div>}
+
+      {isConfirmModal && (
+        <div
+          onClick={() => {
+            setIsConfirmModal(false);
+          }}
+          className="barrier-expand-btn"
+        ></div>
+      )}
     </>
   );
 }

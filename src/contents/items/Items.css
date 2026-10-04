@@ -48,6 +48,7 @@
   border: 1px solid #2a2f3a;
   background:hwb(218 10% 83%);
   position:relative;
+  padding:0.02rem 0;
 }
 .item-name{
   flex:1;
@@ -55,9 +56,12 @@
   text-wrap:nowrap;
   overflow:hidden;
 }
+.item-gen-details{
+  display:flex;
+  gap:2px;
+}
 .item-name span{
   font-size:0.6rem;
-  margin-left:0.2rem;
   color:#8b93a3;
   padding:3px 5px;
   border-radius:3px;
@@ -68,8 +72,8 @@
 .item-name .item-price-calc{
   background:#23262e;
 }
-.item-name div{
-  margin:0.1rem 0.2rem;
+.item-name > div{
+  margin:0.2rem 0.2rem;
   font-weight:500;
 }
 .item-date{
