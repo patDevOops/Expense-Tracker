@@ -54,7 +54,6 @@
   margin:8px 0 8px 3px;
   text-wrap:nowrap;
   overflow:hidden;
-  min-width:0;
 }
 .item-name span{
   font-size:0.6rem;
@@ -64,6 +63,7 @@
   border-radius:3px;
   z-index: 1;
   white-space:nowrap;
+  font-weight:500;
 }
 .item-name .item-price-calc{
   background:#23262e;
@@ -139,7 +139,7 @@
   align-items:center;
   gap:3px;
   position:relative;
-  margin-left:0.6rem;
+  margin-left:0.4rem;
   min-width:20px;
   z-index:150;
 }
@@ -156,7 +156,7 @@
   background-color:rgb(15,22,31);
 }
 .pick-category-collapse div{
-  padding:5px 20px;
+  padding:5px 20px 5px 0.5rem;
   background-color:rgb(15,22,31);
 }
 .pick-category-collapse div:last-child{
