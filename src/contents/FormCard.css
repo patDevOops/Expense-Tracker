@@ -53,6 +53,7 @@
   right:5px;
   display:flex;
   top:0.6rem;
+  z-index: 170;
 }
 .pick-item-generated > div > div span{
   font-size:0.5rem;

@@ -115,7 +115,7 @@ export function ItemsGen({
             </div>
             {showTotal && (
               <div className="total-price-per-day">
-                Total: ₱{totalPricePerDay}
+                Total: ₱{totalPricePerDay.toFixed(2)}
               </div>
             )}
           </>

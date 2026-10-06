@@ -4,7 +4,7 @@ import { Contents } from "./contents/Contents";
 import { SideBar } from "./SideBar.tsx";
 import { Modal } from "./modal/Modal";
 import "./Main.css";
-
+import { Barrier } from "./components/barrier.tsx";
 function App() {
   const [typeModal, setTypeModal] = useState(null);
   //Modal
@@ -37,28 +37,14 @@ function App() {
   };
   useEffect(() => {
     eruda.init();
-  }, []);
+  });
 
   return (
     <>
       <Header toggleSidebar={toggleSidebar} />
 
-      {isShowModal && (
-        <div
-          className="barrier"
-          onClick={() => {
-            setIsShowSidebar(false);
-          }}
-        ></div>
-      )}
-      {isShowSidebar && (
-        <div
-          className="barrier"
-          onClick={() => {
-            setIsShowSidebar(false);
-          }}
-        ></div>
-      )}
+      <Barrier a={isShowModal} b="barrier" c={setIsShowModal} />
+      <Barrier a={isShowSidebar} b="barrier" c={setIsShowSidebar} />
 
       <SideBar
         isShowSidebar={isShowSidebar}

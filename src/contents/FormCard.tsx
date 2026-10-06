@@ -2,8 +2,18 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
-
-export function FormCard({ isShowForm, records, addItems, category,setIsShowForm,form,setForm,isEditingItem,saveItem }) {
+import { Barrier } from "../components/barrier.tsx";
+export function FormCard({
+  isShowForm,
+  records,
+  addItems,
+  category,
+  setIsShowForm,
+  form,
+  setForm,
+  isEditingItem,
+  saveItem,
+}) {
   const [isShowMoreForm, setIsShowMoreForm] = useState(false);
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
@@ -43,25 +53,20 @@ export function FormCard({ isShowForm, records, addItems, category,setIsShowForm
     addItems({
       ...form,
       quantity: form.quantity <= 0 ? 1 : form.quantity,
-      createdAt: `${form.date ? form.date: dayjs().format('YYYY-MM-D')} ${form.time ? form.time : dayjs().format('h:mm A')}`,
+      createdAt: `${form.date ? form.date : dayjs().format("YYYY-MM-D")} ${form.time ? form.time : dayjs().format("h:mm A")}`,
       id: crypto.randomUUID(),
       totalPrice: form.price ? form.price * form.quantity : form.totalPrice,
       price: form.price ? form.price : 0,
     });
-    console.log('form', form)
+    console.log("form", form);
   };
   return (
     <>
-      {isShowForm && (
-        <div
-          className="barrier-form"
-          onClick={() => {
-            setIsShowForm(false);
-          }}
-        ></div>
-      )}
+      <Barrier a={isShowForm} b="barrier-form" c={setIsShowForm} />
+
       {isShowForm && (
         <div className="form-cont">
+          <Barrier a={isPickItem} b="barrier-pick-item" c={setIspickItem} />
           <div className="form-name form">
             <label className="label">Item Name</label>
             <div className="form-input-name-cont">
@@ -208,13 +213,17 @@ export function FormCard({ isShowForm, records, addItems, category,setIsShowForm
             <button onClick={expandMoreForm}>
               <IoIosArrowDown size="22" />
             </button>
-            <button onClick={()=>{
-          if (isEditingItem){
-            saveItem()
-            return;
-          }
-          addItemsForm()
-            }}>{isEditingItem ?'Save' :'Add'}</button>
+            <button
+              onClick={() => {
+                if (isEditingItem) {
+                  saveItem();
+                  return;
+                }
+                addItemsForm();
+              }}
+            >
+              {isEditingItem ? "Save" : "Add"}
+            </button>
           </div>
         </div>
       )}
