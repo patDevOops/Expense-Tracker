@@ -54,14 +54,15 @@ export function ItemsGen({
                   {isCategoryGlobal && (
                     <span id="category-global-name">{categoryName}</span>
                   )}
+                  
+                  <span>{dayjs(item.createdAt).format("h:mm A")}</span>
+                  
                   {isShowQtyCalc && (
                     <span className="item-price-calc">
                       {item.quantity} x ₱
                       {(item.totalPrice / item.quantity).toFixed(2)}
                     </span>
                   )}
-
-                  <span>{dayjs(item.createdAt).format("h:mm A")}</span>
                 </div>
               </div>
 

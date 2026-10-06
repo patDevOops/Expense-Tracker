@@ -48,7 +48,7 @@
   border: 1px solid #2a2f3a;
   background:hwb(218 10% 83%);
   position:relative;
-  padding:0.02rem 0;
+  padding:0.15rem 0;
 }
 .item-name{
   flex:1;
@@ -73,13 +73,13 @@
   font-weight:500;
 }
 .item-name .item-gen-details .item-price-calc{
-  background:#23262e;
+  background:#1f232c;
   padding:0 5px;
   display:flex;
   align-items:center;
 }
 .item-name > div{
-  margin:0.2rem 0.2rem;
+  margin:0.06rem 0.2rem;
   font-weight:500;
 }
 .item-date{
@@ -174,9 +174,9 @@
   margin-top:3px;
 }
 #category-global-name{
-  background:#F97316;
+  background:rgba(255,179,64,0.15);
   border-radius:4px;
-  color:white;
+  color:#ffb340;
   padding:3px 5px;
 }
 .confirm-del-modal{
