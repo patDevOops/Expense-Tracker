@@ -107,21 +107,19 @@ export function Contents() {
 
   let previousDate;
   let listDate = itemRecords.map((item) => {
-    const convertDate = dayjs(item.createdAt).format("YYYY-MM");
+    const convertedDate = dayjs(item.createdAt).format("YYYY-MM");
 
-    if (previousDate !== convertDate) {
-      previousDate = convertDate;
-      return convertDate;
+    if (previousDate !== convertedDate) {
+      previousDate = convertedDate;
+      return convertedDate;
     }
   });
   listDate = listDate.filter((a) => a);
-  console.log(listDate);
-  listDates = listDate;
+  listDates = listDate.length ?listDate :[dayjs().format('YYYY-MM')];
 
   const [selectedDate, setSelectedDate] = useState(listDates[0]);
   const changeDate = (index) => {
     setSelectedDate(listDates[index]);
-    console.log("change");
   };
 
   //get total price per month
