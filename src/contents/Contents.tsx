@@ -7,13 +7,7 @@ import { FormCard } from "./FormCard";
 import { FloatingButtons } from "./FloatingButtons";
 import { formatTime,formatMY } from "../utils/date.js";
 import "./Contents";
-type Record = {
-  name: string;
-  id: string;
-  createdAt: string;
-  status: string;
-  items: [];
-};
+
 type Items = {
   name: string;
   id: string;
@@ -24,7 +18,7 @@ type Items = {
   totalPrice: string;
 };
 
-export function Contents() {
+export function Contents({currentRecordId,records,setRecords}) {
   const [category, setCategory] = useState([
     {
       categoryName: "Others",
@@ -39,56 +33,10 @@ export function Contents() {
       id: "765",
     },
   ]);
-  const [currentRecordId, setCurrentRecordId] = useState("123");
+  
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");
-  const [records, setRecords] = useState<Record[]>([
-    {
-      name: "untitled",
-      id: "123",
-      createdAt: "2026-09-20",
-      status: "local",
-      items: [
-        {
-          name: "Chooe",
-          id: "88",
-          createdAt: "2026-07-22 11:22 AM",
-          quantity: 2,
-          price: 15,
-          category: "098",
-          totalPrice: 30,
-        },
-        {
-          name: "Milk",
-          id: "111",
-          createdAt: "2026-09-22 11:22 AM",
-          quantity: 2,
-          price: 15,
-          category: "098",
-          totalPrice: 30,
-        },
-        {
-          name: "Candy",
-          id: "112",
-          createdAt: "2026-09-23 11:30 AM",
-          quantity: 5,
-          price: 1,
-          category: "765",
-          totalPrice: 5,
-        },
-        {
-          name: "ulam",
-          id: "113",
-          createdAt: "2026-09-22 1:30 PM",
-          quantity: 1,
-          price: 40,
-          category: "098",
-          totalPrice: 40,
-        },
-      ],
-    },
-  ]);
-
+  
   const recordName = records.find((a) => currentRecordId === a.id).name;
 
   //find array of items in records

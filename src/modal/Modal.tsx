@@ -1,20 +1,36 @@
-import {Record} from './Record';
-import {Category} from './Category';
-import {CustomItems} from './CustomItems';
-import './Modal.css';
+import { Record } from "./Record";
+import { Category } from "./Category";
+import { CustomItems } from "./CustomItems";
+import "./Modal.css";
 import { IoMdClose } from "react-icons/io";
-export function Modal({toggleModal,toggleSidebar,typeModal}) {
-  return(
+export function Modal({
+  toggleModal,
+  toggleSidebar,
+  typeModal,
+  switchViewRec,
+  addRecord,
+  records,
+}) {
+  return (
     <div className="modal-container">
-      <button 
+      <button
         className="close-btn-modal"
-        onClick={()=>{
+        onClick={() => {
           toggleModal(false);
-        }}><IoMdClose size="20"/></button>
-      
-      {typeModal === "record" && <Record/>}
-      {typeModal === "category" && <Category/>}
-      {typeModal === "custom-items" && <CustomItems/>}
+        }}
+      >
+        <IoMdClose size="20" />
+      </button>
+
+      {typeModal === "record" && (
+        <Record
+          records={records}
+          switchViewRec={switchViewRec}
+          addRecord={addRecord}
+        />
+      )}
+      {typeModal === "category" && <Category />}
+      {typeModal === "custom-items" && <CustomItems />}
     </div>
-  )
+  );
 }

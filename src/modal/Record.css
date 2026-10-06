@@ -39,14 +39,6 @@
   border-radius:4px;
   padding:6px 10px;
 }
-.record-btn-container .close{
-  border:none;
-  color:white;
-  background:hwb(218 15% 71% / 0.8352941176470589);
-  border-radius:4px;
-  padding:6px 10px;
-  margin-right:4px;
-}
 .record-btn-container{
   display:flex;
   justify-content: space-between;

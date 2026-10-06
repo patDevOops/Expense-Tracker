@@ -1,36 +1,50 @@
+import { useState } from "react";
 import "./Record.css";
-export function Record() {
+export function Record({ switchViewRec, addRecord, records }) {
+  const [recordNameInput, setRecordNameInput] = useState("");
+  const inputNameRecord = (event) => {
+    const {value} = event.target;
+    if (value.length >= 9) return;
+    setRecordNameInput(value);
+  };
   return (
     <>
       <div className="modal-title">Create Record</div>
 
       <div className="record-input-cont">
-        <input className="modal-input-rec" />
-        <button>Create</button>
+        <input
+          onChange={inputNameRecord}
+          value={recordNameInput}
+          placeholder="Record Name"
+          className="modal-input-rec"
+        />
+        <button
+          onClick={() => {
+            addRecord(recordNameInput);
+            setRecordNameInput('')
+          }}
+        >
+          Create
+        </button>
       </div>
-      
-      <div className="record-gen">
-        <div>
-          <span className="record-gen-name">untitled</span>
-          <div className="record-gen-description">
-            <span>2026-09-19</span>
-            <span>local</span>
-          </div>
-        </div>
 
-        <div>
-          <span className="record-gen-name">jayce</span>
-          <div className="record-gen-description">
-            <span>2026-09-15</span>
-            <span>online</span>
-          </div>
-        </div>
+      <div className="record-gen">
+        {records.map((record) => {
+          return (
+            <div key={record.id}>
+              <span className="record-gen-name">{record.name}</span>
+              <div className="record-gen-description">
+                <span>{record.createdAt}</span>
+                <span>{record.status}</span>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       <div className="record-btn-container">
         <button className="delete">delete</button>
         <div>
-          <button className="close">close</button>
           <button className="view">view</button>
         </div>
       </div>
