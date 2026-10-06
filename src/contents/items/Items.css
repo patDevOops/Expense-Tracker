@@ -55,22 +55,28 @@
   margin:8px 0 8px 3px;
   text-wrap:nowrap;
   overflow:hidden;
+  display:flex;
+  flex-direction:column;
 }
 .item-gen-details{
   display:flex;
-  gap:2px;
+  gap:5px;
 }
-.item-name span{
+
+.item-name  span{
   font-size:0.6rem;
   color:#8b93a3;
-  padding:3px 5px;
+  padding:3px 0px;
   border-radius:3px;
   z-index: 1;
   white-space:nowrap;
   font-weight:500;
 }
-.item-name .item-price-calc{
+.item-name .item-gen-details .item-price-calc{
   background:#23262e;
+  padding:0 5px;
+  display:flex;
+  align-items:center;
 }
 .item-name > div{
   margin:0.2rem 0.2rem;
