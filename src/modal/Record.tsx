@@ -1,9 +1,16 @@
 import { useState } from "react";
 import "./Record.css";
-export function Record({ switchViewRec, addRecord, records }) {
+export function Record({
+  switchViewRec,
+  addRecord,
+  records,
+  currentRecordId,
+  setCurrentRecordId,
+}) {
   const [recordNameInput, setRecordNameInput] = useState("");
+  const [selectedRec, setSelectedRec] = useState(null);
   const inputNameRecord = (event) => {
-    const {value} = event.target;
+    const { value } = event.target;
     if (value.length >= 9) return;
     setRecordNameInput(value);
   };
@@ -21,7 +28,7 @@ export function Record({ switchViewRec, addRecord, records }) {
         <button
           onClick={() => {
             addRecord(recordNameInput);
-            setRecordNameInput('')
+            setRecordNameInput("");
           }}
         >
           Create
@@ -31,7 +38,12 @@ export function Record({ switchViewRec, addRecord, records }) {
       <div className="record-gen">
         {records.map((record) => {
           return (
-            <div key={record.id}>
+            <div
+              onClick={() => {
+                setSelectedRec(record.id);
+              }}
+              key={record.id}
+            >
               <span className="record-gen-name">{record.name}</span>
               <div className="record-gen-description">
                 <span>{record.createdAt}</span>
@@ -45,7 +57,16 @@ export function Record({ switchViewRec, addRecord, records }) {
       <div className="record-btn-container">
         <button className="delete">delete</button>
         <div>
-          <button className="view">view</button>
+          {selectedRec && (
+            <button
+              onClick={() => {
+                setCurrentRecordId(selectedRec);
+              }}
+              className="view"
+            >
+              view
+            </button>
+          )}
         </div>
       </div>
     </>

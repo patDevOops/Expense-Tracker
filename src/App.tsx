@@ -123,6 +123,8 @@ function App() {
 
       {isShowModal && (
         <Modal
+          setCurrentRecordId={setCurrentRecordId}
+          currentRecordId={currentRecordId}
           records={records}
           addRecord={addRecord}
           switchViewRec={switchViewRec}

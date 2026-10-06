@@ -10,9 +10,20 @@ export function Modal({
   switchViewRec,
   addRecord,
   records,
+  currectRecordId,
+  setCurrentRecordId,
 }) {
   return (
     <div className="modal-container">
+      <div className="confirmation-modal">
+        <span>Are You Sure?</span>
+        <span>Delete "untitled"</span>
+        <div>
+          <button>Yes</button>
+          <button>No</button>
+        </div>
+      </div>
+      
       <button
         className="close-btn-modal"
         onClick={() => {
@@ -24,6 +35,8 @@ export function Modal({
 
       {typeModal === "record" && (
         <Record
+          setCurrentRecordId={setCurrentRecordId}
+          currectRecordId={currectRecordId}
           records={records}
           switchViewRec={switchViewRec}
           addRecord={addRecord}

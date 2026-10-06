@@ -22,3 +22,28 @@
   color:#adb2ba;
   font-weight:500;
 }
+.confirmation-modal{
+  position:absolute;
+  right:30px;
+  left:30px;
+  top:70px;
+  background:rgb(15,22,31);
+  padding:0.5rem;
+  border-radius:5px;
+  border:var(--border);
+}
+.confirmation-modal{
+  display:flex;
+  flex-direction: column;
+}
+.confirmation-modal > span:first-child{
+  font-size:1.8rem;
+  
+}
+.confirmation-modal > div{
+  display:flex;
+}
+.confirmation-modal > div button{
+  padding:0.3rem 0.5rem;
+  color:black;
+}
