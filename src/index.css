@@ -1,3 +1,8 @@
+html,body, #root{
+  height:100dvh;
+  overflow: hidden;
+}
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -15,4 +20,5 @@ body{
   color:white;
   font-family:arial;
   padding-top:60px;
+  font-family:arial;
 }
