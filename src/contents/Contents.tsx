@@ -188,6 +188,14 @@ export function Contents() {
 
   const [isEditingItem, setIsEditingItem] = useState(false);
 
+  useEffect(() => {
+    if (!isShowForm && isEditingItem){
+      setIsEditingItem(false)
+      clearForm()
+    }
+  }, [isShowForm])
+  
+
   const [form, setForm] = useState({
     name: "",
     category: category[category.length - 1]?.id || "",
