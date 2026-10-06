@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
 
-export function FormCard({ isShowForm, records, addItems, category,setIsShowForm }) {
+export function FormCard({ isShowForm, records, addItems, category,setIsShowForm,form,setForm,isEditingItem,saveItem }) {
   const [isShowMoreForm, setIsShowMoreForm] = useState(false);
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
@@ -12,17 +12,6 @@ export function FormCard({ isShowForm, records, addItems, category,setIsShowForm
   const pickItem = () => {
     setIspickItem(isPickItem ? false : true);
   };
-
-  const [form, setForm] = useState({
-    name: "",
-    category: category[category.length - 1]?.id || "",
-    date:"",
-    time:"",
-    price: "",
-    quantity: 1,
-    id: "",
-    totalPrice: "",
-  });
 
   const inputForm = (event) => {
     const { name, value } = event.target;
@@ -61,7 +50,6 @@ export function FormCard({ isShowForm, records, addItems, category,setIsShowForm
     });
     console.log('form', form)
   };
-
   return (
     <>
       {isShowForm && (
@@ -220,7 +208,13 @@ export function FormCard({ isShowForm, records, addItems, category,setIsShowForm
             <button onClick={expandMoreForm}>
               <IoIosArrowDown size="22" />
             </button>
-            <button onClick={addItemsForm}>Add</button>
+            <button onClick={()=>{
+          if (isEditingItem){
+            saveItem()
+            return;
+          }
+          addItemsForm()
+            }}>{isEditingItem ?'Save' :'Add'}</button>
           </div>
         </div>
       )}

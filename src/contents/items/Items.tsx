@@ -12,6 +12,7 @@ export function Items({
   setIsCategoryGlobal,
   isCategoryGlobal,
   removeItems,
+  editItem
 }) {
   
   const [isCollapse, setIsCollapse] = useState([]);
@@ -120,6 +121,7 @@ export function Items({
           previousDate = formatMY(item.createdAt);
           return (
             <ItemsGen
+              editItem={editItem}
               totalPricePerDay={totalSameDate[itemDate].price}
               showTotal={showTotal}
               removeItems={removeItems}

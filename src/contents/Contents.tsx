@@ -5,6 +5,7 @@ import { Items } from "./items/Items";
 import { Info } from "./Info";
 import { FormCard } from "./FormCard";
 import { FloatingButtons } from "./FloatingButtons";
+import { formatTime,formatMY } from "../utils/date.js";
 import "./Contents";
 type Record = {
   name: string;
@@ -20,6 +21,7 @@ type Items = {
   quantity: number;
   price: number;
   category: string;
+  totalPrice: string;
 };
 
 export function Contents() {
@@ -87,9 +89,7 @@ export function Contents() {
     },
   ]);
 
-  const recordName = records.find((a)=> currentRecordId === a.id).name
-
-  
+  const recordName = records.find((a) => currentRecordId === a.id).name;
 
   //find array of items in records
   let itemRecords: Items[] = [];
@@ -118,7 +118,6 @@ export function Contents() {
   console.log(listDate);
   listDates = listDate;
 
-  
   const [selectedDate, setSelectedDate] = useState(listDates[0]);
   const changeDate = (index) => {
     setSelectedDate(listDates[index]);
@@ -127,9 +126,10 @@ export function Contents() {
 
   //get total price per month
   let totalPrice = 0;
-  itemRecords.forEach((item)=>{
-    if (selectedDate === dayjs(item.createdAt).format("YYYY-MM")) totalPrice += item.totalPrice;
-  })
+  itemRecords.forEach((item) => {
+    if (selectedDate === dayjs(item.createdAt).format("YYYY-MM"))
+      totalPrice += item.totalPrice;
+  });
 
   //filter items to match selectedCategory and selectedDate
   itemRecords = itemRecords.filter((item) => {
@@ -159,7 +159,8 @@ export function Contents() {
         return record;
       }),
     );
-    console.log('addItems',newItems)
+    console.log("addItems", newItems);
+    clearForm();
   };
   //remove items event handler
   const removeItems = (id) => {
@@ -185,6 +186,80 @@ export function Contents() {
     setIsShowForm(isShowForm ? false : true);
   };
 
+  const [isEditingItem, setIsEditingItem] = useState(false);
+
+  const [form, setForm] = useState({
+    name: "",
+    category: category[category.length - 1]?.id || "",
+    date: "",
+    time: "",
+    price: "",
+    quantity: 1,
+    id: "",
+    totalPrice: "",
+  });
+
+  function clearForm() {
+    setForm({
+      name: "",
+      category: category[category.length - 1]?.id || "",
+      date: "",
+      time: "",
+      price: "",
+      quantity: 1,
+      id: "",
+      totalPrice: "",
+    });
+  }
+
+  const editItem = (item) => {
+    setIsEditingItem(true);
+    setIsShowForm(true);
+    const { name, category, price, totalPrice, id, quantity } = item;
+    const time = formatTime(item.createdAt);
+    const date = formatMY(item.createdAt);
+    setForm({
+      name,
+      category,
+      date,
+      time,
+      price,
+      quantity,
+      id,
+      totalPrice,
+    });
+    console.log("edit item", "form", form);
+  };
+  const saveItem = () => {
+    if (!form.name || !form.totalPrice) return;
+    setRecords(
+      records.map((record) => {
+        if (record.id === currentRecordId) {
+          return {
+            ...record,
+            items: record.items.map((item) => {
+              if (form.id === item.id) {
+                return {
+                  ...form,
+                  quantity: form.quantity <= 0 ? 1 : form.quantity,
+                  createdAt: `${form.date ? form.date : dayjs().format("YYYY-MM-D")} ${form.time ? form.time : dayjs().format("h:mm A")}`,
+                  totalPrice: form.price
+                    ? form.price * form.quantity
+                    : form.totalPrice,
+                  price: form.price ? form.price : 0,
+                };
+              }
+              return item;
+            }),
+          };
+        }
+        return record;
+      }),
+    );
+    clearForm();
+    setIsEditingItem(false);
+  };
+
   return (
     <div className="main">
       <Date
@@ -192,11 +267,9 @@ export function Contents() {
         changeDate={changeDate}
         listDates={listDates}
       />
-      <Info 
-        recordName={recordName}
-        totalPrice={totalPrice}
-        />
+      <Info recordName={recordName} totalPrice={totalPrice} />
       <Items
+        editItem={editItem}
         removeItems={removeItems}
         setIsCategoryGlobal={setIsCategoryGlobal}
         isCategoryGlobal={isCategoryGlobal}
@@ -206,6 +279,10 @@ export function Contents() {
         selectedCategory={selectedCategory}
       />
       <FormCard
+        saveItem={saveItem}
+        isEditingItem={isEditingItem}
+        form={form}
+        setForm={setForm}
         setIsShowForm={setIsShowForm}
         category={category}
         isShowForm={isShowForm}

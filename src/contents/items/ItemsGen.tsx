@@ -15,6 +15,7 @@ export function ItemsGen({
   removeItems,
   showTotal,
   totalPricePerDay,
+  editItem
 }) {
   const [isExpanding, setIsExpanding] = useState(false);
   const [isConfirmModal, setIsConfirmModal] = useState(false);
@@ -72,17 +73,21 @@ export function ItemsGen({
                 ).toFixed(2)}
               </div>
 
-              <div className="item-arrow-cont">
+              <div 
+                onClick={toggleExpand}
+                className="item-arrow-cont">
                 <IoIosArrowBack
                   className="item-arrow"
-                  size="20"
-                  onClick={toggleExpand}
+                  size="25"
                 />
               </div>
 
               {isExpanding && (
-                <div className="expanded-btn-cont">
-                  <button className="expanded-btn">
+                <div 
+                  className="expanded-btn-cont">
+                  <button 
+                    onClick={()=>{editItem(item)}}
+                    className="expanded-btn">
                     <LuPencil className="arrow-btn-expanded" />
                   </button>
                   <button
@@ -110,7 +115,7 @@ export function ItemsGen({
             </div>
             {showTotal && (
               <div className="total-price-per-day">
-                Total: {totalPricePerDay}
+                Total: ₱{totalPricePerDay}
               </div>
             )}
           </>
