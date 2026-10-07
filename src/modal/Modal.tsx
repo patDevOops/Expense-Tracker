@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Record } from "./Record";
 import { Category } from "./Category";
 import { CustomItems } from "./CustomItems";
@@ -12,18 +13,37 @@ export function Modal({
   records,
   currectRecordId,
   setCurrentRecordId,
+  deleteRecord,
 }) {
+  const [deleteRecordId, setDeleteRecordId] = useState(null);
+
   return (
     <div className="modal-container">
-      <div className="confirmation-modal">
-        <span>Are You Sure?</span>
-        <span>Delete "untitled"</span>
-        <div>
-          <button>Yes</button>
-          <button>No</button>
+      {deleteRecordId && (
+        <div className="confirmation-modal">
+          <span>Are You Sure?</span>
+          {/*<span>Note:Be Sure To Make Backup First</span>*/}
+          <span className="to-delete-name">Deleting "untitled"</span>
+          <div>
+            <button
+              onClick={() => {
+                deleteRecord(deleteRecordId);
+                setDeleteRecordId(null);
+              }}
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => {
+                setDeleteRecordId(null);
+              }}
+            >
+              No
+            </button>
+          </div>
         </div>
-      </div>
-      
+      )}
+
       <button
         className="close-btn-modal"
         onClick={() => {
@@ -35,6 +55,7 @@ export function Modal({
 
       {typeModal === "record" && (
         <Record
+          setDeleteRecordId={setDeleteRecordId}
           setCurrentRecordId={setCurrentRecordId}
           currectRecordId={currectRecordId}
           records={records}

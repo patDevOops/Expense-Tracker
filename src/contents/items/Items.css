@@ -49,11 +49,11 @@
   border: 1px solid #2a2f3a;
   background:hwb(218 10% 83%);
   position:relative;
-  padding:0.15rem;
+  
 }
 .item-name{
   flex:1;
-  margin:8px 0 8px 3px;
+  margin:0.7rem 0 0.7rem 3px;
   text-wrap:nowrap;
   overflow:hidden;
   display:flex;

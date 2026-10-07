@@ -24,8 +24,8 @@
 }
 .confirmation-modal{
   position:absolute;
-  right:30px;
-  left:30px;
+  right:20px;
+  left:20px;
   top:70px;
   background:rgb(15,22,31);
   padding:0.5rem;
@@ -35,15 +35,42 @@
 .confirmation-modal{
   display:flex;
   flex-direction: column;
+  text-align: center;
+  gap:0.2rem;
 }
 .confirmation-modal > span:first-child{
   font-size:1.8rem;
   
 }
+.to-delete-name{
+  color:var(--text-blur);
+  font-size: 0.7rem;
+}
 .confirmation-modal > div{
   display:flex;
+  flex-direction: column;
+  margin-top:1rem;
+  gap:0.3rem;
 }
 .confirmation-modal > div button{
-  padding:0.3rem 0.5rem;
-  color:black;
+  padding:0.5rem 1.5rem;
+  color:white;
+  border:none;
+  border-radius:5px;
+  font-size: 0.8rem;
 }
+.confirmation-modal > div button:first-child{
+  border:1px solid rgba(255,92,92,0.2);
+  background:rgba(255,92,92,0.1);
+  font-weight: 600;
+}
+.confirmation-modal > div button:last-child{
+  border:none;
+  background:none;
+  color:var(--text-blur);
+}
+/*.confirmation-modal .note-confirmation{
+  font-size: 0.6rem;
+  text-align: start;
+  padding-left:1.3rem;
+}*/

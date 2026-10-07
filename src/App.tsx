@@ -69,6 +69,9 @@ function App() {
       items:[]
     }])
   }
+  const deleteRecord = (id)=>{
+    setRecords(records.filter(a => id !== a.id))
+  }
   const [typeModal, setTypeModal] = useState(null);
   //Modal
   const [isShowModal, setIsShowModal] = useState(false);
@@ -123,6 +126,7 @@ function App() {
 
       {isShowModal && (
         <Modal
+          deleteRecord={deleteRecord}
           setCurrentRecordId={setCurrentRecordId}
           currentRecordId={currentRecordId}
           records={records}

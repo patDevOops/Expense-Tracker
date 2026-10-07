@@ -6,6 +6,7 @@ export function Record({
   records,
   currentRecordId,
   setCurrentRecordId,
+  setDeleteRecordId,
 }) {
   const [recordNameInput, setRecordNameInput] = useState("");
   const [selectedRec, setSelectedRec] = useState(null);
@@ -55,7 +56,16 @@ export function Record({
       </div>
 
       <div className="record-btn-container">
-        <button className="delete">delete</button>
+        {selectedRec && (
+          <button
+            onClick={() => {
+              setDeleteRecordId(selectedRec);
+            }}
+            className="delete"
+          >
+            delete
+          </button>
+        )}
         <div>
           {selectedRec && (
             <button
