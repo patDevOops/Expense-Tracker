@@ -7,9 +7,12 @@ export function Record({
   currentRecordId,
   setCurrentRecordId,
   setDeleteRecordId,
+  toggleModal,
+  selectedRec,
+  setSelectedRec,
 }) {
   const [recordNameInput, setRecordNameInput] = useState("");
-  const [selectedRec, setSelectedRec] = useState(null);
+  
   const inputNameRecord = (event) => {
     const { value } = event.target;
     if (value.length >= 9) return;
@@ -28,6 +31,7 @@ export function Record({
         />
         <button
           onClick={() => {
+            if (!recordNameInput) return;
             addRecord(recordNameInput);
             setRecordNameInput("");
           }}
@@ -70,7 +74,8 @@ export function Record({
           {selectedRec && (
             <button
               onClick={() => {
-                setCurrentRecordId(selectedRec);
+                setCurrentRecordId(selectedRec)
+                  toggleModal(false);
               }}
               className="view"
             >

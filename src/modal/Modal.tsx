@@ -15,6 +15,7 @@ export function Modal({
   setCurrentRecordId,
   deleteRecord,
 }) {
+  const [selectedRec, setSelectedRec] = useState(null);
   const [deleteRecordId, setDeleteRecordId] = useState(null);
 
   return (
@@ -29,6 +30,7 @@ export function Modal({
               onClick={() => {
                 deleteRecord(deleteRecordId);
                 setDeleteRecordId(null);
+                setSelectedRec(null)
               }}
             >
               Yes
@@ -55,6 +57,9 @@ export function Modal({
 
       {typeModal === "record" && (
         <Record
+          setSelectedRec={setSelectedRec}
+          selectedRec={selectedRec}
+          toggleModal={toggleModal}
           setDeleteRecordId={setDeleteRecordId}
           setCurrentRecordId={setCurrentRecordId}
           currectRecordId={currectRecordId}

@@ -37,7 +37,7 @@ export function Contents({currentRecordId,records,setRecords}) {
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");
   
-  const recordName = records.find((a) => currentRecordId === a.id).name;
+  const recordName = records.find((a) => currentRecordId === a.id)?.name;
 
   //find array of items in records
   let itemRecords: Items[] = [];
