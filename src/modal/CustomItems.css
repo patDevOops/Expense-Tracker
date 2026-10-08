@@ -23,8 +23,29 @@
 .custom-item-input-cont button{
   width:20%
 }
-.custom-item-input-cont input{
-  width:55%
+.name-custom{
+  display:flex;
+  flex-direction:column;
+  width:34%;
+  position: relative;
+  
+}
+.price-custom{
+  display:flex;
+  flex-direction:column;
+  width:21%;
+  position: relative;
+}
+.price-custom input{
+  text-align: center;
+  font-size:0.8rem;
+}
+.name-custom label,.price-custom label{
+  font-size:0.6rem;
+  position:absolute;
+  top:-0.3rem;
+  left:0.2rem;
+  z-index:1
 }
 .custom-item-category{
   font-size:0.65rem;
