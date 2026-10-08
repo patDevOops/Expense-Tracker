@@ -4,6 +4,7 @@ import { Category } from "./Category";
 import { CustomItems } from "./CustomItems";
 import "./Modal.css";
 import { IoMdClose } from "react-icons/io";
+import {Barrier} from '../components/barrier.tsx';
 export function Modal({
   toggleModal,
   toggleSidebar,
@@ -20,6 +21,7 @@ export function Modal({
 
   return (
     <div className="modal-container">
+      <Barrier a={deleteRecordId} b="barrier-confirm-modal" c={setDeleteRecordId}/>
       {deleteRecordId && (
         <div className="confirmation-modal">
           <span>Are You Sure?</span>
