@@ -18,12 +18,11 @@ export function ItemsGen({
   editItem,
   selectedItem,
   setSelectedItem,
+  expanding,
+  setExpanding
 }) {
-  const [isExpanding, setIsExpanding] = useState(false);
+  
   const [isConfirmModal, setIsConfirmModal] = useState(false);
-  const toggleExpand = () => {
-    setIsExpanding(isExpanding ? false : true);
-  };
   const isShowQtyCalc = item.price && item.quantity !== 1 ? true : false;
 
   const categoryName = category.find(
@@ -52,7 +51,7 @@ export function ItemsGen({
             <div 
               onClick={()=>{setSelectedItem(item.id)}}
               className="item-gen"
-              id={selectedItem === item.id?'border-highlight':''}>
+              id={selectedItem === item.id?'border-highlight-item':''}>
               <div className="item-name">
                 <div>{item.name}</div>
                 <div className="item-gen-details">
@@ -80,7 +79,12 @@ export function ItemsGen({
               </div>
 
               <div 
-                onClick={toggleExpand}
+                onClick={()=>{
+                  if (expanding === item.id){
+                    setExpanding(null)
+                    return
+                  } 
+                  setExpanding(item.id)}}
                 className="item-arrow-cont">
                 <IoIosArrowBack
                   className="item-arrow"
@@ -88,7 +92,7 @@ export function ItemsGen({
                 />
               </div>
 
-              {isExpanding && (
+              {expanding === item.id && (
                 <div 
                   className="expanded-btn-cont">
                   <button 

@@ -14,7 +14,7 @@ export function Items({
   removeItems,
   editItem
 }) {
-  
+  const [expanding, setExpanding] = useState(null)
   const [isCollapse, setIsCollapse] = useState([]);
   const [isDropdown, setIsDropdown] = useState(false);
   const [selectedItem,setSelectedItem] = useState(null)
@@ -122,6 +122,8 @@ export function Items({
           previousDate = formatMY(item.createdAt);
           return (
             <ItemsGen
+              expanding={expanding}
+              setExpanding={setExpanding}
               setSelectedItem={setSelectedItem}
               selectedItem={selectedItem}
               editItem={editItem}

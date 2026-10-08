@@ -40,7 +40,6 @@
   background:hwb(214 6% 88%);
 }
 .item-gen{
-  border:0.5px solid white;
   margin:5px 15px;
   display:flex;
   justify-content: space-between;
@@ -207,4 +206,7 @@
 }
 .confirm-del-modal > button:last-child{
   background:hwb(39 1% 13%);
+}
+#border-highlight-item{
+  border-color:#3e4452e6
 }
