@@ -44,6 +44,7 @@ export function Record({
         {records.map((record) => {
           return (
             <div
+              id={selectedRec === record.id ? 'border-highlight' : ''}
               onClick={() => {
                 setSelectedRec(record.id);
               }}

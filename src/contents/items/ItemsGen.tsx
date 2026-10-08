@@ -15,7 +15,9 @@ export function ItemsGen({
   removeItems,
   showTotal,
   totalPricePerDay,
-  editItem
+  editItem,
+  selectedItem,
+  setSelectedItem,
 }) {
   const [isExpanding, setIsExpanding] = useState(false);
   const [isConfirmModal, setIsConfirmModal] = useState(false);
@@ -47,7 +49,10 @@ export function ItemsGen({
 
         {!isHide && (
           <>
-            <div className="item-gen">
+            <div 
+              onClick={()=>{setSelectedItem(item.id)}}
+              className="item-gen"
+              id={selectedItem === item.id?'border-highlight':''}>
               <div className="item-name">
                 <div>{item.name}</div>
                 <div className="item-gen-details">

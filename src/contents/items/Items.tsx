@@ -17,6 +17,7 @@ export function Items({
   
   const [isCollapse, setIsCollapse] = useState([]);
   const [isDropdown, setIsDropdown] = useState(false);
+  const [selectedItem,setSelectedItem] = useState(null)
 
   const toggleDropdown = () => {
     setIsDropdown(isDropdown ? false : true);
@@ -121,6 +122,8 @@ export function Items({
           previousDate = formatMY(item.createdAt);
           return (
             <ItemsGen
+              setSelectedItem={setSelectedItem}
+              selectedItem={selectedItem}
               editItem={editItem}
               totalPricePerDay={totalSameDate[itemDate].price}
               showTotal={showTotal}
