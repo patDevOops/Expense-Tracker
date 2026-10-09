@@ -10,9 +10,11 @@
 
 .custom-item-gen{
   border:var(--border);
-  padding:4px;
+  padding:4px 4px 2rem 4px;
   border-radius:5px;
   overflow: scroll;
+  scrollbar-width: none;
+  
 }
 .custom-item-gen > div span:first-child{
   font-weight:500;
@@ -55,4 +57,13 @@
   text-align: center;
   padding:1px 2px;
   margin-top:3px;
+}
+.custom-item-details{
+  display:flex;
+  font-size:0.6rem;
+  align-items: center;
+  gap:1rem;
+}
+.custom-item-details p:last-child{
+  color:var(--text-blur);
 }
