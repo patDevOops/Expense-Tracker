@@ -94,7 +94,7 @@ export function CustomItems({
               category: categoryId ? categoryId : category[0].id,
               id: crypto.randomUUID(),
             });
-            console.log(customItemInput)
+            
           }}
         >
           Add

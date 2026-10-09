@@ -14,6 +14,7 @@ type Record = {
   items: [];
 };
 function App() {
+  /*
   const [category, setCategory] = useState([
     {
       categoryName: "Others",
@@ -28,6 +29,7 @@ function App() {
       id: "765",
     },
   ]);
+  */
   const [customItems, setCustomItems] = useState([
     {
       name: "candy",
@@ -59,6 +61,20 @@ function App() {
       id: "123",
       createdAt: "2026-09-20",
       status: "local",
+      category: [
+        {
+          categoryName: "Others",
+          id: "652",
+        },
+        {
+          categoryName: "Food",
+          id: "098",
+        },
+        {
+          categoryName: "Things",
+          id: "765",
+        },
+      ],
       items: [
         {
           name: "Chooe",
@@ -99,6 +115,13 @@ function App() {
       ],
     },
   ]);
+  const [currentRecordId, setCurrentRecordId] = useState("123");
+  const switchViewRec = (id) => {
+    setCurrentRecordId(id);
+  };
+  //find record category
+  let category = records.find(a => currentRecordId === a.id)?.category || [];
+  
   const addRecord = (name) => {
     setRecords([
       ...records,
@@ -107,6 +130,7 @@ function App() {
         id: crypto.randomUUID(),
         createdAt: dayjs().format("YYYY-MM-D"),
         status: "local",
+        category:[],
         items: [],
       },
     ]);
@@ -117,11 +141,6 @@ function App() {
   const [typeModal, setTypeModal] = useState(null);
   //Modal
   const [isShowModal, setIsShowModal] = useState(false);
-
-  const [currentRecordId, setCurrentRecordId] = useState("123");
-  const switchViewRec = (id) => {
-    setCurrentRecordId(id);
-  };
 
   const renderTypeModal = (type) => {
     setTypeModal(type);
@@ -186,7 +205,6 @@ function App() {
 
       <Contents
         category={category}
-        setCategory={setCategory}
         records={records}
         setRecords={setRecords}
         currentRecordId={currentRecordId}

@@ -37,7 +37,7 @@ export function Items({
 
   const renderCategoryName = category.find(
     (a) => selectedCategory === a.id,
-  ).categoryName;
+  )?.categoryName || "";
 
   
     let quantity = 0
