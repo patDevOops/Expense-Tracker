@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import { useState, useEffect } from "react";
 import { Header } from "./Header";
 import { Contents } from "./contents/Contents";
@@ -14,6 +14,31 @@ type Record = {
   items: [];
 };
 function App() {
+  const [customItems, setCustomItems] = useState([
+    {
+      name: "candy",
+      price: 1,
+      categoryId: "098",
+      id: "455",
+    },
+  ]);
+  const addCustomItem = (newItem) => {
+    setCustomItems([...customItems, newItem]);
+  };
+  const deleteCustomItem = (id) => {
+    setCustomItems(customItems.filter((a) => a.id !== id));
+  };
+  const saveEditCustomItem = (editedItem) => {
+    setCustomItems(
+      customItems.map((item) => {
+        if (editedItem.id === item.id) {
+          return editedItem;
+        }
+        return item;
+      }),
+    );
+  };
+
   const [records, setRecords] = useState<Record[]>([
     {
       name: "untitled",
@@ -60,18 +85,21 @@ function App() {
       ],
     },
   ]);
-  const addRecord = (name)=>{
-    setRecords([...records,{
-      name,
-      id:crypto.randomUUID(),
-      createdAt:dayjs().format('YYYY-MM-D'),
-      status:'local',
-      items:[]
-    }])
-  }
-  const deleteRecord = (id)=>{
-    setRecords(records.filter(a => id !== a.id))
-  }
+  const addRecord = (name) => {
+    setRecords([
+      ...records,
+      {
+        name,
+        id: crypto.randomUUID(),
+        createdAt: dayjs().format("YYYY-MM-D"),
+        status: "local",
+        items: [],
+      },
+    ]);
+  };
+  const deleteRecord = (id) => {
+    setRecords(records.filter((a) => id !== a.id));
+  };
   const [typeModal, setTypeModal] = useState(null);
   //Modal
   const [isShowModal, setIsShowModal] = useState(false);
@@ -126,6 +154,7 @@ function App() {
 
       {isShowModal && (
         <Modal
+          customItems={customItems}
           deleteRecord={deleteRecord}
           setCurrentRecordId={setCurrentRecordId}
           currentRecordId={currentRecordId}
@@ -137,10 +166,11 @@ function App() {
         />
       )}
 
-      <Contents 
+      <Contents
         records={records}
         setRecords={setRecords}
-        currentRecordId={currentRecordId} />
+        currentRecordId={currentRecordId}
+      />
     </>
   );
 }
