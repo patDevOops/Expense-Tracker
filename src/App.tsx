@@ -30,37 +30,20 @@ function App() {
     },
   ]);
   */
-  const [customItems, setCustomItems] = useState([
-    {
-      name: "candy",
-      price: 1,
-      categoryId: "098",
-      id: "455",
-    },
-  ]);
-  const addCustomItem = (newItem) => {
-    setCustomItems([...customItems, newItem]);
-  };
-  const deleteCustomItem = (id) => {
-    setCustomItems(customItems.filter((a) => a.id !== id));
-  };
-  const saveEditCustomItem = (editedItem) => {
-    setCustomItems(
-      customItems.map((item) => {
-        if (editedItem.id === item.id) {
-          return editedItem;
-        }
-        return item;
-      }),
-    );
-  };
-
   const [records, setRecords] = useState<Record[]>([
     {
       name: "untitled",
       id: "123",
       createdAt: "2026-09-20",
       status: "local",
+      customItems: [
+        {
+          name: "candy",
+          price: 1,
+          categoryId: "098",
+          id: "455",
+        },
+      ],
       category: [
         {
           categoryName: "Others",
@@ -119,9 +102,57 @@ function App() {
   const switchViewRec = (id) => {
     setCurrentRecordId(id);
   };
+  //find saved custom items in records
+  const customItems =
+    records.find((a) => currentRecordId == a.id)?.customItems || [];
+
+  function matchRec(a) {
+    return a === currentRecordId;
+  }
+
+  const addCustomItem = (newItem) => {
+    setRecords(
+      records.map((record) => {
+        if (matchRec(record.id)) {
+          return {
+            ...record,
+            customItems: [...record.customItems, newItem],
+          };
+        }
+        return record;
+      }),
+    );
+  };
+  const deleteCustomItem = (id) => {
+    setRecords(
+      records.map((record) =>
+        matchRec(record.id)
+          ? {
+              ...record,
+              customItems: customItems.filter((a) => a !== id),
+            }
+          : record,
+      ),
+    );
+  };
+  const saveEditCustomItem = (editedItem) => {
+    setRecords(
+      records.map((record) =>
+        matchRec(record.id)
+          ? {
+              ...record,
+              customItems: record.customItems.map((a) =>
+                editedItem.id == a.id ? editedItem : a,
+              ),
+            }
+          : record,
+      ),
+    );
+  };
+
   //find record category
-  let category = records.find(a => currentRecordId === a.id)?.category || [];
-  
+  let category = records.find((a) => currentRecordId === a.id)?.category || [];
+
   const addRecord = (name) => {
     setRecords([
       ...records,
@@ -130,7 +161,7 @@ function App() {
         id: crypto.randomUUID(),
         createdAt: dayjs().format("YYYY-MM-D"),
         status: "local",
-        category:[],
+        category: [],
         items: [],
       },
     ]);
