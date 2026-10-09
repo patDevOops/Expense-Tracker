@@ -91,10 +91,9 @@ export function CustomItems({
             if (!name) return;
             addCustomItem({
               ...customItemInput,
-              category: categoryId ? categoryId : category[0].id,
+              categoryId: categoryId ? categoryId : category[0].id,
               id: crypto.randomUUID(),
             });
-            
           }}
         >
           Add
@@ -113,7 +112,8 @@ export function CustomItems({
                       category.find((a) => a.id == customItem.categoryId)?.categoryName
                     }
                   </p>
-                  <p>&#8369;{customItem.price.toFixed(2)}</p>
+                  <p>{customItem.price ? 
+                  `\u20B1${customItem.price.toFixed(2)}`:''}</p>
                 </div>
               </span>
               <span className="category-menu-container">
