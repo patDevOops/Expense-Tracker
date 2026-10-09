@@ -4,7 +4,7 @@ import { Category } from "./Category";
 import { CustomItems } from "./CustomItems";
 import "./Modal.css";
 import { IoMdClose } from "react-icons/io";
-import {Barrier} from '../components/barrier.tsx';
+import { Barrier } from "../components/barrier.tsx";
 export function Modal({
   toggleModal,
   toggleSidebar,
@@ -15,13 +15,22 @@ export function Modal({
   currectRecordId,
   setCurrentRecordId,
   deleteRecord,
+  category,
+  deleteCustomItem,
+  saveEditCustomItem,
+  addCustomItem,
+  customItems,
 }) {
   const [selectedRec, setSelectedRec] = useState(null);
   const [deleteRecordId, setDeleteRecordId] = useState(null);
 
   return (
     <div className="modal-container">
-      <Barrier a={deleteRecordId} b="barrier-confirm-modal" c={setDeleteRecordId}/>
+      <Barrier
+        a={deleteRecordId}
+        b="barrier-confirm-modal"
+        c={setDeleteRecordId}
+      />
       {deleteRecordId && (
         <div className="confirmation-modal">
           <span>Are You Sure?</span>
@@ -32,7 +41,7 @@ export function Modal({
               onClick={() => {
                 deleteRecord(deleteRecordId);
                 setDeleteRecordId(null);
-                setSelectedRec(null)
+                setSelectedRec(null);
               }}
             >
               Yes
@@ -71,7 +80,15 @@ export function Modal({
         />
       )}
       {typeModal === "category" && <Category />}
-      {typeModal === "custom-items" && <CustomItems />}
+      {typeModal === "custom-items" && (
+        <CustomItems
+          customItems={customItems}
+          saveEditCustomItem={saveEditCustomItem}
+          deleteCustomItem={deleteCustomItem}
+          addCustomItem={addCustomItem}
+          category={category}
+        />
+      )}
     </div>
   );
 }

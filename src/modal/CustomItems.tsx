@@ -3,7 +3,13 @@ import "./CustomItems.css";
 import { GoKebabHorizontal } from "react-icons/go";
 import { GoPencil } from "react-icons/go";
 import { CiTrash } from "react-icons/ci";
-export function CustomItems() {
+export function CustomItems({
+  category,
+  addCustomItem,
+  saveEditCustomItem,
+  deleteCustomItem,
+  customItems,
+}) {
   const [isViewMenu, setIsViewMenu] = useState(false);
   const toggleMenu = () => {
     setIsViewMenu(isViewMenu ? false : true);
@@ -11,8 +17,9 @@ export function CustomItems() {
   const [customItemInput, setCustomItemInput] = useState({
     name: "",
     price: "",
-    category: "",
+    categoryId: "",
   });
+
   const inputItem = (event) => {
     let { name, value } = event.target;
     //name is price
@@ -30,8 +37,8 @@ export function CustomItems() {
         [name]: value,
       }));
       return;
-    };
-    
+    }
+
     setCustomItemInput((prev) => ({
       ...prev,
       [name]: value,
@@ -68,12 +75,31 @@ export function CustomItems() {
           name="category"
           className="modal-input-rec"
         >
-          <option>Food</option>
+          {category.map((categoryVal) => {
+            return (
+              <option key={categoryVal.id} value={categoryVal.id}>
+                {categoryVal.categoryName}
+              </option>
+            );
+          })}
         </select>
-        <button>Add</button>
+        <button
+          onClick={() => {
+            const {name,categoryId,price} = customItemInput;
+            if(!name || !price) return;
+            addCustomItem({
+              ...customItemInput,
+              category: categoryId ? categoryId: category[0],
+              id:crypto.randomUUID(),
+            });
+          }}
+        >
+          Add
+        </button>
       </div>
 
       <div className="custom-item-gen">
+        
         <div>
           <span>
             <p>Milk</p>

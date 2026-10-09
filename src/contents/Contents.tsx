@@ -18,21 +18,7 @@ type Items = {
   totalPrice: string;
 };
 
-export function Contents({currentRecordId,records,setRecords}) {
-  const [category, setCategory] = useState([
-    {
-      categoryName: "Others",
-      id: "652",
-    },
-    {
-      categoryName: "Food",
-      id: "098",
-    },
-    {
-      categoryName: "Things",
-      id: "765",
-    },
-  ]);
+export function Contents({currentRecordId,records,setRecords,category,setCategory}) {
   
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");

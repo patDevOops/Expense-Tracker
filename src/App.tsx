@@ -14,6 +14,20 @@ type Record = {
   items: [];
 };
 function App() {
+  const [category, setCategory] = useState([
+    {
+      categoryName: "Others",
+      id: "652",
+    },
+    {
+      categoryName: "Food",
+      id: "098",
+    },
+    {
+      categoryName: "Things",
+      id: "765",
+    },
+  ]);
   const [customItems, setCustomItems] = useState([
     {
       name: "candy",
@@ -154,6 +168,10 @@ function App() {
 
       {isShowModal && (
         <Modal
+          addCustomItem={addCustomItem}
+          saveEditCustomItem={saveEditCustomItem}
+          deleteCustomItem={deleteCustomItem}
+          category={category}
           customItems={customItems}
           deleteRecord={deleteRecord}
           setCurrentRecordId={setCurrentRecordId}
@@ -167,6 +185,8 @@ function App() {
       )}
 
       <Contents
+        category={category}
+        setCategory={setCategory}
         records={records}
         setRecords={setRecords}
         currentRecordId={currentRecordId}
