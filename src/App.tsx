@@ -105,7 +105,7 @@ function App() {
   //find saved custom items in records
   const customItems =
     records.find((a) => currentRecordId == a.id)?.customItems || [];
-
+  //shortcut for finding current Record
   function matchRec(a) {
     return a === currentRecordId;
   }
@@ -161,7 +161,12 @@ function App() {
         id: crypto.randomUUID(),
         createdAt: dayjs().format("YYYY-MM-D"),
         status: "local",
-        category: [],
+        category: [
+          {
+            categoryName: "Product",
+            id: "098765",
+          },
+        ],
         items: [],
       },
     ]);
@@ -169,6 +174,7 @@ function App() {
   const deleteRecord = (id) => {
     setRecords(records.filter((a) => id !== a.id));
   };
+
   const [typeModal, setTypeModal] = useState(null);
   //Modal
   const [isShowModal, setIsShowModal] = useState(false);
