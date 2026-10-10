@@ -18,7 +18,7 @@ type Items = {
   totalPrice: string;
 };
 
-export function Contents({currentRecordId,records,setRecords,category}) {
+export function Contents({currentRecordId,records,setRecords,category,customItems}) {
   
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");
@@ -219,6 +219,7 @@ export function Contents({currentRecordId,records,setRecords,category}) {
         selectedCategory={selectedCategory}
       />
       <FormCard
+        customItems={customItems}
         saveItem={saveItem}
         isEditingItem={isEditingItem}
         form={form}

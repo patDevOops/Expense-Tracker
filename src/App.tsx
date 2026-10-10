@@ -105,6 +105,7 @@ function App() {
   //find saved custom items in records
   const customItems =
     records.find((a) => currentRecordId == a.id)?.customItems || [];
+  
   //shortcut for finding current Record
   function matchRec(a) {
     return a === currentRecordId;
@@ -241,6 +242,7 @@ function App() {
       )}
 
       <Contents
+        customItems={customItems}
         category={category}
         records={records}
         setRecords={setRecords}

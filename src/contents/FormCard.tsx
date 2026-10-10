@@ -13,6 +13,7 @@ export function FormCard({
   setForm,
   isEditingItem,
   saveItem,
+  customItems,
 }) {
   const [isShowMoreForm, setIsShowMoreForm] = useState(false);
   const expandMoreForm = () => {
@@ -60,6 +61,7 @@ export function FormCard({
     });
     console.log("form", form);
   };
+  
   return (
     <>
       <Barrier a={isShowForm} b="barrier-form" c={setIsShowForm} />
@@ -81,19 +83,25 @@ export function FormCard({
               <div className="pick-item-container">
                 {isPickItem && (
                   <div className="pick-item-generated">
-                    <div>
-                      <span>candy</span>
-                      <div className="pick-item-gen-description">
-                        <span>food</span>
-                        <span>₱1.00</span>
-                      </div>
-                    </div>
-                    <div>
-                      <span>milk</span>
-                      <div className="pick-item-gen-description">
-                        <span>food</span>
-                      </div>
-                    </div>
+                    {customItems.map((customItem) => {
+                      return (
+                        <div key={customItem.id}>
+                          <span>{customItem.name}</span>
+                          <div className="pick-item-gen-description">
+                            <span>
+                              {category.find(
+                                (a) => a.id == customItem.categoryId,
+                              )?.categoryName || ""}
+                            </span>
+                            <span>
+                              {customItem.price
+                                ? `\u20B1${customItem.price.toFixed(2)}`
+                                : ""}
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
 
@@ -103,7 +111,6 @@ export function FormCard({
                   onClick={pickItem}
                 />
               </div>
-              
             </div>
           </div>
 
