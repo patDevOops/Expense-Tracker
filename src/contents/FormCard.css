@@ -75,6 +75,7 @@
   border:var(--border);
   border-radius:5px;
   overflow:hidden;
+  z-index:175;
 }
 .pick-item-gen-description{
   display:flex;

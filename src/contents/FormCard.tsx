@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import dayjs from "dayjs";
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
@@ -50,6 +50,7 @@ export function FormCard({
   };
 
   const addItemsForm = () => {
+    console.log(form)
     if (!form.name || !form.totalPrice) return;
     addItems({
       ...form,
@@ -62,8 +63,26 @@ export function FormCard({
     console.log("form", form);
   };
   
+  const pickCustomItem = (item) => {
+    const { price, categoryId, name } = item;
+    
+    setForm((prev) => ({
+      ...prev,
+      quantity:1,
+      price:price,
+      totalPrice:price,
+      category:categoryId,
+      name,
+    }));
+    setIspickItem(false);
+  };
+  useEffect(() => {
+    console.log(form)
+  }, [form])
+  
   return (
     <>
+      
       <Barrier a={isShowForm} b="barrier-form" c={setIsShowForm} />
 
       {isShowForm && (
@@ -84,8 +103,18 @@ export function FormCard({
                 {isPickItem && (
                   <div className="pick-item-generated">
                     {customItems.map((customItem) => {
+                      const { name, price, categoryId } = customItem;
                       return (
-                        <div key={customItem.id}>
+                        <div
+                          onClick={() => {
+                            pickCustomItem({
+                              name,
+                              price,
+                              categoryId,
+                            });
+                          }}
+                          key={customItem.id}
+                        >
                           <span>{customItem.name}</span>
                           <div className="pick-item-gen-description">
                             <span>
