@@ -109,11 +109,15 @@ export function CustomItems({
                 <div className="custom-item-details">
                   <p className="custom-item-category">
                     {
-                      category.find((a) => a.id == customItem.categoryId)?.categoryName
+                      category.find((a) => a.id == customItem.categoryId)
+                        ?.categoryName
                     }
                   </p>
-                  <p>{customItem.price ? 
-                  `\u20B1${customItem.price.toFixed(2)}`:''}</p>
+                  <p>
+                    {customItem.price
+                      ? `\u20B1${customItem.price.toFixed(2)}`
+                      : ""}
+                  </p>
                 </div>
               </span>
               <span className="category-menu-container">
@@ -130,7 +134,12 @@ export function CustomItems({
                       <GoPencil />
                       edit
                     </p>
-                    <p>
+                    <p
+                      onClick={() => {
+                        deleteCustomItem(customItem.id);
+                        setIsViewMenu(false)
+                      }}
+                    >
                       <CiTrash />
                       delete
                     </p>

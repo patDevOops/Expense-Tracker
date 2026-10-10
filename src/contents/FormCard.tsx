@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
@@ -50,7 +50,6 @@ export function FormCard({
   };
 
   const addItemsForm = () => {
-    console.log(form)
     if (!form.name || !form.totalPrice) return;
     addItems({
       ...form,
@@ -62,27 +61,23 @@ export function FormCard({
     });
     console.log("form", form);
   };
-  
+
   const pickCustomItem = (item) => {
     const { price, categoryId, name } = item;
-    
+
     setForm((prev) => ({
       ...prev,
-      quantity:1,
-      price:price,
-      totalPrice:price,
-      category:categoryId,
+      quantity: 1,
+      price: price,
+      totalPrice: price,
+      category: categoryId,
       name,
     }));
     setIspickItem(false);
   };
-  useEffect(() => {
-    console.log(form)
-  }, [form])
-  
+
   return (
     <>
-      
       <Barrier a={isShowForm} b="barrier-form" c={setIsShowForm} />
 
       {isShowForm && (

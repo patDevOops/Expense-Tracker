@@ -108,6 +108,7 @@ function App() {
   
   //shortcut for finding current Record
   function matchRec(a) {
+    console.log(a === currentRecordId)
     return a === currentRecordId;
   }
 
@@ -125,12 +126,13 @@ function App() {
     );
   };
   const deleteCustomItem = (id) => {
+    console.log(id)
     setRecords(
       records.map((record) =>
         matchRec(record.id)
           ? {
               ...record,
-              customItems: customItems.filter((a) => a !== id),
+              customItems: record.customItems.filter((a) => a.id !== id),
             }
           : record,
       ),
