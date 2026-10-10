@@ -126,6 +126,7 @@ function App() {
     );
   };
   const deleteCustomItem = (id) => {
+    console.log(customItems)
     console.log(id)
     setRecords(
       records.map((record) =>

@@ -20,6 +20,7 @@ export function CustomItems({
     price: "",
     categoryId: "",
   });
+  const [editingCustomItem, setEditingCustomItem] = useState(null);
 
   const inputItem = (event) => {
     let { name, value } = event.target;
@@ -45,6 +46,29 @@ export function CustomItems({
       [name]: value,
     }));
   };
+  const editCustomItem = (toEditItem) => {
+    setIsViewMenu(false);
+    const { name, categoryId, price, id } = toEditItem;
+    if (editingCustomItem == id) {
+      setEditingCustomItem(false);
+      clearInput();
+      return;
+    } else setEditingCustomItem(id);
+
+    setCustomItemInput({
+      name,
+      categoryId,
+      price,
+      id,
+    });
+  };
+  function clearInput() {
+    setCustomItemInput({
+      name: "",
+      price: "",
+      categoryId: category[0].id,
+    });
+  }
   return (
     <>
       <Barrier b="barrier-menu-custom-item" a={isViewMenu} c={setIsViewMenu} />
@@ -89,14 +113,26 @@ export function CustomItems({
           onClick={() => {
             const { name, categoryId, price } = customItemInput;
             if (!name) return;
+
+            if (editingCustomItem) {
+              saveEditCustomItem({
+                ...customItemInput,
+                categoryId: categoryId ? categoryId : category[0].id,
+              });
+              setEditingCustomItem(false);
+              clearInput();
+              return;
+            }
+
             addCustomItem({
               ...customItemInput,
               categoryId: categoryId ? categoryId : category[0].id,
               id: crypto.randomUUID(),
             });
+            clearInput();
           }}
         >
-          Add
+          {editingCustomItem ? "Save" : "Add"}
         </button>
       </div>
 
@@ -130,14 +166,20 @@ export function CustomItems({
 
                 {isViewMenu === customItem.id && (
                   <div className="select-menu">
-                    <p>
+                    <p
+                      onClick={() => {
+                        editCustomItem(customItem);
+                      }}
+                    >
                       <GoPencil />
-                      edit
+                      {editingCustomItem == customItem.id
+                        ? "cancel edit"
+                        : "edit"}
                     </p>
                     <p
                       onClick={() => {
                         deleteCustomItem(customItem.id);
-                        setIsViewMenu(false)
+                        setIsViewMenu(false);
                       }}
                     >
                       <CiTrash />
