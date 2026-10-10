@@ -79,7 +79,8 @@ export function Modal({
           addRecord={addRecord}
         />
       )}
-      {typeModal === "category" && <Category />}
+      {typeModal === "category" && <Category 
+                                     category={category}/>}
       {typeModal === "custom-items" && (
         <CustomItems
           customItems={customItems}

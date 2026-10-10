@@ -105,10 +105,9 @@ function App() {
   //find saved custom items in records
   const customItems =
     records.find((a) => currentRecordId == a.id)?.customItems || [];
-  
+
   //shortcut for finding current Record
   function matchRec(a) {
-    console.log(a === currentRecordId)
     return a === currentRecordId;
   }
 
@@ -126,8 +125,8 @@ function App() {
     );
   };
   const deleteCustomItem = (id) => {
-    console.log(customItems)
-    console.log(id)
+    console.log(customItems);
+    console.log(id);
     setRecords(
       records.map((record) =>
         matchRec(record.id)
@@ -151,6 +150,48 @@ function App() {
             }
           : record,
       ),
+    );
+  };
+
+  const addCategory = (newCategory) => {
+    setRecords(
+      records.map((record) => {
+        if (matchRec(record.id)) {
+          return {
+            ...record,
+            category: [...record.category, newCategory],
+          };
+        }
+        return record;
+      }),
+    );
+  };
+  const renameCategory = (newName) => {
+    setRecords(
+      records.map((record) => {
+        if (matchRec(record.id)) {
+          return {
+            ...record,
+            category: record.category.map((a) =>
+              a.id == newName.id ? newName : a,
+            ),
+          };
+        }
+        return record;
+      }),
+    );
+  };
+  const deleteCategory = (id) => {
+    setRecords(
+      records.map((record) => {
+        if (matchRec(record.id)) {
+          return {
+            ...record,
+            category: record.category.filter((a) => a.id !== id),
+          };
+        }
+        return record;
+      }),
     );
   };
 

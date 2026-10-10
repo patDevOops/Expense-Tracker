@@ -1,15 +1,15 @@
 import { useState } from "react";
+import {Barrier} from '../components/barrier.tsx';
 import { GoKebabHorizontal } from "react-icons/go";
 import { GoPencil } from "react-icons/go";
 import { CiTrash } from "react-icons/ci";
 import "./Category.css";
-export function Category() {
+export function Category({ category }) {
   const [isFindMenu, setIsFindMenu] = useState(false);
-  const toggleMenu = () => {
-    setIsFindMenu(isFindMenu ? false : true);
-  };
+  
   return (
     <>
+      <Barrier a={isFindMenu} b="barrier-category" c={setIsFindMenu}/>
       <div className="modal-title">
         viewing category for{" "}
         <span className="record-name-highlighted">untitled</span>
@@ -19,32 +19,29 @@ export function Category() {
         <button>Add</button>
       </div>
       <div className="category-gen">
-        <div>
-          <span>Food</span>
-          <span className="category-menu-container">
-            <GoKebabHorizontal size="19" onClick={toggleMenu} />
+        {category.map((categoryVal) => {
+          return (
+            <div key={categoryVal.id}>
+              <span>{categoryVal.categoryName}</span>
+              <span className="category-menu-container">
+                <GoKebabHorizontal size="19" onClick={()=>{setIsFindMenu(categoryVal.id)}} />
 
-            {isFindMenu && (
-              <div className="select-menu">
-                <p>
-                  <GoPencil />
-                  rename
-                </p>
-                <p>
-                  <CiTrash />
-                  delete
-                </p>
-              </div>
-            )}
-          </span>
-        </div>
-        
-        <div>
-          <span>Things</span>
-          <span className="category-menu-container">
-            <GoKebabHorizontal size="19" />
-          </span>
-        </div>
+                {isFindMenu == categoryVal.id && (
+                  <div className="select-menu">
+                    <p>
+                      <GoPencil />
+                      rename
+                    </p>
+                    <p>
+                      <CiTrash />
+                      delete
+                    </p>
+                  </div>
+                )}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </>
   );

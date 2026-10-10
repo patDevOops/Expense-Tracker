@@ -35,7 +35,7 @@ export function SideBar({ isShowSidebar,toggleModal,toggleSidebar,renderTypeModa
           renderTypeModal('category')
           }}>
             <span><BiCategory color="white"/></span>
-            <span>Add Category</span>
+            <span>Category</span>
           </div>
         </div>
       )}

@@ -27,7 +27,7 @@ export function ItemsGen({
 
   const categoryName = category.find(
     (a) => a.id === item.category,
-  )?.categoryName;
+  )?.categoryName || '';
   const removeBarrier = () => {
     setIsConfirmModal(false);
   };
