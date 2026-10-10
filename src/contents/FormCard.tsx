@@ -75,6 +75,9 @@ export function FormCard({
     }));
     setIspickItem(false);
   };
+  const renderCategoryName = (id) => {
+    return category.find((a) => a.id == id)?.categoryName;
+  };
 
   return (
     <>
@@ -112,11 +115,10 @@ export function FormCard({
                         >
                           <span>{customItem.name}</span>
                           <div className="pick-item-gen-description">
-                            <span>
-                              {category.find(
-                                (a) => a.id == customItem.categoryId,
-                              )?.categoryName || ""}
-                            </span>
+                            
+                            {renderCategoryName(customItem.categoryId) && <span>
+                              {renderCategoryName(customItem.categoryId)}
+                            </span>}
                             <span>
                               {customItem.price
                                 ? `\u20B1${customItem.price.toFixed(2)}`

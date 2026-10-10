@@ -69,6 +69,9 @@ export function CustomItems({
       categoryId: category[0].id,
     });
   }
+  const renderCategoryName = (id) => {
+    return category.find((a) => a.id == id)?.categoryName;
+  };
   return (
     <>
       <Barrier b="barrier-menu-custom-item" a={isViewMenu} c={setIsViewMenu} />
@@ -117,7 +120,7 @@ export function CustomItems({
             if (editingCustomItem) {
               saveEditCustomItem({
                 ...customItemInput,
-                categoryId: categoryId ? categoryId : category[0].id,
+                categoryId: categoryId ? categoryId : category[0]?.id,
               });
               setEditingCustomItem(false);
               clearInput();
@@ -126,7 +129,7 @@ export function CustomItems({
 
             addCustomItem({
               ...customItemInput,
-              categoryId: categoryId ? categoryId : category[0].id,
+              categoryId: categoryId ? categoryId : category[0]?.id,
               id: crypto.randomUUID(),
             });
             clearInput();
@@ -143,12 +146,11 @@ export function CustomItems({
               <span>
                 <p>{customItem.name}</p>
                 <div className="custom-item-details">
+                  {renderCategoryName(customItem.categoryId) &&
                   <p className="custom-item-category">
-                    {
-                      category.find((a) => a.id == customItem.categoryId)
-                        ?.categoryName
-                    }
+                    {renderCategoryName(customItem.categoryId)}
                   </p>
+                  }
                   <p>
                     {customItem.price
                       ? `\u20B1${customItem.price.toFixed(2)}`
