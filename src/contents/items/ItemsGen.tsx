@@ -27,7 +27,7 @@ export function ItemsGen({
 
   const categoryName = category.find(
     (a) => a.id === item.category,
-  )?.categoryName || '';
+  )?.categoryName;
   const removeBarrier = () => {
     setIsConfirmModal(false);
   };
@@ -55,7 +55,7 @@ export function ItemsGen({
               <div className="item-name">
                 <div>{item.name}</div>
                 <div className="item-gen-details">
-                  {isCategoryGlobal && (
+                  {isCategoryGlobal && categoryName && (
                     <span id="category-global-name">{categoryName}</span>
                   )}
                   
