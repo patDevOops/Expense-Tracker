@@ -9,6 +9,7 @@ export function Category({
   deleteCategory,
   renameCategory,
   addCategory,
+  setSelectedCategoryDel,
 }) {
   const [isFindMenu, setIsFindMenu] = useState(false);
   const [isEditingCategory, setIsEditingCategory] = useState(false);
@@ -72,22 +73,22 @@ export function Category({
                         if (isEditingCategory) {
                           setIsEditingCategory(false);
                           setCategoryNameInput("");
-                          
-                          
                         } else {
                           setIsEditingCategory(categoryVal.id);
-                          
-                        
-                        setCategoryNameInput(categoryVal.categoryName);
+
+                          setCategoryNameInput(categoryVal.categoryName);
                         }
-                        setIsFindMenu(false)
+                        setIsFindMenu(false);
                       }}
                     >
                       <GoPencil />
                       {isEditingCategory ? "cancel" : "rename"}
                     </p>
-                    <p>
-                      <CiTrash onClick={() => {}} />
+                    <p onClick={() => {
+                          setSelectedCategoryDel(categoryVal);
+                        }}>
+                      <CiTrash
+                      />
                       delete
                     </p>
                   </div>

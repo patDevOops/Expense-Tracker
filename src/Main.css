@@ -46,8 +46,8 @@
 }
 .barrier-confirm-modal{
   position:fixed;
-  opacity: 0.1;
-  z-index:1;
+  opacity: 1;
+  z-index:150;
 }
 .barrier-menu-custom-item{
   position:fixed;

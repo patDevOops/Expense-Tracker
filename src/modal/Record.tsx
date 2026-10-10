@@ -46,7 +46,7 @@ export function Record({
             <div
               id={selectedRec === record.id ? 'border-highlight' : ''}
               onClick={() => {
-                setSelectedRec(record.id);
+                setSelectedRec(record);
               }}
               key={record.id}
             >
@@ -64,7 +64,7 @@ export function Record({
         {selectedRec && (
           <button
             onClick={() => {
-              setDeleteRecordId(selectedRec);
+              setDeleteRecordId(selectedRec.id);
             }}
             className="delete"
           >
