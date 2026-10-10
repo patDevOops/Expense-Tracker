@@ -20,6 +20,9 @@ export function Modal({
   saveEditCustomItem,
   addCustomItem,
   customItems,
+  addCategory,
+  deleteCategory,
+  renameCategory,
 }) {
   const [selectedRec, setSelectedRec] = useState(null);
   const [deleteRecordId, setDeleteRecordId] = useState(null);
@@ -79,8 +82,14 @@ export function Modal({
           addRecord={addRecord}
         />
       )}
-      {typeModal === "category" && <Category 
-                                     category={category}/>}
+      {typeModal === "category" && (
+        <Category
+          addCategory={addCategory}
+          renameCategory={renameCategory}
+          deleteCategory={deleteCategory}
+          category={category}
+        />
+      )}
       {typeModal === "custom-items" && (
         <CustomItems
           customItems={customItems}

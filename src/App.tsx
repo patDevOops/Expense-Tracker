@@ -269,6 +269,9 @@ function App() {
 
       {isShowModal && (
         <Modal
+          deleteCategory={deleteCategory}
+          renameCategory={renameCategory}
+          addCategory={addCategory}
           addCustomItem={addCustomItem}
           saveEditCustomItem={saveEditCustomItem}
           deleteCustomItem={deleteCustomItem}

@@ -57,4 +57,5 @@
 .barrier-category{
   z-index: 1;
   position:fixed;
+  opacity:0;
 }
