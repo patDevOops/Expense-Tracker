@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { useState, useEffect } from "react";
+import { useRecords } from "./hooks/records/useRecords.ts";
 import { Header } from "./Header";
 import { Contents } from "./contents/Contents";
 import { SideBar } from "./SideBar.tsx";
@@ -14,90 +15,22 @@ type Record = {
   items: [];
 };
 function App() {
-  /*
-  const [category, setCategory] = useState([
-    {
-      categoryName: "Others",
-      id: "652",
-    },
-    {
-      categoryName: "Food",
-      id: "098",
-    },
-    {
-      categoryName: "Things",
-      id: "765",
-    },
-  ]);
-  */
-  const [records, setRecords] = useState<Record[]>([
-    {
-      name: "untitled",
-      id: "123",
-      createdAt: "2026-09-20",
-      status: "local",
-      customItems: [
-        {
-          name: "candy",
-          price: 1,
-          categoryId: "098",
-          id: "455",
-        },
-      ],
-      category: [
-        {
-          categoryName: "Others",
-          id: "652",
-        },
-        {
-          categoryName: "Food",
-          id: "098",
-        },
-        {
-          categoryName: "Things",
-          id: "765",
-        },
-      ],
-      items: [
-        {
-          name: "Chooe",
-          id: "88",
-          createdAt: "2026-07-22 11:22 AM",
-          quantity: 2,
-          price: 15,
-          category: "098",
-          totalPrice: 30,
-        },
-        {
-          name: "Milk",
-          id: "111",
-          createdAt: "2026-09-22 11:22 AM",
-          quantity: 2,
-          price: 15,
-          category: "098",
-          totalPrice: 30,
-        },
-        {
-          name: "Candy",
-          id: "112",
-          createdAt: "2026-09-23 11:30 AM",
-          quantity: 5,
-          price: 1,
-          category: "765",
-          totalPrice: 5,
-        },
-        {
-          name: "ulam",
-          id: "113",
-          createdAt: "2026-09-22 1:30 PM",
-          quantity: 1,
-          price: 40,
-          category: "098",
-          totalPrice: 40,
-        },
-      ],
-    },
-  ]);
+  const [isEditingItem, setIsEditingItem] = useState(false);
+  const {
+    records,
+    addRecord,
+    deleteRecord,
+    addCustomItem,
+    deleteCustomItem,
+    saveEditCustomItem,
+    renameCategory,
+    addCategory,
+    deleteCategory,
+    addItems,
+    removeItems,
+    saveItem,
+  } = useRecords(matchRec, setIsEditingItem, clearForm);
+
   const [currentRecordId, setCurrentRecordId] = useState("123");
   const switchViewRec = (id) => {
     setCurrentRecordId(id);
@@ -111,114 +44,32 @@ function App() {
     return a === currentRecordId;
   }
 
-  const addCustomItem = (newItem) => {
-    setRecords(
-      records.map((record) => {
-        if (matchRec(record.id)) {
-          return {
-            ...record,
-            customItems: [...record.customItems, newItem],
-          };
-        }
-        return record;
-      }),
-    );
-  };
-  const deleteCustomItem = (id) => {
-    console.log(customItems);
-    console.log(id);
-    setRecords(
-      records.map((record) =>
-        matchRec(record.id)
-          ? {
-              ...record,
-              customItems: record.customItems.filter((a) => a.id !== id),
-            }
-          : record,
-      ),
-    );
-  };
-  const saveEditCustomItem = (editedItem) => {
-    setRecords(
-      records.map((record) =>
-        matchRec(record.id)
-          ? {
-              ...record,
-              customItems: record.customItems.map((a) =>
-                editedItem.id == a.id ? editedItem : a,
-              ),
-            }
-          : record,
-      ),
-    );
-  };
-
-  const addCategory = (newCategory) => {
-    setRecords(
-      records.map((record) => {
-        if (matchRec(record.id)) {
-          return {
-            ...record,
-            category: [...record.category, newCategory],
-          };
-        }
-        return record;
-      }),
-    );
-  };
-  const renameCategory = (newName) => {
-    setRecords(
-      records.map((record) => {
-        if (matchRec(record.id)) {
-          return {
-            ...record,
-            category: record.category.map((a) =>
-              a.id == newName.id ? newName : a,
-            ),
-          };
-        }
-        return record;
-      }),
-    );
-  };
-  const deleteCategory = (id) => {
-    setRecords(
-      records.map((record) => {
-        if (matchRec(record.id)) {
-          return {
-            ...record,
-            category: record.category.filter((a) => a.id !== id),
-          };
-        }
-        return record;
-      }),
-    );
-  };
-
   //find record category
   let category = records.find((a) => currentRecordId === a.id)?.category || [];
 
-  const addRecord = (name) => {
-    setRecords([
-      ...records,
-      {
-        name,
-        id: crypto.randomUUID(),
-        createdAt: dayjs().format("YYYY-MM-D"),
-        status: "local",
-        category: [
-          {
-            categoryName: "Product",
-            id: "098765",
-          },
-        ],
-        items: [],
-      },
-    ]);
-  };
-  const deleteRecord = (id) => {
-    setRecords(records.filter((a) => id !== a.id));
-  };
+  const [form, setForm] = useState({
+    name: "",
+    category: category[category.length - 1]?.id || "",
+    date: "",
+    time: "",
+    price: "",
+    quantity: 1,
+    id: "",
+    totalPrice: "",
+  });
+
+  function clearForm() {
+    setForm({
+      name: "",
+      category: category[category.length - 1]?.id || "",
+      date: "",
+      time: "",
+      price: "",
+      quantity: 1,
+      id: "",
+      totalPrice: "",
+    });
+  }
 
   const [typeModal, setTypeModal] = useState(null);
   //Modal
@@ -246,7 +97,7 @@ function App() {
       return;
     }
     if (isShowSidebar) {
-      setIsSidebar(false);
+      setIsShowSidebar(false);
     } else setIsShowSidebar(true);
   };
   useEffect(() => {
@@ -289,10 +140,17 @@ function App() {
       )}
 
       <Contents
+        form={form}
+        setForm={setForm}
+        saveItem={saveItem}
+        removeItems={removeItems}
+        addItems={addItems}
+        clearForm={clearForm}
+        isEditingItem={isEditingItem}
+        isEditingItem={isEditingItem}
         customItems={customItems}
         category={category}
         records={records}
-        setRecords={setRecords}
         currentRecordId={currentRecordId}
       />
     </>

@@ -5,7 +5,7 @@ import { Items } from "./items/Items";
 import { Info } from "./Info";
 import { FormCard } from "./FormCard";
 import { FloatingButtons } from "./FloatingButtons";
-import { formatTime,formatMY } from "../utils/date.js";
+import { formatTime, formatMY } from "../utils/date.js";
 import "./Contents";
 
 type Items = {
@@ -18,11 +18,23 @@ type Items = {
   totalPrice: string;
 };
 
-export function Contents({currentRecordId,records,setRecords,category,customItems}) {
-  
+export function Contents({
+  currentRecordId,
+  records,
+  category,
+  customItems,
+  isEditingItem,
+  setIsEditingItem,
+  addItems,
+  removeItems,
+  saveItem,
+  clearForm,
+  setForm,
+  form
+}) {
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");
-  
+
   const recordName = records.find((a) => currentRecordId === a.id)?.name;
 
   //find array of items in records
@@ -49,7 +61,7 @@ export function Contents({currentRecordId,records,setRecords,category,customItem
     }
   });
   listDate = listDate.filter((a) => a);
-  listDates = listDate.length ?listDate :[dayjs().format('YYYY-MM')];
+  listDates = listDate.length ? listDate : [dayjs().format("YYYY-MM")];
 
   const [selectedDate, setSelectedDate] = useState(listDates[0]);
   const changeDate = (index) => {
@@ -79,35 +91,8 @@ export function Contents({currentRecordId,records,setRecords,category,customItem
     return dayjs().diff(a.createdAt) - dayjs().diff(b.createdAt);
   });
   //add items event handler
-  const addItems = (newItems) => {
-    setRecords(
-      records.map((record) => {
-        if (record.id === currentRecordId) {
-          return {
-            ...record,
-            items: [...record.items, newItems],
-          };
-        }
-        return record;
-      }),
-    );
-    console.log("addItems", newItems);
-    clearForm();
-  };
+
   //remove items event handler
-  const removeItems = (id) => {
-    setRecords(
-      records.map((record) => {
-        if (record.id === currentRecordId) {
-          return {
-            ...record,
-            items: record.items.filter((a) => a.id !== id),
-          };
-        }
-        return record;
-      }),
-    );
-  };
 
   const changeCategory = (categoryId) => {
     setSelectedCategory(categoryId);
@@ -118,39 +103,12 @@ export function Contents({currentRecordId,records,setRecords,category,customItem
     setIsShowForm(isShowForm ? false : true);
   };
 
-  const [isEditingItem, setIsEditingItem] = useState(false);
-
   useEffect(() => {
-    if (!isShowForm && isEditingItem){
-      setIsEditingItem(false)
-      clearForm()
+    if (!isShowForm && isEditingItem) {
+      setIsEditingItem(false);
+      clearForm();
     }
-  }, [isShowForm])
-  
-
-  const [form, setForm] = useState({
-    name: "",
-    category: category[category.length - 1]?.id || "",
-    date: "",
-    time: "",
-    price: "",
-    quantity: 1,
-    id: "",
-    totalPrice: "",
-  });
-
-  function clearForm() {
-    setForm({
-      name: "",
-      category: category[category.length - 1]?.id || "",
-      date: "",
-      time: "",
-      price: "",
-      quantity: 1,
-      id: "",
-      totalPrice: "",
-    });
-  }
+  }, [isShowForm]);
 
   const editItem = (item) => {
     setIsEditingItem(true);
@@ -168,36 +126,6 @@ export function Contents({currentRecordId,records,setRecords,category,customItem
       id,
       totalPrice,
     });
-    console.log("edit item", "form", form);
-  };
-  const saveItem = () => {
-    if (!form.name || !form.totalPrice) return;
-    setRecords(
-      records.map((record) => {
-        if (record.id === currentRecordId) {
-          return {
-            ...record,
-            items: record.items.map((item) => {
-              if (form.id === item.id) {
-                return {
-                  ...form,
-                  quantity: form.quantity <= 0 ? 1 : form.quantity,
-                  createdAt: `${form.date ? form.date : dayjs().format("YYYY-MM-D")} ${form.time ? form.time : dayjs().format("h:mm A")}`,
-                  totalPrice: form.price
-                    ? form.price * form.quantity
-                    : form.totalPrice,
-                  price: form.price ? form.price : 0,
-                };
-              }
-              return item;
-            }),
-          };
-        }
-        return record;
-      }),
-    );
-    clearForm();
-    setIsEditingItem(false);
   };
 
   return (
