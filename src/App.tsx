@@ -1,19 +1,19 @@
-import dayjs from "dayjs";
+// @ts-ignore
 import { useState, useEffect } from "react";
+// @ts-ignore
 import { useRecords } from "./hooks/records/useRecords.ts";
+// @ts-ignore
 import { Header } from "./Header";
+// @ts-ignore
 import { Contents } from "./contents/Contents";
+// @ts-ignore
 import { SideBar } from "./SideBar.tsx";
+// @ts-ignore
 import { Modal } from "./modal/Modal";
 import "./Main.css";
+// @ts-ignore
 import { Barrier } from "./components/barrier.tsx";
-type Record = {
-  name: string;
-  id: string;
-  createdAt: string;
-  status: string;
-  items: [];
-};
+
 function App() {
   const [isEditingItem, setIsEditingItem] = useState(false);
   const {
@@ -29,16 +29,17 @@ function App() {
     addItems,
     removeItems,
     saveItem,
-  } = useRecords(matchRec, setIsEditingItem, clearForm);
+  } = useRecords({matchRec, setIsEditingItem, clearForm});
+
   const [currentRecordId, setCurrentRecordId] = useState("123");
-  const switchViewRec = (id) => {
+  const switchViewRec = (id:string) => {
     setCurrentRecordId(id);
   };
   //find saved custom items in records
   const customItems =
-    records.find((a) => currentRecordId == a.id)?.customItems || [];
+    records.find((a:any) => currentRecordId == a.id)?.customItems || [];
   //find record category
-  let category = records.find((a) => currentRecordId === a.id)?.category || [];
+  let category = records.find((a:{id:string}) => currentRecordId === a.id)?.category || [];
 
   const [form, setForm] = useState({
     name: "",
@@ -68,10 +69,10 @@ function App() {
   //Modal
   const [isShowModal, setIsShowModal] = useState(false);
 
-  const renderTypeModal = (type) => {
+  const renderTypeModal = (type:string) => {
     setTypeModal(type);
   };
-  const toggleModal = (bool) => {
+  const toggleModal = (bool:boolean) => {
     if (bool !== undefined) {
       setIsShowModal(bool);
       return;
@@ -84,7 +85,7 @@ function App() {
   //for sidebar hamburger menu toggle
   const [isShowSidebar, setIsShowSidebar] = useState(false);
 
-  const toggleSidebar = (bool) => {
+  const toggleSidebar = (bool:boolean) => {
     if (bool !== undefined) {
       setIsShowSidebar(bool);
       return;
@@ -94,14 +95,16 @@ function App() {
     } else setIsShowSidebar(true);
   };
   useEffect(() => {
+    // @ts-ignore
     eruda.init();
   });
   //shortcut for finding current Record
-  function matchRec(a) {
+  function matchRec(a: string):boolean {
     return a === currentRecordId;
   }
 
   return (
+    // @ts-ignore
     <>
       <Header toggleSidebar={toggleSidebar} />
 
@@ -143,7 +146,6 @@ function App() {
         removeItems={removeItems}
         addItems={addItems}
         clearForm={clearForm}
-        isEditingItem={isEditingItem}
         isEditingItem={isEditingItem}
         customItems={customItems}
         category={category}
