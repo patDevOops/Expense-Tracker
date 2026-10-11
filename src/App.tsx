@@ -30,7 +30,6 @@ function App() {
     removeItems,
     saveItem,
   } = useRecords(matchRec, setIsEditingItem, clearForm);
-
   const [currentRecordId, setCurrentRecordId] = useState("123");
   const switchViewRec = (id) => {
     setCurrentRecordId(id);
@@ -38,12 +37,6 @@ function App() {
   //find saved custom items in records
   const customItems =
     records.find((a) => currentRecordId == a.id)?.customItems || [];
-
-  //shortcut for finding current Record
-  function matchRec(a) {
-    return a === currentRecordId;
-  }
-
   //find record category
   let category = records.find((a) => currentRecordId === a.id)?.category || [];
 
@@ -103,6 +96,10 @@ function App() {
   useEffect(() => {
     eruda.init();
   });
+  //shortcut for finding current Record
+  function matchRec(a) {
+    return a === currentRecordId;
+  }
 
   return (
     <>
