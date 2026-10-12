@@ -1,4 +1,4 @@
-export function useCustomItems(setRecords, matchRec, records) {
+export function useCustomItems({setRecords, matchRec, records}) {
     const addCustomItem = newItem => {
         setRecords(
             records.map(record => {

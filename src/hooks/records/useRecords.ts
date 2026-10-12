@@ -107,11 +107,11 @@ export function useRecords({
     }
   ]);
 
-  const deleteRecord = (id:string) => {
-    setRecords(records.filter((a:{id:string}) => id !== a.id));
+  const deleteRecord = (id: string) => {
+    setRecords(records.filter((a: { id: string }) => id !== a.id));
   };
 
-  const addRecord = (name:string) => {
+  const addRecord = (name: string) => {
     setRecords([
       ...records,
       {
@@ -131,21 +131,21 @@ export function useRecords({
   };
 
   const { addCustomItem, deleteCustomItem, saveEditCustomItem } =
-    useCustomItems(setRecords, matchRec, records);
+    useCustomItems({ setRecords, matchRec, records });
   console.log(records);
-  const { addCategory, renameCategory, deleteCategory } = useCategory(
+  const { addCategory, renameCategory, deleteCategory } = useCategory({
     setRecords,
     records,
     matchRec
-  );
+  });
 
-  const { addItems, removeItems, saveItem } = useItems(
+  const { addItems, removeItems, saveItem } = useItems({
     setRecords,
     matchRec,
     clearForm,
     setIsEditingItem,
     records
-  );
+  });
 
   return {
     addRecord,

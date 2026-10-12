@@ -1,4 +1,4 @@
-export function useCategory(setRecords, records, matchRec) {
+export function useCategory({setRecords, records, matchRec}) {
     console.log(records);
     const addCategory = newCategory => {
         setRecords(

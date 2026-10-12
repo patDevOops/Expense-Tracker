@@ -1,10 +1,10 @@
-export function useItems(
+export function useItems({
     setRecords,
     matchRec,
     clearForm,
     setIsEditingItem,
     records
-) {
+}) {
     const addItems = newItems => {
         setRecords(
             records.map(record => {
