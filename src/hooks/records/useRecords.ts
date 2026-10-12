@@ -3,35 +3,21 @@ import dayjs from "dayjs";
 import { useCustomItems } from "./useCustomItems";
 import { useCategory } from "./useCategory";
 import { useItems } from "./useItems";
-type Record = {
-  name: string;
-  id: string;
-  createdAt: string;
-  status: string;
-  items: {
-    name: string;
-    id: string;
-    createdAt: string;
-    quantity: number;
-    price: number;
-    category: string;
-    totalPrice: number;
-  }[];
-  customItems: {
-    name: string;
-    price: number;
-    categoryId: string;
-    id: string;
-  }[];
-  category: {
-    categoryName: string;
-    id: string;
-  }[];
-};
-type UseRecordParam = {
-  matchRec: () => boolean;
+import type {RecordType} from "../../App.tsx";
+export type UseRecordParam = {
+  matchRec: (id:string) => boolean;
   clearForm: () => void;
-  setIsEditingItem: () => void;
+  setIsEditingItem: (value: boolean) => void;
+  form:{
+    name: string,
+    category: string,
+    date: string,
+    time: string,
+    price: string | number,
+    quantity: number,
+    id: string,
+    totalPrice: string | number,
+  }
 };
 export function useRecords({
   matchRec,
@@ -39,7 +25,7 @@ export function useRecords({
   setIsEditingItem,
   form
 }: UseRecordParam) {
-  const [records, setRecords] = useState<Record[]>([
+  const [records, setRecords] = useState<RecordType[]>([
     {
       name: "untitled",
       id: "123",
@@ -123,7 +109,7 @@ export function useRecords({
         category: [
           {
             categoryName: "Product",
-            id: crypto.randomUUID(),
+            id: crypto.randomUUID()
           }
         ],
         items: []

@@ -1,3 +1,7 @@
+
+import dayjs from 'dayjs';
+import type {UseRecordParam} from './useRecords.ts';
+import type {Item} from '../../App.tsx';
 export function useItems({
   setRecords,
   matchRec,
@@ -5,8 +9,9 @@ export function useItems({
   setIsEditingItem,
   records,
   form
-}) {
-  const addItems = (newItems) => {
+}:UseRecordParam) {
+  const addItems = (newItems:Item) => {
+    console.log(newItems)
     setRecords(
       records.map((record) => {
         if (matchRec(record.id)) {
@@ -21,7 +26,7 @@ export function useItems({
     clearForm();
   };
 
-  const removeItems = (id) => {
+  const removeItems = (id:string) => {
     setRecords(
       records.map((record) => {
         if (matchRec(record.id)) {

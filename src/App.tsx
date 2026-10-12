@@ -13,6 +13,39 @@ import { Modal } from "./modal/Modal";
 import "./Main.css";
 // @ts-ignore
 import { Barrier } from "./components/barrier.tsx";
+export type Item = {
+  name: string;
+  id: string;
+  createdAt: string;
+  quantity: number;
+  price: number;
+  category: string;
+  totalPrice: number;
+  time:string;
+  date:string;
+};
+
+export type CustomItem = {
+  name: string;
+  price: number;
+  categoryId: string;
+  id: string;
+};
+
+export type Category = {
+  categoryName: string;
+  id: string;
+};
+
+export type RecordType = {
+  name: string;
+  id: string;
+  createdAt: string;
+  status: string;
+  items: Item[];
+  customItems: CustomItem[];
+  category: Category[];
+};
 
 function App() {
   const [isEditingItem, setIsEditingItem] = useState(false);
@@ -26,9 +59,6 @@ function App() {
     id: "",
     totalPrice: "",
   });
-  useEffect(() => {
-    setForm({ ...form, category: category[category.length - 1]?.id || "" });
-  }, []);
   const {
     records,
     addRecord,
@@ -49,11 +79,12 @@ function App() {
     setCurrentRecordId(id);
   };
   //find saved custom items in records
-  const customItems =
-    records.find((a: any) => currentRecordId == a.id)?.customItems || [];
+  const customItems: CustomItem[] =
+    records.find((a) => currentRecordId === a.id)?.customItems ?? [];
+  
   //find record category
-  let category =
-    records.find((a: { id: string }) => currentRecordId === a.id)?.category ||
+  let category:Category[] =
+    records.find((a) => currentRecordId === a.id)?.category ||
     [];
 
   function clearForm() {
@@ -102,6 +133,9 @@ function App() {
     // @ts-ignore
     eruda.init();
   });
+  useEffect(() => {
+    setForm({ ...form, category: category[category.length - 1]?.id || "" });
+  }, []);
   //shortcut for finding current Record
   function matchRec(a: string): boolean {
     return a === currentRecordId;
