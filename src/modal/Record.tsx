@@ -75,7 +75,7 @@ export function Record({
           {selectedRec && (
             <button
               onClick={() => {
-                setCurrentRecordId(selectedRec)
+                setCurrentRecordId(selectedRec.id)
                   toggleModal(false);
               }}
               className="view"
