@@ -36,7 +36,8 @@ type UseRecordParam = {
 export function useRecords({
   matchRec,
   clearForm,
-  setIsEditingItem
+  setIsEditingItem,
+  form
 }: UseRecordParam) {
   const [records, setRecords] = useState<Record[]>([
     {
@@ -122,7 +123,7 @@ export function useRecords({
         category: [
           {
             categoryName: "Product",
-            id: "098765"
+            id: crypto.randomUUID(),
           }
         ],
         items: []
@@ -132,7 +133,6 @@ export function useRecords({
 
   const { addCustomItem, deleteCustomItem, saveEditCustomItem } =
     useCustomItems({ setRecords, matchRec, records });
-  console.log(records);
   const { addCategory, renameCategory, deleteCategory } = useCategory({
     setRecords,
     records,
@@ -144,7 +144,8 @@ export function useRecords({
     matchRec,
     clearForm,
     setIsEditingItem,
-    records
+    records,
+    form
   });
 
   return {

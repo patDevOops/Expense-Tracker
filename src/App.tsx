@@ -16,6 +16,19 @@ import { Barrier } from "./components/barrier.tsx";
 
 function App() {
   const [isEditingItem, setIsEditingItem] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    category: "",
+    date: "",
+    time: "",
+    price: "",
+    quantity: 1,
+    id: "",
+    totalPrice: "",
+  });
+  useEffect(() => {
+    setForm({ ...form, category: category[category.length - 1]?.id || "" });
+  }, []);
   const {
     records,
     addRecord,
@@ -29,28 +42,19 @@ function App() {
     addItems,
     removeItems,
     saveItem,
-  } = useRecords({matchRec, setIsEditingItem, clearForm});
+  } = useRecords({ matchRec, setIsEditingItem, clearForm, form });
 
   const [currentRecordId, setCurrentRecordId] = useState("123");
-  const switchViewRec = (id:string) => {
+  const switchViewRec = (id: string) => {
     setCurrentRecordId(id);
   };
   //find saved custom items in records
   const customItems =
-    records.find((a:any) => currentRecordId == a.id)?.customItems || [];
+    records.find((a: any) => currentRecordId == a.id)?.customItems || [];
   //find record category
-  let category = records.find((a:{id:string}) => currentRecordId === a.id)?.category || [];
-
-  const [form, setForm] = useState({
-    name: "",
-    category: category[category.length - 1]?.id || "",
-    date: "",
-    time: "",
-    price: "",
-    quantity: 1,
-    id: "",
-    totalPrice: "",
-  });
+  let category =
+    records.find((a: { id: string }) => currentRecordId === a.id)?.category ||
+    [];
 
   function clearForm() {
     setForm({
@@ -69,10 +73,10 @@ function App() {
   //Modal
   const [isShowModal, setIsShowModal] = useState(false);
 
-  const renderTypeModal = (type:string) => {
+  const renderTypeModal = (type: string) => {
     setTypeModal(type);
   };
-  const toggleModal = (bool:boolean) => {
+  const toggleModal = (bool: boolean) => {
     if (bool !== undefined) {
       setIsShowModal(bool);
       return;
@@ -85,7 +89,7 @@ function App() {
   //for sidebar hamburger menu toggle
   const [isShowSidebar, setIsShowSidebar] = useState(false);
 
-  const toggleSidebar = (bool:boolean) => {
+  const toggleSidebar = (bool: boolean) => {
     if (bool !== undefined) {
       setIsShowSidebar(bool);
       return;
@@ -99,7 +103,7 @@ function App() {
     eruda.init();
   });
   //shortcut for finding current Record
-  function matchRec(a: string):boolean {
+  function matchRec(a: string): boolean {
     return a === currentRecordId;
   }
 
@@ -151,6 +155,7 @@ function App() {
         category={category}
         records={records}
         currentRecordId={currentRecordId}
+        setIsEditingItem={setIsEditingItem}
       />
     </>
   );
