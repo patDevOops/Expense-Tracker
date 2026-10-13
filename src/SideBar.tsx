@@ -4,7 +4,13 @@ import { CiViewList } from "react-icons/ci";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosPaper } from "react-icons/io";
 import { IoMdAdd } from "react-icons/io";
-export function SideBar({ isShowSidebar,toggleModal,toggleSidebar,renderTypeModal }) {
+type SidebarProp = {
+  isShowSidebar:boolean;
+  toggleModal:(bool:boolean)=>void;
+  toggleSidebar:(bool:boolean)=>void;
+  renderTypeModal:(type:string)=>void;
+}
+export function SideBar({ isShowSidebar,toggleModal,toggleSidebar,renderTypeModal }:SidebarProp) {
   return (
     <>
       {isShowSidebar && (

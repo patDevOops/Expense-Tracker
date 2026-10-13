@@ -11,7 +11,7 @@ export function useItems({
   form
 }:UseRecordParam) {
   const addItems = (newItems:Item) => {
-    console.log(newItems)
+    
     setRecords(
       records.map((record) => {
         if (matchRec(record.id)) {
