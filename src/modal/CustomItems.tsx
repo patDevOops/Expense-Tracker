@@ -4,23 +4,35 @@ import "./CustomItems.css";
 import { GoKebabHorizontal } from "react-icons/go";
 import { GoPencil } from "react-icons/go";
 import { CiTrash } from "react-icons/ci";
+import type { Category, CustomItem } from "../App.tsx";
+type CustomItemsProps = {
+  category: Category[];
+  addCustomItem: (newItem: CustomItem) => void;
+  saveEditCustomItem: (editedItem: CustomItem) => void;
+  deleteCustomItem: (id: string) => void;
+  customItems: CustomItem[];
+};
+type customItemInputType = {
+  name: string;
+  price: "" | number;
+  categoryId: string;
+};
 export function CustomItems({
   category,
   addCustomItem,
   saveEditCustomItem,
   deleteCustomItem,
   customItems,
-}) {
+}: CustomItemsProps) {
   const [isViewMenu, setIsViewMenu] = useState(false);
-  const toggleMenu = () => {
-    setIsViewMenu(isViewMenu ? false : true);
-  };
-  const [customItemInput, setCustomItemInput] = useState({
+  const [customItemInput, setCustomItemInput] = useState<customItemInputType>({
     name: "",
     price: "",
     categoryId: "",
   });
-  const [editingCustomItem, setEditingCustomItem] = useState(null);
+  const [editingCustomItem, setEditingCustomItem] = useState<
+    null | boolean | string
+  >(null);
 
   const inputItem = (event) => {
     let { name, value } = event.target;
@@ -46,7 +58,7 @@ export function CustomItems({
       [name]: value,
     }));
   };
-  const editCustomItem = (toEditItem) => {
+  const editCustomItem = (toEditItem: CustomItem) => {
     setIsViewMenu(false);
     const { name, categoryId, price, id } = toEditItem;
     if (editingCustomItem == id) {
@@ -69,7 +81,7 @@ export function CustomItems({
       categoryId: category[0].id,
     });
   }
-  const renderCategoryName = (id) => {
+  const renderCategoryName = (id: string) => {
     return category.find((a) => a.id == id)?.categoryName;
   };
   return (
@@ -114,7 +126,7 @@ export function CustomItems({
         </select>
         <button
           onClick={() => {
-            const { name, categoryId, price } = customItemInput;
+            const { name, categoryId } = customItemInput;
             if (!name) return;
 
             if (editingCustomItem) {
@@ -146,11 +158,11 @@ export function CustomItems({
               <span>
                 <p>{customItem.name}</p>
                 <div className="custom-item-details">
-                  {renderCategoryName(customItem.categoryId) &&
-                  <p className="custom-item-category">
-                    {renderCategoryName(customItem.categoryId)}
-                  </p>
-                  }
+                  {renderCategoryName(customItem.categoryId) && (
+                    <p className="custom-item-category">
+                      {renderCategoryName(customItem.categoryId)}
+                    </p>
+                  )}
                   <p>
                     {customItem.price
                       ? `\u20B1${customItem.price.toFixed(2)}`
