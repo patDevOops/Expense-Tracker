@@ -1,6 +1,17 @@
-export function useCategory({ setRecords, records, matchRec }) {
+import { RecordType, Category } from "../../App.tsx";
+
+type UseCategoryProp = {
+  setRecords: () => void;
+  records: RecordType[];
+  matchRec: (id: string) => boolean;
+};
+export function useCategory({
+  setRecords,
+  records,
+  matchRec
+}: UseCategoryProp) {
   console.log(records);
-  const addCategory = (newCategory) => {
+  const addCategory = (newCategory: Category) => {
     setRecords(
       records.map((record) => {
         if (matchRec(record.id)) {
@@ -13,8 +24,7 @@ export function useCategory({ setRecords, records, matchRec }) {
       })
     );
   };
-  const renameCategory = (newName) => {
-    console.log(newName);
+  const renameCategory = (newName: Category) => {
     setRecords(
       records.map((record) => {
         if (matchRec(record.id)) {
@@ -29,7 +39,7 @@ export function useCategory({ setRecords, records, matchRec }) {
       })
     );
   };
-  const deleteCategory = (id) => {
+  const deleteCategory = (id: string) => {
     setRecords(
       records.map((record) => {
         if (matchRec(record.id)) {

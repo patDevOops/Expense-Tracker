@@ -7,7 +7,14 @@ import { FormCard } from "./FormCard";
 import { FloatingButtons } from "./FloatingButtons";
 import { formatTime, formatMY } from "../utils/date.js";
 import "./Contents";
-import type {RecordType,Category,CustomItem} from '../App.tsx';
+import type {
+  RecordType,
+  Category,
+  CustomItem,
+  Item,
+  FormType,
+} from "../App.tsx";
+/*
 type Items = {
   name: string;
   id: string;
@@ -17,21 +24,21 @@ type Items = {
   category: string;
   totalPrice: string;
 };
-
+*/
 type ContentsProp = {
-  currentRecordId:string;
-  records:RecordType[];
-  category:Category[];
-  customItems:CustomItem;
-  isEditingItem:boolean;
-  setIsEditingItem:(bool:boolean)=>void;
-  addItems,
-  removeItems,
-  saveItem,
-  clearForm,
-  setForm,
-  form
-}
+  currentRecordId: string;
+  records: RecordType[];
+  category: Category[];
+  customItems: CustomItem;
+  isEditingItem: boolean;
+  setIsEditingItem: (bool: boolean) => void;
+  addItems: (newItems: Item) => void;
+  removeItems: (id: string) => void;
+  saveItem: () => void;
+  clearForm: () => void;
+  setForm: (form: FormType) => void;
+  form: FormType;
+};
 export function Contents({
   currentRecordId,
   records,
@@ -44,15 +51,15 @@ export function Contents({
   saveItem,
   clearForm,
   setForm,
-  form
-}) {
+  form,
+}:ContentsProp) {
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");
 
   const recordName = records.find((a) => currentRecordId === a.id)?.name;
 
   //find array of items in records
-  let itemRecords: Items[] = [];
+  let itemRecords: Item[] = [];
   records.forEach((record) => {
     if (record.id === currentRecordId) {
       itemRecords = record.items;
@@ -65,7 +72,7 @@ export function Contents({
     return dayjs().diff(a.createdAt) - dayjs().diff(b.createdAt);
   });
 
-  let previousDate;
+  let previousDate:undefined | string;
   let listDate = itemRecords.map((item) => {
     const convertedDate = dayjs(item.createdAt).format("YYYY-MM");
 
@@ -78,7 +85,7 @@ export function Contents({
   listDates = listDate.length ? listDate : [dayjs().format("YYYY-MM")];
 
   const [selectedDate, setSelectedDate] = useState(listDates[0]);
-  const changeDate = (index) => {
+  const changeDate = (index:number) => {
     setSelectedDate(listDates[index]);
   };
 
@@ -108,7 +115,7 @@ export function Contents({
 
   //remove items event handler
 
-  const changeCategory = (categoryId) => {
+  const changeCategory = (categoryId:string) => {
     setSelectedCategory(categoryId);
   };
 
@@ -124,7 +131,7 @@ export function Contents({
     }
   }, [isShowForm]);
 
-  const editItem = (item) => {
+  const editItem = (item:Item) => {
     setIsEditingItem(true);
     setIsShowForm(true);
     const { name, category, price, totalPrice, id, quantity } = item;

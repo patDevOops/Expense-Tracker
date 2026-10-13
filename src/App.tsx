@@ -47,22 +47,32 @@ export type RecordType = {
   category: Category[];
 };
 export type UseRecordHook = {
-  records:RecordType[];
-  addRecord:(name:string)=>void;
-  deleteRecord:(id:string)=>void;
-  addCustomItem:(newItem:CustomItem)=>void;
-  deleteCustomItem:(id:string)=>void;
-  saveEditCustomItem:(editedItem:CustomItem)=>void;
-  renameCategory:(newName:Category)=>void;
-  addCategory:(newCategory:Category)=>void;
-  deleteCategory:(id:string)=>void;
-  addItems:(newItems:Item)=>void;
-  removeItems:(id:string)=>void;
-  saveItem:()=>void;
+  records: RecordType[];
+  addRecord: (name: string) => void;
+  deleteRecord: (id: string) => void;
+  addCustomItem: (newItem: CustomItem) => void;
+  deleteCustomItem: (id: string) => void;
+  saveEditCustomItem: (editedItem: CustomItem) => void;
+  renameCategory: (newName: Category) => void;
+  addCategory: (newCategory: Category) => void;
+  deleteCategory: (id: string) => void;
+  addItems: (newItems: Item) => void;
+  removeItems: (id: string) => void;
+  saveItem: () => void;
+};
+type FormType = {
+  name: string;
+  category: string;
+  date: string;
+  time: string;
+  price: string;
+  quantity: number;
+  id: string;
+  totalPrice: string;
 };
 function App() {
-  const [isEditingItem, setIsEditingItem] = useState(false);
-  const [form, setForm] = useState({
+  const [isEditingItem, setIsEditingItem] = useState<boolean>(false);
+  const [form, setForm] = useState<FormType>({
     name: "",
     category: "",
     date: "",
@@ -85,9 +95,14 @@ function App() {
     addItems,
     removeItems,
     saveItem,
-  }:UseRecordHook = useRecords({ matchRec, setIsEditingItem, clearForm, form });
+  }: UseRecordHook = useRecords({
+    matchRec,
+    setIsEditingItem,
+    clearForm,
+    form,
+  });
 
-  const [currentRecordId, setCurrentRecordId] = useState("123");
+  const [currentRecordId, setCurrentRecordId] = useState<string>("123");
   const switchViewRec = (id: string) => {
     setCurrentRecordId(id);
   };
@@ -112,9 +127,9 @@ function App() {
     });
   }
 
-  const [typeModal, setTypeModal] = useState(null);
+  const [typeModal, setTypeModal] = useState<null | string>(null);
   //Modal
-  const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
   const renderTypeModal = (type: string) => {
     setTypeModal(type);

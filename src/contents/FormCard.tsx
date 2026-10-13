@@ -1,11 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import dayjs from "dayjs";
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
 import { Barrier } from "../components/barrier.tsx";
+import type {Item,Category,FormType,CustomItem} from "../App.tsx";
+type FormCardProps = {
+  isShowForm:boolean;
+  addItems:(newItems:Item)=>void;
+  category:Category[];
+  setIsShowForm:(form:boolean)=>void;
+  form:FormType;
+  setForm:(form:FormType)=>void;
+  isEditingItem:boolean;
+  saveItem:()=>void;
+  customItems:CustomItem;
+};
 export function FormCard({
   isShowForm,
-  records,
   addItems,
   category,
   setIsShowForm,
@@ -14,8 +25,8 @@ export function FormCard({
   isEditingItem,
   saveItem,
   customItems,
-}) {
-  const [isShowMoreForm, setIsShowMoreForm] = useState(false);
+}:FormCardProps) {
+  const [isShowMoreForm, setIsShowMoreForm] = useState<boolean>(false);
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
   };
@@ -24,7 +35,7 @@ export function FormCard({
     setIspickItem(isPickItem ? false : true);
   };
 
-  const inputForm = (event) => {
+  const inputForm = () => {
     const { name, value } = event.target;
     setForm((prev) => ({
       ...prev,
@@ -32,7 +43,7 @@ export function FormCard({
     }));
   };
 
-  const inputNumForm = (event) => {
+  const inputNumForm = () => {
     const name = event.target.name;
     const value = !event.target.value ? "" : Number(event.target.value);
     setForm((prev) => ({
@@ -62,7 +73,7 @@ export function FormCard({
     console.log("form", form);
   };
 
-  const pickCustomItem = (item) => {
+  const pickCustomItem = (item:CustomItem) => {
     const { price, categoryId, name } = item;
 
     setForm((prev) => ({
@@ -75,7 +86,7 @@ export function FormCard({
     }));
     setIspickItem(false);
   };
-  const renderCategoryName = (id) => {
+  const renderCategoryName = (id:string) => {
     return category.find((a) => a.id == id)?.categoryName;
   };
 
@@ -115,10 +126,11 @@ export function FormCard({
                         >
                           <span>{customItem.name}</span>
                           <div className="pick-item-gen-description">
-                            
-                            {renderCategoryName(customItem.categoryId) && <span>
-                              {renderCategoryName(customItem.categoryId)}
-                            </span>}
+                            {renderCategoryName(customItem.categoryId) && (
+                              <span>
+                                {renderCategoryName(customItem.categoryId)}
+                              </span>
+                            )}
                             <span>
                               {customItem.price
                                 ? `\u20B1${customItem.price.toFixed(2)}`
