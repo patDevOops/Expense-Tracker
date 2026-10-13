@@ -30,12 +30,12 @@ export function FormCard({
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
   };
-  const [isPickItem, setIspickItem] = useState(false);
+  const [isPickItem, setIspickItem] = useState<boolean>(false);
   const pickItem = () => {
     setIspickItem(isPickItem ? false : true);
   };
 
-  const inputForm = () => {
+  const inputForm = (event) => {
     const { name, value } = event.target;
     setForm((prev) => ({
       ...prev,
@@ -43,7 +43,7 @@ export function FormCard({
     }));
   };
 
-  const inputNumForm = () => {
+  const inputNumForm = (event) => {
     const name = event.target.name;
     const value = !event.target.value ? "" : Number(event.target.value);
     setForm((prev) => ({

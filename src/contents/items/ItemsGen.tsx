@@ -5,6 +5,23 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoTrashBin } from "react-icons/io5";
 import { LuPencil } from "react-icons/lu";
+import type {Item,Category} from "../../App.tsx";
+type ItemsGenProps= {
+  item:Item;
+  showDate:boolean;
+  toggleCollapse:(id:string)=>void;
+  isHide:boolean;
+  isCategoryGlobal:boolean;
+  category:Category[];
+  removeItems:(id:string)=>void;
+  showTotal:boolean;
+  totalPricePerDay:number;
+  editItem:(item:Item)=>void;
+  selectedItem:string | null;
+  setSelectedItem:(item:string)=>void;
+  expanding:string|null;
+  setExpanding:(a:string|null)=>void;
+};
 export function ItemsGen({
   item,
   showDate,
@@ -19,13 +36,12 @@ export function ItemsGen({
   selectedItem,
   setSelectedItem,
   expanding,
-  setExpanding
-}) {
-  
-  const [isConfirmModal, setIsConfirmModal] = useState(false);
+  setExpanding,
+}:ItemsGenProps) {
+  const [isConfirmModal, setIsConfirmModal] = useState<boolean>(false);
   const isShowQtyCalc = item.price && item.quantity !== 1 ? true : false;
 
-  const categoryName = category.find(
+  const categoryName:string = category.find(
     (a) => a.id === item.category,
   )?.categoryName;
   const removeBarrier = () => {
@@ -48,19 +64,22 @@ export function ItemsGen({
 
         {!isHide && (
           <>
-            <div 
-              onClick={()=>{setSelectedItem(item.id)}}
+            <div
+              onClick={() => {
+                setSelectedItem(item.id);
+              }}
               className="item-gen"
-              id={selectedItem === item.id?'border-highlight-item':''}>
+              id={selectedItem === item.id ? "border-highlight-item" : ""}
+            >
               <div className="item-name">
                 <div>{item.name}</div>
                 <div className="item-gen-details">
                   {isCategoryGlobal && categoryName && (
                     <span id="category-global-name">{categoryName}</span>
                   )}
-                  
+
                   <span>{dayjs(item.createdAt).format("h:mm A")}</span>
-                  
+
                   {isShowQtyCalc && (
                     <span className="item-price-calc">
                       {item.quantity} x ₱
@@ -78,26 +97,27 @@ export function ItemsGen({
                 ).toFixed(2)}
               </div>
 
-              <div 
-                onClick={()=>{
-                  if (expanding === item.id){
-                    setExpanding(null)
-                    return
-                  } 
-                  setExpanding(item.id)}}
-                className="item-arrow-cont">
-                <IoIosArrowBack
-                  className="item-arrow"
-                  size="25"
-                />
+              <div
+                onClick={() => {
+                  if (expanding === item.id) {
+                    setExpanding(null);
+                    return;
+                  }
+                  setExpanding(item.id);
+                }}
+                className="item-arrow-cont"
+              >
+                <IoIosArrowBack className="item-arrow" size="25" />
               </div>
 
               {expanding === item.id && (
-                <div 
-                  className="expanded-btn-cont">
-                  <button 
-                    onClick={()=>{editItem(item)}}
-                    className="expanded-btn">
+                <div className="expanded-btn-cont">
+                  <button
+                    onClick={() => {
+                      editItem(item);
+                    }}
+                    className="expanded-btn"
+                  >
                     <LuPencil className="arrow-btn-expanded" />
                   </button>
                   <button

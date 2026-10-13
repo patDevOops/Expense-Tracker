@@ -1,9 +1,19 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { formatMY } from "../../utils/date.js";
 import "./Items.css";
 import { ItemsGen } from "./ItemsGen";
 import { IoMdArrowDropup } from "react-icons/io";
-
+import type {Item,Category} from "../../App.tsx";
+type ItemsProps = {
+  itemRecords:Item[];
+  changeCategory:(categoryId:string)=>void;
+  category:Category;
+  selectedCategory:string;
+  isCategoryGlobal:boolean;
+  setIsCategoryGlobal:(bool:boolean)=>void;
+  removeItems:(id:string)=>void;
+  editItem:(item:Item)=>void;
+};
 export function Items({
   itemRecords,
   changeCategory,
@@ -12,18 +22,18 @@ export function Items({
   setIsCategoryGlobal,
   isCategoryGlobal,
   removeItems,
-  editItem
-}) {
-  const [expanding, setExpanding] = useState(null)
+  editItem,
+}:ItemsProps) {
+  const [expanding, setExpanding] = useState<string | null>(null);
   const [isCollapse, setIsCollapse] = useState([]);
-  const [isDropdown, setIsDropdown] = useState(false);
-  const [selectedItem,setSelectedItem] = useState(null)
+  const [isDropdown, setIsDropdown] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   const toggleDropdown = () => {
     setIsDropdown(isDropdown ? false : true);
   };
 
-  const toggleCollapse = (date) => {
+  const toggleCollapse = (date:string) => {
     if (isCollapse.includes(date)) {
       setIsCollapse(
         isCollapse.filter((a) => {
@@ -35,113 +45,114 @@ export function Items({
     }
   };
 
-  const renderCategoryName = category.find(
-    (a) => selectedCategory === a.id,
-  )?.categoryName || "";
+  const renderCategoryName:string =
+    category.find((a) => selectedCategory === a.id)?.categoryName || "";
 
-  
-    let quantity = 0
-    itemRecords.forEach((item)=>{
-      if (item.category === selectedCategory) quantity += 1
-    })
+  let quantity = 0;
+  itemRecords.forEach((item) => {
+    if (item.category === selectedCategory) quantity += 1;
+  });
 
-  let totalSameDate = {}
-  itemRecords.forEach((item)=>{
-    let convertedDate = formatMY(item.createdAt)
-    if (totalSameDate[convertedDate]){
+  let totalSameDate = {};
+  itemRecords.forEach((item) => {
+    let convertedDate = formatMY(item.createdAt);
+    if (totalSameDate[convertedDate]) {
       totalSameDate[convertedDate].count += 1;
       totalSameDate[convertedDate].price += item.totalPrice;
-      return
+      return;
     }
     totalSameDate[convertedDate] = {
-      count:1,
-      price:item.totalPrice
+      count: 1,
+      price: item.totalPrice,
     };
-  })
-  let previousDate;
+  });
+  let previousDate:string | undefined;
   let countDate = 0;
-  
 
   return (
     <>
       <div className="items">
-      <div>
-        <span className="category-cont">
-          <div 
-            onClick={toggleDropdown}
-            >{isCategoryGlobal ? 'All' :renderCategoryName}</div>
-          
-          <IoMdArrowDropup
-            className="dropdown-arrow"
-            onClick={toggleDropdown}
-          />
-
-          {isDropdown && (
-            <div className="pick-category-collapse">
-              {category.map((categoryVal) => {
-                return (
-                  <div
-                    key={categoryVal.id}
-                    onClick={() => {
-                      changeCategory(categoryVal.id);
-                      setIsCategoryGlobal(false)
-                      toggleDropdown()
-                    }}
-                  >
-                    {categoryVal.categoryName}
-                  </div>
-                );
-              })}
-              <div onClick={()=>{
-              setIsCategoryGlobal(true)
-              toggleDropdown()
-                                }}>All</div>
+        <div>
+          <span className="category-cont">
+            <div onClick={toggleDropdown}>
+              {isCategoryGlobal ? "All" : renderCategoryName}
             </div>
-          )}
-        </span>
 
-        <span>{isCategoryGlobal ? itemRecords.length: quantity} items</span>
-      </div>
-
-      <div className="items-scrollable">
-        {itemRecords.map((item) => {
-          const itemDate = formatMY(item.createdAt)
-          const isHide = isCollapse.includes(formatMY(item.createdAt));
-          let showDate = true;
-          let showTotal = false;
-          
-          countDate += 1;
-          if (totalSameDate[itemDate].count === countDate) {
-            showTotal = true;
-            countDate = 0
-          }
-          
-          if (previousDate === itemDate) {
-            showDate = false;
-          }
-          previousDate = formatMY(item.createdAt);
-          return (
-            <ItemsGen
-              expanding={expanding}
-              setExpanding={setExpanding}
-              setSelectedItem={setSelectedItem}
-              selectedItem={selectedItem}
-              editItem={editItem}
-              totalPricePerDay={totalSameDate[itemDate].price}
-              showTotal={showTotal}
-              removeItems={removeItems}
-              category={category}
-              isCategoryGlobal={isCategoryGlobal}
-              item={item}
-              key={item.id}
-              showDate={showDate}
-              toggleCollapse={toggleCollapse}
-              isHide={isHide}
+            <IoMdArrowDropup
+              className="dropdown-arrow"
+              onClick={toggleDropdown}
             />
-          );
-        })}
+
+            {isDropdown && (
+              <div className="pick-category-collapse">
+                {category.map((categoryVal) => {
+                  return (
+                    <div
+                      key={categoryVal.id}
+                      onClick={() => {
+                        changeCategory(categoryVal.id);
+                        setIsCategoryGlobal(false);
+                        toggleDropdown();
+                      }}
+                    >
+                      {categoryVal.categoryName}
+                    </div>
+                  );
+                })}
+                <div
+                  onClick={() => {
+                    setIsCategoryGlobal(true);
+                    toggleDropdown();
+                  }}
+                >
+                  All
+                </div>
+              </div>
+            )}
+          </span>
+
+          <span>{isCategoryGlobal ? itemRecords.length : quantity} items</span>
+        </div>
+
+        <div className="items-scrollable">
+          {itemRecords.map((item) => {
+            const itemDate = formatMY(item.createdAt);
+            const isHide = isCollapse.includes(formatMY(item.createdAt));
+            let showDate = true;
+            let showTotal = false;
+
+            countDate += 1;
+            if (totalSameDate[itemDate].count === countDate) {
+              showTotal = true;
+              countDate = 0;
+            }
+
+            if (previousDate === itemDate) {
+              showDate = false;
+            }
+            previousDate = formatMY(item.createdAt);
+            return (
+              <ItemsGen
+                expanding={expanding}
+                setExpanding={setExpanding}
+                setSelectedItem={setSelectedItem}
+                selectedItem={selectedItem}
+                editItem={editItem}
+                totalPricePerDay={totalSameDate[itemDate].price}
+                showTotal={showTotal}
+                removeItems={removeItems}
+                category={category}
+                isCategoryGlobal={isCategoryGlobal}
+                item={item}
+                key={item.id}
+                showDate={showDate}
+                toggleCollapse={toggleCollapse}
+                isHide={isHide}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
       {isDropdown && (
         <div
           className="barrier-items"
