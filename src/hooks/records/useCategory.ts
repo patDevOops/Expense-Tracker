@@ -10,7 +10,6 @@ export function useCategory({
   records,
   matchRec
 }: UseCategoryProp) {
-  console.log(records);
   const addCategory = (newCategory: Category) => {
     setRecords(
       records.map((record) => {

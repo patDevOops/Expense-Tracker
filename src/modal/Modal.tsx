@@ -1,13 +1,31 @@
 import { useState } from "react";
 import { Record } from "./Record";
-import { Category } from "./Category";
+import { CategoryCom } from "./Category";
 import { CustomItems } from "./CustomItems";
 import "./Modal.css";
 import { IoMdClose } from "react-icons/io";
 import { Barrier } from "../components/barrier.tsx";
+import type { RecordType, Category, CustomItem } from "../App.tsx";
+type ModalProps = {
+  toggleModal: (bool: boolean) => void;
+  typeModal: null | string;
+  switchViewRec: (id: string) => void;
+  addRecord: (name: string) => void;
+  records: RecordType[];
+  currectRecordId: string;
+  setCurrentRecordId: (a: string) => void;
+  deleteRecord: (id: string) => void;
+  category: Category;
+  deleteCustomItem: (id: string) => void;
+  saveEditCustomItem: (editedItem: CustomItem) => void;
+  addCustomItem: (newItem: CustomItem) => void;
+  customItems: CustomItem[];
+  addCategory: (newCategory: Category) => void;
+  deleteCategory: (id: string) => void;
+  renameCategory: (newName: Category) => void;
+};
 export function Modal({
   toggleModal,
-  toggleSidebar,
   typeModal,
   switchViewRec,
   addRecord,
@@ -23,10 +41,12 @@ export function Modal({
   addCategory,
   deleteCategory,
   renameCategory,
-}) {
-  const [selectedRec, setSelectedRec] = useState(null);
-  const [deleteRecordId, setDeleteRecordId] = useState(null);
-  const [selectedCategoryDel, setSelectedCategoryDel] = useState(null);
+}:ModalProps) {
+  const [selectedRec, setSelectedRec] = useState<null|RecordType|boolean>(null);
+  const [deleteRecordId, setDeleteRecordId] = useState<null|string|boolean>(null);
+  const [selectedCategoryDel, setSelectedCategoryDel] = useState<null | string|boolean>(
+    null,
+  );
 
   return (
     <>
@@ -119,7 +139,7 @@ export function Modal({
           />
         )}
         {typeModal === "category" && (
-          <Category
+          <CategoryCom
             setSelectedCategoryDel={setSelectedCategoryDel}
             addCategory={addCategory}
             renameCategory={renameCategory}

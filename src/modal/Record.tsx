@@ -1,18 +1,26 @@
 import { useState } from "react";
 import "./Record.css";
+import type { RecordType } from "../App.tsx";
+type RecordModalProps = {
+  addRecord: (name: string) => void;
+  records: RecordType[];
+  setCurrentRecordId: string;
+  setDeleteRecordId: (a: string) => void;
+  toggleModal: (bool: boolean) => void;
+  selectedRec: null | RecordType | boolean;
+  setSelectedRec: (a: null | RecordType | boolean) => void;
+};
 export function Record({
-  switchViewRec,
   addRecord,
   records,
-  currentRecordId,
   setCurrentRecordId,
   setDeleteRecordId,
   toggleModal,
   selectedRec,
   setSelectedRec,
-}) {
-  const [recordNameInput, setRecordNameInput] = useState("");
-  
+}: RecordModalProps) {
+  const [recordNameInput, setRecordNameInput] = useState<string>("");
+
   const inputNameRecord = (event) => {
     const { value } = event.target;
     if (value.length >= 9) return;
@@ -44,7 +52,7 @@ export function Record({
         {records.map((record) => {
           return (
             <div
-              id={selectedRec === record.id ? 'border-highlight' : ''}
+              id={selectedRec === record.id ? "border-highlight" : ""}
               onClick={() => {
                 setSelectedRec(record);
               }}
@@ -75,8 +83,8 @@ export function Record({
           {selectedRec && (
             <button
               onClick={() => {
-                setCurrentRecordId(selectedRec.id)
-                  toggleModal(false);
+                setCurrentRecordId(selectedRec.id);
+                toggleModal(false);
               }}
               className="view"
             >

@@ -4,13 +4,19 @@ import { GoKebabHorizontal } from "react-icons/go";
 import { GoPencil } from "react-icons/go";
 import { CiTrash } from "react-icons/ci";
 import "./Category.css";
-export function Category({
+import type {Category} from "../App.tsx";
+type CategoryProps = {
+  category:Category[];
+  renameCategory:(newName:Category)=>void;
+  addCategory:(newCategory:Category)=>void;
+  setSelectedCategoryDel:null|Category;
+};
+export function CategoryCom({
   category,
-  deleteCategory,
   renameCategory,
   addCategory,
   setSelectedCategoryDel,
-}) {
+}:CategoryProps) {
   const [isFindMenu, setIsFindMenu] = useState(false);
   const [isEditingCategory, setIsEditingCategory] = useState(false);
   const [categoryNameInput, setCategoryNameInput] = useState("");
@@ -84,11 +90,12 @@ export function Category({
                       <GoPencil />
                       {isEditingCategory ? "cancel" : "rename"}
                     </p>
-                    <p onClick={() => {
-                          setSelectedCategoryDel(categoryVal);
-                        }}>
-                      <CiTrash
-                      />
+                    <p
+                      onClick={() => {
+                        setSelectedCategoryDel(categoryVal);
+                      }}
+                    >
+                      <CiTrash />
                       delete
                     </p>
                   </div>

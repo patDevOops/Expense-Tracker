@@ -1,5 +1,15 @@
-export function useCustomItems({ setRecords, matchRec, records }) {
-  const addCustomItem = (newItem) => {
+import type { RecordType, CustomItem } from "../../App.tsx";
+type UseCustomItemsProps = {
+  setRecords: (record: RecordType) => void;
+  matchRec: (id: string) => boolean;
+  records: RecordType;
+};
+export function useCustomItems({
+  setRecords,
+  matchRec,
+  records
+}: UseCustomItemsProps) {
+  const addCustomItem = (newItem: CustomItem) => {
     setRecords(
       records.map((record) => {
         if (matchRec(record.id)) {
@@ -13,7 +23,7 @@ export function useCustomItems({ setRecords, matchRec, records }) {
     );
   };
 
-  const deleteCustomItem = (id) => {
+  const deleteCustomItem = (id: string) => {
     setRecords(
       records.map((record) =>
         matchRec(record.id)
@@ -26,8 +36,8 @@ export function useCustomItems({ setRecords, matchRec, records }) {
     );
   };
 
-  const saveEditCustomItem = (editedItem) => {
-    console.log("rdited",editedItem)
+  const saveEditCustomItem = (editedItem: CustomItem) => {
+    console.log("rdited", editedItem);
     setRecords(
       records.map((record) =>
         matchRec(record.id)
