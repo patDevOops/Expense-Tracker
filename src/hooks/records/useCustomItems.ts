@@ -27,6 +27,7 @@ export function useCustomItems({ setRecords, matchRec, records }) {
   };
 
   const saveEditCustomItem = (editedItem) => {
+    console.log("rdited",editedItem)
     setRecords(
       records.map((record) =>
         matchRec(record.id)

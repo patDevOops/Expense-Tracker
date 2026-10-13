@@ -1,9 +1,8 @@
 import "./SideBar.css";
 import { BiCategory } from "react-icons/bi";
 import { CiViewList } from "react-icons/ci";
-import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosPaper } from "react-icons/io";
-import { IoMdAdd } from "react-icons/io";
+
 type SidebarProp = {
   isShowSidebar:boolean;
   toggleModal:(bool:boolean)=>void;

@@ -7,7 +7,7 @@ import { FormCard } from "./FormCard";
 import { FloatingButtons } from "./FloatingButtons";
 import { formatTime, formatMY } from "../utils/date.js";
 import "./Contents";
-
+import type {RecordType,Category,CustomItem} from '../App.tsx';
 type Items = {
   name: string;
   id: string;
@@ -18,6 +18,20 @@ type Items = {
   totalPrice: string;
 };
 
+type ContentsProp = {
+  currentRecordId:string;
+  records:RecordType[];
+  category:Category[];
+  customItems:CustomItem;
+  isEditingItem:boolean;
+  setIsEditingItem:(bool:boolean)=>void;
+  addItems,
+  removeItems,
+  saveItem,
+  clearForm,
+  setForm,
+  form
+}
 export function Contents({
   currentRecordId,
   records,

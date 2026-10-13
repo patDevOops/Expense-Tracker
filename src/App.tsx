@@ -21,8 +21,8 @@ export type Item = {
   price: number;
   category: string;
   totalPrice: number;
-  time:string;
-  date:string;
+  time: string;
+  date: string;
 };
 
 export type CustomItem = {
@@ -46,7 +46,20 @@ export type RecordType = {
   customItems: CustomItem[];
   category: Category[];
 };
-
+export type UseRecordHook = {
+  records:RecordType[];
+  addRecord:(name:string)=>void;
+  deleteRecord:(id:string)=>void;
+  addCustomItem:(newItem:CustomItem)=>void;
+  deleteCustomItem:(id:string)=>void;
+  saveEditCustomItem:(editedItem:CustomItem)=>void;
+  renameCategory:(newName:Category)=>void;
+  addCategory:(newCategory:Category)=>void;
+  deleteCategory:(id:string)=>void;
+  addItems:(newItems:Item)=>void;
+  removeItems:(id:string)=>void;
+  saveItem:()=>void;
+};
 function App() {
   const [isEditingItem, setIsEditingItem] = useState(false);
   const [form, setForm] = useState({
@@ -72,7 +85,7 @@ function App() {
     addItems,
     removeItems,
     saveItem,
-  } = useRecords({ matchRec, setIsEditingItem, clearForm, form });
+  }:UseRecordHook = useRecords({ matchRec, setIsEditingItem, clearForm, form });
 
   const [currentRecordId, setCurrentRecordId] = useState("123");
   const switchViewRec = (id: string) => {
@@ -81,11 +94,10 @@ function App() {
   //find saved custom items in records
   const customItems: CustomItem[] =
     records.find((a) => currentRecordId === a.id)?.customItems ?? [];
-  
+
   //find record category
-  let category:Category[] =
-    records.find((a) => currentRecordId === a.id)?.category ||
-    [];
+  let category: Category[] =
+    records.find((a) => currentRecordId === a.id)?.category || [];
 
   function clearForm() {
     setForm({
