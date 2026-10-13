@@ -4,7 +4,7 @@ import type { RecordType } from "../App.tsx";
 type RecordModalProps = {
   addRecord: (name: string) => void;
   records: RecordType[];
-  setCurrentRecordId: string;
+  setCurrentRecordId: (id:string)=>void;
   setDeleteRecordId: (a: string) => void;
   toggleModal: (bool: boolean) => void;
   selectedRec: null | RecordType | boolean;

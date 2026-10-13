@@ -2,7 +2,7 @@
 import { CiMenuBurger } from "react-icons/ci";
 import './Header.css';
 
-export function Header({toggleSidebar}:{toggleSidebar:(bool:boolean)=> void}){
+export function Header({toggleSidebar}:{toggleSidebar:()=> void}){
   return(
     <header>
       <div 

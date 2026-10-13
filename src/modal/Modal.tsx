@@ -15,7 +15,7 @@ type ModalProps = {
   currectRecordId: string;
   setCurrentRecordId: (a: string) => void;
   deleteRecord: (id: string) => void;
-  category: Category;
+  category: Category[];
   deleteCustomItem: (id: string) => void;
   saveEditCustomItem: (editedItem: CustomItem) => void;
   addCustomItem: (newItem: CustomItem) => void;
