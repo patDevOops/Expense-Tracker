@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { formatMY } from "../../utils/date.js";
 import "./Items.css";
-import { ItemsGen } from "./ItemsGen";
+import { ItemsGen } from "./ItemsGen.js";
 import { IoMdArrowDropup } from "react-icons/io";
-import type {Item,Category} from "../../App.tsx";
+import type {Item,Category} from "../../App.js";
 type ItemsProps = {
   itemRecords:Item[];
   changeCategory:(categoryId:string)=>void;
-  category:Category;
+  category:Category[];
   selectedCategory:string;
   isCategoryGlobal:boolean;
   setIsCategoryGlobal:(bool:boolean)=>void;
@@ -25,7 +25,8 @@ export function Items({
   editItem,
 }:ItemsProps) {
   const [expanding, setExpanding] = useState<string | null>(null);
-  const [isCollapse, setIsCollapse] = useState([]);
+  // The collapse list stores formatted date strings.
+  const [isCollapse, setIsCollapse] = useState<string[]>([]);
   const [isDropdown, setIsDropdown] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
@@ -53,7 +54,8 @@ export function Items({
     if (item.category === selectedCategory) quantity += 1;
   });
 
-  let totalSameDate = {};
+  // Each key is a formatted date; each value tracks count and sum for that date.
+  let totalSameDate: Record<string, { count: number; price: number }> = {};
   itemRecords.forEach((item) => {
     let convertedDate = formatMY(item.createdAt);
     if (totalSameDate[convertedDate]) {

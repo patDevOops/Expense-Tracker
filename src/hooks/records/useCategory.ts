@@ -1,7 +1,9 @@
-import { RecordType, Category } from "../../App.tsx";
+import type { Dispatch, SetStateAction } from "react";
+import type { RecordType, Category } from "../../App.js";
 
 type UseCategoryProp = {
-  setRecords: () => void;
+  // setRecords is the React state setter for the complete records array.
+  setRecords: Dispatch<SetStateAction<RecordType[]>>;
   records: RecordType[];
   matchRec: (id: string) => boolean;
 };

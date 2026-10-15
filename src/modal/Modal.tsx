@@ -1,18 +1,21 @@
 import { useState } from "react";
-import { Record } from "./Record";
-import { CategoryCom } from "./Category";
-import { CustomItems } from "./CustomItems";
+import type { ReactNode } from "react";
+import { Record } from "./Record.js";
+import { CategoryCom } from "./Category.js";
+import { CustomItems } from "./CustomItems.js";
 import "./Modal.css";
 import { IoMdClose } from "react-icons/io";
-import { Barrier } from "../components/barrier.tsx";
-import type { RecordType, Category, CustomItem } from "../App.tsx";
+import { Barrier } from "../components/barrier.js";
+import type { RecordType, Category, CustomItem } from "../App.js";
 type ModalProps = {
   toggleModal: (bool: boolean) => void;
   typeModal: null | string;
   switchViewRec: (id: string) => void;
   addRecord: (name: string) => void;
   records: RecordType[];
-  currectRecordId: string;
+  // The caller currently sends currentRecordId; keep the old misspelled prop optional for compatibility.
+  currentRecordId: string;
+  currectRecordId?: string;
   setCurrentRecordId: (a: string) => void;
   deleteRecord: (id: string) => void;
   category: Category[];
@@ -42,11 +45,12 @@ export function Modal({
   deleteCategory,
   renameCategory,
 }:ModalProps) {
-  const [selectedRec, setSelectedRec] = useState<null|RecordType|boolean>(null);
-  const [deleteRecordId, setDeleteRecordId] = useState<null|string|boolean>(null);
-  const [selectedCategoryDel, setSelectedCategoryDel] = useState<null | string|boolean>(
-    null,
-  );
+  // A selected record is either a RecordType object or no selection.
+  const [selectedRec, setSelectedRec] = useState<null | RecordType>(null);
+  // false closes the confirmation layer; a string stores the selected record ID.
+  const [deleteRecordId, setDeleteRecordId] = useState<null | string | false>(null);
+  // Store the selected category object, or false/null when no confirmation is active.
+  const [selectedCategoryDel, setSelectedCategoryDel] = useState<null | Category | false>(null);
 
   return (
     <>
@@ -66,7 +70,7 @@ export function Modal({
             <span>Are You Sure?</span>
             {/*<span>Note:Be Sure To Make Backup First</span>*/}
             <span className="to-delete-name">
-              Deleting "{selectedRec.name}"
+              Deleting "{selectedRec!.name}"
             </span>
             <div>
               <button
@@ -92,7 +96,7 @@ export function Modal({
           <div className="confirmation-modal">
             <span>Are You Sure?</span>
             {/*<span>Note:Be Sure To Make Backup First</span>*/}
-            {console.log(selectedCategoryDel)}
+            {console.log(selectedCategoryDel) as unknown as ReactNode}
             <span className="to-delete-name">
               Deleting "{selectedCategoryDel.categoryName}" Category
             </span>

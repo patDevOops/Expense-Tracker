@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
-import { Date } from "./Date";
-import { Items } from "./items/Items";
-import { Info } from "./Info";
-import { FormCard } from "./FormCard";
-import { FloatingButtons } from "./FloatingButtons";
+import { Date } from "./Date.js";
+import { Items } from "./items/Items.js";
+import { Info } from "./Info.js";
+import { FormCard } from "./FormCard.js";
+import { FloatingButtons } from "./FloatingButtons.js";
 import { formatTime, formatMY } from "../utils/date.js";
-import "./Contents";
+import "./Contents.js";
+import type { Dispatch, SetStateAction } from "react";
 import type {
   RecordType,
   Category,
   CustomItem,
   Item,
   FormType,
-} from "../App.tsx";
+} from "../App.js";
 /*
 type Items = {
   name: string;
@@ -29,14 +30,16 @@ type ContentsProp = {
   currentRecordId: string;
   records: RecordType[];
   category: Category[];
-  customItems: CustomItem;
+  // This value is mapped in FormCard, so it is an array of custom items.
+  customItems: CustomItem[];
   isEditingItem: boolean;
   setIsEditingItem: (bool: boolean) => void;
   addItems: (newItems: Item) => void;
   removeItems: (id: string) => void;
   saveItem: () => void;
   clearForm: () => void;
-  setForm: (form: FormType) => void;
+  // Match the React setter returned by useState; it accepts values and updater callbacks.
+  setForm: Dispatch<SetStateAction<FormType>>;
   form: FormType;
 };
 export function Contents({
@@ -56,7 +59,8 @@ export function Contents({
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");
 
-  const recordName:string = records.find((a) => currentRecordId === a.id)?.name;
+  // find() can return undefined when no record matches the current ID.
+  const recordName: string | undefined = records.find((a) => currentRecordId === a.id)?.name;
 
   //find array of items in records
   let itemRecords: Item[] = [];
@@ -67,24 +71,25 @@ export function Contents({
   });
 
   //get Date List in itemRecords
-  let listDates = [];
+  // This collection contains formatted year-month strings.
+  let listDates: string[] = [];
   itemRecords.sort((a, b) => {
     return dayjs().diff(a.createdAt) - dayjs().diff(b.createdAt);
   });
 
   let previousDate:undefined | string;
-  let listDate = itemRecords.map((item) => {
+  const listDate = itemRecords.map((item) => {
     const convertedDate = dayjs(item.createdAt).format("YYYY-MM");
 
     if (previousDate !== convertedDate) {
       previousDate = convertedDate;
       return convertedDate;
     }
-  });
-  listDate = listDate.filter((a) => a);
+  }).filter((a): a is string => Boolean(a));
+  // The type predicate tells TypeScript that undefined entries are removed.
   listDates = listDate.length ? listDate : [dayjs().format("YYYY-MM")];
 
-  const [selectedDate, setSelectedDate] = useState(listDates[0]);
+  const [selectedDate, setSelectedDate] = useState<string>(listDates[0]);
   const changeDate = (index:number) => {
     setSelectedDate(listDates[index]);
   };

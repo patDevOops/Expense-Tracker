@@ -1,8 +1,10 @@
-import type { RecordType, CustomItem } from "../../App.tsx";
+import type { Dispatch, SetStateAction } from "react";
+import type { RecordType, CustomItem } from "../../App.js";
 type UseCustomItemsProps = {
-  setRecords: (record: RecordType) => void;
+  // Records are an array, and setRecords is React's state setter for that array.
+  setRecords: Dispatch<SetStateAction<RecordType[]>>;
   matchRec: (id: string) => boolean;
-  records: RecordType;
+  records: RecordType[];
 };
 export function useCustomItems({
   setRecords,

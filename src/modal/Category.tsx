@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { Barrier } from "../components/barrier.tsx";
+import type { ChangeEvent } from "react";
+import { Barrier } from "../components/barrier.js";
 import { GoKebabHorizontal } from "react-icons/go";
 import { GoPencil } from "react-icons/go";
 import { CiTrash } from "react-icons/ci";
 import "./Category.css";
-import type {Category} from "../App.tsx";
+import type {Category} from "../App.js";
 type CategoryProps = {
   category:Category[];
   renameCategory:(newName:Category)=>void;
   addCategory:(newCategory:Category)=>void;
-  setSelectedCategoryDel:null|Category;
+  setSelectedCategoryDel: (category: Category) => void;
 };
 export function CategoryCom({
   category,
@@ -17,10 +18,12 @@ export function CategoryCom({
   addCategory,
   setSelectedCategoryDel,
 }:CategoryProps) {
-  const [isFindMenu, setIsFindMenu] = useState(false);
-  const [isEditingCategory, setIsEditingCategory] = useState(false);
+  // The menu stores a category ID when open and false when closed.
+  const [isFindMenu, setIsFindMenu] = useState<string | false>(false);
+  // The editing state stores an ID or false when nothing is being edited.
+  const [isEditingCategory, setIsEditingCategory] = useState<string | false>(false);
   const [categoryNameInput, setCategoryNameInput] = useState("");
-  const inputCategoryName = (event) => {
+  const inputCategoryName = (event: ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value);
     setCategoryNameInput(event.target.value);
   };

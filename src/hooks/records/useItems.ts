@@ -1,7 +1,7 @@
 
 import dayjs from 'dayjs';
-import type {UseRecordParam} from './useRecords.ts';
-import type {Item} from '../../App.tsx';
+import type {UseItemsParam} from './useRecords.js';
+import type {Item} from '../../App.js';
 export function useItems({
   setRecords,
   matchRec,
@@ -9,7 +9,7 @@ export function useItems({
   setIsEditingItem,
   records,
   form
-}:UseRecordParam) {
+}:UseItemsParam) {
   const addItems = (newItems:Item) => {
     
     setRecords(
@@ -53,9 +53,9 @@ export function useItems({
                   quantity: form.quantity <= 0 ? 1 : form.quantity,
                   createdAt: `${form.date ? form.date : dayjs().format("YYYY-MM-D")} ${form.time ? form.time : dayjs().format("h:mm A")}`,
                   totalPrice: form.price
-                    ? form.price * form.quantity
-                    : form.totalPrice,
-                  price: form.price ? form.price : 0
+                    ? (form.price as number) * form.quantity
+                    : (form.totalPrice as number),
+                  price: form.price ? (form.price as number) : 0
                 };
               }
               return item;

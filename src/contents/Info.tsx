@@ -4,10 +4,11 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 type InfoProps = {
   totalPrice:number;
-  recordName:string;
+  recordName: string | undefined;
 };
 export function Info({ totalPrice, recordName }:InfoProps) {
-  const [listToggle, setListToggle] = useState([]);
+  // The only values stored here are the two string keys used by includes().
+  const [listToggle, setListToggle] = useState<string[]>([]);
   const toggle = (val:string) => {
     if (listToggle.includes(val)) {
       setListToggle(listToggle.filter((a) => val !== a));

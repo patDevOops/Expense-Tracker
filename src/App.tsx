@@ -1,18 +1,11 @@
-// @ts-ignore
 import { useState, useEffect } from "react";
-// @ts-ignore
-import { useRecords } from "./hooks/records/useRecords.ts";
-// @ts-ignore
-import { Header } from "./Header";
-// @ts-ignore
-import { Contents } from "./contents/Contents";
-// @ts-ignore
-import { SideBar } from "./SideBar.tsx";
-// @ts-ignore
-import { Modal } from "./modal/Modal";
+import { useRecords } from "./hooks/records/useRecords.js";
+import { Header } from "./Header.js";
+import { Contents } from "./contents/Contents.js";
+import { SideBar } from "./SideBar.js";
+import { Modal } from "./modal/Modal.js";
 import "./Main.css";
-// @ts-ignore
-import { Barrier } from "./components/barrier.tsx";
+import { Barrier } from "./components/barrier.js";
 export type Item = {
   name: string;
   id: string;
@@ -21,8 +14,7 @@ export type Item = {
   price: number;
   category: string;
   totalPrice: number;
-  time: string;
-  date: string;
+  // Item stores one combined createdAt value; date/time are form-only values.
 };
 
 export type CustomItem = {
@@ -60,15 +52,17 @@ export type UseRecordHook = {
   removeItems: (id: string) => void;
   saveItem: () => void;
 };
-type FormType = {
+// Exported so other components can share the exact form data type.
+export type FormType = {
   name: string;
   category: string;
   date: string;
   time: string;
-  price: string;
+  // Numeric inputs begin empty and then store numbers.
+  price: "" | number;
   quantity: number;
   id: string;
-  totalPrice: string;
+  totalPrice: "" | number;
 };
 function App() {
   const [isEditingItem, setIsEditingItem] = useState<boolean>(false);
@@ -147,7 +141,8 @@ function App() {
   //for sidebar hamburger menu toggle
   const [isShowSidebar, setIsShowSidebar] = useState(false);
 
-  const toggleSidebar = (bool: boolean) => {
+  // Optional because the header calls this without an argument to toggle.
+  const toggleSidebar = (bool?: boolean) => {
     if (bool !== undefined) {
       setIsShowSidebar(bool);
       return;
@@ -157,7 +152,6 @@ function App() {
     } else setIsShowSidebar(true);
   };
   useEffect(() => {
-    // @ts-ignore
     eruda.init();
   });
   useEffect(() => {
@@ -169,7 +163,6 @@ function App() {
   }
 
   return (
-    // @ts-ignore
     <>
       <Header toggleSidebar={toggleSidebar} />
 

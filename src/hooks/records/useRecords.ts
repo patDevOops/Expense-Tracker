@@ -1,23 +1,21 @@
 import { useState } from "react";
 import dayjs from "dayjs";
-import { useCustomItems } from "./useCustomItems";
-import { useCategory } from "./useCategory";
-import { useItems } from "./useItems";
-import type {RecordType} from "../../App.tsx";
+import { useCustomItems } from "./useCustomItems.js";
+import { useCategory } from "./useCategory.js";
+import { useItems } from "./useItems.js";
+import type { Dispatch, SetStateAction } from "react";
+import type { FormType, RecordType } from "../../App.js";
 export type UseRecordParam = {
   matchRec: (id:string) => boolean;
   clearForm: () => void;
   setIsEditingItem: (value: boolean) => void;
-  form:{
-    name: string,
-    category: string,
-    date: string,
-    time: string,
-    price: string | number,
-    quantity: number,
-    id: string,
-    totalPrice: string | number,
-  }
+  form: FormType;
+};
+
+// useItems additionally receives the current records array and its React setter.
+export type UseItemsParam = UseRecordParam & {
+  setRecords: Dispatch<SetStateAction<RecordType[]>>;
+  records: RecordType[];
 };
 export function useRecords({
   matchRec,
@@ -113,7 +111,7 @@ export function useRecords({
           }
         ],
         items: []
-      }
+      } as unknown as RecordType // Type assertion only; preserves the original record object.
     ]);
   };
 

@@ -1,19 +1,24 @@
 import { useState } from "react";
+import type { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
 import dayjs from "dayjs";
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
-import { Barrier } from "../components/barrier.tsx";
-import type {Item,Category,FormType,CustomItem} from "../App.tsx";
+import { Barrier } from "../components/barrier.js";
+import type {Item,Category,FormType,CustomItem,RecordType} from "../App.js";
 type FormCardProps = {
+  // Contents passes records here; this component does not currently read the prop.
+  records: RecordType[];
   isShowForm:boolean;
   addItems:(newItems:Item)=>void;
   category:Category[];
   setIsShowForm:(form:boolean)=>void;
   form:FormType;
-  setForm:(form:FormType)=>void;
+  // Keep the setter type returned by useState so functional updates are allowed.
+  setForm: Dispatch<SetStateAction<FormType>>;
   isEditingItem:boolean;
   saveItem:()=>void;
-  customItems:CustomItem;
+  // FormCard uses map() to show all saved custom items.
+  customItems:CustomItem[];
 };
 export function FormCard({
   isShowForm,
@@ -35,25 +40,27 @@ export function FormCard({
     setIspickItem(isPickItem ? false : true);
   };
 
-  const inputForm = (event) => {
+  // ChangeEvent gives event.target the correct input/select type.
+  const inputForm = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setForm((prev) => ({
       ...prev,
       [name]: value,
-    }));
+    } as FormType));
   };
 
-  const inputNumForm = (event) => {
+  const inputNumForm = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name;
     const value = !event.target.value ? "" : Number(event.target.value);
     setForm((prev) => ({
       ...prev,
       [name]: value ? value : "",
-    }));
+    } as FormType));
   };
 
-  const clickBtnQty = (event) => {
-    const { name } = event.target;
+  const clickBtnQty = (event: MouseEvent<HTMLButtonElement>) => {
+    // The cast is type-only; keep using the same event target value as before.
+    const { name } = event.target as HTMLButtonElement;
     setForm((prev) => ({
       ...prev,
       quantity: name === "increase" ? prev.quantity + 1 : prev.quantity - 1,
@@ -67,13 +74,14 @@ export function FormCard({
       quantity: form.quantity <= 0 ? 1 : form.quantity,
       createdAt: `${form.date ? form.date : dayjs().format("YYYY-MM-D")} ${form.time ? form.time : dayjs().format("h:mm A")}`,
       id: crypto.randomUUID(),
-      totalPrice: form.price ? form.price * form.quantity : form.totalPrice,
-      price: form.price ? form.price : 0,
+      totalPrice: form.price ? (form.price as number) * form.quantity : (form.totalPrice as number),
+      price: form.price ? (form.price as number) : 0,
     });
     console.log("form", form);
   };
 
-  const pickCustomItem = (item:CustomItem) => {
+  // The caller only passes these three fields; the saved item ID is not used here.
+  const pickCustomItem = (item: Pick<CustomItem, "price" | "categoryId" | "name">) => {
     const { price, categoryId, name } = item;
 
     setForm((prev) => ({
@@ -160,7 +168,7 @@ export function FormCard({
                 placeholder="price"
                 className="form-input form-input-price"
                 value={
-                  form.price ? form.price * form.quantity : form.totalPrice
+                  form.price ? (form.price as number) * form.quantity : form.totalPrice
                 }
                 onChange={inputNumForm}
                 type="number"

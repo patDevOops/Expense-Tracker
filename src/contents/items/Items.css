@@ -40,7 +40,7 @@
   background:hwb(214 6% 88%);
 }
 .item-gen{
-  margin:5px 15px;
+  margin:0 15px 0.3rem 15px;
   display:flex;
   justify-content: space-between;
   align-items: stretch;
@@ -85,19 +85,20 @@
   font-weight:500;
 }
 .item-date{
-  margin:8px 15px 0px 15px;
+  margin:0.1rem 15px 0px 15px;
   font-size:0.8rem;
   display:flex;
   gap:0.5rem;
   color:#adb2ba;
+  border-top:var(--border);
+  padding:0.2rem 0
 }
 .total-price-per-day{
   margin:0px 15px 0.5rem 15px;
-  font-size:0.84rem;
-  color:white;
+  font-size:0.70rem;
+  color:var(--text-blur);
   font-weight:500;
-  border-bottom:var(--border);
-  padding-bottom:0.3rem;
+  padding-bottom:0.2rem;
 }
 .item-date div{
   font-size:0.7rem;

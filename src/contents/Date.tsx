@@ -6,7 +6,8 @@ import "./Date.css";
 type DateProps = {
   changeDate:(index:number)=>void;
   selectedDate:string;
-  listDates:[];
+  // The parent passes a list of formatted year-month strings.
+  listDates: string[];
 };
 export function Date({ changeDate, selectedDate, listDates }:DateProps) {
   const [defaultDate, setDefaultDate] = useState<number>(0);

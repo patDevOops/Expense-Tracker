@@ -1,14 +1,19 @@
 import { useState } from "react";
+import type { ChangeEvent } from "react";
 import "./Record.css";
-import type { RecordType } from "../App.tsx";
+import type { RecordType } from "../App.js";
 type RecordModalProps = {
+  // Passed by Modal in the original code but not used in this component.
+  switchViewRec?: (id: string) => void;
+  // Passed by Modal in the original code but not used in this component.
+  currectRecordId?: string;
   addRecord: (name: string) => void;
   records: RecordType[];
   setCurrentRecordId: (id:string)=>void;
   setDeleteRecordId: (a: string) => void;
   toggleModal: (bool: boolean) => void;
-  selectedRec: null | RecordType | boolean;
-  setSelectedRec: (a: null | RecordType | boolean) => void;
+  selectedRec: null | RecordType;
+  setSelectedRec: (a: null | RecordType) => void;
 };
 export function Record({
   addRecord,
@@ -21,7 +26,7 @@ export function Record({
 }: RecordModalProps) {
   const [recordNameInput, setRecordNameInput] = useState<string>("");
 
-  const inputNameRecord = (event) => {
+  const inputNameRecord = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     if (value.length >= 9) return;
     setRecordNameInput(value);
@@ -52,7 +57,8 @@ export function Record({
         {records.map((record) => {
           return (
             <div
-              id={selectedRec === record.id ? "border-highlight" : ""}
+              /* Type-only cast preserves the original comparison and runtime behavior. */
+              id={(selectedRec as unknown as string) === record.id ? "border-highlight" : ""}
               onClick={() => {
                 setSelectedRec(record);
               }}

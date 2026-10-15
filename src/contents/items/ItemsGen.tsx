@@ -5,7 +5,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoTrashBin } from "react-icons/io5";
 import { LuPencil } from "react-icons/lu";
-import type {Item,Category} from "../../App.tsx";
+import type {Item,Category} from "../../App.js";
 type ItemsGenProps= {
   item:Item;
   showDate:boolean;
@@ -41,7 +41,8 @@ export function ItemsGen({
   const [isConfirmModal, setIsConfirmModal] = useState<boolean>(false);
   const isShowQtyCalc = item.price && item.quantity !== 1 ? true : false;
 
-  const categoryName:string = category.find(
+  // find() can return undefined when the item has no matching category.
+  const categoryName = category.find(
     (a) => a.id === item.category,
   )?.categoryName;
   const removeBarrier = () => {

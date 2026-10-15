@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Barrier } from "../components/barrier.tsx";
+import type { ChangeEvent } from "react";
+import { Barrier } from "../components/barrier.js";
 import "./CustomItems.css";
 import { GoKebabHorizontal } from "react-icons/go";
 import { GoPencil } from "react-icons/go";
 import { CiTrash } from "react-icons/ci";
-import type { Category, CustomItem } from "../App.tsx";
+import type { Category, CustomItem } from "../App.js";
 type CustomItemsProps = {
   category: Category[];
   addCustomItem: (newItem: CustomItem) => void;
@@ -16,6 +17,8 @@ type customItemInputType = {
   name: string;
   price: "" | number;
   categoryId: string;
+  // This field exists when editing an item; new items receive an ID on submit.
+  id?: string;
 };
 export function CustomItems({
   category,
@@ -24,7 +27,8 @@ export function CustomItems({
   deleteCustomItem,
   customItems,
 }: CustomItemsProps) {
-  const [isViewMenu, setIsViewMenu] = useState(false);
+  // The menu stores the selected custom-item ID or false when closed.
+  const [isViewMenu, setIsViewMenu] = useState<string | false>(false);
   const [customItemInput, setCustomItemInput] = useState<customItemInputType>({
     name: "",
     price: "",
@@ -34,8 +38,9 @@ export function CustomItems({
     null | boolean | string
   >(null);
 
-  const inputItem = (event) => {
-    let { name, value } = event.target;
+  const inputItem = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name } = event.target;
+    let value: string | number = event.target.value;
     //name is price
     if (name === "price") {
       value = Number(value);
@@ -43,20 +48,20 @@ export function CustomItems({
         setCustomItemInput((prev) => ({
           ...prev,
           [name]: "",
-        }));
+        } as customItemInputType));
         return;
       }
       setCustomItemInput((prev) => ({
         ...prev,
         [name]: value,
-      }));
+      } as customItemInputType));
       return;
     }
 
     setCustomItemInput((prev) => ({
       ...prev,
       [name]: value,
-    }));
+    } as customItemInputType));
   };
   const editCustomItem = (toEditItem: CustomItem) => {
     setIsViewMenu(false);
@@ -78,7 +83,7 @@ export function CustomItems({
     setCustomItemInput({
       name: "",
       price: "",
-      categoryId: category[0].id,
+      categoryId: category[0]!.id, // Non-null assertion changes only TypeScript checking.
     });
   }
   const renderCategoryName = (id: string) => {
@@ -130,10 +135,11 @@ export function CustomItems({
             if (!name) return;
 
             if (editingCustomItem) {
+              // This assertion is only for TypeScript: edit mode already has the item ID.
               saveEditCustomItem({
                 ...customItemInput,
-                categoryId: categoryId ? categoryId : category[0]?.id,
-              });
+                categoryId: categoryId ? categoryId : (category[0]?.id as string),
+              } as CustomItem);
               setEditingCustomItem(false);
               clearInput();
               return;
@@ -141,9 +147,9 @@ export function CustomItems({
 
             addCustomItem({
               ...customItemInput,
-              categoryId: categoryId ? categoryId : category[0]?.id,
+              categoryId: categoryId ? categoryId : (category[0]?.id as string),
               id: crypto.randomUUID(),
-            });
+            } as CustomItem);
             clearInput();
           }}
         >
