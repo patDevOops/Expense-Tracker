@@ -95,7 +95,7 @@ function App() {
     form,
   });
 
-  const [currentRecordId, setCurrentRecordId] = useState<string>("123");
+  const [currentRecordId, setCurrentRecordId] = useState<string>(localStorage.getItem("selected-record") ?? "");
   const switchViewRec = (id: string) => {
     setCurrentRecordId(id);
   };
@@ -165,6 +165,9 @@ function App() {
   useEffect(() => {
     localStorage.setItem("records", JSON.stringify(records));
   }, [records]);
+  useEffect(() => {
+    localStorage.setItem("selected-record", currentRecordId);
+  }, [currentRecordId]);
 
   return (
     <>
