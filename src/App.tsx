@@ -16,7 +16,6 @@ export type Item = {
   totalPrice: number;
   // Item stores one combined createdAt value; date/time are form-only values.
 };
-
 export type CustomItem = {
   name: string;
   price: number;
@@ -161,6 +160,11 @@ function App() {
   function matchRec(a: string): boolean {
     return a === currentRecordId;
   }
+
+  //save storage when modifying records
+  useEffect(() => {
+    localStorage.setItem("records", JSON.stringify(records));
+  }, [records]);
 
   return (
     <>

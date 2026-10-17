@@ -42,7 +42,7 @@ export function ItemsGen({
   const isShowQtyCalc = item.price && item.quantity !== 1 ? true : false;
 
   // find() can return undefined when the item has no matching category.
-  const categoryName = category.find(
+  const categoryName:string|undefined = category.find(
     (a) => a.id === item.category,
   )?.categoryName;
   const removeBarrier = () => {
