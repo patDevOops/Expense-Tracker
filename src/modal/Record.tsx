@@ -58,7 +58,7 @@ export function Record({
           return (
             <div
               /* Type-only cast preserves the original comparison and runtime behavior. */
-              id={(selectedRec as unknown as string) === record.id ? "border-highlight" : ""}
+              id={(selectedRec?.id as unknown as string) === record.id ? "border-highlight" : ""}
               onClick={() => {
                 setSelectedRec(record);
               }}
