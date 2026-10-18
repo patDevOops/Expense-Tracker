@@ -62,6 +62,7 @@ export function CategoryCom({
           {isEditingCategory ? "Save" : "Add"}
         </button>
       </div>
+      
       <div className="category-gen">
         {category.map((categoryVal) => {
           return (

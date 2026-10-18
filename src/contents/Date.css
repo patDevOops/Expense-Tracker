@@ -18,6 +18,7 @@
   justify-content:center;
   margin:auto 8px;
   transition:background 0.15s;
+  transition:padding 0.15s;
 }
 .arrow-btn-cont:active{
   background:#6a9fff;
