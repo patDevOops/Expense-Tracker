@@ -108,7 +108,7 @@ export function ItemsGen({
                 }}
                 className="item-arrow-cont"
               >
-                <IoIosArrowBack className="item-arrow" size="25" />
+                <IoIosArrowBack className={`item-arrow ${expanding === item.id ? "arrow-rotate":"arrow-unrotate"}`} size="25" />
               </div>
 
               {expanding === item.id && (

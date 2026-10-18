@@ -3,13 +3,13 @@ import "./Info.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 type InfoProps = {
-  totalPrice:number;
+  totalPrice: number;
   recordName: string | undefined;
 };
-export function Info({ totalPrice, recordName }:InfoProps) {
+export function Info({ totalPrice, recordName }: InfoProps) {
   // The only values stored here are the two string keys used by includes().
   const [listToggle, setListToggle] = useState<string[]>([]);
-  const toggle = (val:string) => {
+  const toggle = (val: string) => {
     if (listToggle.includes(val)) {
       setListToggle(listToggle.filter((a) => val !== a));
     } else {
@@ -33,8 +33,12 @@ export function Info({ totalPrice, recordName }:InfoProps) {
             toggle("current-record");
           }}
         >
-          <IoIosArrowForward size="21" color="orange" />
+          <IoIosArrowForward 
+            color="orange"
+            className={`${listToggle.includes("current-record") ? "arrow-rotate":"arrow-unrotate"}`}
+            size="21" />
         </div>
+        
       </div>
 
       <div className="total-expense-cont">
@@ -44,7 +48,9 @@ export function Info({ totalPrice, recordName }:InfoProps) {
             toggle("total-expense");
           }}
         >
-          <IoIosArrowBack color="orange" size="21" />
+          <IoIosArrowBack 
+            className={`${listToggle.includes("total-expense") ? "arrow-rotate":"arrow-unrotate"}`}
+            color="orange" size="21" />
         </div>
         {listToggle.includes("total-expense") && (
           <div className="record-info-cont">

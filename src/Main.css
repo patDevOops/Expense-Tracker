@@ -59,3 +59,11 @@
   position:fixed;
   opacity:0;
 }
+.arrow-rotate{
+  transition: transform 0.01s;
+  transform: rotateZ(-180deg);
+}
+.arrow-unrotate{
+  transition: transform 0.01s;
+  transform: rotateZ(-360deg);
+}
