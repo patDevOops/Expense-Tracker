@@ -17,6 +17,11 @@
   align-items:center;
   justify-content:center;
   margin:auto 8px;
+  transition:background 0.15s;
+}
+.arrow-btn-cont:active{
+  background:#6a9fff;
+  padding:5px 1px;
 }
 .date-year-name div:first-child{
   font-size:32px;

@@ -5,6 +5,7 @@
   bottom:10px;
   right:3px;
   z-index:160;
+  align-items:center;
 }
 .floating-btn button{
   margin-bottom:0.4rem;
@@ -20,5 +21,13 @@
   background:#4f8cff;
   color:white;
   font-weight:1000;
-  box-shadow:1px -1px 8px rgba(0,0,0,0.35)
+  box-shadow:1px -1px 8px rgba(0,0,0,0.35);
+  transition: height 0.15s;
+  transition: width 0.15s;
+}
+
+.floating-btn button:active{
+  background:#4d8bff84;
+  min-width:55px;
+  min-height:58px;
 }

@@ -139,6 +139,9 @@
   border-radius:5px;
   padding:10px;
 }
+.form-btns button:last-child:active{
+  background:#689cff;
+}
 .form-date{
   width:60%;
 }

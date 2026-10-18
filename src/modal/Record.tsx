@@ -41,6 +41,7 @@ export function Record({
           value={recordNameInput}
           placeholder="Record Name"
           className="modal-input-rec"
+          onClick={()=>{setSelectedRec(null)}}
         />
         <button
           onClick={() => {
