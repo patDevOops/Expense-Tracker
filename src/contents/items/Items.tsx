@@ -81,7 +81,7 @@ export function Items({
             </div>
 
             <IoMdArrowDropup
-              className="dropdown-arrow"
+              className={`dropdown-arrow ${isDropdown ?"category-arrow-collapse":""}`}
               onClick={toggleDropdown}
             />
 

@@ -88,10 +88,13 @@
   margin:0.1rem 15px 0px 15px;
   font-size:0.8rem;
   display:flex;
-  gap:0.5rem;
   color:#adb2ba;
   border-top:var(--border);
-  padding:0.2rem 0
+  padding:0.2rem 0;
+}
+.item-date-toggle-cont{
+  display:flex;
+  gap:0.5rem;
 }
 .total-price-per-day{
   margin:0px 15px 0.5rem 15px;
@@ -210,4 +213,10 @@
 }
 #border-highlight-item{
   border-color:#3e4452e6
+}
+.arrow-rotate-show{
+  transform: rotateZ(-90deg);
+}
+.category-arrow-collapse{
+  transform: rotateZ(180deg);
 }

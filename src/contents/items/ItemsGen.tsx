@@ -5,22 +5,22 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoTrashBin } from "react-icons/io5";
 import { LuPencil } from "react-icons/lu";
-import type {Item,Category} from "../../App.js";
-type ItemsGenProps= {
-  item:Item;
-  showDate:boolean;
-  toggleCollapse:(id:string)=>void;
-  isHide:boolean;
-  isCategoryGlobal:boolean;
-  category:Category[];
-  removeItems:(id:string)=>void;
-  showTotal:boolean;
-  totalPricePerDay:number;
-  editItem:(item:Item)=>void;
-  selectedItem:string | null;
-  setSelectedItem:(item:string)=>void;
-  expanding:string|null;
-  setExpanding:(a:string|null)=>void;
+import type { Item, Category } from "../../App.js";
+type ItemsGenProps = {
+  item: Item;
+  showDate: boolean;
+  toggleCollapse: (id: string) => void;
+  isHide: boolean;
+  isCategoryGlobal: boolean;
+  category: Category[];
+  removeItems: (id: string) => void;
+  showTotal: boolean;
+  totalPricePerDay: number;
+  editItem: (item: Item) => void;
+  selectedItem: string | null;
+  setSelectedItem: (item: string) => void;
+  expanding: string | null;
+  setExpanding: (a: string | null) => void;
 };
 export function ItemsGen({
   item,
@@ -37,12 +37,12 @@ export function ItemsGen({
   setSelectedItem,
   expanding,
   setExpanding,
-}:ItemsGenProps) {
+}: ItemsGenProps) {
   const [isConfirmModal, setIsConfirmModal] = useState<boolean>(false);
   const isShowQtyCalc = item.price && item.quantity !== 1 ? true : false;
 
   // find() can return undefined when the item has no matching category.
-  const categoryName:string|undefined = category.find(
+  const categoryName: string | undefined = category.find(
     (a) => a.id === item.category,
   )?.categoryName;
   const removeBarrier = () => {
@@ -53,13 +53,17 @@ export function ItemsGen({
       <div>
         {showDate && (
           <div className="item-date">
-            <div>{dayjs(item.createdAt).format("MMM D")}</div>
-            <IoIosArrowDown
-              size="15"
+            <div
               onClick={() => {
                 toggleCollapse(formatMY(item.createdAt));
               }}
-            />
+              className="item-date-toggle-cont"
+            >
+              <div>{dayjs(item.createdAt).format("MMM D")}</div>
+              <IoIosArrowDown 
+                className={`${isHide ?"arrow-rotate-show":""}`}
+                size="15" />
+            </div>
           </div>
         )}
 
@@ -108,7 +112,10 @@ export function ItemsGen({
                 }}
                 className="item-arrow-cont"
               >
-                <IoIosArrowBack className={`item-arrow ${expanding === item.id ? "arrow-rotate":"arrow-unrotate"}`} size="25" />
+                <IoIosArrowBack
+                  className={`item-arrow ${expanding === item.id ? "arrow-rotate" : "arrow-unrotate"}`}
+                  size="25"
+                />
               </div>
 
               {expanding === item.id && (
