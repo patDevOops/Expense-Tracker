@@ -22,12 +22,9 @@
   color:white;
   font-weight:1000;
   box-shadow:1px -1px 8px rgba(0,0,0,0.35);
-  transition: height 0.15s;
-  transition: width 0.15s;
 }
 
 .floating-btn button:active{
-  background:#4d8bff84;
-  min-width:55px;
-  min-height:58px;
+  background:#6398f9;
+  transform: scale(0.95,0.95);
 }
