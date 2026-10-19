@@ -67,6 +67,9 @@
   padding:0.3rem 2rem 0.2rem 0.4rem;
   border-bottom:1px dotted #2a2f3a;
 }
+.pick-item-generated > div:active{
+  background:hwb(219 12% 83% / 0.6078431372549019);
+}
 .pick-item-generated > div:last-child{
   border:none;
 }
@@ -130,6 +133,9 @@
   border-radius:5px;
   padding:4px;
 }
+.form-btns button:first-child:active{
+  background:hwb(217 10% 85%);
+}
 .form-btns button:last-child{
   background:#4f8cff;
   border:none;
@@ -166,6 +172,9 @@
   font-size:1rem;
   font-weight:600;
 }
+.form-quan-btn:active{
+  background:#91b6fb;
+}
 .row-container{
   display:flex;
   width:100%;
@@ -176,4 +185,12 @@
 }
 .form-quantity{
   width:40%;
+}
+.arrow-rotate-form{
+  transition:transform 0.15s;
+  transform: rotateX(180deg);
+}
+.arrow-rotate-form-return{
+  transition:transform 0.15s;
+  transform: rotateX(15deg);
 }

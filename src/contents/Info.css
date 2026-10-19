@@ -47,6 +47,9 @@
   border-right: 1px solid #2a2f3a;
   
 }
+.arrow-expand-cont:active{
+  color:white
+}
 .arrow-expand-cont-left{
   border: 1px solid #2a2f3a;
   border-right:none;

@@ -169,7 +169,7 @@ export function FormCard({
 
                 <IoIosArrowDown
                   size="23"
-                  className="item-pick-arrow"
+                  className={`item-pick-arrow ${isPickItem ?"arrow-rotate-form":"arrow-rotate-form-return"}`}
                   onClick={pickItem}
                 />
               </div>
@@ -282,7 +282,9 @@ export function FormCard({
 
           <div className="form-btns">
             <button onClick={expandMoreForm}>
-              <IoIosArrowDown size="22" />
+              <IoIosArrowDown 
+                className={`${isShowMoreForm ?"arrow-rotate-form":"arrow-rotate-form-return"}`}
+                size="22" />
             </button>
             <button
               onClick={() => {

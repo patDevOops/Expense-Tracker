@@ -22,6 +22,7 @@
   color:white;
   font-weight:1000;
   box-shadow:1px -1px 8px rgba(0,0,0,0.35);
+  transition:transform 0.15s;
 }
 
 .floating-btn button:active{
