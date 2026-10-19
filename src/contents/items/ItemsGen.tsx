@@ -64,6 +64,11 @@ export function ItemsGen({
                 className={`${isHide ?"arrow-rotate-show":""}`}
                 size="15" />
             </div>
+             
+              <div className="total-price-per-day">
+                ₱{totalPricePerDay.toFixed(2)}
+              </div>
+          
           </div>
         )}
 
@@ -151,11 +156,6 @@ export function ItemsGen({
                 </div>
               )}
             </div>
-            {showTotal && (
-              <div className="total-price-per-day">
-                Total: ₱{totalPricePerDay.toFixed(2)}
-              </div>
-            )}
           </>
         )}
       </div>

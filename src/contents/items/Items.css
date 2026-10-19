@@ -11,7 +11,6 @@
   border-radius:6px;
   position:relative;
   padding-top:26px;
-  
 }
 /*
 .items-scrollable{
@@ -26,6 +25,9 @@
   overflow: auto;
   scrollbar-width: none;
   padding-bottom:10rem;
+  display:flex;
+  flex-direction: column;
+  gap:0.1rem;
 }
 .items > div:first-child{
   font-size:0.8rem;
@@ -91,13 +93,14 @@
   color:#adb2ba;
   border-top:var(--border);
   padding:0.2rem 0;
+  justify-content: space-between;
 }
 .item-date-toggle-cont{
   display:flex;
   gap:0.5rem;
 }
 .total-price-per-day{
-  margin:0px 15px 0.5rem 15px;
+  /*margin:0px 15px 0.5rem 15px;*/
   font-size:0.70rem;
   color:var(--text-blur);
   font-weight:500;
@@ -128,6 +131,10 @@
   color:white;
   width:16px;
   height:25px;
+  transition:transform 0.5s;
+}
+.arrow-btn-expanded:active{
+  transform: scale(2,2);
 }
 .expanded-btn{
   height:100%;

@@ -21,7 +21,7 @@ export function Info({ totalPrice, recordName }: InfoProps) {
       <div className="current-record-cont">
         {listToggle.includes("current-record") && (
           <div className="record-info-cont">
-            <div className="edge-title">Current Record</div>
+            <div className="edge-title">Viewing Record</div>
             <div className="record-name">
               {recordName || "No Record Selected"}
             </div>
