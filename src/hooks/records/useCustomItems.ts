@@ -26,6 +26,7 @@ export function useCustomItems({
   };
 
   const deleteCustomItem = (id: string) => {
+    console.log('delete ci',id)
     setRecords(
       records.map((record) =>
         matchRec(record.id)

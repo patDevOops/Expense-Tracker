@@ -113,7 +113,8 @@ export function useRecords({
             id: crypto.randomUUID()
           }
         ],
-        items: []
+        items: [],
+        customItems:[]
       } as unknown as RecordType // Type assertion only; preserves the original record object.
     ]);
   };

@@ -66,7 +66,7 @@ export function Contents({
   let itemRecords: Item[] = [];
   records.forEach((record) => {
     if (record.id === currentRecordId) {
-      itemRecords = record.items;
+      itemRecords = [...record.items];
     }
   });
 

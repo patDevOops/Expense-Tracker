@@ -147,6 +147,8 @@
 }
 .form-btns button:last-child:active{
   background:#689cff;
+  transition:transform 0.15s;
+  transform:scale(0.99,0.95)
 }
 .form-date{
   width:60%;

@@ -11,6 +11,9 @@
   align-items: center;
   gap:20px;
 }
+.sidebar div:active{
+  background-color:rgb(53, 59, 73);
+}
 .sidebar div span:last-child{
   font-size:0.8rem;
 }

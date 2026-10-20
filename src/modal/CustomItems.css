@@ -4,9 +4,9 @@
   padding:5px;
   border-bottom:var(--border);
 }
-.custom-item-gen > div:active{
+/*.custom-item-gen > div:active{
   opacity:0.6
-}
+}*/
 .custom-item-gen > div:last-child{
   border-bottom:none;
 }

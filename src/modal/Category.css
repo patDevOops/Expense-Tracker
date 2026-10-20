@@ -37,6 +37,9 @@
   display:flex;
   gap:5px;
 }
+.select-menu p:active{
+  background:hwb(212 14% 76%);
+}
 .select-menu p:first-child{
   border-bottom:var(--border);
   border-bottom-style:dotted;
