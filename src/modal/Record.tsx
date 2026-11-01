@@ -6,6 +6,7 @@ type RecordModalProps = {
   // Passed by Modal in the original code but not used in this component.
   switchViewRec?: (id: string) => void;
   // Passed by Modal in the original code but not used in this component.
+  currentRecordId:string|null;
   currectRecordId?: string;
   addRecord: (name: string) => void;
   records: RecordType[];
@@ -23,6 +24,7 @@ export function Record({
   toggleModal,
   selectedRec,
   setSelectedRec,
+  currentRecordId,
 }: RecordModalProps) {
   const [recordNameInput, setRecordNameInput] = useState<string>("");
 
@@ -68,7 +70,8 @@ export function Record({
               <span className="record-gen-name">{record.name}</span>
               <div className="record-gen-description">
                 <span>{record.createdAt}</span>
-                <span>{record.status}</span>
+                <span className="status">{record.status}</span>
+                {currentRecordId == record.id && <span className="viewing">Currently Viewing</span>}
               </div>
             </div>
           );

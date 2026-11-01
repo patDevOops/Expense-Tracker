@@ -60,8 +60,11 @@
   gap:6px;
   margin-top:5px;
 }
-.record-gen-description span:last-child{
+.record-gen-description .status{
   color:lime;
+}
+.record-gen-description .viewing{
+  color:orange;
 }
 .record-gen-name{
   font-weight:500;

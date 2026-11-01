@@ -34,6 +34,7 @@ export function Modal({
   addRecord,
   records,
   currectRecordId,
+  currentRecordId,
   setCurrentRecordId,
   deleteRecord,
   category,
@@ -136,6 +137,7 @@ export function Modal({
             toggleModal={toggleModal}
             setDeleteRecordId={setDeleteRecordId}
             setCurrentRecordId={setCurrentRecordId}
+            currentRecordId={currentRecordId}
             currectRecordId={currectRecordId}
             records={records}
             switchViewRec={switchViewRec}
