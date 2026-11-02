@@ -5,6 +5,7 @@ import { Items } from "./items/Items.js";
 import { Info } from "./Info.js";
 import { FormCard } from "./FormCard.js";
 import { FloatingButtons } from "./FloatingButtons.js";
+import {Wallet} from "./Wallet";
 import { formatTime, formatMY } from "../utils/date.js";
 import "./Contents.js";
 import type { Dispatch, SetStateAction } from "react";
@@ -156,6 +157,7 @@ export function Contents({
 
   return (
     <div className="main">
+      <Wallet/>
       <Date
         selectedDate={selectedDate}
         changeDate={changeDate}
