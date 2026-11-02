@@ -4,6 +4,8 @@
   border-radius:10px;
   padding:0.4rem;
   background:rgb(26,32,43);
+}
+.wallet-info{
   display:flex;
   align-items:center;
   gap:0.5rem
@@ -15,7 +17,7 @@
 }
 .wallet-link{
   font-size:0.5rem;
-  color:hwb(0 85% 14%);
+  color:var(--text-blur);
 }
 .wallet-budget{
   color:var(--btn-color);
@@ -27,4 +29,13 @@
   color:var(--btn-color);
   width:30px;
   height:30px;
+}
+.wallet-modal{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:rgb(15,22,31);
+  border:var(--border);
+  z-index:100;
 }
