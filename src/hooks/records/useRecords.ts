@@ -31,6 +31,25 @@ export function useRecords({
         id: "123",
         createdAt: "2026-09-20",
         status: "local",
+        wallet:{
+          totalMoney:65,
+          walletLog:[
+            {
+              id:"1",
+              amount:900,
+              details:"salary on my bank",
+              date:'2026-10-08',
+              method:'sum'
+            },
+            {
+              id:"2",
+              amount:10,
+              details:"expense on ulam",
+              date:'2026-10-08',
+              method:'subtract'
+            }
+          ]
+        },
         customItems: [
           {
             name: "candy",
@@ -61,7 +80,8 @@ export function useRecords({
             quantity: 2,
             price: 15,
             category: "098",
-            totalPrice: 30
+            totalPrice: 30,
+            isRecordedWallet:true,
           },
           {
             name: "Milk",
@@ -70,7 +90,8 @@ export function useRecords({
             quantity: 2,
             price: 15,
             category: "098",
-            totalPrice: 30
+            totalPrice: 30,
+            isRecordedWallet:false,
           },
           {
             name: "Candy",
@@ -79,7 +100,8 @@ export function useRecords({
             quantity: 5,
             price: 1,
             category: "765",
-            totalPrice: 5
+            totalPrice: 5,
+            isRecordedWallet:false,
           },
           {
             name: "ulam",
@@ -88,7 +110,8 @@ export function useRecords({
             quantity: 1,
             price: 40,
             category: "098",
-            totalPrice: 40
+            totalPrice: 40,
+            isRecordedWallet:true,
           }
         ]
       }

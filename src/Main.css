@@ -4,7 +4,9 @@
 .barrier-expand-btn,
 .barrier-confirm-modal,
 .barrier-menu-custom-item,
-.barrier-category{
+.barrier-category,
+.barrier-wallet-form,
+.barrier-wallet-modal{
   background-color:black;
   position:absolute;
   top:0;
@@ -66,4 +68,14 @@
 .arrow-unrotate{
   transition: transform 0.01s;
   transform: rotateZ(-360deg);
+}
+.barrier-wallet-form{
+  position:fixed;
+  z-index:1;
+  opacity:0;
+}
+.barrier-wallet-modal{
+  position:fixed;
+  z-index:100;
+  opacity:0;
 }

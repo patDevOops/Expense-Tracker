@@ -1,0 +1,298 @@
+.wallet {
+  margin: 3px 15px;
+  border: var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 0.7rem;
+  background: rgb(26, 32, 43);
+}
+
+.wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wallet-title {
+  font-size: 0.8rem;
+  color: rgb(173, 178, 176);
+  font-weight: 500;
+}
+
+.wallet-link {
+  font-size: 0.5rem;
+  color: var(--text-blur);
+}
+
+.wallet-budget {
+  color: var(--btn-color);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0.2rem 0 0.05rem;
+}
+
+.wallet-icon {
+  color: var(--btn-color);
+  width: 30px;
+  height: 30px;
+}
+
+/* Wallet bottom sheet */
+.wallet-modal {
+  position: fixed;
+  inset: 50dvh 0 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-height: 0;
+  padding: 0.75rem;
+  overflow: hidden;
+  background: rgb(15, 22, 31);
+  border: var(--border);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.wallet-modal-head {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.wallet-modal-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 44px;
+}
+
+.wallet-modal-summary p {
+  color: var(--btn-color);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.wallet-btn-cont {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.wallet-btn-add-money,
+.wallet-btn-edit-money {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: white;
+  font-size: 1.1rem;
+  background: var(--btn-color);
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.wallet-btn-add-money:active,
+.wallet-btn-edit-money:active,
+.wallet-form-add-money-btn:active,
+.wallet-edit-btn-save-cont button:active {
+  transform: scale(0.97);
+}
+
+/* Shared form layout */
+.wallet-form-add-money,
+.wallet-form-edit-money {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  gap: 0.65rem;
+  padding: 0.8rem;
+  background: rgb(21, 29, 41);
+  border: var(--border);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.wallet-form-add-money {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.wallet-form-toggle-method,
+.wallet-form-edit-heading {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 24px;
+  color: var(--btn-color);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.wallet-form-toggle-method svg,
+.wallet-form-edit-heading svg {
+  flex: 0 0 auto;
+}
+
+.wallet-form-input-amount,
+.wallet-form-input-details,
+.wallet-form-input-date,
+.wallet-input-money-amount-cont,
+.wallet-input-details-cont {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 0.3rem;
+}
+
+.wallet-form-input-amount {
+  grid-column: 1 / -1;
+}
+
+.wallet-form-input-details {
+  grid-column: 1 / -1;
+}
+
+.wallet-form-input-date {
+  grid-column: 1 / 2;
+}
+
+.wallet-form-input-label {
+  display: block;
+  color: var(--text-blur);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.wallet-form-input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  padding: 0.55rem 0.7rem;
+  color: white;
+  font: inherit;
+  font-size: 0.85rem;
+  background: rgb(26, 32, 43);
+  border: var(--border);
+  border-radius: 8px;
+  outline: none;
+}
+
+.wallet-form-input:focus {
+  border-color: var(--btn-color);
+  box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.14);
+}
+
+.wallet-form-add-money-btn-cont {
+  display: flex;
+  grid-column: 2 / 3;
+  align-items: end;
+  justify-content: end;
+  min-width: 0;
+}
+
+.wallet-form-add-money-btn,
+.wallet-edit-btn-save-cont button {
+  min-height: 40px;
+  padding: 0.55rem 1rem;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--btn-color);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+}
+
+.wallet-form-add-money-btn {
+  width: 100%;
+}
+
+.wallet-form-edit-money {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.wallet-edit-btn-save-cont {
+  display: flex;
+  grid-column: 1 / -1;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.wallet-edit-btn-save-cont button {
+  min-width: 88px;
+}
+
+@media (max-width: 360px) {
+  .wallet-modal {
+    padding: 0.6rem;
+  }
+
+  .wallet-form-add-money,
+  .wallet-form-edit-money {
+    gap: 0.5rem;
+    padding: 0.65rem;
+  }
+
+  .wallet-form-input {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+}
+
+.wallet-row-details {
+  font-size: 0.7rem;
+  color: var(--text-blur);
+  display: grid;
+  grid-template-columns: 2rem 1fr 1.3fr 1fr 0.2fr;
+}
+.wallet-dropdown-date {
+  display: flex;
+}
+.wallet-icon-dropdown {
+  display: flex;
+  align-item: center;
+  justify-content: center;
+}
+.wallet-record {
+  margin: 0 0 0.1rem 0;
+  
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.7fr 0.2fr;
+  font-size: 0.85rem;
+  column-gap: 0.1rem;
+  align-items: center;
+  /*border: var(--border);*/
+  padding: 0.4rem 0.4rem 0.4rem 0.9rem;
+  border-radius: 6px;
+  background:hwb(120 0% 0% / 0.1450980392156863);
+  .wallet-record-date {
+    text-align: center;
+    font-size: 0.5rem;
+    color: var(--text-blur);
+  }
+  .wallet-record-detail {
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--text-blur);
+  }
+  .wallet-record-amount {
+    color: limegreen;
+    font-weight: 700;
+  }
+}
