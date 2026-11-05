@@ -6,6 +6,12 @@ import { SideBar } from "./SideBar.js";
 import { Modal } from "./modal/Modal.js";
 import "./Main.css";
 import { Barrier } from "./components/barrier.js";
+type WalletType = {
+  id: string;
+  amount: number;
+  details: string;
+  date: string;
+};
 export type Item = {
   name: string;
   id: string;
@@ -36,6 +42,7 @@ export type RecordType = {
   items: Item[];
   customItems: CustomItem[];
   category: Category[];
+  wallets:WalletType[]
 };
 export type UseRecordHook = {
   records: RecordType[];
@@ -95,10 +102,14 @@ function App() {
     form,
   });
 
-  const [currentRecordId, setCurrentRecordId] = useState<string>(localStorage.getItem("selected-record") ?? "");
+  const [currentRecordId, setCurrentRecordId] = useState<string>(
+    localStorage.getItem("selected-record") ?? "",
+  );
   const switchViewRec = (id: string) => {
     setCurrentRecordId(id);
   };
+  const wallets = records.find((a) => currentRecordId === a.id)?.wallets ?? [];
+  console.log("first",wallets)
   //find saved custom items in records
   const customItems: CustomItem[] =
     records.find((a) => currentRecordId === a.id)?.customItems ?? [];
@@ -205,6 +216,7 @@ function App() {
       )}
 
       <Contents
+        wallets={wallets}
         form={form}
         setForm={setForm}
         saveItem={saveItem}

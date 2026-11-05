@@ -3,8 +3,10 @@ import dayjs from "dayjs";
 import { useCustomItems } from "./useCustomItems.js";
 import { useCategory } from "./useCategory.js";
 import { useItems } from "./useItems.js";
+import { useWallet } from "./useWallet.ts";
 import type { Dispatch, SetStateAction } from "react";
 import type { FormType, RecordType } from "../../App.js";
+
 export type UseRecordParam = {
   matchRec: (id: string) => boolean;
   clearForm: () => void;
@@ -31,25 +33,20 @@ export function useRecords({
         id: "123",
         createdAt: "2026-09-20",
         status: "local",
-        wallet:{
-          totalMoney:65,
-          walletLog:[
-            {
-              id:"1",
-              amount:900,
-              details:"salary on my bank",
-              date:'2026-10-08',
-              method:'sum'
-            },
-            {
-              id:"2",
-              amount:10,
-              details:"expense on ulam",
-              date:'2026-10-08',
-              method:'subtract'
-            }
-          ]
-        },
+        wallets: [
+          {
+            id: "1",
+            amount: 900,
+            details: "salary on my bank",
+            date: "2026-10-08"
+          },
+          {
+            id: "2",
+            amount: -10,
+            details: "expense on ulam",
+            date: "2026-10-08"
+          },
+        ],
         customItems: [
           {
             name: "candy",
@@ -81,7 +78,7 @@ export function useRecords({
             price: 15,
             category: "098",
             totalPrice: 30,
-            isRecordedWallet:true,
+            isRecordedWallet: true
           },
           {
             name: "Milk",
@@ -91,7 +88,7 @@ export function useRecords({
             price: 15,
             category: "098",
             totalPrice: 30,
-            isRecordedWallet:false,
+            isRecordedWallet: false
           },
           {
             name: "Candy",
@@ -101,7 +98,7 @@ export function useRecords({
             price: 1,
             category: "765",
             totalPrice: 5,
-            isRecordedWallet:false,
+            isRecordedWallet: false
           },
           {
             name: "ulam",
@@ -111,7 +108,7 @@ export function useRecords({
             price: 40,
             category: "098",
             totalPrice: 40,
-            isRecordedWallet:true,
+            isRecordedWallet: true
           }
         ]
       }
@@ -137,7 +134,7 @@ export function useRecords({
           }
         ],
         items: [],
-        customItems:[]
+        customItems: []
       } as unknown as RecordType // Type assertion only; preserves the original record object.
     ]);
   };
@@ -158,6 +155,7 @@ export function useRecords({
     records,
     form
   });
+
   return {
     addRecord,
     deleteRecord,

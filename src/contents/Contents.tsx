@@ -15,7 +15,8 @@ import type {
   CustomItem,
   Item,
   FormType,
-} from "../App.js";
+  WalletType,
+} from "../App";
 /*
 type Items = {
   name: string;
@@ -42,6 +43,7 @@ type ContentsProp = {
   // Match the React setter returned by useState; it accepts values and updater callbacks.
   setForm: Dispatch<SetStateAction<FormType>>;
   form: FormType;
+  wallets:WalletType[]
 };
 export function Contents({
   currentRecordId,
@@ -56,6 +58,7 @@ export function Contents({
   clearForm,
   setForm,
   form,
+  wallets,
 }:ContentsProp) {
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");
@@ -157,7 +160,7 @@ export function Contents({
 
   return (
     <div className="main">
-      <Wallet/>
+      <Wallet wallets={wallets}/>
       <Date
         selectedDate={selectedDate}
         changeDate={changeDate}
