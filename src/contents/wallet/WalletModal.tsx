@@ -67,6 +67,31 @@ export function WalletModal({ wallets,totalWalletMoney }) {
               <FaPlus />
               <span>Add money</span>
             </div>
+            <div className="wallet-form-money-action" role="group" aria-label="Wallet money action">
+              <label className="wallet-form-money-action-option">
+                <input
+                  type="radio"
+                  name="wallet-money-action"
+                  value="add"
+                  defaultChecked
+                />
+                <span className="wallet-form-money-action-choice wallet-form-money-action-add">
+                  <FaPlus />
+                  <span>Add to wallet</span>
+                </span>
+              </label>
+              <label className="wallet-form-money-action-option">
+                <input
+                  type="radio"
+                  name="wallet-money-action"
+                  value="subtract"
+                />
+                <span className="wallet-form-money-action-choice wallet-form-money-action-subtract">
+                  <FaMinus />
+                  <span>Subtract from wallet</span>
+                </span>
+              </label>
+            </div>
             <div className="wallet-form-input-amount">
               <label className="wallet-form-input-label">Amount</label>
               <input className="wallet-form-input" />

@@ -146,6 +146,71 @@
   flex: 0 0 auto;
 }
 
+.wallet-form-money-action {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.wallet-form-money-action-option {
+  position: relative;
+  display: block;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.wallet-form-money-action-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.wallet-form-money-action-choice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 42px;
+  padding: 0.55rem 0.45rem;
+  color: var(--text-blur);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+  background: rgb(26, 32, 43);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.wallet-form-money-action-choice svg {
+  flex: 0 0 auto;
+}
+
+.wallet-form-money-action-option input:checked + .wallet-form-money-action-add {
+  color: #55d889;
+  background: rgba(34, 197, 94, 0.13);
+  border-color: rgba(34, 197, 94, 0.65);
+}
+
+.wallet-form-money-action-option input:checked + .wallet-form-money-action-subtract {
+  color: #ff7777;
+  background: rgba(239, 68, 68, 0.13);
+  border-color: rgba(239, 68, 68, 0.65);
+}
+
+.wallet-form-money-action-option input:focus-visible + .wallet-form-money-action-choice {
+  outline: 2px solid var(--btn-color);
+  outline-offset: 2px;
+}
+
 .wallet-form-input-amount,
 .wallet-form-input-details,
 .wallet-form-input-date,
