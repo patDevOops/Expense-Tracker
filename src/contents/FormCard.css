@@ -183,7 +183,7 @@
   gap:5px;
 }
 .form-price-each{
-  width:60%
+  width:45%
 }
 .form-quantity{
   width:40%;
@@ -195,4 +195,16 @@
 .arrow-rotate-form-return{
   transition:transform 0.15s;
   transform: rotateX(15deg);
+}
+.form-wallet-toggle{
+  width:15%;
+}
+.form-wallet-toggle div{
+  width:100%
+}
+.form-wallet-icon{
+  font-size:2.8rem;
+}
+.form-wallet-icon.active{
+  color:var(--btn-color);
 }

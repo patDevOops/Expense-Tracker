@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import "./FormCard.css";
 import { IoIosArrowDown } from "react-icons/io";
 import { Barrier } from "../components/barrier.js";
+import { FaWallet } from "react-icons/fa";
 import type {
   Item,
   Category,
@@ -39,6 +40,7 @@ export function FormCard({
   records,
 }: FormCardProps) {
   const [isShowMoreForm, setIsShowMoreForm] = useState<boolean>(false);
+  const [isActiveWallet,setIsActiveWallet]=useState(false);
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
   };
@@ -276,7 +278,16 @@ export function FormCard({
                     </button>
                   </div>
                 </div>
+                
+                <div className="form-wallet-toggle">
+                  <label className="label">Wallet</label>
+                  <div onClick={()=>{setIsActiveWallet(isActiveWallet?false:true)}}>
+                    <FaWallet className={`form-wallet-icon ${isActiveWallet&&"active"}`}/>
+                  </div>
+                </div>
+                
               </div>
+              
             </div>
           )}
 

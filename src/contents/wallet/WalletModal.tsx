@@ -150,7 +150,9 @@ export function WalletModal({ wallets,totalWalletMoney }) {
         <div className="wallet-records-gen">
           {wallets.map((wallet) => {
             return (
-              <div className={`wallet-record ${wallet.amount>=0?'background-green':'background-red'}`}>
+              <div 
+                key={wallet.id}
+                className={`wallet-record ${wallet.amount>=0?'background-green':'background-red'}`}>
                 <span className={`wallet-record-amount ${wallet.amount>=0?'text-green':'text-red'}`}>
                   <p>{wallet.amount >= 0 ? <FaPlus/> : <FaMinus />}
                   </p>
