@@ -5,6 +5,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoTrashBin } from "react-icons/io5";
 import { LuPencil } from "react-icons/lu";
+import { FaWallet } from "react-icons/fa";
 import type { Item, Category } from "../../App.js";
 type ItemsGenProps = {
   item: Item;
@@ -42,9 +43,9 @@ export function ItemsGen({
   const isShowQtyCalc = item.price && item.quantity !== 1 ? true : false;
 
   // find() can return undefined when the item has no matching category.
-  const categoryName: string | undefined = category.find(
+  const categoryName: string = category.find(
     (a) => a.id === item.category,
-  )?.categoryName;
+  )?.categoryName||"";
   const removeBarrier = () => {
     setIsConfirmModal(false);
   };
@@ -96,6 +97,9 @@ export function ItemsGen({
                       {(item.totalPrice / item.quantity).toFixed(2)}
                     </span>
                   )}
+                  {item.walletId && <span>
+                    <FaWallet/>
+                  </span>}
                 </div>
               </div>
 

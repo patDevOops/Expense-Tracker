@@ -46,6 +46,12 @@ export function useRecords({
             details: "expense on ulam",
             date: "2026-10-08"
           },
+          {
+            id: "3",
+            amount: -5,
+            details: "expense on Candy",
+            date: "2026-09-23"
+          }
         ],
         customItems: [
           {
@@ -77,8 +83,7 @@ export function useRecords({
             quantity: 2,
             price: 15,
             category: "098",
-            totalPrice: 30,
-            isRecordedWallet: true
+            totalPrice: 30
           },
           {
             name: "Milk",
@@ -87,8 +92,7 @@ export function useRecords({
             quantity: 2,
             price: 15,
             category: "098",
-            totalPrice: 30,
-            isRecordedWallet: false
+            totalPrice: 30
           },
           {
             name: "Candy",
@@ -98,7 +102,7 @@ export function useRecords({
             price: 1,
             category: "765",
             totalPrice: 5,
-            isRecordedWallet: false
+            walletId: "3"
           },
           {
             name: "ulam",
@@ -108,7 +112,7 @@ export function useRecords({
             price: 40,
             category: "098",
             totalPrice: 40,
-            isRecordedWallet: true
+            walletId: "2"
           }
         ]
       }
@@ -134,7 +138,8 @@ export function useRecords({
           }
         ],
         items: [],
-        customItems: []
+        customItems: [],
+        wallets:[]
       } as unknown as RecordType // Type assertion only; preserves the original record object.
     ]);
   };
@@ -155,7 +160,7 @@ export function useRecords({
     records,
     form
   });
-
+  const { addWalletRecord } = useWallet({ matchRec, setRecords, records });
   return {
     addRecord,
     deleteRecord,
@@ -168,6 +173,7 @@ export function useRecords({
     renameCategory,
     addItems,
     removeItems,
-    saveItem
+    saveItem,
+    addWalletRecord
   };
 }

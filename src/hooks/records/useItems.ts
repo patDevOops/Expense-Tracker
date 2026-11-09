@@ -1,7 +1,6 @@
-
-import dayjs from 'dayjs';
-import type {UseItemsParam} from './useRecords.js';
-import type {Item} from '../../App.js';
+import dayjs from "dayjs";
+import type { UseItemsParam } from "./useRecords.js";
+import type { Item } from "../../App.js";
 export function useItems({
   setRecords,
   matchRec,
@@ -9,24 +8,24 @@ export function useItems({
   setIsEditingItem,
   records,
   form
-}:UseItemsParam) {
-  const addItems = (newItems:Item) => {
-    
-    setRecords(
-      records.map((record) => {
+}: UseItemsParam) {
+  const addItems = (newItems: Item) => {
+    setRecords((prevRecords) =>
+      prevRecords.map((record) => {
         if (matchRec(record.id)) {
           return {
             ...record,
             items: [...record.items, newItems]
           };
         }
+
         return record;
       })
     );
     clearForm();
   };
 
-  const removeItems = (id:string) => {
+  const removeItems = (id: string) => {
     setRecords(
       records.map((record) => {
         if (matchRec(record.id)) {

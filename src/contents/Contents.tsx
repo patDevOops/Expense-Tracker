@@ -59,6 +59,7 @@ export function Contents({
   setForm,
   form,
   wallets,
+  addWalletRecord
 }:ContentsProp) {
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");
@@ -178,6 +179,7 @@ export function Contents({
         selectedCategory={selectedCategory}
       />
       <FormCard
+        addWalletRecord={addWalletRecord}
         customItems={customItems}
         saveItem={saveItem}
         isEditingItem={isEditingItem}

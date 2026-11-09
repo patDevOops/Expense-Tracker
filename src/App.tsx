@@ -95,6 +95,7 @@ function App() {
     addItems,
     removeItems,
     saveItem,
+    addWalletRecord
   }: UseRecordHook = useRecords({
     matchRec,
     setIsEditingItem,
@@ -109,7 +110,6 @@ function App() {
     setCurrentRecordId(id);
   };
   const wallets = records.find((a) => currentRecordId === a.id)?.wallets ?? [];
-  console.log("first",wallets)
   //find saved custom items in records
   const customItems: CustomItem[] =
     records.find((a) => currentRecordId === a.id)?.customItems ?? [];
@@ -216,6 +216,7 @@ function App() {
       )}
 
       <Contents
+        addWalletRecord={addWalletRecord}
         wallets={wallets}
         form={form}
         setForm={setForm}

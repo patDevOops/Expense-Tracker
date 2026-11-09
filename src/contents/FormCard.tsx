@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import type { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
 import dayjs from "dayjs";
-import "./FormCard.css";
+import { formatMY } from "../utils/date.js";
 import { IoIosArrowDown } from "react-icons/io";
 import { Barrier } from "../components/barrier.js";
 import { FaWallet } from "react-icons/fa";
+import "./FormCard.css";
 import type {
   Item,
   Category,
@@ -38,9 +39,10 @@ export function FormCard({
   saveItem,
   customItems,
   records,
+  addWalletRecord,
 }: FormCardProps) {
   const [isShowMoreForm, setIsShowMoreForm] = useState<boolean>(false);
-  const [isActiveWallet,setIsActiveWallet]=useState(false);
+  const [isActiveWallet, setIsActiveWallet] = useState(false);
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
   };
@@ -85,7 +87,21 @@ export function FormCard({
   };
 
   const addItemsForm = () => {
-    if (!form.name || !form.totalPrice) return;
+    console.log("totalPrice",form.totalPrice,form.price)
+    if (!form.name || (!form.totalPrice&&!form.price)) return;
+    let walletId;
+    if (isActiveWallet) {
+      walletId = crypto.randomUUID();
+      addWalletRecord({
+        id: walletId,
+        details: `expense on ${form.name}`,
+        amount: form.price
+          ? -1 * (form.price * form.quantity)
+          : -1 * form.totalPrice,
+        date: `${form.date ? form.date : dayjs().format("YYYY-MM-D")}`,
+      });
+    }
+
     addItems({
       ...form,
       quantity: form.quantity <= 0 ? 1 : form.quantity,
@@ -95,6 +111,7 @@ export function FormCard({
         ? (form.price as number) * form.quantity
         : (form.totalPrice as number),
       price: form.price ? (form.price as number) : 0,
+      walletId,
     });
   };
   // The caller only passes these three fields; the saved item ID is not used here.
@@ -171,7 +188,7 @@ export function FormCard({
 
                 <IoIosArrowDown
                   size="23"
-                  className={`item-pick-arrow ${isPickItem ?"arrow-rotate-form":"arrow-rotate-form-return"}`}
+                  className={`item-pick-arrow ${isPickItem ? "arrow-rotate-form" : "arrow-rotate-form-return"}`}
                   onClick={pickItem}
                 />
               </div>
@@ -278,24 +295,29 @@ export function FormCard({
                     </button>
                   </div>
                 </div>
-                
+
                 <div className="form-wallet-toggle">
                   <label className="label">Wallet</label>
-                  <div onClick={()=>{setIsActiveWallet(isActiveWallet?false:true)}}>
-                    <FaWallet className={`form-wallet-icon ${isActiveWallet&&"active"}`}/>
+                  <div
+                    onClick={() => {
+                      setIsActiveWallet(isActiveWallet ? false : true);
+                    }}
+                  >
+                    <FaWallet
+                      className={`form-wallet-icon ${isActiveWallet && "active"}`}
+                    />
                   </div>
                 </div>
-                
               </div>
-              
             </div>
           )}
 
           <div className="form-btns">
             <button onClick={expandMoreForm}>
-              <IoIosArrowDown 
-                className={`${isShowMoreForm ?"arrow-rotate-form":"arrow-rotate-form-return"}`}
-                size="22" />
+              <IoIosArrowDown
+                className={`${isShowMoreForm ? "arrow-rotate-form" : "arrow-rotate-form-return"}`}
+                size="22"
+              />
             </button>
             <button
               onClick={() => {
