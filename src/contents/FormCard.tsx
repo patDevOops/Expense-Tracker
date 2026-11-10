@@ -42,7 +42,10 @@ export function FormCard({
   addWalletRecord,
 }: FormCardProps) {
   const [isShowMoreForm, setIsShowMoreForm] = useState<boolean>(false);
-  const [isActiveWallet, setIsActiveWallet] = useState(false);
+  const [isActiveWallet, setIsActiveWallet] = useState(
+    localStorage.getItem("wallet-toggle") || "",
+  );
+
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
   };
@@ -87,8 +90,7 @@ export function FormCard({
   };
 
   const addItemsForm = () => {
-    console.log("totalPrice",form.totalPrice,form.price)
-    if (!form.name || (!form.totalPrice&&!form.price)) return;
+    if (!form.name || (!form.totalPrice && !form.price)) return;
     let walletId;
     if (isActiveWallet) {
       walletId = crypto.randomUUID();
@@ -300,7 +302,13 @@ export function FormCard({
                   <label className="label">Wallet</label>
                   <div
                     onClick={() => {
-                      setIsActiveWallet(isActiveWallet ? false : true);
+                      const newValue = isActiveWallet ? false : true;
+                      setIsActiveWallet(newValue);
+
+                      localStorage.setItem(
+                        "wallet-toggle",
+                        newValue ? "true" : "",
+                      );
                     }}
                   >
                     <FaWallet
