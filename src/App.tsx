@@ -101,7 +101,8 @@ function App() {
     removeItems,
     saveItem,
     addWalletRecord,
-    saveWalletEdited
+    saveWalletEdited,
+    deleteWalletRecord
   }: UseRecordHook = useRecords({
     matchRec,
     setIsEditingItem,
@@ -134,7 +135,7 @@ function App() {
       quantity: 1,
       id: "",
       totalPrice: "",
-      walletId:localStorage.getItem("wallet-toggle")||undefined
+      walletId:localStorage.getItem("wallet-toggle")
     });
   }
 
@@ -178,7 +179,6 @@ function App() {
   function matchRec(a: string): boolean {
     return a === currentRecordId;
   }
-
   //save storage when modifying records
   useEffect(() => {
     localStorage.setItem("records", JSON.stringify(records));
@@ -223,6 +223,7 @@ function App() {
       )}
 
       <Contents
+        deleteWalletRecord={deleteWalletRecord}
         saveWalletEdited={saveWalletEdited}
         addWalletRecord={addWalletRecord}
         wallets={wallets}

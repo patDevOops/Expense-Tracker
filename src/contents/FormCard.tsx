@@ -39,6 +39,7 @@ export function FormCard({
   customItems,
   addWalletRecord,
   saveWalletEdited,
+  deleteWalletRecord,
 }: FormCardProps) {
   const [isShowMoreForm, setIsShowMoreForm] = useState<boolean>(false);
   const [isShowConfirmModal, setIsShowConfirmModal] = useState(false);
@@ -166,13 +167,13 @@ export function FormCard({
               </button>
             </div>
           )}
-          {typeof isShowConfirmModal === "string" && isShowConfirmModal && (
+          {isShowConfirmModal==="add-wallet" && (
             <div className="form-card-confirm-modal">
               <p>Add This Item To Wallet?</p>
               <button
                 onClick={() => {
                   addWalletRecord({
-                    id: form.tempWalletId,
+                    id: form.walletId,
                     details: `expense on ${form.name}`,
                     amount: form.price
                       ? -1 * (form.price * form.quantity)
@@ -195,6 +196,29 @@ export function FormCard({
               </button>
             </div>
           )}
+          {isShowConfirmModal==="delete-wallet" && (
+            <div className="form-card-confirm-modal">
+              <p>Delete This Item To Wallet?</p>
+              <button
+                onClick={() => {
+                  deleteWalletRecord(form.tempWalletId)
+                  setIsShowConfirmModal(false);
+                  saveItem();
+                }}
+              >
+                Yes
+              </button>
+              <button
+                onClick={() => {
+                  setIsShowConfirmModal(false);
+                  saveItem();
+                }}
+              >
+                No
+              </button>
+            </div>
+          )}
+          
           <Barrier
             a={isShowConfirmModal}
             b="barrier-form-confirm-modal"
@@ -391,6 +415,10 @@ export function FormCard({
             <button
               onClick={() => {
                 if (isEditingItem) {
+                  if(form.tempWalletId&&!form.walletId){
+                    setIsShowConfirmModal("delete-wallet");
+                    return
+                  }
                   if (form.tempWalletId) {
                     setIsShowConfirmModal(true);
                     return;

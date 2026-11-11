@@ -63,6 +63,7 @@ export function Contents({
   wallets,
   addWalletRecord,
   saveWalletEdited,
+  deleteWalletRecord,
 }:ContentsProp) {
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");
@@ -183,6 +184,7 @@ export function Contents({
         selectedCategory={selectedCategory}
       />
       <FormCard
+        deleteWalletRecord={deleteWalletRecord}
         saveWalletEdited={saveWalletEdited}
         addWalletRecord={addWalletRecord}
         customItems={customItems}
