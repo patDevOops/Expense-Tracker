@@ -209,18 +209,51 @@
   color:var(--btn-color);
 }
 .form-card-confirm-modal{
-  background:var(--main-color);
   position:fixed;
-  z-index: 180;
-  right:60px;
-  left:60px;
-  border-radius:5px;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:calc(100% - 40px);
+  max-width:360px;
+  box-sizing:border-box;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0.6rem;
+  padding:1rem;
+  background:var(--main-color);
   border:var(--border);
-  padding:0.4rem;
+  border-radius:10px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.35);
+  z-index:180;
 }
 .form-card-confirm-modal p{
+  grid-column:1 / -1;
+  margin:0 0 0.35rem;
+  color:white;
   text-align:center;
-  font-size:0.8rem;
-  font-weight:700;
-  margin:0.2rem
+  font-size:1rem;
+  font-weight:600;
+  line-height:1.4;
+}
+.form-card-confirm-modal button{
+  min-height:42px;
+  padding:0.65rem;
+  border:1px solid #2a2f3a;
+  border-radius:6px;
+  color:white;
+  font-size:0.9rem;
+  font-weight:600;
+}
+.form-card-confirm-modal button:first-of-type{
+  background:#4f8cff;
+  border-color:#4f8cff;
+}
+.form-card-confirm-modal button:first-of-type:active{
+  background:#689cff;
+}
+.form-card-confirm-modal button:last-of-type{
+  background:hwb(218 10% 83%);
+}
+.form-card-confirm-modal button:last-of-type:active{
+  background:hwb(217 12% 80%);
 }
