@@ -5,15 +5,15 @@ import { Barrier } from "../../components/barrier.tsx";
 import "./Wallet.css";
 import type { WalletType } from "../../App.tsx";
 type WalletProps = {
-  wallet: WalletType[];
+  wallets: WalletType[];
 };
 export function Wallet({ wallets }: WalletProps) {
   const [isShowWalletModal, setIsShowWalletModal] = useState(false);
-  const totalWalletMoney: number = wallets
+  const totalWalletMoney: number = Number(wallets
     .reduce((acc, current) => {
       return (acc += current.amount);
     }, 0)
-    .toFixed(2);
+    .toFixed(2));
   return (
     <div className="wallet">
       <Barrier

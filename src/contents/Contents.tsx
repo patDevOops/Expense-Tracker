@@ -45,7 +45,8 @@ type ContentsProp = {
   form: FormType;
   wallets:WalletType[];
   addWalletRecord:(newWalletRecord:WalletType)=>void;
-  saveWalletEdited:(form:WalletType)=>void
+  saveWalletEdited:(form:WalletType)=>void;
+  deleteWalletRecord:(id:string)=>void
 };
 export function Contents({
   currentRecordId,

@@ -11,6 +11,7 @@ import type {
   FormType,
   CustomItem,
   RecordType,
+  WalletType
 } from "../App.js";
 type FormCardProps = {
   // Contents passes records here; this component does not currently read the prop.
@@ -26,6 +27,9 @@ type FormCardProps = {
   saveItem: () => void;
   // FormCard uses map() to show all saved custom items.
   customItems: CustomItem[];
+  addWalletRecord:(newWalletRecords:WalletType)=>void;
+  saveWalletEdited:(form:WalletType)=>void;
+  deleteWalletRecord:(id:string)=>void;
 };
 export function FormCard({
   isShowForm,

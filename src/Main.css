@@ -82,5 +82,6 @@
 }
 .barrier-form-confirm-modal{
   position:fixed;
-  z-index:175
+  z-index:175;
+  opacity:0;
 }

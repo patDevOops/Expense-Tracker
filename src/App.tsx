@@ -58,7 +58,8 @@ export type UseRecordHook = {
   removeItems: (id: string) => void;
   saveItem: () => void;
   addWalletRecord:(newWalletRecord:WalletType)=>void;
-  saveWalletEdited:(form:WalletType)=>void
+  saveWalletEdited:(form:WalletType)=>void;
+  deleteWalletRecord:(id:string)=>void
 };
 // Exported so other components can share the exact form data type.
 export type FormType = {
@@ -71,7 +72,8 @@ export type FormType = {
   quantity: number;
   id: string;
   totalPrice: "" | number;
-  walletId:string|undefined
+  walletId:string|undefined;
+  tempWalletId?:string|undefined
 };
 function App() {
   const [isEditingItem, setIsEditingItem] = useState<boolean>(false);
@@ -85,7 +87,6 @@ function App() {
     id: "",
     totalPrice: "",
     walletId:localStorage.getItem("wallet-toggle"),
-    tempWalletId:null
   });
   const {
     records,
