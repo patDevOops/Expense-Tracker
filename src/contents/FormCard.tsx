@@ -40,12 +40,11 @@ export function FormCard({
   customItems,
   records,
   addWalletRecord,
+  tempWalletId,
+  saveWalletEdited
 }: FormCardProps) {
   const [isShowMoreForm, setIsShowMoreForm] = useState<boolean>(false);
-  const [isActiveWallet, setIsActiveWallet] = useState(
-    localStorage.getItem("wallet-toggle") || "",
-  );
-
+  const [isShowConfirmModal, setIsShowConfirmModal] = useState(false);
   const expandMoreForm = () => {
     setIsShowMoreForm(isShowMoreForm ? false : true);
   };
@@ -92,7 +91,7 @@ export function FormCard({
   const addItemsForm = () => {
     if (!form.name || (!form.totalPrice && !form.price)) return;
     let walletId;
-    if (isActiveWallet) {
+    if (form.walletId) {
       walletId = crypto.randomUUID();
       addWalletRecord({
         id: walletId,
@@ -141,6 +140,65 @@ export function FormCard({
 
       {isShowForm && (
         <div className="form-cont">
+          {typeof isShowConfirmModal === "boolean" && isShowConfirmModal && (
+            <div className="form-card-confirm-modal">
+              <p>Modified Wallet?</p>
+              <button
+                onClick={() => {
+                  saveWalletEdited({
+                    id: tempWalletId,
+                    details: `expense on ${form.name}`,
+                    amount: form.price
+                      ? -1 * (form.price * form.quantity)
+                      : -1 * form.totalPrice,
+                    date: `${form.date ? form.date : dayjs().format("YYYY-MM-D")}`,
+                  });
+                  setIsShowConfirmModal(false);
+                  saveItem();
+                }}
+              >
+                Yes
+              </button>
+              <button
+                onClick={() => {
+                  saveItem();
+                  setIsShowConfirmModal(false);
+                }}
+              >
+                No
+              </button>
+            </div>
+          )}
+          {typeof isShowConfirmModal === "string" && isShowConfirmModal && (
+            <div className="form-card-confirm-modal">
+              <p>Add This Item To Wallet?</p>
+              <button
+                onClick={() => {
+                  addWalletRecord({
+                    id: tempWalletId,
+                    details: `expense on ${form.name}`,
+                    amount: form.price
+                      ? -1 * (form.price * form.quantity)
+                      : -1 * form.totalPrice,
+                    date: `${form.date ? form.date : dayjs().format("YYYY-MM-D")}`,
+                  });
+                  setIsShowConfirmModal(false)
+                  saveItem();
+                }}
+              >
+                Yes
+              </button>
+              <button onClick={()=>{
+              setIsShowConfirmModal(false)
+                  saveItem();
+              }}>No</button>
+            </div>
+          )}
+          <Barrier
+            a={isShowConfirmModal}
+            b="barrier-form-confirm-modal"
+            c={setIsShowConfirmModal}
+          />
           <Barrier a={isPickItem} b="barrier-pick-item" c={setIspickItem} />
           <div className="form-name form">
             <label className="label">Item Name</label>
@@ -302,17 +360,16 @@ export function FormCard({
                   <label className="label">Wallet</label>
                   <div
                     onClick={() => {
-                      const newValue = isActiveWallet ? false : true;
-                      setIsActiveWallet(newValue);
-
-                      localStorage.setItem(
-                        "wallet-toggle",
-                        newValue ? "true" : "",
-                      );
+                      setForm({
+                        ...form,
+                        walletId: form.walletId
+                          ? undefined
+                          : crypto.randomUUID(),
+                      });
                     }}
                   >
                     <FaWallet
-                      className={`form-wallet-icon ${isActiveWallet && "active"}`}
+                      className={`form-wallet-icon ${form.walletId && "active"}`}
                     />
                   </div>
                 </div>
@@ -330,6 +387,14 @@ export function FormCard({
             <button
               onClick={() => {
                 if (isEditingItem) {
+                  if (tempWalletId) {
+                    setIsShowConfirmModal(true);
+                    return;
+                  }
+                  if (form.walletId) {
+                    setIsShowConfirmModal("add-wallet");
+                    return;
+                  }
                   saveItem();
                   return;
                 }

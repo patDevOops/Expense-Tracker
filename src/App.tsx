@@ -81,6 +81,7 @@ function App() {
     quantity: 1,
     id: "",
     totalPrice: "",
+    walletId:undefined
   });
   const {
     records,
@@ -95,7 +96,8 @@ function App() {
     addItems,
     removeItems,
     saveItem,
-    addWalletRecord
+    addWalletRecord,
+    saveWalletEdited
   }: UseRecordHook = useRecords({
     matchRec,
     setIsEditingItem,
@@ -128,6 +130,7 @@ function App() {
       quantity: 1,
       id: "",
       totalPrice: "",
+      walletId:undefined
     });
   }
 
@@ -216,6 +219,7 @@ function App() {
       )}
 
       <Contents
+        saveWalletEdited={saveWalletEdited}
         addWalletRecord={addWalletRecord}
         wallets={wallets}
         form={form}

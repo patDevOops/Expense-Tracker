@@ -208,3 +208,19 @@
 .form-wallet-icon.active{
   color:var(--btn-color);
 }
+.form-card-confirm-modal{
+  background:var(--main-color);
+  position:fixed;
+  z-index: 180;
+  right:60px;
+  left:60px;
+  border-radius:5px;
+  border:var(--border);
+  padding:0.4rem;
+}
+.form-card-confirm-modal p{
+  text-align:center;
+  font-size:0.8rem;
+  font-weight:700;
+  margin:0.2rem
+}

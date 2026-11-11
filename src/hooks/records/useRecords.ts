@@ -160,7 +160,7 @@ export function useRecords({
     records,
     form
   });
-  const { addWalletRecord } = useWallet({ matchRec, setRecords, records });
+  const { addWalletRecord,saveWalletEdited } = useWallet({ matchRec, setRecords, records });
   return {
     addRecord,
     deleteRecord,
@@ -174,6 +174,7 @@ export function useRecords({
     addItems,
     removeItems,
     saveItem,
-    addWalletRecord
+    addWalletRecord,
+    saveWalletEdited
   };
 }

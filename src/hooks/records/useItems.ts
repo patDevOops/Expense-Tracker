@@ -40,8 +40,8 @@ export function useItems({
   };
   const saveItem = () => {
     if (!form.name || !form.totalPrice) return;
-    setRecords(
-      records.map((record) => {
+    setRecords((prevRecords)=>
+      prevRecords.map((record) => {
         if (matchRec(record.id)) {
           return {
             ...record,

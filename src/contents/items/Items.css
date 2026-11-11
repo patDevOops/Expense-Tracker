@@ -1,4 +1,4 @@
-.items{
+ .items{
   display:flex;
   flex-direction: column;
   border:1px solid #2a2f3a;
@@ -50,7 +50,7 @@
   border: 1px solid #2a2f3a;
   background:hwb(218 10% 83%);
   position:relative;
-  
+
 }
 .item-name{
   flex:1;
@@ -80,7 +80,7 @@
   display:flex;
   align-items:center;
   color:rgb(139,147,163);
-  
+
 }
 .item-name > div{
   margin:0.06rem 0.2rem;
@@ -157,7 +157,7 @@
 .dropdown-arrow{
   height:18px;
   width:20px;
-  
+
 }
 .category-cont{
   display:flex;
@@ -202,23 +202,42 @@
 }
 .confirm-del-modal{
   position: absolute;
-  bottom: -4.4rem;
-  right: 0;
-  display:flex;
+  top: calc(100% + 6px);
+  right: 6px;
+  bottom: auto;
+  z-index: 165;
+  display: flex;
   flex-direction: column;
-    z-index:165;
+  gap: 5px;
+  width: 112px;
+  padding: 5px;
+  background: #151d29;
+  border: 1px solid #3e4452;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 .confirm-del-modal > button{
-  padding:0.6rem 0.68rem;
-  border:none;
-  color:white;
-  font-weight: 500;
+  width: 100%;
+  min-height: 38px;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s ease;
 }
 .confirm-del-modal > button:first-child{
-  background:hwb(39 1% 13%);
+  background: #283343;
+  border-color: #3e4a5c;
 }
 .confirm-del-modal > button:last-child{
-  background:hwb(39 1% 13%);
+  background: #c74747;
+  border-color: #dd5b5b;
+}
+.confirm-del-modal > button:active{
+  filter: brightness(1.15);
 }
 #border-highlight-item{
   border-color:#3e4452e6

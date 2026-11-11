@@ -6,7 +6,8 @@
 .barrier-menu-custom-item,
 .barrier-category,
 .barrier-wallet-form,
-.barrier-wallet-modal{
+.barrier-wallet-modal,
+.barrier-form-confirm-modal{
   background-color:black;
   position:absolute;
   top:0;
@@ -78,4 +79,8 @@
   position:fixed;
   z-index:100;
   opacity:0;
+}
+.barrier-form-confirm-modal{
+  position:fixed;
+  z-index:175
 }

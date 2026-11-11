@@ -59,7 +59,8 @@ export function Contents({
   setForm,
   form,
   wallets,
-  addWalletRecord
+  addWalletRecord,
+  saveWalletEdited,
 }:ContentsProp) {
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");
@@ -140,11 +141,12 @@ export function Contents({
       clearForm();
     }
   }, [isShowForm]);
-
+  const [tempWalletId,setTempWalletId]=useState(null);
   const editItem = (item:Item) => {
     setIsEditingItem(true);
     setIsShowForm(true);
-    const { name, category, price, totalPrice, id, quantity } = item;
+    const { name, category, price, totalPrice, id, quantity,walletId } = item;
+    setTempWalletId(walletId);
     const time = formatTime(item.createdAt);
     const date = formatMY(item.createdAt);
     setForm({
@@ -156,6 +158,7 @@ export function Contents({
       quantity,
       id,
       totalPrice,
+      walletId
     });
   };
 
@@ -179,6 +182,8 @@ export function Contents({
         selectedCategory={selectedCategory}
       />
       <FormCard
+        saveWalletEdited={saveWalletEdited}
+        tempWalletId={tempWalletId}
         addWalletRecord={addWalletRecord}
         customItems={customItems}
         saveItem={saveItem}
