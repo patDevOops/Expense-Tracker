@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
 import dayjs from "dayjs";
-import { formatMY } from "../utils/date.js";
 import { IoIosArrowDown } from "react-icons/io";
 import { Barrier } from "../components/barrier.js";
 import { FaWallet } from "react-icons/fa";
@@ -38,10 +37,8 @@ export function FormCard({
   isEditingItem,
   saveItem,
   customItems,
-  records,
   addWalletRecord,
-  tempWalletId,
-  saveWalletEdited
+  saveWalletEdited,
 }: FormCardProps) {
   const [isShowMoreForm, setIsShowMoreForm] = useState<boolean>(false);
   const [isShowConfirmModal, setIsShowConfirmModal] = useState(false);
@@ -146,7 +143,7 @@ export function FormCard({
               <button
                 onClick={() => {
                   saveWalletEdited({
-                    id: tempWalletId,
+                    id: form.tempWalletId,
                     details: `expense on ${form.name}`,
                     amount: form.price
                       ? -1 * (form.price * form.quantity)
@@ -175,23 +172,27 @@ export function FormCard({
               <button
                 onClick={() => {
                   addWalletRecord({
-                    id: tempWalletId,
+                    id: form.tempWalletId,
                     details: `expense on ${form.name}`,
                     amount: form.price
                       ? -1 * (form.price * form.quantity)
                       : -1 * form.totalPrice,
                     date: `${form.date ? form.date : dayjs().format("YYYY-MM-D")}`,
                   });
-                  setIsShowConfirmModal(false)
+                  setIsShowConfirmModal(false);
                   saveItem();
                 }}
               >
                 Yes
               </button>
-              <button onClick={()=>{
-              setIsShowConfirmModal(false)
+              <button
+                onClick={() => {
+                  setIsShowConfirmModal(false);
                   saveItem();
-              }}>No</button>
+                }}
+              >
+                No
+              </button>
             </div>
           )}
           <Barrier
@@ -360,12 +361,15 @@ export function FormCard({
                   <label className="label">Wallet</label>
                   <div
                     onClick={() => {
+                      const newWalletId = form.walletId
+                      ? undefined
+                      : crypto.randomUUID();
                       setForm({
-                        ...form,
-                        walletId: form.walletId
-                          ? undefined
-                          : crypto.randomUUID(),
+                      ...form,
+                      walletId:newWalletId
                       });
+                      
+                      localStorage.setItem("wallet-toggle",newWalletId??"");
                     }}
                   >
                     <FaWallet
@@ -387,7 +391,7 @@ export function FormCard({
             <button
               onClick={() => {
                 if (isEditingItem) {
-                  if (tempWalletId) {
+                  if (form.tempWalletId) {
                     setIsShowConfirmModal(true);
                     return;
                   }

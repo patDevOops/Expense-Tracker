@@ -6,7 +6,7 @@ import { SideBar } from "./SideBar.js";
 import { Modal } from "./modal/Modal.js";
 import "./Main.css";
 import { Barrier } from "./components/barrier.js";
-type WalletType = {
+export type WalletType = {
   id: string;
   amount: number;
   details: string;
@@ -57,6 +57,8 @@ export type UseRecordHook = {
   addItems: (newItems: Item) => void;
   removeItems: (id: string) => void;
   saveItem: () => void;
+  addWalletRecord:(newWalletRecord:WalletType)=>void;
+  saveWalletEdited:(form:WalletType)=>void
 };
 // Exported so other components can share the exact form data type.
 export type FormType = {
@@ -69,6 +71,7 @@ export type FormType = {
   quantity: number;
   id: string;
   totalPrice: "" | number;
+  walletId:string|undefined
 };
 function App() {
   const [isEditingItem, setIsEditingItem] = useState<boolean>(false);
@@ -81,7 +84,8 @@ function App() {
     quantity: 1,
     id: "",
     totalPrice: "",
-    walletId:undefined
+    walletId:localStorage.getItem("wallet-toggle"),
+    tempWalletId:null
   });
   const {
     records,
@@ -130,7 +134,7 @@ function App() {
       quantity: 1,
       id: "",
       totalPrice: "",
-      walletId:undefined
+      walletId:localStorage.getItem("wallet-toggle")||undefined
     });
   }
 

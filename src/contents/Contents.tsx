@@ -43,7 +43,9 @@ type ContentsProp = {
   // Match the React setter returned by useState; it accepts values and updater callbacks.
   setForm: Dispatch<SetStateAction<FormType>>;
   form: FormType;
-  wallets:WalletType[]
+  wallets:WalletType[];
+  addWalletRecord:(newWalletRecord:WalletType)=>void;
+  saveWalletEdited:(form:WalletType)=>void
 };
 export function Contents({
   currentRecordId,
@@ -141,12 +143,10 @@ export function Contents({
       clearForm();
     }
   }, [isShowForm]);
-  const [tempWalletId,setTempWalletId]=useState(null);
   const editItem = (item:Item) => {
     setIsEditingItem(true);
     setIsShowForm(true);
     const { name, category, price, totalPrice, id, quantity,walletId } = item;
-    setTempWalletId(walletId);
     const time = formatTime(item.createdAt);
     const date = formatMY(item.createdAt);
     setForm({
@@ -158,7 +158,8 @@ export function Contents({
       quantity,
       id,
       totalPrice,
-      walletId
+      walletId,
+      tempWalletId:walletId
     });
   };
 
@@ -183,7 +184,6 @@ export function Contents({
       />
       <FormCard
         saveWalletEdited={saveWalletEdited}
-        tempWalletId={tempWalletId}
         addWalletRecord={addWalletRecord}
         customItems={customItems}
         saveItem={saveItem}

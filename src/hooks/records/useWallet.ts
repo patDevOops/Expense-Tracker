@@ -1,5 +1,12 @@
-export function useWallet({ setRecords, matchRec,records}) {
-  const addWalletRecord = (newWalletRecord) => {
+import type {WalletType,RecordType} from "../../App.tsx";
+import type { Dispatch, SetStateAction } from "react";
+
+type UseWalletParam = {
+  setRecords: Dispatch<SetStateAction<RecordType[]>>;
+  matchRec:(id:string)=>boolean;
+}
+export function useWallet({ setRecords, matchRec}:UseWalletParam) {
+  const addWalletRecord = (newWalletRecord:WalletType) => {
     setRecords((prevRecords) =>
       prevRecords.map((record) => {
         if (matchRec(record.id)) {
@@ -13,7 +20,7 @@ export function useWallet({ setRecords, matchRec,records}) {
       })
     );
   };
-  const saveWalletEdited = (form) => {
+  const saveWalletEdited = (form:WalletType) => {
     setRecords((prevRecords)=>
       prevRecords.map((record) => {
         if (matchRec(record.id)) {
