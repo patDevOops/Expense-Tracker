@@ -383,25 +383,20 @@
   height: 100%;
 }
 .wallet-confirm-modal{
+  width:auto;
+  margin:0;
   position:fixed;
-  bottom:0;
+  top:auto;
+  bottom:50dvh;
   right:30px;
   left:30px;
   background:var(--main-color);
   border:var(--border);
   border-radius:5px;
-  padding:0.5rem;
+  padding:0.8rem;
   font-size:1.3rem;
   .wallet-confirm-modal div p{
     font-weight:700;
-  }
-  .wallet-confirm-modal div{
-    display:flex;
-    gap:0.3rem;
-  }
-  .wallet-confirm-modal-btn-cont{
-    display:flex;
-    gap:0.3rem
   }
   .wallet-confirm-modal-btn-cont button{
     color:white;
@@ -419,3 +414,12 @@
     border:var(--border)
   }
 }
+.wallet-confirm-modal > div{
+    display:flex;
+    gap:0.5rem;
+  flex-direction:column;
+  }
+.wallet-confirm-modal-btn-cont{
+    display:flex;
+    gap:0.3rem
+  }
