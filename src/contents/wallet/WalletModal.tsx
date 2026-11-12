@@ -79,22 +79,24 @@ export function WalletModal({
       >
         <div>
           <p>Delete This Records?</p>
-          <button
-            onClick={() => {
-              deleteWalletRecord(toDeleteWalletRecordId);
-              removeWalletId(toDeleteWalletRecordId);
-              confirmModalRef.current?.close();
-            }}
-          >
-            Yes
-          </button>
-          <button
-            onClick={() => {
-              confirmModalRef.current?.close();
-            }}
-          >
-            No
-          </button>
+          <div className="wallet-confirm-modal-btn-cont">
+            <button
+              onClick={() => {
+                deleteWalletRecord(toDeleteWalletRecordId);
+                removeWalletId(toDeleteWalletRecordId);
+                confirmModalRef.current?.close();
+              }}
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => {
+                confirmModalRef.current?.close();
+              }}
+            >
+              No
+            </button>
+          </div>
         </div>
       </dialog>
 
@@ -267,7 +269,7 @@ export function WalletModal({
                 <span className="wallet-record-date">{wallet.date}</span>
                 <span
                   onClick={() => {
-                 setToDeleteWalletRecordId(wallet.id);
+                    setToDeleteWalletRecordId(wallet.id);
                     confirmModalRef.current?.showModal();
                   }}
                   className="wallet-record-delete"
