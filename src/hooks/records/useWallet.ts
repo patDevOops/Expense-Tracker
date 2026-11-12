@@ -6,6 +6,7 @@ type UseWalletParam = {
   matchRec: (id: string) => boolean;
 };
 export function useWallet({ setRecords, matchRec }: UseWalletParam) {
+  
   const addWalletRecord = (newWalletRecord: WalletType) => {
     setRecords((prevRecords) =>
       prevRecords.map((record) => {

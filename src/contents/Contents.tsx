@@ -167,7 +167,8 @@ export function Contents({
 
   return (
     <div className="main">
-      <Wallet wallets={wallets}/>
+      <Wallet wallets={wallets}
+        addWalletRecord={addWalletRecord}/>
       <Date
         selectedDate={selectedDate}
         changeDate={changeDate}

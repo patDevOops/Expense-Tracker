@@ -36,7 +36,7 @@ export function useRecords({
         wallets: [
           {
             id: "1",
-            amount: 900,
+            amount: 10000,
             details: "salary on my bank",
             date: "2026-10-08"
           },

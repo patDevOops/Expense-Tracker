@@ -6,8 +6,15 @@ import { CiTrash } from "react-icons/ci";
 import { LuPencil } from "react-icons/lu";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
+import dayjs from "dayjs";
+export function WalletModal({ wallets, totalWalletMoney, addWalletRecord }) {
+  const [walletForm, setWalletForm] = useState({
+    amount: "",
+    details: "",
+    date: "",
+    "wallet-money-action": "add",
+  });
 
-export function WalletModal({ wallets,totalWalletMoney }) {
   const [isToggleBtn, setIsToggleBtn] = useState({
     addMoney: false,
     editMoney: false,
@@ -26,6 +33,19 @@ export function WalletModal({ wallets,totalWalletMoney }) {
           : { addMoney: false, editMoney: true },
       );
     }
+  };
+  const inputForm = (event) => {
+    let { value, name } = event.target;
+    if (name === "amount") {
+      value = Number(value);
+    }
+    if (name === "amount" && !Number(value)) {
+      value = "";
+    }
+    setWalletForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
   return (
     <div className="wallet-modal">
@@ -67,9 +87,14 @@ export function WalletModal({ wallets,totalWalletMoney }) {
               <FaPlus />
               <span>Add money</span>
             </div>
-            <div className="wallet-form-money-action" role="group" aria-label="Wallet money action">
+            <div
+              className="wallet-form-money-action"
+              role="group"
+              aria-label="Wallet money action"
+            >
               <label className="wallet-form-money-action-option">
                 <input
+                  onChange={inputForm}
                   type="radio"
                   name="wallet-money-action"
                   value="add"
@@ -80,8 +105,10 @@ export function WalletModal({ wallets,totalWalletMoney }) {
                   <span>Add to wallet</span>
                 </span>
               </label>
+
               <label className="wallet-form-money-action-option">
                 <input
+                  onChange={inputForm}
                   type="radio"
                   name="wallet-money-action"
                   value="subtract"
@@ -94,18 +121,52 @@ export function WalletModal({ wallets,totalWalletMoney }) {
             </div>
             <div className="wallet-form-input-amount">
               <label className="wallet-form-input-label">Amount</label>
-              <input className="wallet-form-input" />
+              <input
+                type="number"
+                name="amount"
+                onChange={inputForm}
+                value={walletForm.amount}
+                className="wallet-form-input"
+              />
             </div>
             <div className="wallet-form-input-details">
               <label className="wallet-form-input-label">Details</label>
-              <input className="wallet-form-input" />
+              <input
+                name="details"
+                value={walletForm.details}
+                onChange={inputForm}
+                className="wallet-form-input"
+              />
             </div>
             <div className="wallet-form-input-date">
               <label className="wallet-form-input-label">Date</label>
-              <input className="wallet-form-input" />
+              <input
+                name="date"
+                type="date"
+                onChange={inputForm}
+                value={walletForm.date}
+                className="wallet-form-input"
+              />
             </div>
             <div className="wallet-form-add-money-btn-cont">
-              <button className="wallet-form-add-money-btn">Add</button>
+              <button
+                onClick={() => {
+                  addWalletRecord({
+                    id: crypto.randomUUID(),
+                    details: walletForm.details,
+                    date: walletForm.date
+                      ? walletForm.date
+                      : dayjs().format("YYYY-MM-D"),
+                    amount:
+                      walletForm["wallet-money-action"] === "add"
+                        ? walletForm.amount
+                        : walletForm.amount * -1,
+                  });
+                }}
+                className="wallet-form-add-money-btn"
+              >
+                Add
+              </button>
             </div>
           </div>
         )}
@@ -150,12 +211,14 @@ export function WalletModal({ wallets,totalWalletMoney }) {
         <div className="wallet-records-gen">
           {wallets.map((wallet) => {
             return (
-              <div 
+              <div
                 key={wallet.id}
-                className={`wallet-record ${wallet.amount>=0?'background-green':'background-red'}`}>
-                <span className={`wallet-record-amount ${wallet.amount>=0?'text-green':'text-red'}`}>
-                  <p>{wallet.amount >= 0 ? <FaPlus/> : <FaMinus />}
-                  </p>
+                className={`wallet-record ${wallet.amount >= 0 ? "background-green" : "background-red"}`}
+              >
+                <span
+                  className={`wallet-record-amount ${wallet.amount >= 0 ? "text-green" : "text-red"}`}
+                >
+                  <p>{wallet.amount >= 0 ? <FaPlus /> : <FaMinus />}</p>
                   <p>
                     ₱{wallet.amount > 0 ? wallet.amount : wallet.amount * -1}
                   </p>

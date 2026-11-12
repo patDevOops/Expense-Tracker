@@ -7,7 +7,7 @@ import type { WalletType } from "../../App.tsx";
 type WalletProps = {
   wallets: WalletType[];
 };
-export function Wallet({ wallets }: WalletProps) {
+export function Wallet({ wallets,addWalletRecord }: WalletProps) {
   const [isShowWalletModal, setIsShowWalletModal] = useState(false);
   const totalWalletMoney: number = Number(wallets
     .reduce((acc, current) => {
@@ -39,7 +39,8 @@ export function Wallet({ wallets }: WalletProps) {
       </div>
 
       {isShowWalletModal && (
-        <WalletModal wallets={wallets} totalWalletMoney={totalWalletMoney} />
+        <WalletModal wallets={wallets} totalWalletMoney={totalWalletMoney}
+          addWalletRecord={addWalletRecord}/>
       )}
     </div>
   );

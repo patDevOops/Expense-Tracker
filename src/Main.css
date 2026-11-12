@@ -83,5 +83,5 @@
 .barrier-form-confirm-modal{
   position:fixed;
   z-index:175;
-  opacity:0;
+  opacity:0.3;
 }
