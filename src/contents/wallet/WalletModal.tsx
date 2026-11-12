@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Barrier } from "../../components/barrier.tsx";
 import { IoMdArrowDropup } from "react-icons/io";
 import { GoMultiSelect } from "react-icons/go";
@@ -7,7 +7,15 @@ import { LuPencil } from "react-icons/lu";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import dayjs from "dayjs";
-export function WalletModal({ wallets, totalWalletMoney, addWalletRecord }) {
+export function WalletModal({
+  wallets,
+  totalWalletMoney,
+  addWalletRecord,
+  deleteWalletRecord,
+  removeWalletId,
+  onClose,
+}) {
+  const [toDeleteWalletRecordId, setToDeleteWalletRecordId] = useState(null);
   const [walletForm, setWalletForm] = useState({
     amount: "",
     details: "",
@@ -47,6 +55,7 @@ export function WalletModal({ wallets, totalWalletMoney, addWalletRecord }) {
       [name]: value,
     }));
   };
+  const confirmModalRef = useRef<HTMLDialogElement>(null);
   return (
     <div className="wallet-modal">
       {(isToggleBtn.addMoney || isToggleBtn.editMoney) && (
@@ -57,6 +66,37 @@ export function WalletModal({ wallets, totalWalletMoney, addWalletRecord }) {
           }}
         ></div>
       )}
+
+      <dialog
+        className="wallet-confirm-modal"
+        ref={confirmModalRef}
+        onClose={onClose}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) {
+            confirmModalRef.current?.close(); // click sa backdrop
+          }
+        }}
+      >
+        <div>
+          <p>Delete This Records?</p>
+          <button
+            onClick={() => {
+              deleteWalletRecord(toDeleteWalletRecordId);
+              removeWalletId(toDeleteWalletRecordId);
+              confirmModalRef.current?.close();
+            }}
+          >
+            Yes
+          </button>
+          <button
+            onClick={() => {
+              confirmModalRef.current?.close();
+            }}
+          >
+            No
+          </button>
+        </div>
+      </dialog>
 
       <div className="wallet-modal-head">
         <div className="wallet-modal-summary">
@@ -225,7 +265,13 @@ export function WalletModal({ wallets, totalWalletMoney, addWalletRecord }) {
                 </span>
                 <span className="wallet-record-detail">{wallet.details}</span>
                 <span className="wallet-record-date">{wallet.date}</span>
-                <span className="wallet-record-delete">
+                <span
+                  onClick={() => {
+                 setToDeleteWalletRecordId(wallet.id);
+                    confirmModalRef.current?.showModal();
+                  }}
+                  className="wallet-record-delete"
+                >
                   <CiTrash />
                 </span>
               </div>

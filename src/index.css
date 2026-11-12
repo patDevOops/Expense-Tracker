@@ -22,3 +22,16 @@ body{
   padding-top:60px;
   font-family:arial;
 }
+dialog::backdrop {
+  background: rgb(0 0 0 / 40%);
+}
+dialog {
+  box-sizing: border-box;
+  margin: auto;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  max-width: none;
+}

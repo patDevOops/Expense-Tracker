@@ -40,7 +40,7 @@ export function useItems({
   };
   const saveItem = () => {
     if (!form.name || !form.totalPrice) return;
-    setRecords((prevRecords)=>
+    setRecords((prevRecords) =>
       prevRecords.map((record) => {
         if (matchRec(record.id)) {
           return {
@@ -67,8 +67,27 @@ export function useItems({
     clearForm();
     setIsEditingItem(false);
   };
+  const removeWalletId = (walletId) => {
+    setRecords((prevRecords) =>
+      prevRecords.map((record) => {
+        if (matchRec(record.id)) {
+          return {
+            ...record,
+            items:record.items.map((item) => {
+                if (item.walletId === walletId) {
+                  item.walletId = undefined;
+                }
+                return item;
+              })
+          };
+        }
 
+        return record;
+      })
+    );
+  };
   return {
+    removeWalletId,
     addItems,
     saveItem,
     removeItems

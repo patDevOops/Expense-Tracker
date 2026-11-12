@@ -378,3 +378,16 @@
 .wallet-record.background-red{
   background:hwb(0 0% 0% / 0.08235294117647059)
 }
+.wallet-records-gen{
+  overflow:scroll;
+  height: 100%;
+}
+.wallet-confirm-modal{
+  position:absolu;
+  right:50px;
+  left:50px;
+  background:var(--main-color);
+  border:var(--border);
+  border-radius:5px;
+  padding:0.4rem;
+}

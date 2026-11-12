@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import { useRecords } from "./hooks/records/useRecords.js";
 import { Header } from "./Header.js";
 import { Contents } from "./contents/Contents.js";
@@ -75,6 +75,33 @@ export type FormType = {
   walletId:string|undefined;
   tempWalletId?:string|undefined
 };
+/*
+function ExampleModal({ onClose }: { onClose: () => void }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    dialogRef.current?.showModal();
+  }, []);
+
+  return (
+    <dialog
+      ref={dialogRef}
+      aria-labelledby="modal-title"
+      onClose={onClose}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) {
+          dialogRef.current?.close(); // click sa backdrop
+        }
+      }}
+    >
+      <h2 id="modal-title">Title ng modal</h2>
+      <button onClick={() => dialogRef.current?.close()}>
+        Isara
+      </button>
+    </dialog>
+  );
+}
+*/
 function App() {
   const [isEditingItem, setIsEditingItem] = useState<boolean>(false);
   const [form, setForm] = useState<FormType>({
@@ -103,7 +130,8 @@ function App() {
     saveItem,
     addWalletRecord,
     saveWalletEdited,
-    deleteWalletRecord
+    deleteWalletRecord,
+    removeWalletId
   }: UseRecordHook = useRecords({
     matchRec,
     setIsEditingItem,
@@ -224,6 +252,7 @@ function App() {
       )}
 
       <Contents
+        removeWalletId={removeWalletId}
         deleteWalletRecord={deleteWalletRecord}
         saveWalletEdited={saveWalletEdited}
         addWalletRecord={addWalletRecord}

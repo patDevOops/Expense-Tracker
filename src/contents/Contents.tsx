@@ -46,7 +46,8 @@ type ContentsProp = {
   wallets:WalletType[];
   addWalletRecord:(newWalletRecord:WalletType)=>void;
   saveWalletEdited:(form:WalletType)=>void;
-  deleteWalletRecord:(id:string)=>void
+  deleteWalletRecord:(id:string)=>void;
+  removeWalletId:(walletId:string)=>void
 };
 export function Contents({
   currentRecordId,
@@ -65,6 +66,7 @@ export function Contents({
   addWalletRecord,
   saveWalletEdited,
   deleteWalletRecord,
+  removeWalletId
 }:ContentsProp) {
   const [isCategoryGlobal, setIsCategoryGlobal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("098");
@@ -167,7 +169,10 @@ export function Contents({
 
   return (
     <div className="main">
-      <Wallet wallets={wallets}
+      <Wallet 
+        removeWalletId={removeWalletId}
+        deleteWalletRecord={deleteWalletRecord}
+        wallets={wallets}
         addWalletRecord={addWalletRecord}/>
       <Date
         selectedDate={selectedDate}
