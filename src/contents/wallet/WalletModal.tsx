@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { IoMdCheckmark } from "react-icons/io";
 import dayjs from "dayjs";
 import { useClickOutside } from "../../utils/useClickOutside.tsx";
 import { WalletsGen } from "./WalletsGen";
@@ -14,7 +15,8 @@ export function WalletModal({
   removeWalletId,
   onClose,
 }) {
-  const [isOpenDateDropdown,setIsOpenDateDropdown]=useState(false);
+  const [isOpenDateDropdown, setIsOpenDateDropdown] = useState(false);
+  const [selectedWalletDate, setSelectedWalletDate] = useState("2026-11");
   const [toDeleteWalletRecordId, setToDeleteWalletRecordId] = useState(null);
   const [walletForm, setWalletForm] = useState({
     amount: "",
@@ -57,7 +59,24 @@ export function WalletModal({
   };
   const confirmModalRef = useRef<HTMLDialogElement>(null);
   const filterDateRef = useRef<HTMLDivElement>(null);
+
   useClickOutside(filterDateRef, () => setIsOpenDateDropdown(false));
+
+  wallets.sort((a, b) => {
+    return dayjs().diff(a.date) - dayjs().diff(b.date);
+  });
+
+  const walletDates: string[] = [];
+  wallets.forEach((wallet) => {
+    const formatedDate = dayjs(wallet.date).format("YYYY-MM");
+    if (!walletDates.includes(formatedDate)) {
+      walletDates.push(formatedDate);
+    }
+  });
+
+  useEffect(() => {
+    console.log(walletDates);
+  });
   return (
     <div className="wallet-modal">
       {(isToggleBtn.addMoney || isToggleBtn.editMoney) && (
@@ -249,22 +268,30 @@ export function WalletModal({
 
       <div>
         <div className="wallet-row-details">
-          <div 
-            ref={filterDateRef}
-            className="wallet-dropdown-date">
-            <div 
-              onClick={()=>{setIsOpenDateDropdown(!isOpenDateDropdown)}}>
-              <span>All</span>
+          <div ref={filterDateRef} className="wallet-dropdown-date">
+            <div
+              className="wallet-dropdown-date-toggle"
+              onClick={() => {
+                setIsOpenDateDropdown(!isOpenDateDropdown);
+              }}
+            >
+              <span className="wallet-dropdown-date-toggle-text">{dayjs(selectedWalletDate).format('YYYY-MMMM')}</span>
               <span className="wallet-icon-dropdown">
                 <IoMdArrowDropup size="17" />
               </span>
             </div>
+            
             {isOpenDateDropdown && (
               <div className="wallet-dropdown-date-filter">
-                <p>2026-February</p>
-                <p className="selected">2026-March</p>
-                <p>2026-February</p>
-                <p>2026-February</p>
+                {walletDates.map((walletDate) => {
+                  return (
+                    <p
+                      className={`${selectedWalletDate === walletDate && "selected"}`}
+                    >
+                      {dayjs(walletDate).format('YYYY-MMMM')} {selectedWalletDate === walletDate &&<IoMdCheckmark size={16} />}
+                    </p>
+                  );
+                })}
               </div>
             )}
           </div>

@@ -324,7 +324,7 @@
   font-size: 0.7rem;
   color: var(--text-blur);
   display: grid;
-  grid-template-columns: 2rem 1fr 1.3fr 1fr 0.2fr;
+  grid-template-columns: 3rem 1fr 1.3fr 1fr 0.2fr;
 }
 .wallet-dropdown-date {
   display: flex;
@@ -342,7 +342,7 @@
   margin: 0 0 0.1rem 0;
   
   display: grid;
-  grid-template-columns: 1fr 1fr 1.7fr 0.2fr;
+  grid-template-columns: 1.2fr 1.1fr 1.7fr 0.2fr;
   font-size: 0.85rem;
   column-gap: 0.1rem;
   align-items: center;
@@ -364,6 +364,7 @@
     align-items:center;
     gap:0.1rem;
     font-weight: 700;
+    justify-content:center
   }
   .wallet-record-amount.text-green{
     color:limegreen
@@ -435,8 +436,11 @@
   top:20px;
   display:flex;
   flex-direction:column;
-  padding:0.2rem 0.4rem;
+  padding:0.3rem 0.4rem;
   width:150px;
+  max-height:200px;
+  overflow:scroll;
+  scrollbar-width: none;
 }
 .wallet-dropdown-date-filter p{
   text-wrap: nowrap;
@@ -447,5 +451,13 @@
 .wallet-dropdown-date-filter p.selected{
   background:#4d8eff87;
   border:0.5px solid var(--btn-color);
-  border-radius:7px
+  border-radius:7px;
+  display:flex;
+  justify-content:space-between;
+}
+.wallet-dropdown-date-toggle .wallet-dropdown-date-toggle-text{
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow: hidden;
+  max-width:33px;
 }
