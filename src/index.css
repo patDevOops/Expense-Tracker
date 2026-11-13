@@ -26,12 +26,15 @@ dialog::backdrop {
   background: rgb(0 0 0 / 40%);
 }
 dialog {
-  box-sizing: border-box;
-  margin: auto;
-  border: 0;
+  /* Wag all: unset */
+  border: none;
   padding: 0;
+  margin: 0;
   background: transparent;
-  color: inherit;
-  font: inherit;
+
+  /* Kailangan to para buong screen pa rin siya */
+  width: 100%;
+  height: 100%;
   max-width: none;
+  max-height: none;
 }

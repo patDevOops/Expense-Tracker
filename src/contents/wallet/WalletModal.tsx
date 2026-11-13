@@ -1,12 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { Barrier } from "../../components/barrier.tsx";
+import dayjs from "dayjs";
+import { useClickOutside } from "../../utils/useClickOutside.tsx";
+import { WalletsGen } from "./WalletsGen";
 import { IoMdArrowDropup } from "react-icons/io";
 import { GoMultiSelect } from "react-icons/go";
-import { CiTrash } from "react-icons/ci";
-import { LuPencil } from "react-icons/lu";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
-import dayjs from "dayjs";
 export function WalletModal({
   wallets,
   totalWalletMoney,
@@ -15,6 +14,7 @@ export function WalletModal({
   removeWalletId,
   onClose,
 }) {
+  const [isOpenDateDropdown,setIsOpenDateDropdown]=useState(false);
   const [toDeleteWalletRecordId, setToDeleteWalletRecordId] = useState(null);
   const [walletForm, setWalletForm] = useState({
     amount: "",
@@ -56,6 +56,8 @@ export function WalletModal({
     }));
   };
   const confirmModalRef = useRef<HTMLDialogElement>(null);
+  const filterDateRef = useRef<HTMLDivElement>(null);
+  useClickOutside(filterDateRef, () => setIsOpenDateDropdown(false));
   return (
     <div className="wallet-modal">
       {(isToggleBtn.addMoney || isToggleBtn.editMoney) && (
@@ -193,10 +195,10 @@ export function WalletModal({
             <div className="wallet-form-add-money-btn-cont">
               <button
                 onClick={() => {
-                  if(!walletForm.amount)return
+                  if (!walletForm.amount) return;
                   addWalletRecord({
                     id: crypto.randomUUID(),
-                    details: walletForm.details?walletForm.details:"---",
+                    details: walletForm.details ? walletForm.details : "---",
                     date: walletForm.date
                       ? walletForm.date
                       : dayjs().format("YYYY-MM-D"),
@@ -205,10 +207,20 @@ export function WalletModal({
                         ? walletForm.amount
                         : walletForm.amount * -1,
                   });
+                  setIsToggleBtn({
+                    addMoney: false,
+                    editMoney: false,
+                  });
+                  setWalletForm({
+                    amount: "",
+                    details: "",
+                    date: "",
+                    "wallet-money-action": "add",
+                  });
                 }}
                 className="wallet-form-add-money-btn"
               >
-                Add
+                Proceed
               </button>
             </div>
           </div>
@@ -237,12 +249,26 @@ export function WalletModal({
 
       <div>
         <div className="wallet-row-details">
-          <span className="wallet-dropdown-date">
-            <span>All</span>
-            <span className="wallet-icon-dropdown">
-              <IoMdArrowDropup size="17" />
-            </span>
-          </span>
+          <div 
+            ref={filterDateRef}
+            className="wallet-dropdown-date">
+            <div 
+              onClick={()=>{setIsOpenDateDropdown(!isOpenDateDropdown)}}>
+              <span>All</span>
+              <span className="wallet-icon-dropdown">
+                <IoMdArrowDropup size="17" />
+              </span>
+            </div>
+            {isOpenDateDropdown && (
+              <div className="wallet-dropdown-date-filter">
+                <p>2026-February</p>
+                <p className="selected">2026-March</p>
+                <p>2026-February</p>
+                <p>2026-February</p>
+              </div>
+            )}
+          </div>
+
           <span>Amount</span>
           <span>Details</span>
           <span>Date</span>
@@ -254,30 +280,14 @@ export function WalletModal({
         <div className="wallet-records-gen">
           {wallets.map((wallet) => {
             return (
-              <div
-                key={wallet.id}
-                className={`wallet-record ${wallet.amount >= 0 ? "background-green" : "background-red"}`}
-              >
-                <span
-                  className={`wallet-record-amount ${wallet.amount >= 0 ? "text-green" : "text-red"}`}
-                >
-                  <p>{wallet.amount >= 0 ? <FaPlus /> : <FaMinus />}</p>
-                  <p>
-                    ₱{wallet.amount > 0 ? wallet.amount : wallet.amount * -1}
-                  </p>
-                </span>
-                <span className="wallet-record-detail">{wallet.details}</span>
-                <span className="wallet-record-date">{wallet.date}</span>
-                <span
-                  onClick={() => {
-                    setToDeleteWalletRecordId(wallet.id);
-                    confirmModalRef.current?.showModal();
-                  }}
-                  className="wallet-record-delete"
-                >
-                  <CiTrash />
-                </span>
-              </div>
+              <>
+                <WalletsGen
+                  key={wallet.id}
+                  wallet={wallet}
+                  setToDeleteWalletRecordId={setToDeleteWalletRecordId}
+                  confirmModalRef={confirmModalRef}
+                />
+              </>
             );
           })}
         </div>

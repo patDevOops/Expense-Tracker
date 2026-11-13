@@ -328,6 +328,10 @@
 }
 .wallet-dropdown-date {
   display: flex;
+  position:relative;
+}
+.wallet-dropdown-date > div{
+  display:flex;
 }
 .wallet-icon-dropdown {
   display: flex;
@@ -423,3 +427,25 @@
     display:flex;
     gap:0.3rem
   }
+.wallet-dropdown-date-filter{
+  border:var(--border);
+  background:var(--main-color);
+  border-radius:4px;
+  position:absolute;
+  top:20px;
+  display:flex;
+  flex-direction:column;
+  padding:0.2rem 0.4rem;
+  width:150px;
+}
+.wallet-dropdown-date-filter p{
+  text-wrap: nowrap;
+  color:hwb(0 93% 4%);
+  padding:0.3rem 0.2rem;
+  font-size:0.8rem
+}
+.wallet-dropdown-date-filter p.selected{
+  background:#4d8eff87;
+  border:0.5px solid var(--btn-color);
+  border-radius:7px
+}

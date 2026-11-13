@@ -1,5 +1,6 @@
 import { useState, useEffect,useRef } from "react";
 import { useRecords } from "./hooks/records/useRecords.js";
+import { useClickOutside } from "./utils/useClickOutside.tsx";
 import { Header } from "./Header.js";
 import { Contents } from "./contents/Contents.js";
 import { SideBar } from "./SideBar.js";
@@ -75,6 +76,39 @@ export type FormType = {
   walletId:string|undefined;
   tempWalletId?:string|undefined
 };
+function MyDropdown() {
+  const [open, setOpen] = useState(false);
+  const boxRef = useRef(null);
+
+  // Dito mo siya tinatawag
+  // Pag nag-click sa labas ng boxRef, magiging false yung open
+  useClickOutside(boxRef, () => setOpen(false));
+
+  return (
+    <div ref={boxRef} style={{ position: "relative" }}>
+      <button onClick={() => setOpen(true)}>
+        Open Menu
+      </button>
+
+      {open && (
+        <div style={{
+          position: "absolute",
+          top: "40px",
+          left: 0,
+          background: "#1e1e1e",
+          color: "white",
+          padding: "16px",
+          borderRadius: "12px",
+          width: "200px"
+        }}>
+          <p>Option 1</p>
+          <p>Option 2</p>
+          <p>Option 3</p>
+        </div>
+      )}
+    </div>
+  );
+}
 /*
 function ExampleModal({ onClose }: { onClose: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -218,6 +252,7 @@ function App() {
 
   return (
     <>
+      {/*<MyDropdown/>*/}
       <Header toggleSidebar={toggleSidebar} />
 
       <Barrier a={isShowModal} b="barrier" c={setIsShowModal} />
