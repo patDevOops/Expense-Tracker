@@ -102,7 +102,7 @@ export function WalletModal({
 
       <div className="wallet-modal-head">
         <div className="wallet-modal-summary">
-          <p>₱{totalWalletMoney}</p>
+          <p>₱{totalWalletMoney.toFixed(2)}</p>
           <div className="wallet-btn-cont">
             {/*<div
               onClick={() => {
@@ -193,9 +193,10 @@ export function WalletModal({
             <div className="wallet-form-add-money-btn-cont">
               <button
                 onClick={() => {
+                  if(!walletForm.amount)return
                   addWalletRecord({
                     id: crypto.randomUUID(),
-                    details: walletForm.details,
+                    details: walletForm.details?walletForm.details:"---",
                     date: walletForm.date
                       ? walletForm.date
                       : dayjs().format("YYYY-MM-D"),

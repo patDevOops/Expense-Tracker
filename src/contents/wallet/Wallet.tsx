@@ -9,11 +9,10 @@ type WalletProps = {
 };
 export function Wallet({ wallets,addWalletRecord,deleteWalletRecord,removeWalletId }: WalletProps) {
   const [isShowWalletModal, setIsShowWalletModal] = useState(false);
-  const totalWalletMoney: number = Number(wallets
+  const totalWalletMoney: number = wallets
     .reduce((acc, current) => {
       return (acc += current.amount);
-    }, 0)
-    .toFixed(2));
+    }, 0);
   return (
     <div className="wallet">
       <Barrier
@@ -26,7 +25,7 @@ export function Wallet({ wallets,addWalletRecord,deleteWalletRecord,removeWallet
           <FaWallet className="wallet-icon" />
         </div>
         <div>
-          <div className="wallet-budget">₱{totalWalletMoney}</div>
+          <div className="wallet-budget">₱{totalWalletMoney.toFixed(2)}</div>
           <div
             onClick={() => {
               setIsShowWalletModal(true);
