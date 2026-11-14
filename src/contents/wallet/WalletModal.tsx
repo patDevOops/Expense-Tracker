@@ -5,11 +5,25 @@ import { MdDeleteForever } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
-import { Barrier } from "../../components/barrier.tsx";
 import { useClickOutside } from "../../utils/useClickOutside.tsx";
 import { WalletsGen } from "./WalletsGen";
 import { IoMdArrowDropup } from "react-icons/io";
 import { GoMultiSelect } from "react-icons/go";
+import type { WalletType } from "../../App.tsx";
+type WalletForm = {
+  amount: "" | number;
+  details: string;
+  date: string;
+  "wallet-money-action": "add" | "subtract";
+};
+type WalletModalProps = {
+  wallets: WalletType[];
+  totalWalletMoney: number;
+  addWalletRecord: (newWalletRecord: WalletType) => void;
+  deleteWalletRecord: (id: string) => void;
+  removeWalletId: (walletId: string) => void;
+  onClose:unknown;
+};
 export function WalletModal({
   wallets,
   totalWalletMoney,
@@ -17,13 +31,17 @@ export function WalletModal({
   deleteWalletRecord,
   removeWalletId,
   onClose,
-}) {
-  const [toDeleteSelecteds, setToDeleteSelecteds] = useState([]);
+}: WalletModalProps) {
+  const [toDeleteSelecteds, setToDeleteSelecteds] = useState<string[]>([]);
   const [isMultiSelected, setIsMultiSelected] = useState(false);
   const [isOpenDateDropdown, setIsOpenDateDropdown] = useState(false);
-  const [selectedWalletDate, setSelectedWalletDate] = useState("all");
-  const [toDeleteWalletRecordId, setToDeleteWalletRecordId] = useState(null);
-  const [walletForm, setWalletForm] = useState({
+  const [selectedWalletDate, setSelectedWalletDate] = useState(
+    localStorage.getItem("selected-default-wallet-date-filter") || "all",
+  );
+  const [toDeleteWalletRecordId, setToDeleteWalletRecordId] = useState<
+    null | string
+  >(null);
+  const [walletForm, setWalletForm] = useState<WalletForm>({
     amount: "",
     details: "",
     date: "",
@@ -64,7 +82,7 @@ export function WalletModal({
   };
   const confirmModalRef = useRef<HTMLDialogElement>(null);
   const filterDateRef = useRef<HTMLDivElement>(null);
-  const multiSelectConfirmModalRef = useRef(null);
+  const multiSelectConfirmModalRef = useRef<HTMLDialogElement>(null);
   useClickOutside(filterDateRef, () => setIsOpenDateDropdown(false));
   wallets.sort((a, b) => {
     return dayjs().diff(a.date) - dayjs().diff(b.date);
@@ -72,7 +90,7 @@ export function WalletModal({
 
   const walletDates: string[] = [];
   wallets.forEach((wallet) => {
-    const formatedDate = dayjs(wallet.date).format("YYYY-MM");
+    const formatedDate:string = dayjs(wallet.date).format("YYYY-MM");
     if (!walletDates.includes(formatedDate)) {
       walletDates.push(formatedDate);
     }
@@ -83,6 +101,18 @@ export function WalletModal({
       (a) => dayjs(a.date).format("YYYY-MM") === selectedWalletDate,
     );
   }
+  if (
+    selectedWalletDate !== "all" &&
+    !walletDates.includes(selectedWalletDate)
+  ) {
+    setSelectedWalletDate(walletDates[0] || "all");
+  }
+  useEffect(() => {
+    localStorage.setItem(
+      "selected-default-wallet-date-filter",
+      selectedWalletDate,
+    );
+  }, [selectedWalletDate]);
   return (
     <div className="wallet-modal">
       {(isToggleBtn.addMoney || isToggleBtn.editMoney) && (

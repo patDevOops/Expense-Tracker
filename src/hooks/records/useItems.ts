@@ -67,7 +67,7 @@ export function useItems({
     clearForm();
     setIsEditingItem(false);
   };
-  const removeWalletId = (walletId) => {
+  const removeWalletId = (walletId:string) => {
     setRecords((prevRecords) =>
       prevRecords.map((record) => {
         if (matchRec(record.id)) {

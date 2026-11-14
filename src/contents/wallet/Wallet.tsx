@@ -6,13 +6,20 @@ import "./Wallet.css";
 import type { WalletType } from "../../App.tsx";
 type WalletProps = {
   wallets: WalletType[];
+  addWalletRecord: (newWalletRecord: WalletType) => void;
+  deleteWalletRecord: (id: string) => void;
+  removeWalletId: (walletId: string) => void;
 };
-export function Wallet({ wallets,addWalletRecord,deleteWalletRecord,removeWalletId }: WalletProps) {
+export function Wallet({
+  wallets,
+  addWalletRecord,
+  deleteWalletRecord,
+  removeWalletId,
+}: WalletProps) {
   const [isShowWalletModal, setIsShowWalletModal] = useState(false);
-  const totalWalletMoney: number = wallets
-    .reduce((acc, current) => {
-      return (acc += current.amount);
-    }, 0);
+  const totalWalletMoney: number = wallets.reduce((acc, current) => {
+    return (acc += current.amount);
+  }, 0);
   return (
     <div className="wallet">
       <Barrier
@@ -38,12 +45,14 @@ export function Wallet({ wallets,addWalletRecord,deleteWalletRecord,removeWallet
       </div>
 
       {isShowWalletModal && (
-        <WalletModal 
+        <WalletModal
           setIsShowWalletModal={setIsShowWalletModal}
           removeWalletId={removeWalletId}
           deleteWalletRecord={deleteWalletRecord}
-          wallets={wallets} totalWalletMoney={totalWalletMoney}
-          addWalletRecord={addWalletRecord}/>
+          wallets={wallets}
+          totalWalletMoney={totalWalletMoney}
+          addWalletRecord={addWalletRecord}
+        />
       )}
     </div>
   );

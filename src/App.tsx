@@ -1,6 +1,5 @@
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect } from "react";
 import { useRecords } from "./hooks/records/useRecords.js";
-import { useClickOutside } from "./utils/useClickOutside.tsx";
 import { Header } from "./Header.js";
 import { Contents } from "./contents/Contents.js";
 import { SideBar } from "./SideBar.js";
@@ -60,7 +59,8 @@ export type UseRecordHook = {
   saveItem: () => void;
   addWalletRecord:(newWalletRecord:WalletType)=>void;
   saveWalletEdited:(form:WalletType)=>void;
-  deleteWalletRecord:(id:string)=>void
+  deleteWalletRecord:(id:string)=>void;
+  removeWalletId:(walletId:string)=>void
 };
 // Exported so other components can share the exact form data type.
 export type FormType = {
@@ -76,6 +76,7 @@ export type FormType = {
   walletId:string|undefined;
   tempWalletId?:string|undefined
 };
+/*
 function MyDropdown() {
   const [open, setOpen] = useState(false);
   const boxRef = useRef(null);
@@ -109,6 +110,7 @@ function MyDropdown() {
     </div>
   );
 }
+*/
 /*
 function ExampleModal({ onClose }: { onClose: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);

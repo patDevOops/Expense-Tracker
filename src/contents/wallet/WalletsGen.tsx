@@ -3,6 +3,15 @@ import { FaMinus } from "react-icons/fa6";
 import { CiTrash } from "react-icons/ci";
 import { IoIosRadioButtonOff } from "react-icons/io";
 import { IoIosRadioButtonOn } from "react-icons/io";
+import type { WalletType } from "../../App";
+type WalletsGenProps = {
+  setToDeleteWalletRecordId: (value: string) => void;
+  confirmModalRef: HTMLDialogElement;
+  wallet: WalletType;
+  isMultiSelected: boolean;
+  toDeleteSelecteds: string[];
+  setToDeleteSelecteds: (value: string) => void;
+};
 export function WalletsGen({
   setToDeleteWalletRecordId,
   confirmModalRef,
@@ -10,7 +19,7 @@ export function WalletsGen({
   isMultiSelected,
   toDeleteSelecteds,
   setToDeleteSelecteds,
-}) {
+}: WalletsGenProps) {
   return (
     <div
       className={`wallet-record ${wallet.amount >= 0 ? "background-green" : "background-red"}`}
