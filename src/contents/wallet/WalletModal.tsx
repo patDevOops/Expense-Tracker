@@ -16,7 +16,7 @@ export function WalletModal({
   onClose,
 }) {
   const [isOpenDateDropdown, setIsOpenDateDropdown] = useState(false);
-  const [selectedWalletDate, setSelectedWalletDate] = useState("2026-11");
+  const [selectedWalletDate, setSelectedWalletDate] = useState("2026-10");
   const [toDeleteWalletRecordId, setToDeleteWalletRecordId] = useState(null);
   const [walletForm, setWalletForm] = useState({
     amount: "",
@@ -74,9 +74,9 @@ export function WalletModal({
     }
   });
 
-  useEffect(() => {
-    console.log(walletDates);
-  });
+  if(selectedWalletDate!=="all"){
+    wallets = wallets.filter(a => dayjs(a.date).format('YYYY-MM')===selectedWalletDate)
+  }
   return (
     <div className="wallet-modal">
       {(isToggleBtn.addMoney || isToggleBtn.editMoney) && (
@@ -275,9 +275,11 @@ export function WalletModal({
                 setIsOpenDateDropdown(!isOpenDateDropdown);
               }}
             >
-              <span className="wallet-dropdown-date-toggle-text">{dayjs(selectedWalletDate).format('YYYY-MMMM')}</span>
+              <span className="wallet-dropdown-date-toggle-text">{selectedWalletDate!=='all'?dayjs(selectedWalletDate).format('YYYY-MMMM'):'All'}</span>
               <span className="wallet-icon-dropdown">
-                <IoMdArrowDropup size="17" />
+                <IoMdArrowDropup 
+                  className={`${isOpenDateDropdown&&'arrow-rotate-180deg'}`}
+                  size="17" />
               </span>
             </div>
             
@@ -286,12 +288,22 @@ export function WalletModal({
                 {walletDates.map((walletDate) => {
                   return (
                     <p
+                      onClick={()=>{
+                        setSelectedWalletDate(walletDate)
+                        setIsOpenDateDropdown(false)
+                      }}
                       className={`${selectedWalletDate === walletDate && "selected"}`}
                     >
                       {dayjs(walletDate).format('YYYY-MMMM')} {selectedWalletDate === walletDate &&<IoMdCheckmark size={16} />}
                     </p>
                   );
                 })}
+                <p 
+                  onClick={()=>{
+                    setSelectedWalletDate('all')
+                    setIsOpenDateDropdown(false)
+                  }}
+                  className={`${selectedWalletDate === "all" && "selected"}`}>All {selectedWalletDate === "all" &&<IoMdCheckmark size={16} />}</p>
               </div>
             )}
           </div>

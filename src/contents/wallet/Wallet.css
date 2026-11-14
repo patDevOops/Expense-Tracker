@@ -444,8 +444,9 @@
 }
 .wallet-dropdown-date-filter p{
   text-wrap: nowrap;
-  color:hwb(0 93% 4%);
-  padding:0.3rem 0.2rem;
+  color:var(--text-blur);
+  padding:0.2rem 0.1rem;
+  margin:0.16rem;
   font-size:0.8rem
 }
 .wallet-dropdown-date-filter p.selected{
@@ -460,4 +461,7 @@
   white-space:nowrap;
   overflow: hidden;
   max-width:33px;
+}
+.arrow-rotate-180deg{
+  transform:rotateZ(180deg);
 }
