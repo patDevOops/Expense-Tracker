@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect } from "react";
-import { IoMdCheckmark } from "react-icons/io";
 import dayjs from "dayjs";
+import { IoMdCheckmark } from "react-icons/io";
+import { MdDeleteForever } from "react-icons/md";
+import { FaPlus } from "react-icons/fa6";
+import { FaMinus } from "react-icons/fa6";
+import { IoMdClose } from "react-icons/io";
+import { Barrier } from "../../components/barrier.tsx";
 import { useClickOutside } from "../../utils/useClickOutside.tsx";
 import { WalletsGen } from "./WalletsGen";
 import { IoMdArrowDropup } from "react-icons/io";
 import { GoMultiSelect } from "react-icons/go";
-import { FaPlus } from "react-icons/fa6";
-import { FaMinus } from "react-icons/fa6";
 export function WalletModal({
   wallets,
   totalWalletMoney,
@@ -15,8 +18,10 @@ export function WalletModal({
   removeWalletId,
   onClose,
 }) {
+  const [toDeleteSelecteds, setToDeleteSelecteds] = useState([]);
+  const [isMultiSelected, setIsMultiSelected] = useState(false);
   const [isOpenDateDropdown, setIsOpenDateDropdown] = useState(false);
-  const [selectedWalletDate, setSelectedWalletDate] = useState("2026-10");
+  const [selectedWalletDate, setSelectedWalletDate] = useState("all");
   const [toDeleteWalletRecordId, setToDeleteWalletRecordId] = useState(null);
   const [walletForm, setWalletForm] = useState({
     amount: "",
@@ -59,9 +64,8 @@ export function WalletModal({
   };
   const confirmModalRef = useRef<HTMLDialogElement>(null);
   const filterDateRef = useRef<HTMLDivElement>(null);
-
+  const multiSelectConfirmModalRef = useRef(null);
   useClickOutside(filterDateRef, () => setIsOpenDateDropdown(false));
-
   wallets.sort((a, b) => {
     return dayjs().diff(a.date) - dayjs().diff(b.date);
   });
@@ -74,8 +78,10 @@ export function WalletModal({
     }
   });
 
-  if(selectedWalletDate!=="all"){
-    wallets = wallets.filter(a => dayjs(a.date).format('YYYY-MM')===selectedWalletDate)
+  if (selectedWalletDate !== "all") {
+    wallets = wallets.filter(
+      (a) => dayjs(a.date).format("YYYY-MM") === selectedWalletDate,
+    );
   }
   return (
     <div className="wallet-modal">
@@ -87,7 +93,44 @@ export function WalletModal({
           }}
         ></div>
       )}
-
+      <dialog
+        ref={multiSelectConfirmModalRef}
+        onClose={onClose}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) {
+            multiSelectConfirmModalRef.current?.close(); // click sa backdrop
+          }
+        }}
+        className="wallet-confirm-modal"
+      >
+        <div>
+          <p>
+            Are You Sure You Want To Delete This {toDeleteSelecteds.length}{" "}
+            selected items?
+          </p>
+          <div className="wallet-confirm-modal-btn-cont">
+            <button
+              onClick={() => {
+                toDeleteSelecteds.forEach((toDeleteId) => {
+                  deleteWalletRecord(toDeleteId);
+                  removeWalletId(toDeleteId);
+                });
+                multiSelectConfirmModalRef.current?.close();
+                setToDeleteSelecteds([]);
+              }}
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => {
+                multiSelectConfirmModalRef.current?.close();
+              }}
+            >
+              No
+            </button>
+          </div>
+        </div>
+      </dialog>
       <dialog
         className="wallet-confirm-modal"
         ref={confirmModalRef}
@@ -275,35 +318,48 @@ export function WalletModal({
                 setIsOpenDateDropdown(!isOpenDateDropdown);
               }}
             >
-              <span className="wallet-dropdown-date-toggle-text">{selectedWalletDate!=='all'?dayjs(selectedWalletDate).format('YYYY-MMMM'):'All'}</span>
+              <span className="wallet-dropdown-date-toggle-text">
+                {selectedWalletDate !== "all"
+                  ? dayjs(selectedWalletDate).format("YYYY-MMMM")
+                  : "All"}
+              </span>
               <span className="wallet-icon-dropdown">
-                <IoMdArrowDropup 
-                  className={`${isOpenDateDropdown&&'arrow-rotate-180deg'}`}
-                  size="17" />
+                <IoMdArrowDropup
+                  className={`${isOpenDateDropdown && "arrow-rotate-180deg"}`}
+                  size="17"
+                />
               </span>
             </div>
-            
+
             {isOpenDateDropdown && (
               <div className="wallet-dropdown-date-filter">
                 {walletDates.map((walletDate) => {
                   return (
                     <p
-                      onClick={()=>{
-                        setSelectedWalletDate(walletDate)
-                        setIsOpenDateDropdown(false)
+                      key={walletDate}
+                      onClick={() => {
+                        setSelectedWalletDate(walletDate);
+                        setIsOpenDateDropdown(false);
                       }}
                       className={`${selectedWalletDate === walletDate && "selected"}`}
                     >
-                      {dayjs(walletDate).format('YYYY-MMMM')} {selectedWalletDate === walletDate &&<IoMdCheckmark size={16} />}
+                      {dayjs(walletDate).format("YYYY-MMMM")}{" "}
+                      {selectedWalletDate === walletDate && (
+                        <IoMdCheckmark size={16} />
+                      )}
                     </p>
                   );
                 })}
-                <p 
-                  onClick={()=>{
-                    setSelectedWalletDate('all')
-                    setIsOpenDateDropdown(false)
+                <p
+                  onClick={() => {
+                    setSelectedWalletDate("all");
+                    setIsOpenDateDropdown(false);
                   }}
-                  className={`${selectedWalletDate === "all" && "selected"}`}>All {selectedWalletDate === "all" &&<IoMdCheckmark size={16} />}</p>
+                  className={`${selectedWalletDate === "all" && "selected"}`}
+                >
+                  All{" "}
+                  {selectedWalletDate === "all" && <IoMdCheckmark size={16} />}
+                </p>
               </div>
             )}
           </div>
@@ -311,22 +367,53 @@ export function WalletModal({
           <span>Amount</span>
           <span>Details</span>
           <span>Date</span>
-          <span>
-            <GoMultiSelect size="15" />
-          </span>
+          <div>
+            {!isMultiSelected ? (
+              <span
+                onClick={() => {
+                  setIsMultiSelected(true);
+                }}
+              >
+                <GoMultiSelect size="16" />
+              </span>
+            ) : (
+              <div className="wallet-icon-multiselected-cont">
+                {toDeleteSelecteds.length !== 0 && (
+                  <span
+                    onClick={() => {
+                      multiSelectConfirmModalRef.current?.showModal();
+                    }}
+                    className="wallet-multi-selected-icons"
+                  >
+                    <MdDeleteForever size="16" />
+                  </span>
+                )}
+                <span
+                  className="wallet-multi-selected-icons"
+                  onClick={() => {
+                    setIsMultiSelected(false);
+                    setToDeleteSelecteds([]);
+                  }}
+                >
+                  <IoMdClose size="16" />
+                </span>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="wallet-records-gen">
           {wallets.map((wallet) => {
             return (
-              <>
-                <WalletsGen
-                  key={wallet.id}
-                  wallet={wallet}
-                  setToDeleteWalletRecordId={setToDeleteWalletRecordId}
-                  confirmModalRef={confirmModalRef}
-                />
-              </>
+              <WalletsGen
+                key={wallet.id}
+                wallet={wallet}
+                setToDeleteWalletRecordId={setToDeleteWalletRecordId}
+                confirmModalRef={confirmModalRef}
+                isMultiSelected={isMultiSelected}
+                toDeleteSelecteds={toDeleteSelecteds}
+                setToDeleteSelecteds={setToDeleteSelecteds}
+              />
             );
           })}
         </div>

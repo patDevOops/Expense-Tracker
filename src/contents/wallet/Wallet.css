@@ -340,7 +340,7 @@
 }
 .wallet-record {
   margin: 0 0 0.1rem 0;
-  
+  z-index:2;
   display: grid;
   grid-template-columns: 1.2fr 1.1fr 1.7fr 0.2fr;
   font-size: 0.85rem;
@@ -462,6 +462,17 @@
   overflow: hidden;
   max-width:33px;
 }
+.wallet-dropdown-date-toggle{
+  display:flex;
+  justify-content: space-between;
+}
 .arrow-rotate-180deg{
   transform:rotateZ(180deg);
+}
+.wallet-icon-multiselected-cont{
+  display:flex;
+  gap:0.15rem
+}
+.wallet-multi-selected-icons{
+  z-index:1
 }

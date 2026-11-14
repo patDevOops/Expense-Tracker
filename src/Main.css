@@ -7,7 +7,8 @@
 .barrier-category,
 .barrier-wallet-form,
 .barrier-wallet-modal,
-.barrier-form-confirm-modal{
+.barrier-form-confirm-modal,
+.barrier-multi-selecteds{
   background-color:black;
   position:absolute;
   top:0;
@@ -84,4 +85,7 @@
   position:fixed;
   z-index:175;
   opacity:0.3;
+}
+.barrier-multi-selecteds{
+  position:fixed;
 }

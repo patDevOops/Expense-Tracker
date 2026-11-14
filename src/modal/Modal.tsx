@@ -97,7 +97,6 @@ export function Modal({
           <div className="confirmation-modal">
             <span>Are You Sure?</span>
             {/*<span>Note:Be Sure To Make Backup First</span>*/}
-            {console.log(selectedCategoryDel) as unknown as ReactNode}
             <span className="to-delete-name">
               Deleting "{selectedCategoryDel.categoryName}" Category
             </span>
