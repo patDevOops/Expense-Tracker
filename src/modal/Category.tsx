@@ -24,7 +24,6 @@ export function CategoryCom({
   const [isEditingCategory, setIsEditingCategory] = useState<string | false>(false);
   const [categoryNameInput, setCategoryNameInput] = useState("");
   const inputCategoryName = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     setCategoryNameInput(event.target.value);
   };
   return (
@@ -40,6 +39,7 @@ export function CategoryCom({
           value={categoryNameInput}
           onChange={inputCategoryName}
           className="modal-input-rec"
+          aria-label="Category name"
         />
         <button
           onClick={() => {

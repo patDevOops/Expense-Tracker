@@ -43,6 +43,7 @@ export function Record({
           value={recordNameInput}
           placeholder="Record Name"
           className="modal-input-rec"
+          aria-label="Record name"
           onClick={()=>{setSelectedRec(null)}}
         />
         <button

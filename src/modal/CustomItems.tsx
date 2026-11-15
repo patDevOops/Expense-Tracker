@@ -37,6 +37,7 @@ export function CustomItems({
   const [editingCustomItem, setEditingCustomItem] = useState<
     null | boolean | string
   >(null);
+  const [selectedDeleteItem, setSelectedDeleteItem] = useState<CustomItem | null>(null);
 
   const inputItem = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name } = event.target;
@@ -83,7 +84,7 @@ export function CustomItems({
     setCustomItemInput({
       name: "",
       price: "",
-      categoryId: category[0]!.id, // Non-null assertion changes only TypeScript checking.
+      categoryId: category[0]?.id ?? "",
     });
   }
   const renderCategoryName = (id: string) => {
@@ -92,6 +93,35 @@ export function CustomItems({
   return (
     <>
       <Barrier b="barrier-menu-custom-item" a={isViewMenu} c={setIsViewMenu} />
+      <Barrier
+        b="barrier-modal-confirm"
+        a={selectedDeleteItem}
+        c={() => setSelectedDeleteItem(null)}
+      />
+      {selectedDeleteItem && (
+        <div className="confirmation-modal" role="alertdialog" aria-modal="true" aria-labelledby="delete-custom-item-title">
+          <span id="delete-custom-item-title">Delete this item?</span>
+          <span className="to-delete-name">“{selectedDeleteItem.name}” will be removed.</span>
+          <div>
+            <button
+              type="button"
+              onClick={() => {
+                deleteCustomItem(selectedDeleteItem.id);
+                if (editingCustomItem === selectedDeleteItem.id) {
+                  setEditingCustomItem(false);
+                  clearInput();
+                }
+                setSelectedDeleteItem(null);
+              }}
+            >
+              Delete
+            </button>
+            <button type="button" onClick={() => setSelectedDeleteItem(null)}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
       <div className="modal-title">Create Custom Items</div>
 
       <div className="record-input-cont custom-item-input-cont">
@@ -101,8 +131,9 @@ export function CustomItems({
             onChange={inputItem}
             value={customItemInput.name}
             name="name"
-            placeholder=".eg"
+            placeholder="e.g. Rice"
             className="modal-input-rec"
+            aria-label="Item name"
           />
         </div>
         <div className="price-custom">
@@ -111,8 +142,13 @@ export function CustomItems({
             onChange={inputItem}
             value={customItemInput.price}
             name="price"
-            placeholder="(optional)"
+            type="number"
+            min="0"
+            step="0.01"
+            inputMode="decimal"
+            placeholder="Optional"
             className="modal-input-rec"
+            aria-label="Price"
           />
         </div>
         <select
@@ -120,6 +156,7 @@ export function CustomItems({
           value={customItemInput.categoryId}
           name="categoryId"
           className="modal-input-rec"
+          aria-label="Category"
         >
           {category.map((categoryVal) => {
             return (
@@ -198,7 +235,7 @@ export function CustomItems({
                     </p>
                     <p
                       onClick={() => {
-                        deleteCustomItem(customItem.id);
+                        setSelectedDeleteItem(customItem);
                         setIsViewMenu(false);
                       }}
                     >

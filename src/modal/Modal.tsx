@@ -1,5 +1,4 @@
 import { useState } from "react";
-import type { ReactNode } from "react";
 import { Record } from "./Record.js";
 import { CategoryCom } from "./Category.js";
 import { CustomItems } from "./CustomItems.js";
@@ -57,21 +56,21 @@ export function Modal({
     <>
       <Barrier
         a={deleteRecordId}
-        b="barrier-confirm-modal"
+        b="barrier-modal-confirm"
         c={setDeleteRecordId}
       />
+      <Barrier
+        a={selectedCategoryDel}
+        b="barrier-modal-confirm"
+        c={setSelectedCategoryDel}
+      />
       <div className="modal-container">
-        <Barrier
-          a={selectedCategoryDel}
-          b="barrier-confirm-modal"
-          c={setSelectedCategoryDel}
-        />
         {deleteRecordId && (
-          <div className="confirmation-modal">
-            <span>Are You Sure?</span>
+          <div className="confirmation-modal" role="alertdialog" aria-modal="true" aria-labelledby="delete-record-title">
+            <span id="delete-record-title">Delete this record?</span>
             {/*<span>Note:Be Sure To Make Backup First</span>*/}
             <span className="to-delete-name">
-              Deleting "{selectedRec!.name}"
+              “{selectedRec!.name}” will be removed.
             </span>
             <div>
               <button
@@ -81,24 +80,24 @@ export function Modal({
                   setSelectedRec(null);
                 }}
               >
-                Yes
+                Delete
               </button>
               <button
                 onClick={() => {
                   setDeleteRecordId(null);
                 }}
               >
-                No
+                Cancel
               </button>
             </div>
           </div>
         )}
         {selectedCategoryDel && (
-          <div className="confirmation-modal">
-            <span>Are You Sure?</span>
+          <div className="confirmation-modal" role="alertdialog" aria-modal="true" aria-labelledby="delete-category-title">
+            <span id="delete-category-title">Delete this category?</span>
             {/*<span>Note:Be Sure To Make Backup First</span>*/}
             <span className="to-delete-name">
-              Deleting "{selectedCategoryDel.categoryName}" Category
+              “{selectedCategoryDel.categoryName}” will be removed.
             </span>
             <div>
               <button
@@ -107,14 +106,14 @@ export function Modal({
                   setSelectedCategoryDel(null);
                 }}
               >
-                Yes
+                Delete
               </button>
               <button
                 onClick={() => {
                   setSelectedCategoryDel(null);
                 }}
               >
-                No
+                Cancel
               </button>
             </div>
           </div>
