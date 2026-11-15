@@ -82,8 +82,17 @@ export function FormCard({
   };
 
   const clickBtnQty = (event: MouseEvent<HTMLButtonElement>) => {
+    
     // The cast is type-only; keep using the same event target value as before.
     const { name } = event.target as HTMLButtonElement;
+    if(form.quantity===""){
+      setForm((prev) => ({
+      ...prev,
+      quantity: 1
+    }));
+      return
+    }
+    if(name==="decrease"&&form.quantity<=1)return;
     setForm((prev) => ({
       ...prev,
       quantity: name === "increase" ? prev.quantity + 1 : prev.quantity - 1,
