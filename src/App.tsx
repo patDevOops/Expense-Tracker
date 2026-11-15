@@ -111,33 +111,7 @@ function MyDropdown() {
   );
 }
 */
-/*
-function ExampleModal({ onClose }: { onClose: () => void }) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
 
-  useEffect(() => {
-    dialogRef.current?.showModal();
-  }, []);
-
-  return (
-    <dialog
-      ref={dialogRef}
-      aria-labelledby="modal-title"
-      onClose={onClose}
-      onClick={(event) => {
-        if (event.target === event.currentTarget) {
-          dialogRef.current?.close(); // click sa backdrop
-        }
-      }}
-    >
-      <h2 id="modal-title">Title ng modal</h2>
-      <button onClick={() => dialogRef.current?.close()}>
-        Isara
-      </button>
-    </dialog>
-  );
-}
-*/
 function App() {
   const [isEditingItem, setIsEditingItem] = useState<boolean>(false);
   const [form, setForm] = useState<FormType>({
