@@ -415,7 +415,8 @@ export function WalletModal({
                     }}
                     className="wallet-multi-selected-icons"
                   >
-                    <MdDeleteForever size="16" />
+                    <MdDeleteForever size="16"
+                      color="#f16060eb"/>
                   </span>
                 )}
                 <span

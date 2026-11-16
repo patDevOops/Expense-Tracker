@@ -382,7 +382,7 @@
     border-radius: 7px;
   }
   .wallet-record-delete {
-    color: var(--text-blur);
+    color:#ff7777;;
     cursor: pointer;
     transition: color 0.15s ease, background-color 0.15s ease;
   }
@@ -428,10 +428,9 @@
 .wallet-record:hover {
   border-color: rgba(255, 255, 255, 0.14);
 }
-.wallet-record .wallet-record-delete:hover {
+/*.wallet-record .wallet-record-delete:hover {
   color: #ff7777;
-  background: rgba(239, 68, 68, 0.12);
-}
+}*/
 .wallet-record.background-green {
   background: rgba(34, 197, 94, 0.08);
 }

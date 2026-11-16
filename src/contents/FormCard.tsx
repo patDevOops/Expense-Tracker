@@ -60,6 +60,7 @@ export function FormCard({
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = event.target;
+    if(name==="category")localStorage.setItem('category',value)
     setForm(
       (prev) =>
         ({
@@ -320,7 +321,8 @@ export function FormCard({
               >
                 {category.map((a) => {
                   return (
-                    <option key={a.id} value={a.id}>
+                    <option 
+                      key={a.id} value={a.id}>
                       {a.categoryName}
                     </option>
                   );

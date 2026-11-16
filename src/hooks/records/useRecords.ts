@@ -29,6 +29,32 @@ export function useRecords({
   const [records, setRecords] = useState<RecordType[]>(
     JSON.parse(localStorage.getItem("records")) || [
       {
+        name: "My Expense Records",
+        id: "123",
+        createdAt: dayjs().format("YYYY-MM-D"),
+        status: "local",
+        wallets: [],
+        customItems: [],
+        category: [
+          {
+            categoryName: "Others",
+            id: "652"
+          },
+          {
+            categoryName: "Food",
+            id: "098"
+          },
+          {
+            categoryName: "Things",
+            id: "765"
+          }
+        ],
+        items: []
+      }
+    ]
+
+    /*[
+      {
         name: "untitled",
         id: "123",
         createdAt: "2026-09-20",
@@ -116,9 +142,8 @@ export function useRecords({
           }
         ]
       }
-    ]
+    ]*/
   );
-
   const deleteRecord = (id: string) => {
     setRecords(records.filter((a: { id: string }) => id !== a.id));
   };
@@ -139,7 +164,7 @@ export function useRecords({
         ],
         items: [],
         customItems: [],
-        wallets:[]
+        wallets: []
       } as unknown as RecordType // Type assertion only; preserves the original record object.
     ]);
   };
@@ -152,7 +177,7 @@ export function useRecords({
     matchRec
   });
 
-  const { addItems, removeItems, saveItem ,removeWalletId} = useItems({
+  const { addItems, removeItems, saveItem, removeWalletId } = useItems({
     setRecords,
     matchRec,
     clearForm,
@@ -160,7 +185,11 @@ export function useRecords({
     records,
     form
   });
-  const { addWalletRecord,saveWalletEdited ,deleteWalletRecord} = useWallet({ matchRec, setRecords, records });
+  const { addWalletRecord, saveWalletEdited, deleteWalletRecord } = useWallet({
+    matchRec,
+    setRecords,
+    records
+  });
   return {
     removeWalletId,
     deleteWalletRecord,

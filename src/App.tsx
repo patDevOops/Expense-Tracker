@@ -42,7 +42,7 @@ export type RecordType = {
   items: Item[];
   customItems: CustomItem[];
   category: Category[];
-  wallets:WalletType[]
+  wallets: WalletType[];
 };
 export type UseRecordHook = {
   records: RecordType[];
@@ -57,10 +57,10 @@ export type UseRecordHook = {
   addItems: (newItems: Item) => void;
   removeItems: (id: string) => void;
   saveItem: () => void;
-  addWalletRecord:(newWalletRecord:WalletType)=>void;
-  saveWalletEdited:(form:WalletType)=>void;
-  deleteWalletRecord:(id:string)=>void;
-  removeWalletId:(walletId:string)=>void
+  addWalletRecord: (newWalletRecord: WalletType) => void;
+  saveWalletEdited: (form: WalletType) => void;
+  deleteWalletRecord: (id: string) => void;
+  removeWalletId: (walletId: string) => void;
 };
 // Exported so other components can share the exact form data type.
 export type FormType = {
@@ -73,8 +73,8 @@ export type FormType = {
   quantity: number;
   id: string;
   totalPrice: "" | number;
-  walletId:string|undefined;
-  tempWalletId?:string|undefined
+  walletId: string | undefined;
+  tempWalletId?: string | undefined;
 };
 /*
 function MyDropdown() {
@@ -116,14 +116,14 @@ function App() {
   const [isEditingItem, setIsEditingItem] = useState<boolean>(false);
   const [form, setForm] = useState<FormType>({
     name: "",
-    category: "",
+    category: localStorage.getItem('category')||'',
     date: "",
     time: "",
     price: "",
     quantity: 1,
     id: "",
     totalPrice: "",
-    walletId:localStorage.getItem("wallet-toggle"),
+    walletId: localStorage.getItem("wallet-toggle"),
   });
   const {
     records,
@@ -141,7 +141,7 @@ function App() {
     addWalletRecord,
     saveWalletEdited,
     deleteWalletRecord,
-    removeWalletId
+    removeWalletId,
   }: UseRecordHook = useRecords({
     matchRec,
     setIsEditingItem,
@@ -150,7 +150,7 @@ function App() {
   });
 
   const [currentRecordId, setCurrentRecordId] = useState<string>(
-    localStorage.getItem("selected-record") ?? "",
+    localStorage.getItem("selected-record") ?? records[0].id ?? "",
   );
   const switchViewRec = (id: string) => {
     setCurrentRecordId(id);
@@ -174,7 +174,7 @@ function App() {
       quantity: 1,
       id: "",
       totalPrice: "",
-      walletId:localStorage.getItem("wallet-toggle")
+      walletId: localStorage.getItem("wallet-toggle"),
     });
   }
 
@@ -212,7 +212,7 @@ function App() {
     eruda.init();
   });
   useEffect(() => {
-    setForm({ ...form, category: category[category.length - 1]?.id || "" });
+    setForm({ ...form, category: form.category||category[category.length - 1]?.id || "" });
   }, []);
   //shortcut for finding current Record
   function matchRec(a: string): boolean {
@@ -285,4 +285,9 @@ function App() {
   );
 }
 
+/*export default App;
+</>
+  );
+}
+*/
 export default App;
