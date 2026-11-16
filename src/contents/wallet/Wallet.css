@@ -321,71 +321,142 @@
 }
 
 .wallet-row-details {
-  font-size: 0.7rem;
-  color: var(--text-blur);
   display: grid;
-  grid-template-columns: 3rem 1fr 1.3fr 1fr 0.2fr;
+  grid-template-columns: 2.8rem minmax(4.5rem, 0.9fr) minmax(4rem, 1.35fr) minmax(4.7rem, 1fr) 1.75rem;
+  align-items: center;
+  column-gap: 0.3rem;
+  padding: 0.5rem 0.45rem;
+  color: var(--text-blur);
+  font-size: 0.65rem;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.wallet-row-details > span {
+  text-align: center;
 }
 .wallet-dropdown-date {
   display: flex;
-  position:relative;
+  position: relative;
+  min-width: 0;
 }
-.wallet-dropdown-date > div{
-  display:flex;
+.wallet-dropdown-date > div {
+  display: flex;
 }
 .wallet-icon-dropdown {
   display: flex;
-  align-item: center;
+  align-items: center;
   justify-content: center;
 }
 .wallet-record {
-  margin: 0 0 0.1rem 0;
-  z-index:2;
   display: grid;
-  grid-template-columns: 1.2fr 1.1fr 1.7fr 0.2fr;
-  font-size: 0.85rem;
-  column-gap: 0.1rem;
+  grid-template-columns: 2.8rem minmax(4.5rem, 0.9fr) minmax(4rem, 1.35fr) minmax(4.7rem, 1fr) 1.75rem;
+  column-gap: 0.3rem;
   align-items: center;
-  /*border: var(--border);*/
-  padding: 0.4rem 0.4rem 0.4rem 0.9rem;
-  border-radius: 6px;
-  .wallet-record-date {
-    text-align: center;
-    font-size: 0.5rem;
-    color: var(--text-blur);
+  margin-bottom: 0.3rem;
+  padding: 0.55rem 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 9px;
+  font-size: 0.85rem;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  .wallet-record-amount {
+    grid-column: 2;
   }
   .wallet-record-detail {
+    grid-column: 3;
+  }
+  .wallet-record-date {
+    grid-column: 4;
+  }
+  > div {
+    grid-column: 5;
+    display: flex;
+    justify-content: center;
+  }
+  .wallet-record-delete,
+  .wallet-multi-selected-icons {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    min-height: 1.75rem;
+    border-radius: 7px;
+  }
+  .wallet-record-delete {
+    color: var(--text-blur);
+    cursor: pointer;
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  .wallet-multi-selected-icons {
+    color: var(--btn-color);
+  }
+  .wallet-record-date {
     text-align: center;
     font-size: 0.65rem;
     color: var(--text-blur);
+    white-space: nowrap;
+  }
+  .wallet-record-detail {
+    min-width: 0;
+    overflow: hidden;
+    color: var(--text-blur);
+    font-size: 0.72rem;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .wallet-record-amount {
-    display:flex;
-    align-items:center;
-    gap:0.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    min-width: 0;
     font-weight: 700;
-    justify-content:center
+    white-space: nowrap;
   }
-  .wallet-record-amount.text-green{
-    color:limegreen
+  .wallet-record-amount.text-green {
+    color: #55d889;
   }
-  .wallet-record-amount.text-red{
-    color:hwb(0 14% 2%)
+  .wallet-record-amount.text-red {
+    color: #ff7777;
   }
-  
-  .wallet-record-amount p:first-child{
-    font-size:0.6rem;
+  .wallet-record-amount p:first-child {
+    display: flex;
+    align-items: center;
+    font-size: 0.6rem;
   }
 }
-.wallet-record.background-green{
-  background:hwb(120 0% 0% / 0.11372549019607843);
+.wallet-record:hover {
+  border-color: rgba(255, 255, 255, 0.14);
 }
-.wallet-record.background-red{
-  background:hwb(0 0% 0% / 0.08235294117647059)
+.wallet-record .wallet-record-delete:hover {
+  color: #ff7777;
+  background: rgba(239, 68, 68, 0.12);
 }
-.wallet-records-gen{
-  overflow:scroll;
+.wallet-record.background-green {
+  background: rgba(34, 197, 94, 0.08);
+}
+.wallet-record.background-red {
+  background: rgba(239, 68, 68, 0.07);
+}
+.wallet-records-gen {
+  overflow: auto;
   height: 100%;
+  padding: 0.35rem 0 0.25rem;
+  scrollbar-width: thin;
+}
+
+@media (max-width: 360px) {
+  .wallet-row-details,
+  .wallet-record {
+    grid-template-columns: 2.5rem minmax(4rem, 0.9fr) minmax(3.5rem, 1.2fr) minmax(4.2rem, 1fr) 1.6rem;
+    column-gap: 0.2rem;
+    padding-right: 0.3rem;
+    padding-left: 0.3rem;
+  }
+
+  .wallet-record .wallet-record-detail {
+    font-size: 0.65rem;
+  }
 }
 .wallet-confirm-modal{
   width:auto;
