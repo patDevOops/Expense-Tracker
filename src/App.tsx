@@ -62,13 +62,11 @@ export type UseRecordHook = {
   deleteWalletRecord: (id: string) => void;
   removeWalletId: (walletId: string) => void;
 };
-// Exported so other components can share the exact form data type.
 export type FormType = {
   name: string;
   category: string;
   date: string;
   time: string;
-  // Numeric inputs begin empty and then store numbers.
   price: "" | number;
   quantity: number;
   id: string;
