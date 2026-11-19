@@ -81,15 +81,13 @@
 
 .wallet-modal-head {
   position: relative;
-  z-index: 2;
+  z-index: 5;
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
   gap: 0.75rem;
   min-width: 0;
-  max-height: 58%;
-  overflow-y: auto;
-  scrollbar-width: thin;
+  overflow: visible;
 }
 
 .wallet-modal-summary {
@@ -155,6 +153,10 @@
 }
 
 .wallet-form-add-money {
+  position: absolute;
+  top: calc(44px + 0.75rem);
+  left: 0;
+  z-index: 5;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -582,10 +584,6 @@
 @media (max-height: 620px) {
   .wallet-modal {
     inset-block-start: 10dvh;
-  }
-
-  .wallet-modal-head {
-    max-height: 64%;
   }
 }
 

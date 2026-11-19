@@ -1,6 +1,6 @@
 # Repository Guidelines
 ## important
-also check the HANDOF.md files to get info what happen in earlier and older session
+also check the HANDOFF.md files to get info what happen in earlier and older session
 
 use mcp tools for browser visualization  like playwright,use it for verifying after web is changed or modified 
 
