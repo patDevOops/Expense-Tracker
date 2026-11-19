@@ -1,3 +1,12 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
 .barrier-items,
 .barrier,
 .barrier-form,
@@ -8,84 +17,72 @@
 .barrier-wallet-form,
 .barrier-wallet-modal,
 .barrier-form-confirm-modal,
-.barrier-multi-selecteds{
-  background-color:black;
-  position:absolute;
-  top:0;
-  left:0;
-  bottom:0;
-  right:0;
+.barrier-multi-selecteds,
+.barrier-pick-item {
+  position: fixed;
+  inset: 0;
+  background: var(--color-scrim);
 }
-.barrier{
-  z-index:200;
-  opacity:0.05;
+
+.barrier {
+  z-index: 200;
+  opacity: 0.05;
 }
-.barrier-items{
-  z-index:85;
-  opacity:0;
-}
-.barrier-form{
-  z-index:155;
-  opacity:0;
-}
-.barrier-expand-btn{
-  opacity:0;
-  z-index:160;
-}
-.barrier-pick-item{
-  background-color:black;
-  top:0;
-  left:0;
-  bottom:0;
-  right:0;
-  position:fixed;
-  opacity:0;
-  z-index:165;
-}
-.main {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-.barrier-confirm-modal{
-  position:fixed;
+
+.barrier-items {
+  z-index: 0;
   opacity: 0;
-  z-index:150;
 }
-.barrier-menu-custom-item{
-  position:fixed;
-  z-index:1;
-  opacity:0;
+
+.barrier-form {
+  z-index: 155;
+  opacity: 0;
 }
-.barrier-category{
+
+.barrier-expand-btn {
+  z-index: 160;
+  opacity: 0;
+}
+
+.barrier-pick-item {
+  z-index: 165;
+  opacity: 0;
+}
+
+.barrier-confirm-modal {
+  z-index: 150;
+  opacity: 0;
+}
+
+.barrier-menu-custom-item,
+.barrier-category,
+.barrier-wallet-form {
   z-index: 1;
-  position:fixed;
-  opacity:0;
+  opacity: 0;
 }
-.arrow-rotate{
-  transition: transform 0.01s;
+
+.barrier-wallet-modal {
+  z-index: 100;
+  opacity: 0;
+}
+
+.barrier-form-confirm-modal {
+  z-index: 175;
+  opacity: 0.3;
+}
+
+.arrow-rotate {
   transform: rotateZ(-180deg);
 }
-.arrow-unrotate{
-  transition: transform 0.01s;
-  transform: rotateZ(-360deg);
+
+.arrow-unrotate {
+  transform: rotateZ(0deg);
 }
-.barrier-wallet-form{
-  position:fixed;
-  z-index:1;
-  opacity:0;
-}
-.barrier-wallet-modal{
-  position:fixed;
-  z-index:100;
-  opacity:0;
-}
-.barrier-form-confirm-modal{
-  position:fixed;
-  z-index:175;
-  opacity:0.3;
-}
-.barrier-multi-selecteds{
-  position:fixed;
+
+@media (min-width: 700px) {
+  .main {
+    max-width: 900px;
+    margin-inline: auto;
+    border-inline: 1px solid var(--color-border-soft);
+  }
 }

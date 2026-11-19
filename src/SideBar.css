@@ -1,19 +1,45 @@
-.sidebar{
-  position:fixed;
-  background-color:rgb(15,22,31);
-  top:0;
+.sidebar {
+  position: fixed;
   z-index: 300;
-  box-shadow: 1px 1px 10px rgba(0,0,0,0.25)
+  inset: calc(var(--header-height) + env(safe-area-inset-top, 0px)) auto 0 0;
+  width: min(82vw, 300px);
+  padding: var(--space-2);
+  overflow-y: auto;
+  background: var(--color-surface);
+  border-right: var(--border);
+  box-shadow: 8px 0 26px rgb(0 0 0 / 28%);
 }
-.sidebar div{
-  padding:10px 3rem 10px 10px;
-  display:flex;
+
+.sidebar div {
+  display: flex;
   align-items: center;
-  gap:20px;
+  gap: var(--space-3);
+  min-height: 48px;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
 }
-.sidebar div:active{
-  background-color:rgb(53, 59, 73);
+
+.sidebar div:active {
+  color: var(--color-text);
+  background: var(--color-surface-raised);
 }
-.sidebar div span:last-child{
-  font-size:0.8rem;
+
+.sidebar div span:first-child {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  font-size: 1.25rem;
+}
+
+.sidebar div span:last-child {
+  font-size: 0.95rem;
+  font-weight: 550;
+}
+
+@media (min-width: 700px) {
+  .sidebar {
+    width: 280px;
+  }
 }

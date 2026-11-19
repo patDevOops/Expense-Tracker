@@ -1,30 +1,46 @@
-.date-year-month-cont{
-  display:flex;
-  justify-content: space-between;
+.date-year-month-cont {
+  display: flex;
   align-items: center;
-  margin:0.5rem 0 0 0;
+  justify-content: space-between;
+  /*gap: clamp(8px, 3vw, 16px);*/
+  /*width: 100%;*/
+  /*min-width: 280px;*/
+  min-height: 52px;
+  margin: var(--space-2) var(--space-3) 0;
+  
 }
-.arrow-btn{
-  height:26px;
-  width:35px;
+
+.arrow-btn-cont {
+  display: grid;
+  flex: 0 0 44px;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-text);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  transition: background 150ms ease, transform 150ms ease;
 }
-.arrow-btn-cont{
-  background:#4f8cff;
-  border-radius:50%;
-  padding:6px 2px;
-  border:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:auto 8px;
-  transition:background 0.15s;
-  transition:padding 0.15s;
+
+.arrow-btn-cont:active {
+  background: var(--color-primary);
+  transform: scale(0.96);
 }
-.arrow-btn-cont:active{
-  background:#6a9fff;
-  padding:5px 1px;
+
+.arrow-btn {
+  width: 20px;
+  height: 20px;
 }
-.date-year-name div:first-child{
-  font-size:32px;
-  font-weight: 600;
+
+.date-year-name {
+  min-width: 156px;
+  text-align: center;
+}
+
+.date-year-name div:first-child {
+  font-size: clamp(1.2rem, 5vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
 }

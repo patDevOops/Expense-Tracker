@@ -1,0 +1,31 @@
+- generic [ref=f4e2]:
+  - banner [ref=f4e3]:
+    - generic [ref=f4e4] [cursor=pointer]
+    - generic [ref=f4e10]: Expense Tracker
+  - generic [ref=f4e11]:
+    - generic [ref=f4e12]:
+      - generic [ref=f4e17]:
+        - generic [ref=f4e18]: ₱0.00
+        - generic [ref=f4e19] [cursor=pointer]: manage wallet
+      - generic [ref=f4e51]:
+        - generic [ref=f4e53]:
+          - paragraph [ref=f4e54]: ₱0.00
+          - generic [ref=f4e56] [cursor=pointer]
+        - generic [ref=f4e60]:
+          - generic [ref=f4e61]: All
+          - generic [ref=f4e67]: Amount
+          - generic [ref=f4e68]: Details
+          - generic [ref=f4e69]: Date
+    - generic [ref=f4e20]:
+      - button [ref=f4e21] [cursor=pointer]
+      - generic [ref=f4e24]: November 2026
+      - button [ref=f4e26] [cursor=pointer]
+    - generic [ref=f4e29]:
+      - generic [ref=f4e31] [cursor=pointer]
+      - generic [ref=f4e35] [cursor=pointer]
+    - generic [ref=f4e39]:
+      - generic [ref=f4e40]:
+        - generic [ref=f4e41] [cursor=pointer]: All
+        - img [ref=f4e42] [cursor=pointer]
+      - generic [ref=f4e44]: 0 items
+    - button [ref=f4e47] [cursor=pointer]

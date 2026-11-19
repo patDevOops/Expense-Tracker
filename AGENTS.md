@@ -1,4 +1,8 @@
 # Repository Guidelines
+## important
+also check the HANDOF.md files to get info what happen in earlier and older session
+
+use mcp tools for browser visualization  like playwright,use it for verifying after web is changed or modified 
 
 ## Project Structure & Module Organization
 
@@ -35,6 +39,13 @@ Recent commits use short, lowercase imperative summaries (for example, `improve 
 Keep dependency versions in `package.json` and `package-lock.json` in sync by using npm. Do not commit `node_modules/` or generated `dist/` output. Avoid placing secrets in source files or client-side environment configuration.
 
 
-##Others 
+## Others 
 
 The eruda console floating is normal. Its a user tools for devtools inspecting element, because no devtools in android chrome browser
+
+## Playwright & Browser Debugging Rules
+- **No Blind Clicking**: If a Playwright `click` fails (timeout, strict mode violation, or element intercepted), DO NOT retry the same click blindly.
+- **Trace DOM First**: Before trying to click again, use `browser_evaluate` or `browser_run_code_unsafe` to extract the `outerHTML` and `getBoundingClientRect()` of the target element and its parent container. 
+- **Check for Overlays**: Look for elements with high `z-index` (e.g., dev tools, modals) that might be intercepting the click.
+- **React Event Fallback**: If a standard Playwright click fails on a React component, use JavaScript event dispatching (`document.querySelector(...).dispatchEvent(new MouseEvent('click', {bubbles: true}))`) to bypass visibility checks.
+- **Visualize Layout before Fixing**: When fixing CSS alignment issues, DO NOT guess. First, extract the exact bounding boxes of the label, icon, and container via Playwright. Base your CSS fix on the actual rendered dimensions.

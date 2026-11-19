@@ -1,73 +1,72 @@
-.date{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  flex-grow: 1;
-  font-weight: 500;
-}
-.info-container{
-  margin-top:6px;
-  position:relative;
+.info-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-1);
+  min-width: 0;
+  margin: 0 var(--space-2);
 }
 
-.date-container{
-  display:flex;
-  justify-content:space-between;
+.date {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 500;
 }
-.edge-title{
-  font-size:0.6rem;
-  margin-bottom:2px;
-  color:#adb2ba;
+
+.date-container {
+  display: flex;
+  justify-content: space-between;
 }
-.item-all-sum,.record-name{
-  color:#ff5c5c;
-  font-size:1.4rem;
-  font-family:sans-serif;
-  font-weight:700;
+
+.current-record-cont,
+.total-expense-cont {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  min-width: 0;
+  max-width: 220px;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 3px 10px rgb(0 0 0 / 18%);
 }
-.current-record-cont,.total-expense-cont{
-  display:flex;
-  border: 1px solid #2a2f3a;
-  border-radius:5px;
-  background:hwb(214 6% 88%);
-  position:fixed;
-  box-shadow:1px 1px 8px rgba(0,0,0,0.35);
-  min-height:65px;
-  z-index:95;
+
+.record-info-cont {
+  min-width: 0;
+  width: 100%;
+  padding: 7px 9px;
 }
-.total-expense-cont{
-  right:0;
+
+.edge-title {
+  margin-bottom: 2px;
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  line-height: 1.2;
 }
-.current-record-cont{
-  left:0;
+
+.item-all-sum,
+.record-name {
+  overflow: hidden;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.arrow-expand-cont{
-  display:flex;
-  align-items:center;
-  border-right: 1px solid #2a2f3a;
-  transition: background 0.15s;
+
+.item-all-sum {
+  color: var(--color-primary);
 }
-.arrow-expand-cont:active{
-  color:white;
-  background:hwb(213 19% 72%);
+
+@media (max-width: 360px) {
+  .info-container {
+    margin-inline: var(--space-2);
+  }
+
+  .info-container {
+    gap: 4px;
+  }
 }
-.arrow-expand-cont-left{
-  border: 1px solid #2a2f3a;
-  border-right:none;
-  border-top:none;
-  border-bottom:none;
-}
-.record-info-cont{
-  padding:9px 6px;
-  
-}
-/*
-.arrow-rotate{
-  transition: transform 0.01s;
-  transform: rotateZ(-180deg);
-}
-.arrow-unrotate{
-  transition: transform 0.01s;
-  transform: rotateZ(-360deg);
-}
-*/

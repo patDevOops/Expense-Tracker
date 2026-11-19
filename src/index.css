@@ -1,34 +1,123 @@
-html,body, #root{
-  height:100dvh;
+:root {
+  color-scheme: dark;
+  font-family: Arial, Helvetica, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --color-bg: #111821;
+  --color-surface: #18212d;
+  --color-surface-raised: #202c3a;
+  --color-surface-input: #0d151e;
+  --color-border: #303d4c;
+  --color-border-soft: rgb(255 255 255 / 9%);
+  --color-text: #f2f5f8;
+  --color-muted: #aab5c1;
+  --color-subtle: #8492a1;
+  --color-primary: #4f8cff;
+  --color-primary-hover: #6a9fff;
+  --color-danger: #e05b63;
+  --color-success: #55d889;
+  --color-warning: #ffb340;
+  --color-overlay: rgb(0 0 0 / 58%);
+  --color-scrim: #000;
+  --color-disabled: #7e8b97;
+  --color-danger-text: #ff9298;
+  --color-category-text: #f2d39a;
+  --color-category-surface: #493719;
+  --color-scrollbar: #405264;
+  --surface-warning-hover: #8a6935;
+  --color-warning-bg: rgb(255 179 64 / 13%);
+  --main-color: var(--color-bg);
+  --btn-color: var(--color-primary);
+  --text-blur: var(--color-muted);
+  --border-warm: #70552b;
+  --surface-danger: #713940;
+  --surface-warning: #68451c;
+  --modal-surface: var(--color-surface);
+  --modal-surface-raised: var(--color-surface-raised);
+  --modal-border: var(--color-border);
+  --modal-muted: var(--color-muted);
+  --color-success-bg: rgb(34 197 94 / 13%);
+  --color-danger-bg: rgb(239 68 68 / 13%);
+  --color-success-soft: rgb(34 197 94 / 8%);
+  --color-danger-soft: rgb(239 68 68 / 7%);
+  --border: 1px solid var(--color-border);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --header-height: 56px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100dvh;
+  min-height: 0;
   overflow: hidden;
 }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-:root{
-  --main-color:hwb(217 7% 88%);
-  --btn-color:#4f8cff;
-  --border:1px solid #2a2f3a;
-  --text-blur:#adb2ba;
+#root {
+  width: 100%;
+  height: calc(100dvh - var(--header-height) - env(safe-area-inset-top, 0px));
+  min-height: 0;
+  overflow: hidden;
 }
 
-body{
-  background:var(--main-color);
-  color:white;
-  font-family:arial;
-  padding-top:60px;
-  font-family:arial;
+body {
+  padding-top: calc(var(--header-height) + env(safe-area-inset-top, 0px));
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+  -webkit-tap-highlight-color: transparent;
 }
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 dialog::backdrop {
-  background: rgb(0 0 0 / 40%);
+  background: var(--color-overlay);
 }
+
 dialog {
-  color:white;
+  color: var(--color-text);
   border: none;
   padding: 0;
   margin: 0;
   background: transparent;
+}
+
+@media (min-width: 700px) {
+  :root {
+    --header-height: 60px;
+  }
 }

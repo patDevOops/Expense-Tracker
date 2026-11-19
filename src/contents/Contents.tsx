@@ -174,12 +174,14 @@ export function Contents({
         deleteWalletRecord={deleteWalletRecord}
         wallets={wallets}
         addWalletRecord={addWalletRecord}/>
-      <Date
-        selectedDate={selectedDate}
-        changeDate={changeDate}
-        listDates={listDates}
-      />
-      <Info recordName={recordName} totalPrice={totalPrice} />
+      <div className="record-month-header">
+        <Date
+          selectedDate={selectedDate}
+          changeDate={changeDate}
+          listDates={listDates}
+        />
+        <Info recordName={recordName} totalPrice={totalPrice} />
+      </div>
       <Items
         editItem={editItem}
         removeItems={removeItems}

@@ -3,23 +3,23 @@
   min-width: 0;
   min-height: 44px;
   padding: 10px 12px;
-  color: #f4f7fa;
+  color: var(--color-text);
   font: inherit;
   font-size: 0.925rem;
-  background: #0b131b;
-  border: 1px solid #334454;
+  background: var(--color-surface-input);
+  border: var(--border);
   border-radius: 9px;
   outline: none;
   transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease;
 }
 
-.modal-input-rec::placeholder { color: #788897; opacity: 1; }
+.modal-input-rec::placeholder { color: var(--color-subtle); opacity: 1; }
 .modal-input-rec:focus {
-  background: #0e1923;
-  border-color: #6ba5ff;
+  background: var(--color-surface);
+  border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgb(79 140 255 / 18%);
 }
-.modal-input-rec:disabled { color: #7e8b97; opacity: 0.7; }
+.modal-input-rec:disabled { color: var(--color-disabled); opacity: 0.7; }
 
 .record-input-cont {
   display: flex;
@@ -32,19 +32,17 @@
   min-width: 76px;
   min-height: 44px;
   padding: 0 15px;
-  color: #fff;
+  color: var(--color-text);
   font: inherit;
   font-size: 0.9rem;
   font-weight: 650;
-  background: #3479e8;
-  border: 1px solid #4b8cf6;
+  background: var(--color-primary);
+  border: 1px solid var(--color-primary);
   border-radius: 9px;
   cursor: pointer;
   transition: background 150ms ease, transform 150ms ease;
 }
-.record-input-cont > button:hover { background: #4388f4; }
-.record-input-cont > button:focus-visible,
-.record-btn-container button:focus-visible { outline: 2px solid #90bdff; outline-offset: 2px; }
+.record-input-cont > button:hover { background: var(--color-primary-hover); }
 .record-input-cont > button:active { transform: scale(0.98); }
 
 .record-gen {
@@ -54,30 +52,30 @@
   overflow: auto;
   padding-right: 2px;
   scrollbar-width: thin;
-  scrollbar-color: #405264 transparent;
+  scrollbar-color: var(--color-scrollbar) transparent;
 }
 
 .record-gen > div {
   padding: 11px 12px;
-  background: #131f2a;
-  border: 1px solid #293946;
+  background: var(--color-surface-raised);
+  border: var(--border);
   border-radius: 9px;
   cursor: pointer;
   transition: border-color 150ms ease, background 150ms ease;
 }
-.record-gen > div:hover { background: #192734; border-color: #43586a; }
-.record-gen > div#border-highlight { background: #182b3d; border-color: #6ba5ff; }
+.record-gen > div:hover { background: var(--color-surface); border-color: var(--color-muted); }
+.record-gen > div#border-highlight { background: var(--color-surface); border-color: var(--color-primary); }
 
 .record-gen-description {
   display: flex;
   flex-wrap: wrap;
   gap: 5px 10px;
   margin-top: 6px;
-  color: #9eacb9;
+  color: var(--color-muted);
   font-size: 0.75rem;
 }
-.record-gen-description .status { color: #7fd8a0; }
-.record-gen-description .viewing { color: #f2c46d; }
+.record-gen-description .status { color: var(--color-success); }
+.record-gen-description .viewing { color: var(--color-warning); }
 .record-gen-name { font-size: 0.95rem; font-weight: 600; overflow-wrap: anywhere; }
 
 .record-btn-container {
@@ -89,14 +87,14 @@
 .record-btn-container button {
   min-height: 42px;
   padding: 0 15px;
-  color: #fff;
+  color: var(--color-text);
   font: inherit;
   font-size: 0.9rem;
   font-weight: 650;
   border-radius: 9px;
   cursor: pointer;
 }
-.record-btn-container .delete { background: #a9343d; border: 1px solid #c34851; }
-.record-btn-container .delete:hover { background: #c03c46; }
-.record-btn-container .view { background: #3479e8; border: 1px solid #4b8cf6; }
-.record-btn-container .view:hover { background: #4388f4; }
+.record-btn-container .delete { background: var(--surface-danger); border: 1px solid var(--color-danger); }
+.record-btn-container .delete:hover { filter: brightness(1.12); }
+.record-btn-container .view { background: var(--color-primary); border: 1px solid var(--color-primary); }
+.record-btn-container .view:hover { background: var(--color-primary-hover); }

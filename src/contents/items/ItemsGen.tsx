@@ -18,8 +18,6 @@ type ItemsGenProps = {
   showTotal: boolean;
   totalPricePerDay: number;
   editItem: (item: Item) => void;
-  selectedItem: string | null;
-  setSelectedItem: (item: string) => void;
   expanding: string | null;
   setExpanding: (a: string | null) => void;
 };
@@ -34,8 +32,6 @@ export function ItemsGen({
   showTotal,
   totalPricePerDay,
   editItem,
-  selectedItem,
-  setSelectedItem,
   expanding,
   setExpanding,
 }: ItemsGenProps) {
@@ -76,11 +72,8 @@ export function ItemsGen({
         {!isHide && (
           <>
             <div
-              onClick={() => {
-                setSelectedItem(item.id);
-              }}
               className="item-gen"
-              id={selectedItem === item.id ? "border-highlight-item" : ""}
+              tabIndex={0}
             >
               <div className="item-name">
                 <div>{item.name}</div>

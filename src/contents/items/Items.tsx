@@ -28,10 +28,9 @@ export function Items({
   // The collapse list stores formatted date strings.
   const [isCollapse, setIsCollapse] = useState<string[]>([]);
   const [isDropdown, setIsDropdown] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   const toggleDropdown = () => {
-    setIsDropdown(isDropdown ? false : true);
+    setIsDropdown(!isDropdown);
   };
 
   const toggleCollapse = (date:string) => {
@@ -137,8 +136,6 @@ export function Items({
               <ItemsGen
                 expanding={expanding}
                 setExpanding={setExpanding}
-                setSelectedItem={setSelectedItem}
-                selectedItem={selectedItem}
                 editItem={editItem}
                 totalPricePerDay={totalSameDate[itemDate].price}
                 showTotal={showTotal}

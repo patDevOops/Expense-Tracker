@@ -131,7 +131,7 @@ export function CustomItems({
             onChange={inputItem}
             value={customItemInput.name}
             name="name"
-            placeholder="e.g. Rice"
+            placeholder="e.g"
             className="modal-input-rec"
             aria-label="Item name"
           />

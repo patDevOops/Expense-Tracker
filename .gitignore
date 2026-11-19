@@ -14,6 +14,15 @@ dist
 dist-ssr
 *.local
 
+# Generated visual and browser-debug artifacts
+/expense-mobile-375.png
+/expense-mobile.png
+/expense-picker-verified.png
+/expense-wallet-final.png
+/expense-wallet-mobile.png
+/expense-wallet-verified.png
+/.playwright-mcp/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

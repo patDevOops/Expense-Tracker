@@ -339,7 +339,7 @@ export function WalletModal({
         )*/}
       </div>
 
-      <div>
+      <div className="wallet-records">
         <div className="wallet-row-details">
           <div ref={filterDateRef} className="wallet-dropdown-date">
             <div

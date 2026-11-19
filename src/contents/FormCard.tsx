@@ -48,11 +48,11 @@ export function FormCard({
   const [isShowMoreForm, setIsShowMoreForm] = useState<boolean>(false);
   const [isShowConfirmModal, setIsShowConfirmModal] = useState(false);
   const expandMoreForm = () => {
-    setIsShowMoreForm(isShowMoreForm ? false : true);
+    setIsShowMoreForm(!isShowMoreForm);
   };
   const [isPickItem, setIspickItem] = useState<boolean>(false);
   const pickItem = () => {
-    setIspickItem(isPickItem ? false : true);
+    setIspickItem(!isPickItem);
   };
 
   // ChangeEvent gives event.target the correct input/select type.
