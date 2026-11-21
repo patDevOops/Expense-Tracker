@@ -7,7 +7,7 @@ import { FormCard } from "./FormCard.js";
 import { FloatingButtons } from "./FloatingButtons.js";
 import {Wallet} from "./wallet/Wallet";
 import { formatTime, formatMY } from "../utils/date.js";
-import "./Contents.js";
+import "./Contents.css";
 import type { Dispatch, SetStateAction } from "react";
 import type {
   RecordType,

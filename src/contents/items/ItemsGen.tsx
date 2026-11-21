@@ -15,7 +15,6 @@ type ItemsGenProps = {
   isCategoryGlobal: boolean;
   category: Category[];
   removeItems: (id: string) => void;
-  showTotal: boolean;
   totalPricePerDay: number;
   editItem: (item: Item) => void;
   expanding: string | null;
@@ -29,7 +28,6 @@ export function ItemsGen({
   isCategoryGlobal,
   category,
   removeItems,
-  showTotal,
   totalPricePerDay,
   editItem,
   expanding,

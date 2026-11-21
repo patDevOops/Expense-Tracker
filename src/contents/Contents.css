@@ -1,20 +1,20 @@
 .record-month-header {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 0;
-  padding-inline: var(--space-2);
+  margin: 0 var(--space-3);
 }
 
 @media (min-width: 700px) {
   .record-month-header {
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+    /* Same desktop gutter as .wallet and .items */
+    margin-inline: var(--space-5);
   }
 
   .record-month-header .date-year-month-cont {
-    width: auto;
-    min-width: 300px;
     margin-top: var(--space-1);
   }
 

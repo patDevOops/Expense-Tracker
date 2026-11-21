@@ -1,10 +1,7 @@
 .info-container {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: var(--space-1);
-  min-width: 0;
-  margin: 0 var(--space-2);
 }
 
 .date {
@@ -25,15 +22,18 @@
   display: flex;
   flex: 1 1 0;
   align-items: center;
-  min-width: 0;
-  max-width: 220px;
   overflow: hidden;
   background: var(--color-surface);
   border: var(--border);
   border-radius: var(--radius-sm);
   box-shadow: 0 3px 10px rgb(0 0 0 / 18%);
 }
-
+.current-record-cont{
+  width:50%
+}
+.total-expense-cont{
+  width:50%
+}
 .record-info-cont {
   min-width: 0;
   width: 100%;
@@ -63,7 +63,7 @@
 
 @media (max-width: 360px) {
   .info-container {
-    margin-inline: var(--space-2);
+    
   }
 
   .info-container {

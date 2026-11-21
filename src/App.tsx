@@ -20,6 +20,8 @@ export type Item = {
   price: number;
   category: string;
   totalPrice: number;
+  // Optional link to the wallet the item was paid from.
+  walletId?: string;
   // Item stores one combined createdAt value; date/time are form-only values.
 };
 export type CustomItem = {
@@ -121,7 +123,7 @@ function App() {
     quantity: 1,
     id: "",
     totalPrice: "",
-    walletId: localStorage.getItem("wallet-toggle"),
+    walletId: localStorage.getItem("wallet-toggle") ?? undefined,
   });
   const {
     records,
@@ -159,20 +161,20 @@ function App() {
     records.find((a) => currentRecordId === a.id)?.customItems ?? [];
 
   //find record category
-  let category: Category[] =
+  const category: Category[] =
     records.find((a) => currentRecordId === a.id)?.category || [];
 
   function clearForm() {
     setForm({
       name: "",
-      category: category[category.length - 1]?.id || "",
+      category: localStorage.getItem('category')||category[category.length - 1]?.id || "",
       date: "",
       time: "",
       price: "",
       quantity: 1,
       id: "",
       totalPrice: "",
-      walletId: localStorage.getItem("wallet-toggle"),
+      walletId: localStorage.getItem("wallet-toggle") ?? undefined,
     });
   }
 
@@ -209,9 +211,9 @@ function App() {
   useEffect(() => {
     eruda.init();
   });
-  useEffect(() => {
+  /*useEffect(() => {
     setForm({ ...form, category: form.category||category[category.length - 1]?.id || "" });
-  }, []);
+  }, []);*/
   //shortcut for finding current Record
   function matchRec(a: string): boolean {
     return a === currentRecordId;

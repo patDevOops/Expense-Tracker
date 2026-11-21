@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import type { ChangeEvent } from "react";
 import dayjs from "dayjs";
 import { IoMdCheckmark } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
@@ -22,7 +23,6 @@ type WalletModalProps = {
   addWalletRecord: (newWalletRecord: WalletType) => void;
   deleteWalletRecord: (id: string) => void;
   removeWalletId: (walletId: string) => void;
-  onClose:unknown;
 };
 export function WalletModal({
   wallets,
@@ -30,7 +30,6 @@ export function WalletModal({
   addWalletRecord,
   deleteWalletRecord,
   removeWalletId,
-  onClose,
 }: WalletModalProps) {
   const [toDeleteSelecteds, setToDeleteSelecteds] = useState<string[]>([]);
   const [isMultiSelected, setIsMultiSelected] = useState(false);
@@ -67,8 +66,10 @@ export function WalletModal({
       );
     }
   };
-  const inputForm = (event) => {
-    let { value, name } = event.target;
+  // value can become a number for the amount field, kaya string | number.
+  const inputForm = (event: ChangeEvent<HTMLInputElement>) => {
+    let value: string | number = event.target.value;
+    const { name } = event.target;
     if (name === "amount") {
       value = Number(value);
     }
@@ -125,7 +126,6 @@ export function WalletModal({
       )}
       <dialog
         ref={multiSelectConfirmModalRef}
-        onClose={onClose}
         onClick={(event) => {
           if (event.target === event.currentTarget) {
             multiSelectConfirmModalRef.current?.close(); // click sa backdrop
@@ -164,7 +164,6 @@ export function WalletModal({
       <dialog
         className="wallet-confirm-modal"
         ref={confirmModalRef}
-        onClose={onClose}
         onClick={(event) => {
           if (event.target === event.currentTarget) {
             confirmModalRef.current?.close(); // click sa backdrop
@@ -176,8 +175,11 @@ export function WalletModal({
           <div className="wallet-confirm-modal-btn-cont">
             <button
               onClick={() => {
-                deleteWalletRecord(toDeleteWalletRecordId);
-                removeWalletId(toDeleteWalletRecordId);
+                // The dialog only opens after a row is picked, pero i-guard pa rin.
+                const id = toDeleteWalletRecordId;
+                if (!id) return;
+                deleteWalletRecord(id);
+                removeWalletId(id);
                 confirmModalRef.current?.close();
               }}
             >

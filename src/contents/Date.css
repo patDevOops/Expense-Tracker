@@ -6,7 +6,7 @@
   /*width: 100%;*/
   /*min-width: 280px;*/
   min-height: 52px;
-  margin: var(--space-2) var(--space-3) 0;
+  /*margin: var(--space-2) var(--space-3) 0;*/
   
 }
 
@@ -39,7 +39,7 @@
 }
 
 .date-year-name div:first-child {
-  font-size: clamp(1.2rem, 5vw, 1.65rem);
+  font-size: clamp(1.95rem, 5vw, 2.65rem);
   font-weight: 700;
   letter-spacing: -0.025em;
   white-space: nowrap;

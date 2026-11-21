@@ -1,10 +1,15 @@
 import { useEffect } from "react";
+import type { RefObject } from "react";
 
-export function useClickOutside(ref, onClickOutside) {
+// ref holds the element to watch, onClickOutside runs kapag click sa labas
+export function useClickOutside(
+  ref: RefObject<HTMLElement | null>,
+  onClickOutside: () => void,
+) {
   useEffect(() => {
-    function handleClick(event) {
+    function handleClick(event: MouseEvent) {
       // Kung may ref ka, at yung clinick mo ay WALA sa loob ng ref
-      if (ref.current && !ref.current.contains(event.target)) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         onClickOutside();
       }
     }

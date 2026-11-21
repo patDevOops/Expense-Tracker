@@ -46,7 +46,10 @@ export function FormCard({
   deleteWalletRecord,
 }: FormCardProps) {
   const [isShowMoreForm, setIsShowMoreForm] = useState<boolean>(false);
-  const [isShowConfirmModal, setIsShowConfirmModal] = useState(false);
+  // true = "modified wallet" prompt; the strings pick a specific wallet action.
+  const [isShowConfirmModal, setIsShowConfirmModal] = useState<
+    boolean | "add-wallet" | "delete-wallet"
+  >(false);
   const expandMoreForm = () => {
     setIsShowMoreForm(!isShowMoreForm);
   };
@@ -60,7 +63,7 @@ export function FormCard({
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = event.target;
-    if(name==="category")localStorage.setItem('category',value)
+    if(name==="category"&&value)localStorage.setItem('category',value)
     setForm(
       (prev) =>
         ({
@@ -86,7 +89,8 @@ export function FormCard({
     
     // The cast is type-only; keep using the same event target value as before.
     const { name } = event.target as HTMLButtonElement;
-    if(form.quantity===""){
+    // The number input can hold "" while the user clears it, kaya string check.
+    if (String(form.quantity) === "") {
       setForm((prev) => ({
       ...prev,
       quantity: 1
@@ -110,7 +114,7 @@ export function FormCard({
         details: `expense on ${form.name}`,
         amount: form.price
           ? -1 * (form.price * form.quantity)
-          : -1 * form.totalPrice,
+          : -1 * Number(form.totalPrice),
         date: `${form.date ? form.date : dayjs().format("YYYY-MM-D")}`,
       });
     }
@@ -157,12 +161,14 @@ export function FormCard({
               <p>Modified Wallet?</p>
               <button
                 onClick={() => {
+                  const walletId = form.tempWalletId;
+                  if (!walletId) return;
                   saveWalletEdited({
-                    id: form.tempWalletId,
+                    id: walletId,
                     details: `expense on ${form.name}`,
                     amount: form.price
                       ? -1 * (form.price * form.quantity)
-                      : -1 * form.totalPrice,
+                      : -1 * Number(form.totalPrice),
                     date: `${form.date ? form.date : dayjs().format("YYYY-MM-D")}`,
                   });
                   setIsShowConfirmModal(false);
@@ -186,12 +192,14 @@ export function FormCard({
               <p>Add This Item To Wallet?</p>
               <button
                 onClick={() => {
+                  const walletId = form.walletId;
+                  if (!walletId) return;
                   addWalletRecord({
-                    id: form.walletId,
+                    id: walletId,
                     details: `expense on ${form.name}`,
                     amount: form.price
                       ? -1 * (form.price * form.quantity)
-                      : -1 * form.totalPrice,
+                      : -1 * Number(form.totalPrice),
                     date: `${form.date ? form.date : dayjs().format("YYYY-MM-D")}`,
                   });
                   setIsShowConfirmModal(false);
@@ -215,7 +223,9 @@ export function FormCard({
               <p>Delete This Item To Wallet?</p>
               <button
                 onClick={() => {
-                  deleteWalletRecord(form.tempWalletId)
+                  const walletId = form.tempWalletId;
+                  if (!walletId) return;
+                  deleteWalletRecord(walletId);
                   setIsShowConfirmModal(false);
                   saveItem();
                 }}

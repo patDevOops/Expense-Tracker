@@ -3,14 +3,15 @@ import { FaMinus } from "react-icons/fa6";
 import { CiTrash } from "react-icons/ci";
 import { IoIosRadioButtonOff } from "react-icons/io";
 import { IoIosRadioButtonOn } from "react-icons/io";
+import type { Dispatch, RefObject, SetStateAction } from "react";
 import type { WalletType } from "../../App";
 type WalletsGenProps = {
   setToDeleteWalletRecordId: (value: string) => void;
-  confirmModalRef: HTMLDialogElement;
+  confirmModalRef: RefObject<HTMLDialogElement | null>;
   wallet: WalletType;
   isMultiSelected: boolean;
   toDeleteSelecteds: string[];
-  setToDeleteSelecteds: (value: string) => void;
+  setToDeleteSelecteds: Dispatch<SetStateAction<string[]>>;
 };
 export function WalletsGen({
   setToDeleteWalletRecordId,
@@ -32,7 +33,7 @@ export function WalletsGen({
           ₱
           {wallet.amount > 0
             ? wallet.amount.toFixed(2)
-            : wallet.amount.toFixed(2) * -1}
+            : (-wallet.amount).toFixed(2)}
         </p>
       </span>
       <span className="wallet-record-detail">{wallet.details}</span>

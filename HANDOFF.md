@@ -1,7 +1,7 @@
 # Project Handoff
 
 - **Status:** React 19, TypeScript, and Vite expense tracker. UI polish is ongoing; current work focuses on mobile layout and form alignment.
-- **Verification:** Playwright screenshots/checkpoints exist in the root and `.playwright-mcp/`. Wallet-toggle vertical alignment has been fixed.
+- **Verification:** Playwright screenshots/checkpoints exist in the root and `.playwright-mcp/`.
 
 ## Changed files and work
 

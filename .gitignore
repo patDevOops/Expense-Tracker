@@ -13,7 +13,7 @@ node_modules
 dist
 dist-ssr
 *.local
-
+/.opencode/
 # Generated visual and browser-debug artifacts
 /expense-mobile-375.png
 /expense-mobile.png

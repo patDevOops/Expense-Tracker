@@ -46,7 +46,6 @@ export function Wallet({
 
       {isShowWalletModal && (
         <WalletModal
-          setIsShowWalletModal={setIsShowWalletModal}
           removeWalletId={removeWalletId}
           deleteWalletRecord={deleteWalletRecord}
           wallets={wallets}

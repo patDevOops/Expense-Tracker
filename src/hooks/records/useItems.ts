@@ -75,7 +75,8 @@ export function useItems({
             ...record,
             items:record.items.map((item) => {
                 if (item.walletId === walletId) {
-                  item.walletId = undefined;
+                  // Return a new object instead of mutating the old item.
+                  return { ...item, walletId: undefined };
                 }
                 return item;
               })

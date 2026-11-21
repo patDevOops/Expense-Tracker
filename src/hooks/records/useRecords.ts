@@ -27,7 +27,8 @@ export function useRecords({
   form
 }: UseRecordParam) {
   const [records, setRecords] = useState<RecordType[]>(
-    JSON.parse(localStorage.getItem("records")) || [
+    // JSON.parse needs a string, kaya "null" ang fallback kapag walang laman ang storage.
+    JSON.parse(localStorage.getItem("records") ?? "null") || [
       {
         name: "My Expense Records",
         id: "123",
@@ -188,7 +189,6 @@ export function useRecords({
   const { addWalletRecord, saveWalletEdited, deleteWalletRecord } = useWallet({
     matchRec,
     setRecords,
-    records
   });
   return {
     removeWalletId,
